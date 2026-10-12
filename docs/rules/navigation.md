@@ -67,3 +67,13 @@ Architect) — removed; don't re-add locked path previews unless asked.
 3. Concept → bottom-bar Next → Back returns to the previous concept; fresh load of any page → no pill.
 4. First page: no Previous; last page: Next reads "Back to … hub"; bar bottom edge == viewport bottom.
 5. Mobile width (390px): bar still one row, tags hidden, hub link collapses to ↑.
+
+## Layout reference (matches RefreshYourself — keep it that way)
+
+- **Crumb bar:** full-width tinted band (`.kd-crumbs`) with pill crumbs (home = slate pill,
+  category = cyan pill, current = outlined pill). The inner content is padded to line up with the
+  1080px wrap, so the Back pill sits at the right edge directly under the search box.
+- **Bottom bar:** flat, full-width, `border-top`, three cells — Previous (left), `↑ hub` (centered
+  between borders), Next (right, tag above title, arrow at the far edge).
+- **Static `<footer class="kd-foot">`:** plain text only ("KeyDrive · AI · concept journey"). Never
+  put a navigation link in it — the fixed bar is the only footer navigation.

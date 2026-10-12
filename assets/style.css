@@ -85,25 +85,39 @@ code, .mono{ font-family:'JetBrains Mono', monospace; }
 .kd-empty{ padding:16px 12px; font-size:13px; color:var(--ink-faint); text-align:center; }
 
 /* ---------- crumbs ---------- */
-.kd-crumbs{ display:flex; align-items:center; gap:8px; padding:14px 24px 0; font-size:13px; color:var(--ink-faint); }
-.kd-crumbs a{ color:var(--ink-soft); text-decoration:none; }
-.kd-crumbs a:hover{ color:var(--cyan); text-decoration:none; }
-.kd-crumbs .sep{ opacity:.5; }
-.kd-crumbs .cur{ color:var(--ink); font-weight:600; }
+/* Full-width tinted band (same shape as RefreshYourself's crumb strip) holding pill crumbs; the
+   inner content still lines up with the 1080px wrap, so the Back pill sits right under the search box. */
+.kd-crumbs, .kd-crumbs.wrap{
+  display:flex; align-items:center; gap:6px; flex-wrap:nowrap; overflow-x:auto; max-width:none; margin:0;
+  padding:9px max(24px, calc((100% - 1032px) / 2)); font-size:12.5px; color:var(--ink-faint);
+  background:var(--surface); border-bottom:1px solid var(--border-soft);
+}
+.kd-crumbs::-webkit-scrollbar{ display:none; }
+.kd-crumbs a:not(.crumb-back), .kd-crumbs .cur{
+  display:inline-flex; align-items:center; gap:4px; white-space:nowrap; flex:0 0 auto;
+  font-family:'Sora'; font-weight:700; font-size:12px; border-radius:20px; padding:4px 12px;
+  text-decoration:none; transition:filter .15s ease, transform .15s ease;
+}
+.kd-crumbs a:not(.crumb-back){ color:var(--ink-soft); background:var(--surface-2); }
+.kd-crumbs a:not(.crumb-back):nth-of-type(2){ color:var(--cyan-ink); background:var(--cyan-bg); }
+.kd-crumbs a:not(.crumb-back):hover{ text-decoration:none; filter:brightness(1.25); transform:translateY(-1px); }
+.kd-crumbs a:not(.crumb-back):active{ transform:scale(.96); }
+.kd-crumbs .sep{ opacity:.5; font-size:11px; flex:0 0 auto; }
+.kd-crumbs .cur{ color:#fff; background:var(--bg); border:1px solid var(--border); }
 
 /* text-link hover: an animated underline that grows in on hover, instead of the browser's
    instant default underline — per docs/rules/interaction-style.md's text-link rule. Applies to
-   any plain inline text link (breadcrumbs, brand, concept-list rows), not whole-card buttons
+   any plain inline text link (brand, concept-list rows), not whole-card buttons
    (those get the lift+glow treatment via a.kd-card instead). */
-.kd-crumbs a, .brand, .concept-row a{
+.brand, .concept-row a{
   position:relative; text-decoration:none;
 }
-.kd-crumbs a::after, .brand::after, .concept-row a::after{
+.brand::after, .concept-row a::after{
   content:''; position:absolute; left:0; bottom:-2px; width:100%; height:1.5px;
   background:currentColor; transform:scaleX(0); transform-origin:left;
   transition:transform .18s ease;
 }
-.kd-crumbs a:hover::after, .brand:hover::after, .concept-row a:hover::after{ transform:scaleX(1); }
+.brand:hover::after, .concept-row a:hover::after{ transform:scaleX(1); }
 .brand::after{ background:var(--grad); }
 
 main{ padding:20px 0 100px; }
@@ -363,7 +377,7 @@ footer.kd-foot a{ color:var(--ink-soft); }
 .kd-crumbs .crumb-back{
   display:inline-flex; align-items:center; gap:6px; margin-left:auto; flex:0 0 auto; white-space:nowrap;
   font-family:'Sora'; font-weight:700; font-size:12.5px; color:var(--ink-soft);
-  background:var(--surface); border:1px solid var(--border-soft); border-radius:20px; padding:5px 14px 5px 11px;
+  background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:4px 14px 4px 10px;
   transition:border-color .15s ease, color .15s ease, transform .15s ease, background .15s ease;
 }
 .kd-crumbs .crumb-back:hover{ color:var(--cyan-ink); border-color:rgba(34,211,238,.45); background:var(--cyan-bg); text-decoration:none; transform:translateX(-2px); }
