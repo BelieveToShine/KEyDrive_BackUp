@@ -119,7 +119,7 @@ def build_secrets_configuration():
 '''<span class="cmt"># read a secret at run time — the caller needs an IAM permission for this one secret</span>
 aws secretsmanager get-secret-value --secret-id prod/shop/db''',
       'Illustrative shape only — the secret name is a placeholder; real apps use an SDK and cache the value.'))
-    body += next_box('Secrets are one slice of security. An architect also needs guardrails that apply to every resource, layers that protect each other, and a way to see threats. Next: Security &amp; Governance.', None)
+    body += next_box('Secrets are one slice of security. An architect also needs guardrails that apply to every resource, layers that protect each other, and a way to see threats. Next: Security &amp; Governance.', 'security-governance.html', 'Security &amp; Governance')
     body += fact_note(FOOT, [DOCS_SM, DOCS_PS, DOCS_INT, DOCS_KMS, DOCS_WKLD, DOCS_ECS])
     return page('secrets-configuration', 'Secrets & Configuration', 'Concept 15 of 19 · 🛠️ Shipping and operating',
         'Keep secrets out of code: <span class="grad-text">ask for them at run time from a guarded place — or avoid having a secret at all.</span>',

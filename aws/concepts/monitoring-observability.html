@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoring &amp; Observability — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Monitoring &amp; Observability</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 17 of 19 · 🛠️ Shipping and operating</div>
+    <h1>Monitoring tells you something is wrong; observability helps you find why — <span class="grad-text">but only if you collected the signals before the incident.</span></h1>
+    <p class="sub">CloudWatch, X-Ray and CloudTrail: metrics, logs, traces and audit, plus alarms that turn signals into action.</p>
+    <div class="interview-q">❓ "How would you monitor an AWS application and get alerted before users notice?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Metrics, logs and traces flow into CloudWatch and X-Ray, where you can query, alarm and visualize them">
+<defs><marker id="mo1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,75 L300,75" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M140,165 L300,165" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M140,255 L300,255" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,75 L510,75" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,165 L510,165" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,255 L510,255" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<rect class="bx" x="10" y="44" width="130" height="62" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="75" y="72.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📈 Metrics</text>
+<text x="75" y="85.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">numbers over time</text>
+<rect class="bx" x="10" y="134" width="130" height="62" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="75" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📜 Logs</text>
+<text x="75" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">events with detail</text>
+<rect class="bx" x="10" y="224" width="130" height="62" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="75" y="252.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧵 Traces</text>
+<text x="75" y="265.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one request's path</text>
+<rect class="bx" x="300" y="44" width="120" height="242" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="360" y="149" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📡 CloudWatch</text>
+<text x="360" y="164" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">and X-Ray</text>
+<text x="360" y="176.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">one place for</text>
+<text x="360" y="189" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">every signal</text>
+<rect class="bx" x="510" y="44" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="72.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔍 Query</text>
+<text x="570" y="85.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Logs Insights</text>
+<rect class="bx" x="510" y="134" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🚨 Alarms</text>
+<text x="570" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">notify or act</text>
+<rect class="bx" x="510" y="224" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="252.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗺️ Maps</text>
+<text x="570" y="265.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">see the flow</text>
+<g class="arrow-pill"><rect x="187" y="66" width="66" height="18" rx="9"/><text x="220" y="78.5" text-anchor="middle" font-size="9" font-style="italic">automatic</text></g>
+<g class="arrow-pill"><rect x="182" y="156" width="76" height="18" rx="9"/><text x="220" y="168.5" text-anchor="middle" font-size="9" font-style="italic">sent by you</text></g>
+<g class="arrow-pill"><rect x="179" y="246" width="82" height="18" rx="9"/><text x="220" y="258.5" text-anchor="middle" font-size="9" font-style="italic">instrumented</text></g>
+<g class="arrow-pill"><rect x="448" y="66" width="34" height="18" rx="9"/><text x="465" y="78.5" text-anchor="middle" font-size="9" font-style="italic">ask</text></g>
+<g class="arrow-pill"><rect x="440" y="156" width="50" height="18" rx="9"/><text x="465" y="168.5" text-anchor="middle" font-size="9" font-style="italic">notify</text></g>
+<g class="arrow-pill"><rect x="445.5" y="246" width="39" height="18" rx="9"/><text x="465" y="258.5" text-anchor="middle" font-size="9" font-style="italic">show</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> three kinds of signal flow into one place. <b>Metrics</b> are numbers over time (is CPU high?). <b>Logs</b> are detailed records of what happened. <b>Traces</b> follow one request through the parts of your app. In AWS that is <b>CloudWatch</b> for metrics, logs and alarms and <b>X-Ray</b> for traces. Once they are together you can <b>query</b> them, <b>alarm</b> on them and see the <b>map</b> of what talks to what.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Monitoring tells you something is wrong; observability lets you work out why — and both need metrics, logs and traces gathered in one place before the incident.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Guardrails say what <i>should</i> happen. They do not tell you what <i>did</i> happen. The app is fast today and slower next week; a deployment looks fine and customers still see errors; the bill climbs and nobody knows which part grew. Without signals, every problem becomes guessing.</p>
+      <p>The skill is deciding <b>what to collect before you need it</b>. Metrics answer "is something off?". Logs answer "what exactly happened?". Traces answer "where did this one request spend its time?". And a fourth source, <b>CloudTrail</b>, answers "who changed what?". Then <b>alarms</b> turn signals into action.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>📡 Amazon CloudWatch</h4><span class="pk-tag">metrics, logs and alarms</span><span class="pk-label use">✅ Pick it when</span><ul><li>The main monitoring and observability service for metrics, logs and alarms</li><li>Logs Insights to query logs</li><li>Service Map and dashboards to see the flow</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Auditing who made API calls — that is CloudTrail</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧵 AWS X-Ray</h4><span class="pk-tag">distributed tracing</span><span class="pk-label use">✅ Pick it when</span><ul><li>An end-to-end view of a request as it travels through your application</li><li>A map of the underlying components</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Only watching a single server — add metrics and logs too</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🕵️ AWS CloudTrail</h4><span class="pk-tag">API activity for audit</span><span class="pk-label use">✅ Pick it when</span><ul><li>Who made a call, when, and which resources were affected</li><li>Compliance and investigations</li><li>Event history covers recent management events by default</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Watching performance — use CloudWatch</li></ul></div>
+      <div class="pick-card" style="--pick:#fb7185"><h4>🚨 CloudWatch alarms</h4><span class="pk-tag">turn a signal into action</span><span class="pk-label use">✅ Pick it when</span><ul><li>Alarm on a metric crossing a threshold</li><li>Notify people or start automation, such as scaling</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Alarm on everything — people will start ignoring them</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 524" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: which question needs which AWS monitoring service">
+<defs><marker id="mo3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What do you need to know?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧑‍💻 Where is this request slow or failing?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">across several services</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">X-Ray</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">distributed traces</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📜 What did a resource do, in detail?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">application and system logs</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">CloudWatch Logs</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">search with Logs Insights</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📈 Is a number out of range right now?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">CPU, latency, queue age</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Metrics + alarm</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">CloudWatch</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕵️ Who made this change, and when?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">API calls in the account</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">CloudTrail</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">audit and compliance</text>
+<rect class="bx" x="10" y="460" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="482.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="495.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with metrics, then add logs</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> start from the <b>question</b>, not the tool. Slow or failing across services? <b>X-Ray</b>. What did a resource do in detail? <b>CloudWatch Logs</b>. A number out of range? <b>A metric and an alarm</b>. Who changed this? <b>CloudTrail</b>. AWS's decision guide sums up the split: CloudTrail is for auditing and compliance; CloudWatch is for monitoring operational health and performance.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔔 From signal to action</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 272" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A CloudWatch alarm watches a metric and when it crosses its threshold it triggers an action such as a notification or automation">
+<defs><marker id="mo2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,70 L230,70" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M360,70 L480,70" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,138 L290,138 L290,176" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,138 L420,138 L420,176" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,176" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<rect class="bx" x="10" y="40" width="110" height="60" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="65" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Metric</text>
+<text x="65" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">CPU, queue age</text>
+<rect class="bx" x="230" y="40" width="130" height="60" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="295" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🚨 Alarm</text>
+<text x="295" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">threshold + period</text>
+<rect class="bx" x="480" y="40" width="150" height="60" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="555" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🔔 Action</text>
+<text x="555" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">who or what to call</text>
+<rect class="bx" x="230" y="176" width="120" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="290" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">✉️ A person</text>
+<text x="290" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">notification</text>
+<rect class="bx" x="360" y="176" width="120" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="420" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">⚡ Automation</text>
+<text x="420" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Lambda, scaling</text>
+<rect class="bx" x="490" y="176" width="120" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🎫 A ticket</text>
+<text x="550" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">or runbook</text>
+<text class="free" x="320" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Every alarm needs an owner who acts on it — otherwise it becomes noise.</text>
+<g class="arrow-pill"><rect x="139.5" y="61" width="71" height="18" rx="9"/><text x="175" y="73.5" text-anchor="middle" font-size="9" font-style="italic">watched by</text></g>
+<g class="arrow-pill"><rect x="398" y="61" width="44" height="18" rx="9"/><text x="420" y="73.5" text-anchor="middle" font-size="9" font-style="italic">fires</text></g>
+<g class="arrow-pill"><rect x="300" y="129" width="60" height="18" rx="9"/><text x="330" y="141.5" text-anchor="middle" font-size="9" font-style="italic">notifies</text></g>
+<g class="arrow-pill"><rect x="450.5" y="129" width="39" height="18" rx="9"/><text x="470" y="141.5" text-anchor="middle" font-size="9" font-style="italic">runs</text></g>
+<g class="arrow-pill"><rect x="533" y="110" width="44" height="18" rx="9"/><text x="555" y="122.5" text-anchor="middle" font-size="9" font-style="italic">opens</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> an <b>alarm</b> watches a metric against a threshold over a period. When the condition is met it triggers an <b>action</b>: notify a person, run automation (for example, scaling or a function) or open a ticket. You already saw this loop in Scaling &amp; Resilience, where a metric drives Auto Scaling.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Metrics, logs, traces and audit</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Answers</th><th scope="col">Looks like</th><th scope="col">Service</th></tr></thead><tbody><tr><th scope="row">📈 Metrics</th><td>Is something off, and since when?</td><td>Numbers in a time series</td><td>CloudWatch</td></tr><tr><th scope="row">📜 Logs</th><td>What exactly happened?</td><td>Records with fields, searched with Logs Insights</td><td>CloudWatch Logs</td></tr><tr><th scope="row">🧵 Traces</th><td>Where did this request go and slow down?</td><td>A request followed across services</td><td>X-Ray</td></tr><tr><th scope="row">🕵️ Audit</th><td>Who changed what, when?</td><td>A record of API calls</td><td>CloudTrail</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🐢</span><h5>Checkout feels slow since Tuesday</h5><p>Which call inside the request takes the time?</p><span class="sc-use">→ X-Ray traces</span></div>
+      <div class="scenario"><span class="sc-icon">📉</span><h5>CPU on the web tier keeps spiking</h5><p>Know about it before users do.</p><span class="sc-use">→ Metric alarm + action</span></div>
+      <div class="scenario"><span class="sc-icon">🔍</span><h5>A firewall rule blocked a partner</h5><p>What exactly was denied, and when?</p><span class="sc-use">→ CloudWatch Logs</span></div>
+      <div class="scenario"><span class="sc-icon">🕵️</span><h5>A setting changed overnight</h5><p>Find out who changed it.</p><span class="sc-use">→ CloudTrail</span></div>
+      <div class="scenario"><span class="sc-icon">🧯</span><h5>A disk is almost full</h5><p>Fix it before the app stops.</p><span class="sc-use">→ Alarm that triggers automation</span></div>
+      <div class="scenario"><span class="sc-icon">🏗️</span><h5>Every new resource must send logs</h5><p>Do not rely on people remembering.</p><span class="sc-use">→ Build it into the infrastructure template</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — habits and traps</summary>
+    <div class="zoom-inner">
+      <p><b>Three data types.</b> AWS frames observability around logs, metrics and traces. CloudWatch collects metrics and logs; X-Ray provides traces; CloudWatch Service Map and the X-Ray trace map show how services connect.</p>
+      <p><b>CloudTrail is audit.</b> It records API activity — who, when and what — and the default event history shows recent management events for your account. Create a trail if you need longer retention.</p>
+      <p><b>Decide what to collect before the incident.</b> The one time you need a log is the time it was not turned on. Build logging into your infrastructure templates (concept 13).</p>
+      <p><b>Keep monitoring itself monitored.</b> Send security findings (concept 16) to the same place, and alarm when something important turns off. Logs are billed by volume, so collect what you will use (Cost Management is next).</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Three signals: metrics, logs, traces. CloudWatch = metrics, logs, alarms; X-Ray = traces; CloudTrail = audit of API calls.</li><li>CloudTrail for audit and compliance; CloudWatch for operational health and performance.</li><li>Alarm = metric + threshold + period → action (notify, automate, ticket).</li><li>Logs Insights queries logs; Service Map and the X-Ray map show the flow.</li><li>Decide what to collect before the incident; alarms without an owner become noise.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I collect metrics, logs and traces: CloudWatch for metrics, logs and alarms, X-Ray for distributed traces, and CloudTrail for the audit trail of API calls. I alarm on symptoms users feel and drive action from the alarms, and I build logging into the infrastructure templates so nothing is forgotten."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Mixing up CloudWatch and CloudTrail.</b> CloudWatch tells you how the system is performing; CloudTrail tells you who did what. You need both.</p>
+      <p>Second trap: <b>an alarm for everything.</b> A flood of alarms trains people to ignore them. Alarm on symptoms users feel, give each alarm an owner, and use dashboards for the rest.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📈 CloudWatch</h5><p>How is the system performing right now? Metrics, logs and alarms.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🕵️ CloudTrail</h5><p>Who did what, and when? A record of API activity for audit and investigation.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># an alarm that fires when average CPU stays high; it notifies an SNS topic</span>
+aws cloudwatch put-metric-alarm --alarm-name shop-cpu-high --metric-name CPUUtilization \
+    --namespace AWS/EC2 --statistic Average --period 300 --threshold 80 \
+    --comparison-operator GreaterThanThreshold --evaluation-periods 2 --alarm-actions &lt;topic-arn&gt;</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the metric, threshold and periods are examples and must match your workload.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You can now see what your system does. Everything above is also <b>metered</b> — and a good design can still be an unaffordable one. Next: Cost Management.</span>
+      <a class="next-link" href="cost-management.html">Cost Management <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Monitoring features change often. This page teaches the ideas; for current features and prices, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/decision-guides/latest/monitoring-on-aws-how-to-choose/monitoring-on-aws-how-to-choose.html" target="_blank" rel="noopener">Choosing an AWS monitoring and observability service</a> · <a href="https://docs.aws.amazon.com/decision-guides/latest/cloudtrail-or-cloudwatch/cloudtrail-or-cloudwatch.html" target="_blank" rel="noopener">AWS CloudTrail or Amazon CloudWatch?</a> · <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html" target="_blank" rel="noopener">Amazon CloudWatch documentation</a> · <a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html" target="_blank" rel="noopener">AWS X-Ray documentation</a> · <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html" target="_blank" rel="noopener">AWS CloudTrail documentation</a> · <a href="https://docs.aws.amazon.com/wellarchitected/latest/management-and-governance-guide/aws-observability-tools.html" target="_blank" rel="noopener">AWS observability tools</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

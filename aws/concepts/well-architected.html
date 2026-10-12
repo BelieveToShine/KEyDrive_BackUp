@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Well-Architected &amp; Landing Zones — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Well-Architected</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 19 of 19 · 🏛️ The capstone</div>
+    <h1>A well-architected system is one whose trade-offs were <span class="grad-text">chosen on purpose — not one that maximised everything.</span></h1>
+    <p class="sub">The six Well-Architected pillars, why they pull against each other, and how landing zones and Control Tower prepare an environment so every account starts with guardrails.</p>
+    <div class="interview-q">❓ "What is the AWS Well-Architected Framework, and what is a landing zone?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Six pillars of the AWS Well-Architected Framework around your design, each one a trade-off against the others">
+<defs><marker id="wa1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="wa1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M110,70 L110,165 L240,165" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<path d="M320,70 L320,130" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<path d="M530,70 L530,165 L400,165" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<path d="M110,268 L110,234 L270,234 L270,200" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<path d="M320,268 L320,200" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<path d="M530,268 L530,234 L370,234 L370,200" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#wa1A)"/>
+<rect class="bx" x="20" y="14" width="180" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="110" y="39.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🛟 Reliability</text>
+<text x="110" y="52.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">concepts 2, 8, 9</text>
+<rect class="bx" x="230" y="14" width="180" height="56" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="320" y="39.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🔐 Security</text>
+<text x="320" y="52.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">concepts 3, 4, 15, 16</text>
+<rect class="bx" x="440" y="14" width="180" height="56" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="530" y="39.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">💰 Cost optimization</text>
+<text x="530" y="52.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">concept 18</text>
+<rect class="bx" x="240" y="130" width="160" height="70" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="156.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">⚖️ Your design</text>
+<text x="320" y="169" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">every choice is a</text>
+<text x="320" y="181.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">trade-off</text>
+<rect class="bx" x="20" y="268" width="180" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="110" y="293.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🛠️ Operational</text>
+<text x="110" y="306.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">excellence · 13, 14, 17</text>
+<rect class="bx" x="230" y="268" width="180" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="293.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🚀 Performance</text>
+<text x="320" y="306.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">efficiency · 5–7, 10</text>
+<rect class="bx" x="440" y="268" width="180" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="530" y="293.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌱 Sustainability</text>
+<text x="530" y="306.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">less energy, less waste</text>
+<g class="arrow-pill"><rect x="139" y="156" width="66" height="18" rx="9"/><text x="172" y="168.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+<g class="arrow-pill"><rect x="287" y="91" width="66" height="18" rx="9"/><text x="320" y="103.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+<g class="arrow-pill"><rect x="435" y="156" width="66" height="18" rx="9"/><text x="468" y="168.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+<g class="arrow-pill"><rect x="157" y="225" width="66" height="18" rx="9"/><text x="190" y="237.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+<g class="arrow-pill"><rect x="287" y="229" width="66" height="18" rx="9"/><text x="320" y="241.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+<g class="arrow-pill"><rect x="417" y="225" width="66" height="18" rx="9"/><text x="450" y="237.5" text-anchor="middle" font-size="9" font-style="italic">trade-off</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the AWS Well-Architected Framework looks at a design through <b>six pillars</b>: operational excellence, security, reliability, performance efficiency, cost optimization and sustainability. Each box shows which earlier concepts feed it. The point of the picture is the arrows: <b>improving one pillar often costs another</b>. A second Region raises reliability and the bill. Deep inspection raises security and lowers speed. Your job is to choose consciously, not to maximise every pillar.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A well-architected system is not the one with the most features — it is the one whose trade-offs between reliability, security, cost, operations, performance and sustainability were chosen on purpose.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You now know the pieces: accounts, Regions, identity, networks, compute, storage, databases, load balancing, scaling, caching, messaging, serverless, code for infrastructure, pipelines, secrets, security, signals and cost. Each one was a good answer to a real limit. But each one also has a price: another thing to run, pay for, secure or watch.</p>
+      <p>So the last skill is not another service. It is <b>judgement</b>: how to look at a whole design and ask whether it fits what the business needs. AWS packages that judgement in the <b>Well-Architected Framework</b> (for a <i>workload</i>) and in the <b>landing zone</b> (for the <i>environment</i> workloads live in).</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>⚖️ Well-Architected Framework</h4><span class="pk-tag">review one workload</span><span class="pk-label use">✅ Pick it when</span><ul><li>Check a design against six pillars</li><li>Each pillar gives practices and trade-offs</li><li>Record where you traded one pillar for another</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Using it as a checklist to tick — it is about decisions, not boxes</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🏔️ Landing zone</h4><span class="pk-tag">a ready, governed multi-account environment</span><span class="pk-label use">✅ Pick it when</span><ul><li>A well-architected multi-account environment based on security and compliance best practices</li><li>Structure and guardrails in place before the first workload arrives</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A one-off experiment — start small, grow into it</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🗼 AWS Control Tower</h4><span class="pk-tag">set up and govern a landing zone</span><span class="pk-label use">✅ Pick it when</span><ul><li>Orchestrates Organizations, Service Catalog and IAM Identity Center to build a landing zone</li><li>Applies preventive and detective guardrails, with a dashboard</li><li>AWS recommends starting with it</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need a fully custom design that only a hand-built landing zone supports</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧭 Security reference architecture</h4><span class="pk-tag">how to organise security accounts and services</span><span class="pk-label use">✅ Pick it when</span><ul><li>Guidance on security accounts, delegated administration and layered services</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Treating it as a ready-made product — it is guidance</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🏔️ What a landing zone is</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 312" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A landing zone: Organizations and guardrails at the top, shared platform accounts for security, logging and networking, and workload accounts where applications run">
+<defs><marker id="wa2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="wa2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="108" width="270" height="168" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="127" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">PLATFORM · shared accounts</text>
+<rect class="zone" x="360" y="108" width="270" height="168" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="374" y="127" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">WORKLOADS · where apps run</text>
+<path d="M260,62 L260,88 L145,88 L145,108" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#wa2A)"/>
+<path d="M380,62 L380,88 L495,88 L495,108" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#wa2A)"/>
+<path d="M360,192 L280,192" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#wa2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="32.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🏛️ AWS Organizations</text>
+<text x="320" y="45.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">OUs and guardrails at the top</text>
+<rect class="bx" x="24" y="138" width="242" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="145" y="159" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🛡️ Security and logging</text>
+<rect class="bx" x="24" y="180" width="242" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="145" y="201" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Networking</text>
+<rect class="bx" x="24" y="222" width="242" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="145" y="243" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🪪 Identity and shared services</text>
+<rect class="bx" x="374" y="140" width="242" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="495" y="163.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Workload account A</text>
+<text x="495" y="176.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">one team</text>
+<rect class="bx" x="374" y="204" width="242" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="495" y="227.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Workload account B</text>
+<text x="495" y="240.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">another team</text>
+<text class="free" x="320" y="298" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Guardrails come from the top, so every new account starts inside them.</text>
+<g class="arrow-pill"><rect x="177.5" y="79" width="55" height="18" rx="9"/><text x="205" y="91.5" text-anchor="middle" font-size="9" font-style="italic">governs</text></g>
+<g class="arrow-pill"><rect x="407.5" y="79" width="55" height="18" rx="9"/><text x="435" y="91.5" text-anchor="middle" font-size="9" font-style="italic">governs</text></g>
+<g class="arrow-pill"><rect x="300.5" y="183" width="39" height="18" rx="9"/><text x="320" y="195.5" text-anchor="middle" font-size="9" font-style="italic">uses</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a landing zone is a <b>prepared multi-account environment</b> so teams do not start from an empty account. At the top, <b>Organizations</b> and its guardrails (concepts 1 and 16) apply to everything. Shared <b>platform accounts</b> hold security and logging, networking and identity. <b>Workload accounts</b> are where each team deploys. AWS Control Tower can set this up for you with prevention and detection guardrails and a dashboard.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🗺️ The whole journey</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="The whole AWS journey in five stages, each one raising the question the next one answers">
+<defs><marker id="wa3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="wa3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,62 L130,98" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#wa3A)"/>
+<path d="M130,150 L130,186" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#wa3A)"/>
+<path d="M130,238 L130,274" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#wa3A)"/>
+<path d="M130,326 L130,362" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#wa3A)"/>
+<rect class="bx" x="20" y="10" width="600" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="33.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏗️ Foundations · concepts 1–4</text>
+<text x="320" y="46.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">where things live, who may act, how they connect</text>
+<rect class="bx" x="20" y="98" width="600" height="52" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="121.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧱 Building blocks · concepts 5–7</text>
+<text x="320" y="134.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">compute, storage, databases</text>
+<rect class="bx" x="20" y="186" width="600" height="52" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="209.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚙️ Handling load · concepts 8–12</text>
+<text x="320" y="222.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">balance, scale, cache, message, serverless</text>
+<rect class="bx" x="20" y="274" width="600" height="52" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="297.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🛠️ Shipping and operating · concepts 13–18</text>
+<text x="320" y="310.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">code, pipelines, secrets, security, signals, cost</text>
+<rect class="bx" x="20" y="362" width="600" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="385.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🏛️ Well-Architected · concept 19</text>
+<text x="320" y="398.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">judge all of it, and set up the landing zone</text>
+<g class="arrow-pill"><rect x="227.5" y="71" width="145" height="18" rx="9"/><text x="300" y="83.5" text-anchor="middle" font-size="9" font-style="italic">now where does code run?</text></g>
+<g class="arrow-pill"><rect x="232.5" y="159" width="135" height="18" rx="9"/><text x="300" y="171.5" text-anchor="middle" font-size="9" font-style="italic">one copy is not enough</text></g>
+<g class="arrow-pill"><rect x="185" y="247" width="230" height="18" rx="9"/><text x="300" y="259.5" text-anchor="middle" font-size="9" font-style="italic">too many parts to click and ship by hand</text></g>
+<g class="arrow-pill"><rect x="222" y="335" width="156" height="18" rx="9"/><text x="300" y="347.5" text-anchor="middle" font-size="9" font-style="italic">how do we judge all of it?</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> each stage exists because the one before it ran into a limit. <b>Foundations</b> organise and connect things. Then code needs a place to run (<b>building blocks</b>), one copy is not enough (<b>handling load</b>), and by hand it all becomes too much to click and ship (<b>shipping and operating</b>). Finally, you need a way to judge it all together — this concept.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 The six pillars</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Pillar</th><th scope="col">The question it asks</th><th scope="col">Concepts you already have for it</th></tr></thead><tbody><tr><th scope="row">🛠️ Operational excellence</th><td>Can we ship, run and fix it reliably?</td><td>Infrastructure as code, CI/CD, monitoring</td></tr><tr><th scope="row">🔐 Security</th><td>Is it protected, and is access limited?</td><td>IAM, VPC, secrets, SCPs, detection</td></tr><tr><th scope="row">🛟 Reliability</th><td>Does it do its job correctly when expected, and recover?</td><td>Zones and Regions, load balancing, scaling, disaster recovery</td></tr><tr><th scope="row">🚀 Performance efficiency</th><td>Does it meet demand quickly, without waste?</td><td>Right compute, caching, scaling, databases</td></tr><tr><th scope="row">💰 Cost optimization</th><td>Are we getting value for what we spend?</td><td>Cost Management, rightsizing, commitments</td></tr><tr><th scope="row">🌱 Sustainability</th><td>Are we using the least energy and resources we need?</td><td>Right-sizing, autoscaling, avoiding idle capacity</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world trade-offs</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🌍</span><h5>"Let's go multi-Region for safety."</h5><p>Reliability goes up, and so do cost and complexity.</p><span class="sc-use">→ Is multi-AZ enough?</span></div>
+      <div class="scenario"><span class="sc-icon">🔍</span><h5>"Inspect and log every request."</h5><p>Security and visibility go up; speed and cost can go down.</p><span class="sc-use">→ Decide what is worth inspecting.</span></div>
+      <div class="scenario"><span class="sc-icon">⚡</span><h5>"Always keep extra capacity warm."</h5><p>Performance is smooth; you pay for idle capacity.</p><span class="sc-use">→ Auto Scaling, or a reserved baseline</span></div>
+      <div class="scenario"><span class="sc-icon">🧑‍💻</span><h5>"Let teams create what they like."</h5><p>Speed is high; security and cost become unpredictable.</p><span class="sc-use">→ Guardrails in a landing zone</span></div>
+      <div class="scenario"><span class="sc-icon">🔁</span><h5>"Release five times a day."</h5><p>Operations improve; risk must be managed with safe rollouts.</p><span class="sc-use">→ CI/CD with a fast rollback</span></div>
+      <div class="scenario"><span class="sc-icon">📝</span><h5>"Why did we choose this?"</h5><p>Nobody remembers the reasoning.</p><span class="sc-use">→ Write the trade-off down</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — how to use the framework in practice</summary>
+    <div class="zoom-inner">
+      <p><b>Balance, not maximise.</b> When designing a workload you make trade-offs between the pillars based on business needs. AWS notes that security and operational excellence are generally not traded away against the other pillars; the others are weighed against each other. Write the choice and the reason down.</p>
+      <p><b>Start from requirements.</b> What must be true: how much downtime, how much data loss (RPO and RTO from concept 9), what compliance, what budget? The pillars are a way to check you did not forget a dimension.</p>
+      <p><b>Review regularly.</b> A design that was right last year may not be now: traffic grows, prices and services change, teams change.</p>
+      <p><b>Control Tower.</b> It automates account setup in an organization, provisioning and guardrails, and gives a dashboard; a custom-built landing zone is for requirements only a custom solution can meet.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, sustainability.</li><li>The pillars trade off against each other; record where you chose one over another and why.</li><li>The Well-Architected Framework reviews a workload; a landing zone sets up the multi-account environment.</li><li>Control Tower builds and governs a landing zone with preventive and detective guardrails and a dashboard.</li><li>Landing zone = platform accounts (security, logging, networking, identity) + workload accounts, under Organizations and guardrails.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I review a design against the six Well-Architected pillars and accept that they trade off — for example a second Region improves reliability but adds cost and complexity — so I write down the choices. For the environment I use a landing zone: Organizations and guardrails at the top, shared platform accounts for security, logging and networking, and workload accounts for each team, set up with Control Tower. Then I review again as things change."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Treating the framework as a checklist.</b> Ticking every recommendation is not the goal; some will cost more than the risk they remove. The value is in the explicit trade-offs.</p>
+      <p>Second trap: <b>building the landing zone last.</b> Guardrails added after a hundred workloads exist are far harder to apply than guardrails that every account starts inside.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>⚖️ Well-Architected Framework</h5><p>Reviews a workload against six pillars and its trade-offs. "Is this design a good one?"</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🏔️ Landing zone</h5><p>Prepares the environment that workloads run in, with structure and guardrails. "Where do workloads go?"</p></div>
+  </div>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box locked">
+      <span>That completes the AWS journey: from an account and its organization all the way to judging a whole design. The same 19 steps shown for Azure carry over — only the service names change.</span>
+    </div>
+  </section>  <p class="fact-note">📌 Frameworks and services are renamed and reorganised often. This page teaches the ideas; for current names and guidance, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html" target="_blank" rel="noopener">AWS Well-Architected Framework: the pillars</a> · <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/waf.html" target="_blank" rel="noopener">What is the AWS Well-Architected Framework?</a> · <a href="https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html" target="_blank" rel="noopener">What is AWS Control Tower?</a> · <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/welcome.html" target="_blank" rel="noopener">AWS Security Reference Architecture</a> · <a href="https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html" target="_blank" rel="noopener">Organizing your AWS environment using multiple accounts</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

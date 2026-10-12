@@ -166,7 +166,11 @@
       "serverless-orchestration",
       "infrastructure-as-code",
       "ci-cd-deployment",
-      "secrets-configuration"
+      "secrets-configuration",
+      "security-governance",
+      "monitoring-observability",
+      "cost-management",
+      "well-architected"
     ],
     "sub": {
       "iam-roles": "identity-access",

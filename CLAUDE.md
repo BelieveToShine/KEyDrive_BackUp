@@ -17,9 +17,10 @@ file first in any new session; it routes to everything else rather than trying t
   **Load Balancing & Traffic Routing**, **Scaling & Resilience** (+ Disaster Recovery), **Caching & Edge Delivery**, **Messaging & Events** (+ Service Bus, Event Hubs),
   **Serverless & Orchestration**, **Infrastructure as Code** and **CI/CD & Deployment Strategies**. **Secrets & Configuration**, **Security & Governance**, **Monitoring & Observability**, **Cost Management** and **Well-Architected & Landing Zones**. The Azure journey is complete; remaining work is user-driven corrections and the 🟨 K ledger rows.
   Facts are logged in `docs/specs/azure/claims-ledger.md` (✅ verified via Microsoft Learn searches / 🟨 still to verify).
-- **AWS** has its hub + locked roadmap and spec folder; **no concept pages yet**. A later session writes
-  them by following `docs/rules/page-production-workflow.md` + `docs/rules/cloud-category-playbook.md`
-  (the "AWS page set" is listed there) — no re-briefing needed.
+- **AWS** is complete: hub + **19 / 19 concepts written + 9 deep dives** (IAM Roles, VPC Endpoints, S3 in Depth, DynamoDB vs RDS and Aurora,
+  Disaster Recovery, SQS/SNS/EventBridge, Kinesis), written in one unattended session following `docs/rules/page-production-workflow.md`
+  and `docs/rules/cloud-category-playbook.md`. **The user has not reviewed it yet** — expect corrections. Facts are in
+  `docs/specs/aws/claims-ledger.md` (✅ V from AWS-docs-restricted searches; 🟨 K rows listed at the bottom still need checking).
 - Three other categories (Cloud Systems, Data Systems, Web Platforms) exist only as "coming
   soon" placeholder tiles on the platform home — no hub page, no spec folder yet.
 - **Status: the user is verifying the AI category in production and applying corrections as

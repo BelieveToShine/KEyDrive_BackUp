@@ -226,8 +226,61 @@ Batch B illustrative phrases: "at least two zones" is not used here · "three zo
 
 Batch C illustrative phrases: "365 days" and "24 hours" are Kinesis retention values (MS5) · "Preview" in CloudFormation text is the "change set preview" meaning, not a lifecycle state.
 
+## Security & Governance (`security-governance.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SG1 | SCPs/RCPs apply guardrails at organization, OU or account level; SCPs never grant; default Organizations setup supports SCPs as deny lists | ✅ V | `/prescriptive-guidance/latest/security-reference-architecture/security-services.html` |
+| SG2 | Config is enabled for member accounts as a prerequisite for Security Hub CSPM; GuardDuty findings flow to Security Hub; Config rules can start in monitoring mode and move to enforcement | ✅ V | same page, Security Pillar |
+| SG3 | Delegated administration of security services to a Security Tooling account, separate from the management account | ✅ V | same page |
+| SG4 | WAF: use AWS managed rules in default mode so they update; Shield Advanced for ALB, Classic LB, Elastic IPs, CloudFront; Firewall Manager applies WAF, Shield and security group rules across accounts | ✅ V | `/prescriptive-guidance/latest/security-reference-architecture/perimeter-security.html` |
+| SG5 | Findings can drive automation such as updating a WAF IP set | ✅ V | same page |
+| SG6 | SCPs do not apply to the management account | ✅ V | AC2 |
+| SG7 | Layer table (organization, identity, network and edge, detection) | 🟦 I | teaching model |
+| SG8 | SCP JSON example (`aws:RequestedRegion`, "2012-10-17" policy version, two example Regions) | 🟦 I | real SCPs exempt global services |
+| SG-I | Scenarios | 🟦 I | |
+
+## Monitoring & Observability (`monitoring-observability.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| MO1 | Observability = logs, metrics, traces; CloudWatch for metrics, logs and alarms; Logs Insights to query logs; X-Ray distributed tracing with a map of components; Service Map | ✅ V | `/decision-guides/latest/monitoring-on-aws-how-to-choose/monitoring-on-aws-how-to-choose.html`, `/wellarchitected/latest/management-and-governance-guide/aws-observability-tools.html` |
+| MO2 | CloudTrail records API activity (who, when, what); default event history covers recent management events (window not quoted) | ✅ V | `/decision-guides/latest/cloudtrail-or-cloudwatch/cloudtrail-or-cloudwatch.html` |
+| MO3 | CloudTrail = audit and compliance; CloudWatch = operational health and performance | ✅ V | same guide |
+| MO4 | Alarm → action (notify, automation, ticket) | 🟨 K | general CloudWatch behaviour |
+| MO5 | `aws cloudwatch put-metric-alarm` flags; period 300, threshold 80, evaluation periods 2 | 🟨 K / 🟦 I | example values |
+| MO-I | Scenarios | 🟦 I | |
+
+## Cost Management (`cost-management.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CO1 | Cost Explorer + cost allocation tags show spend by team/workload; Cost Categories group accounts and tags and appear in Cost Explorer, Budgets and Anomaly Detection | ✅ V | `/decision-guides/latest/cost-management-on-aws-how-to-choose/cost-management-on-aws-how-to-choose.html` |
+| CO2 | AWS Budgets: custom cost and usage budgets with alerts; filter by tags; one budget for overall spend and one per workload | ✅ V | `/wellarchitected/latest/framework/cost_cloud_financial_management_budget_forecast.html` |
+| CO3 | Savings Plans: commitment in $/hour for one or three years; Reserved Instances can be cheaper for steady workloads but less flexible; Well-Architected suggests working toward Savings Plans; Cost Explorer gives recommendations | ✅ V | `/wellarchitected/latest/framework/cost_pricing_model_analysis.html` |
+| CO4 | Spot Instances: spare capacity at a discounted hourly rate, no upfront commitment, for non-critical workloads (discount percentage not quoted) | ✅ V | Cost Optimization pillar |
+| CO5 | Compute Optimizer recommends compute resources; start generic and resize on CPU and memory use | ✅ V | same pillar |
+| CO6 | Commitment fees cannot be tagged in advance; use amortized cost grouped by tag | ✅ V | tagging best practices |
+| CO7 | Cost allocation tags must be activated in billing before they appear in cost reports | 🟨 K | |
+| CO8 | `aws ec2 create-tags` flags; tag values | 🟨 K / 🟦 I | |
+| CO-I | Scenarios | 🟦 I | |
+
+## Well-Architected & Landing Zones (`well-architected.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| WA1 | Six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, sustainability | ✅ V | `/wellarchitected/latest/framework/the-pillars-of-the-framework.html` |
+| WA2 | Trade-offs between pillars depend on business needs; security and operational excellence are generally not traded off against the others | ✅ V | same page |
+| WA3 | A landing zone is a well-architected multi-account environment based on security and compliance best practices | ✅ V | `/controltower/latest/userguide/what-is-control-tower.html` |
+| WA4 | Control Tower orchestrates Organizations, Service Catalog and IAM Identity Center, applies preventive and detective guardrails, gives a dashboard; AWS recommends starting with it; a custom landing zone suits unusual requirements | ✅ V | same page |
+| WA5 | Platform and workload account layout; pillar-to-concept mapping | 🟦 I | teaching model |
+| WA-I | Scenarios | 🟦 I | |
+
+Batch D illustrative phrases: "300" (seconds, example alarm period) · "2012" (the IAM policy language version string in the SCP example).
+
 ---
 
 ## Open verification list
 
-(Filled at the end of the AWS run: every 🟨 K row, in priority order.)
+Everything marked 🟨 K above, in priority order: **IM-series CLI flags and example IDs** (IM10), **ST11 / DB8 / DB9** (S3 CLI flags, DynamoDB global tables and RDS engine list were not covered by the searches), **LB4** (DNS caching), **SC4 / SC5 / DR5 / DR6** (general terms and Builders-Library patterns), **SV4** (Lambda internals and cold starts), **IA4** (change sets and drift detection), **CD5** (CodePipeline and CodeBuild descriptions), **SX5** (KMS envelope encryption), **MS4** (general SQS visibility timeout and dead-letter behaviour), **MO4 / MO5**, **CO7**, **RG6** (zone-name mapping per account), **CP6 / CP7**, and the CLI examples marked K on every page.
+After checking a row against the official AWS page, change 🟨 K to ✅ V and add the exact URL. Also re-check any ✅ V row whose source was a search snippet from a page the search described as older.

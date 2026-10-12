@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Management — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Cost Management</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 18 of 19 · 🛠️ Shipping and operating</div>
+    <h1>Cloud spend is metered — so cost is a design input: <span class="grad-text">see it first, cut the waste, then commit to a discount.</span></h1>
+    <p class="sub">Cost Explorer, Budgets, tags, Savings Plans, Reserved Instances, Spot and Compute Optimizer: the levers an architect uses to keep a good design affordable.</p>
+    <div class="interview-q">❓ "How would you control and reduce AWS costs?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 294" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="The cost loop: see where the money goes, stop paying for waste, pay less for what stays, then review again">
+<defs><marker id="co1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M345,72 L345,108" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co1A)"/>
+<path d="M345,168 L345,204" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co1A)"/>
+<path d="M70,204 L36,204 L36,42 L70,42" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co1A)"/>
+<rect class="bx" x="70" y="12" width="550" height="60" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="345" y="39.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">👀 See where the money goes</text>
+<text x="345" y="52.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">tags, Cost Explorer, budgets and alerts</text>
+<rect class="bx" x="70" y="108" width="550" height="60" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="345" y="135.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">✂️ Stop paying for waste</text>
+<text x="345" y="148.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">idle, oversized and forgotten resources</text>
+<rect class="bx" x="70" y="204" width="550" height="60" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="345" y="231.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🏷️ Pay less for what stays</text>
+<text x="345" y="244.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Savings Plans, Reserved Instances, Spot</text>
+<text class="free" x="345" y="284" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Cost is a habit, not a project: the loop never really ends.</text>
+<g class="arrow-pill"><rect x="398" y="81" width="44" height="18" rx="9"/><text x="420" y="93.5" text-anchor="middle" font-size="9" font-style="italic">finds</text></g>
+<g class="arrow-pill"><rect x="379" y="177" width="82" height="18" rx="9"/><text x="420" y="189.5" text-anchor="middle" font-size="9" font-style="italic">then commits</text></g>
+<g class="arrow-pill"><rect x="11" y="114" width="50" height="18" rx="9"/><text x="36" y="126.5" text-anchor="middle" font-size="9" font-style="italic">repeat</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> cost work is a <b>loop</b>. First <b>see</b> where the money goes — with tags, Cost Explorer, budgets and alerts. Then <b>stop paying for waste</b>: servers nobody uses, resources bigger than they need to be, things left behind. Only then <b>pay less for what stays</b>, with commitments and discounts. Doing it in this order matters: a discount on a resource you should have deleted is still waste.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Cloud spend is metered, so cost is a design input: see it first, cut the waste, then commit to a discount.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Everything built so far is billed by the hour, by the gigabyte, by the request. Auto Scaling adds copies, the second Region doubles the base, logs grow, a forgotten test environment keeps running. A design can be reliable, secure and fast — and still unaffordable.</p>
+      <p>The good news is that AWS also gives you the levers. You can <b>see</b> cost by team and by workload, <b>cut</b> what is idle or oversized, and <b>commit</b> to steady use at a lower price. The architect's job is to make cost visible early and to treat it as one more trade-off, not a surprise on the invoice.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The levers</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📊 Cost Explorer, Budgets, Cost Categories</h4><span class="pk-tag">see, analyse, budget</span><span class="pk-label use">✅ Pick it when</span><ul><li>Cost Explorer shows which services drive spend; cost allocation tags break it down by team or workload</li><li>AWS Budgets: custom cost and usage budgets with alerts; filter by tags</li><li>Cost Categories group accounts and tags into business views</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting a budget to stop spending — it alerts</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>📏 Compute Optimizer and cleanup</h4><span class="pk-tag">stop paying for waste</span><span class="pk-label use">✅ Pick it when</span><ul><li>Recommends right-sized compute for your workload</li><li>Start with a generic size, then resize on real CPU and memory use</li><li>Remove resources nobody uses</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Doing it once — waste comes back</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>📌 Savings Plans and Reserved Instances</h4><span class="pk-tag">commit for a lower price</span><span class="pk-label use">✅ Pick it when</span><ul><li>Savings Plans: a commitment measured in dollars per hour for one or three years, more flexible</li><li>Reserved Instances: can be cheaper still for steady workloads, less flexible</li><li>Cost Explorer makes purchase recommendations</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Uncertain or short-lived workloads — an unused commitment is waste</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🎟️ Spot Instances</h4><span class="pk-tag">spare capacity at a discount</span><span class="pk-label use">✅ Pick it when</span><ul><li>Request spare compute at a discounted hourly rate, with no upfront commitment</li><li>Suits non-critical, interruptible work</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Anything that cannot be interrupted</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 Paying less for compute</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 536" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for paying less for compute: Spot for interruptible work, Reserved Instances for steady fixed use, Savings Plans for steady flexible spend">
+<defs><marker id="co2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 How do you run it?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⏸️ Can the work be interrupted?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">batch, test, jobs that checkpoint</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">Spot Instances</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">spare capacity, can stop</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📌 Steady use of one instance family?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">running all month, every month</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Reserved Instances</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">commit to specific use</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔀 Steady spend, but the shape changes?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a baseline you always have</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Savings Plans</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">commit to $/hour</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📏 Are you sure the size is right?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">check before you commit</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Compute Optimizer</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">resize first</text>
+<rect class="bx" x="10" y="460" width="330" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="485.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💳 Otherwise: On-Demand</text>
+<text x="175" y="498.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">no commitment, flexible, highest unit price</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> ask in order. <b>Can the work be interrupted?</b> Spot Instances. <b>Steady use of one instance family?</b> Reserved Instances. <b>Steady spend that changes shape?</b> Savings Plans — the Well-Architected guidance suggests working toward them as the more flexible option. <b>Not sure the size is right?</b> Resize with Compute Optimizer before you commit. If none fits, On-Demand is the flexible, most expensive unit price. Discount sizes change, so this page quotes none.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🏷️ Tags and budgets</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Tags group costs, Cost Explorer shows them, and a budget compares spend to a limit and sends an alert">
+<defs><marker id="co3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,82 L250,82" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#co3A)"/>
+<path d="M390,82 L500,82" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#co3A)"/>
+<path d="M565,114 L565,170" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#co3A)"/>
+<rect class="bx" x="10" y="50" width="130" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="75" y="78.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🏷️ Tagged</text>
+<text x="75" y="93.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">resources</text>
+<rect class="bx" x="250" y="50" width="140" height="64" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="79.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Cost Explorer</text>
+<text x="320" y="92.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">grouped by tag</text>
+<rect class="bx" x="500" y="50" width="130" height="64" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="565" y="79.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🎯 Budget</text>
+<text x="565" y="92.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">limit and alerts</text>
+<rect class="bx" x="500" y="170" width="130" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="565" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔔 Alert</text>
+<text x="565" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">notify or act</text>
+<text class="free" x="190" y="188" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Cost allocation tags show which team</text>
+<text class="free" x="190" y="204" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">or product drives spend.</text>
+<text class="free" x="190" y="232" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Budgets alert you — they do not stop spending.</text>
+<g class="arrow-pill"><rect x="159.5" y="73" width="71" height="18" rx="9"/><text x="195" y="85.5" text-anchor="middle" font-size="9" font-style="italic">grouped in</text></g>
+<g class="arrow-pill"><rect x="403" y="73" width="76" height="18" rx="9"/><text x="441" y="85.5" text-anchor="middle" font-size="9" font-style="italic">compared to</text></g>
+<g class="arrow-pill"><rect x="444" y="133" width="92" height="18" rx="9"/><text x="490" y="145.5" text-anchor="middle" font-size="9" font-style="italic">at a threshold</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Cost allocation tags</b> let you see spend by team or workload in Cost Explorer. A <b>budget</b> compares spend to a limit and alerts you; AWS suggests one budget for overall account spend and another per workload using tags. One catch: fees for commitments such as Savings Plans and Reserved Instances cannot be tagged in advance, so you look at amortized cost grouped by tag afterwards.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Which discount?</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">You commit to</th><th scope="col">Flexibility</th><th scope="col">Best when</th></tr></thead><tbody><tr><th scope="row">💳 On-Demand</th><td>Nothing</td><td>Highest</td><td>Short, unpredictable or experimental</td></tr><tr><th scope="row">📌 Reserved Instances</th><td>A specific usage, for one or three years</td><td>Lower</td><td>Steady, predictable, long-running</td></tr><tr><th scope="row">🔀 Savings Plans</th><td>An hourly spend for one or three years</td><td>Higher</td><td>Steady spend with changing sizes and services</td></tr><tr><th scope="row">⏸️ Spot</th><td>Nothing — but it can be taken away</td><td>n/a</td><td>Interruptible, non-critical work</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🌙</span><h5>Dev and test run all night</h5><p>Nobody uses them from evening to morning.</p><span class="sc-use">→ Shut down out of hours</span></div>
+      <div class="scenario"><span class="sc-icon">💾</span><h5>Deleted servers left things behind</h5><p>Forgotten resources keep billing.</p><span class="sc-use">→ Find and remove them</span></div>
+      <div class="scenario"><span class="sc-icon">🏭</span><h5>A database tier that runs 24/7 for years</h5><p>The size will not change.</p><span class="sc-use">→ Reserved or Savings Plan, after checking the size</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>A nightly batch job that checkpoints</h5><p>It can restart if interrupted.</p><span class="sc-use">→ Spot Instances</span></div>
+      <div class="scenario"><span class="sc-icon">🏷️</span><h5>"Whose spend is this?"</h5><p>Finance wants it by team.</p><span class="sc-use">→ Cost allocation tags + Cost Explorer</span></div>
+      <div class="scenario"><span class="sc-icon">🔔</span><h5>A bill that doubled last month</h5><p>Find it before the next invoice.</p><span class="sc-use">→ Budget alerts</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details that surprise people</summary>
+    <div class="zoom-inner">
+      <p><b>Commitments.</b> Savings Plans offer lower prices than On-Demand in exchange for a specific usage commitment, measured in dollars per hour, for a one- or three-year period. Reserved Instances can be cheaper still for steady workloads but are less flexible.</p>
+      <p><b>Spot.</b> Spot Instances let you request spare compute capacity at a discounted hourly rate with no upfront commitment. AWS guidance is to use them for non-critical workloads.</p>
+      <p><b>Tags.</b> Cost allocation tags combined with Cost Explorer show which teams or parts of the organization drive spend; Cost Categories group accounts and tags into business-unit views that also appear in Budgets and Cost Anomaly Detection.</p>
+      <p><b>Design choices are cost choices.</b> A second Region, extra copies, longer log retention and bigger instances all show up on the bill. The Well-Architected cost pillar asks you to weigh them against the value they give — which is the next, last concept.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Cost loop: see (tags, Cost Explorer, budgets) → cut waste (idle, oversized) → commit (Savings Plans, Reserved Instances, Spot) → repeat.</li><li>Savings Plans = commitment in dollars per hour, one or three years, more flexible. Reserved Instances = less flexible. Spot = spare capacity, can be interrupted.</li><li>AWS Budgets alert on cost and usage; they do not cap spending by themselves.</li><li>Cost allocation tags give cost business meaning; commitment fees cannot be tagged in advance — use amortized cost.</li><li>Resize with Compute Optimizer before you commit; cut waste before discounts.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I treat cost as a design input and a loop. First visibility: cost allocation tags, Cost Explorer and budget alerts. Then waste: idle and oversized resources, checked with Compute Optimizer. Then commitments: Savings Plans for steady flexible spend, Reserved Instances for steady fixed use, and Spot for interruptible work."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Buying a commitment before cleaning up.</b> You lock in a discount on resources that should not exist. Remove waste first, then commit to what remains.</p>
+      <p>Second trap: <b>thinking a budget protects you.</b> A budget sends alerts; by itself it does not stop spending. Watch forecasts as well as actuals, and act on the alert.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📌 Reserved Instances</h5><p>Commit to specific usage for one or three years. Can be cheaper for steady, fixed use.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🔀 Savings Plans</h5><p>Commit to an hourly spend. More flexible when sizes and services change.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># tag a resource so its cost can be grouped by team in Cost Explorer</span>
+aws ec2 create-tags --resources &lt;instance-id&gt; --tags Key=team,Value=checkout Key=env,Value=prod</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative only — tag keys must also be activated as cost allocation tags in billing before they appear in cost reports.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You now have the building blocks, the safety, the signals and the bill. One last question remains: how do you judge all of it together? Next: Well-Architected &amp; Landing Zones.</span>
+      <a class="next-link" href="well-architected.html">Well-Architected &amp; Landing Zones <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Prices, discount levels and offers change often, so this page uses no price numbers. For current prices and terms, check the official AWS docs and the pricing calculator. Official docs: <a href="https://docs.aws.amazon.com/decision-guides/latest/cost-management-on-aws-how-to-choose/cost-management-on-aws-how-to-choose.html" target="_blank" rel="noopener">Choosing an AWS cost management strategy</a> · <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/what-is-costmanagement.html" target="_blank" rel="noopener">AWS Billing and Cost Management</a> · <a href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/building-a-cost-allocation-strategy.html" target="_blank" rel="noopener">Building a cost allocation strategy (tagging)</a> · <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_cloud_financial_management_budget_forecast.html" target="_blank" rel="noopener">Establish cloud budgets and forecasts</a> · <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_pricing_model_analysis.html" target="_blank" rel="noopener">Perform pricing model analysis</a> · <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html" target="_blank" rel="noopener">AWS Compute Optimizer</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

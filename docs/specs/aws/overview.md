@@ -2,7 +2,7 @@
 
 ## Status
 
-Hub page and full roadmap are done; **no concept pages written yet** (0 / 19). Added at the user's
+Hub page, full roadmap and **all 19 concept pages** are done (19 / 19, plus 9 deep dives), written in one unattended session on 2026-10-12 — **needs the user's verification pass**. Added at the user's
 explicit request (2026-10-12), which lifts the platform-wide "don't start a new category without
 being asked" rule for this category only.
 
@@ -10,7 +10,7 @@ being asked" rule for this category only.
 
 - `aws/index.html` — category hub: hero, the locked 19-node journey-map diagram (every connector
   labeled with the limit that made the next concept necessary, two grouping containers, legend)
-  and the full concept list with 🔒 planned badges. Nodes and rows are not links yet.
+  and the full concept list; every node and row is now a link to a written page.
 - A "Roadmap" tile on the platform home (`index.html`), directly after the Cloud Systems placeholder.
 - This spec folder.
 

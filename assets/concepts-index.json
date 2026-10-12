@@ -1756,5 +1756,109 @@
     "summary": "The classic mistake with Secrets & Configuration.",
     "keywords": "aws secrets configuration secrets manager parameter store kms rotation iam role encryption trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "aws-security-governance",
+    "title": "Security & Governance",
+    "category": "AWS",
+    "page": "aws/concepts/security-governance.html",
+    "summary": "SCPs, IAM, WAF, Shield, GuardDuty, Config and Security Hub.",
+    "keywords": "aws security governance scp guardduty config security hub waf shield firewall manager defense in depth detection"
+  },
+  {
+    "id": "aws-security-governance-recall",
+    "title": "Security & Governance — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/security-governance.html",
+    "summary": "Quick recall points: Security & Governance.",
+    "keywords": "aws security governance scp guardduty config security hub waf shield firewall manager defense in depth detection interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-security-governance-trap",
+    "title": "Security & Governance — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/security-governance.html",
+    "summary": "The classic mistake with Security & Governance.",
+    "keywords": "aws security governance scp guardduty config security hub waf shield firewall manager defense in depth detection trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-monitoring-observability",
+    "title": "Monitoring & Observability",
+    "category": "AWS",
+    "page": "aws/concepts/monitoring-observability.html",
+    "summary": "CloudWatch, X-Ray and CloudTrail: metrics, logs, traces, audit and alarms.",
+    "keywords": "aws monitoring observability cloudwatch x-ray cloudtrail metrics logs traces alarms logs insights"
+  },
+  {
+    "id": "aws-monitoring-observability-recall",
+    "title": "Monitoring & Observability — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/monitoring-observability.html",
+    "summary": "Quick recall points: Monitoring & Observability.",
+    "keywords": "aws monitoring observability cloudwatch x-ray cloudtrail metrics logs traces alarms logs insights interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-monitoring-observability-trap",
+    "title": "Monitoring & Observability — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/monitoring-observability.html",
+    "summary": "The classic mistake with Monitoring & Observability.",
+    "keywords": "aws monitoring observability cloudwatch x-ray cloudtrail metrics logs traces alarms logs insights trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-cost-management",
+    "title": "Cost Management",
+    "category": "AWS",
+    "page": "aws/concepts/cost-management.html",
+    "summary": "Cost Explorer, Budgets, tags, Savings Plans, Reserved Instances, Spot and Compute Optimizer.",
+    "keywords": "aws cost management cost explorer budgets tags savings plans reserved instances spot compute optimizer"
+  },
+  {
+    "id": "aws-cost-management-recall",
+    "title": "Cost Management — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/cost-management.html",
+    "summary": "Quick recall points: Cost Management.",
+    "keywords": "aws cost management cost explorer budgets tags savings plans reserved instances spot compute optimizer interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-cost-management-trap",
+    "title": "Cost Management — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/cost-management.html",
+    "summary": "The classic mistake with Cost Management.",
+    "keywords": "aws cost management cost explorer budgets tags savings plans reserved instances spot compute optimizer trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-well-architected",
+    "title": "Well-Architected & Landing Zones",
+    "category": "AWS",
+    "page": "aws/concepts/well-architected.html",
+    "summary": "The six Well-Architected pillars, trade-offs, landing zones and Control Tower.",
+    "keywords": "aws well architected framework pillars sustainability landing zone control tower trade-offs"
+  },
+  {
+    "id": "aws-well-architected-recall",
+    "title": "Well-Architected & Landing Zones — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/well-architected.html",
+    "summary": "Quick recall points: Well-Architected & Landing Zones.",
+    "keywords": "aws well architected framework pillars sustainability landing zone control tower trade-offs interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-well-architected-trap",
+    "title": "Well-Architected & Landing Zones — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/well-architected.html",
+    "summary": "The classic mistake with Well-Architected & Landing Zones.",
+    "keywords": "aws well architected framework pillars sustainability landing zone control tower trade-offs trap mistake",
+    "anchor": "trap"
   }
 ]
