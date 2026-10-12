@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identity &amp; Access (IAM) — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Identity &amp; Access (IAM)</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 3 of 19 · 🏗️ Foundations</div>
+    <h1>IAM answers "who may do what to which thing?" — and the safe default is <span class="grad-text">nobody, until a policy says so.</span></h1>
+    <p class="sub">IAM policies, roles, Identity Center and the root user: how access works on AWS and why temporary credentials beat long-lived keys.</p>
+    <div class="interview-q">❓ "How does IAM work, and how would you give an application access to AWS resources safely?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Three kinds of caller reach AWS: people through Identity Center, workloads through roles, and the rarely used root user; IAM checks policies and allows only what a policy allows">
+<defs><marker id="ia1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M160,55 L230,55 L230,110 L300,110" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<path d="M160,139 L300,139" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<path d="M160,223 L230,223 L230,170 L300,170" fill="none" stroke="#fb7185" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ia1A)"/>
+<path d="M430,100 L475,100 L475,62 L520,62" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<path d="M430,160 L475,160 L475,198 L520,198" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<rect class="bx" x="10" y="24" width="150" height="62" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="85" y="52.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">👤 A person</text>
+<text x="85" y="65.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">Identity Center</text>
+<rect class="bx" x="10" y="108" width="150" height="62" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="85" y="136.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤖 A workload</text>
+<text x="85" y="149.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">an IAM role</text>
+<rect class="bx" x="10" y="192" width="150" height="62" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="85" y="220.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">👑 Root user</text>
+<text x="85" y="233.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">rare tasks only</text>
+<rect class="bx" x="300" y="70" width="130" height="120" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="365" y="115.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🧾 IAM</text>
+<text x="365" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">checks the</text>
+<text x="365" y="140.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">policies on</text>
+<text x="365" y="152.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">every request</text>
+<rect class="bx" x="520" y="36" width="110" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="575" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">✅ Allowed</text>
+<rect class="bx" x="520" y="172" width="110" height="52" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="575" y="202" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">⛔ Denied</text>
+<g class="arrow-pill"><rect x="197" y="73" width="66" height="18" rx="9"/><text x="230" y="85.5" text-anchor="middle" font-size="9" font-style="italic">temporary</text></g>
+<g class="arrow-pill"><rect x="197" y="130" width="66" height="18" rx="9"/><text x="230" y="142.5" text-anchor="middle" font-size="9" font-style="italic">temporary</text></g>
+<g class="arrow-pill"><rect x="208" y="187" width="44" height="18" rx="9"/><text x="230" y="199.5" text-anchor="middle" font-size="9" font-style="italic">avoid</text></g>
+<g class="arrow-pill"><rect x="453" y="72" width="44" height="18" rx="9"/><text x="475" y="84.5" text-anchor="middle" font-size="9" font-style="italic">allow</text></g>
+<g class="arrow-pill"><rect x="445" y="170" width="60" height="18" rx="9"/><text x="475" y="182.5" text-anchor="middle" font-size="9" font-style="italic">no allow</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> every call to AWS comes from somebody: a <b>person</b> (who should sign in through IAM Identity Center and get temporary credentials), a <b>workload</b> (which gets temporary credentials from an IAM <b>role</b>), or — rarely — the <b>root user</b>. <b>IAM</b> checks the policies on every request. If a policy allows it, it goes through; if nothing allows it, it is denied. Notice the word <i>temporary</i>: long-lived keys are what you try to avoid.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">IAM answers "who may do what to which thing?" — and the safe default is that nobody may do anything until a policy says so, using temporary credentials for people and for apps.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You now have accounts and Regions, and resources are about to be created in many places. The next question is not "can it be reached?" but <b>"who or what is allowed to create, read or change each thing?"</b> That includes your apps, not just people — an app that can read a database is an identity too.</p>
+      <p>AWS answers with <b>IAM</b> (Identity and Access Management). Everything is denied by default; you grant access with <b>policies</b>; and AWS pushes you toward <b>temporary credentials</b> — roles for workloads, federation for people — instead of long-lived keys that can leak. This page is the map; the Roles deep dive shows the mechanics.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>🎭 IAM role</h4><span class="pk-tag">an identity with temporary credentials</span><span class="pk-label use">✅ Pick it when</span><ul><li>Apps and services (EC2, Lambda, containers) that need AWS access</li><li>Cross-account access</li><li>Anything that should not have a permanent key</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A person who needs everyday access — use Identity Center instead</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🧑‍🤝‍🧑 IAM Identity Center</h4><span class="pk-tag">sign-in for your workforce</span><span class="pk-label use">✅ Pick it when</span><ul><li>AWS's recommended way to give people access to accounts</li><li>One place for users and their permissions across accounts</li><li>People get temporary credentials</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Workloads — those use roles</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>📜 IAM policy</h4><span class="pk-tag">a JSON document of allowed or denied actions</span><span class="pk-label use">✅ Pick it when</span><ul><li>Say exactly which actions on which resources</li><li>Start from AWS managed policies, then tighten to your own</li><li>Pair with last-accessed data to remove unused permissions</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Wildcards for everything ("*") — that is not least privilege</li></ul></div>
+      <div class="pick-card" style="--pick:#fb7185"><h4>👑 Root user</h4><span class="pk-tag">the all-powerful account owner</span><span class="pk-label use">✅ Pick it when</span><ul><li>Only the few tasks that really need it</li><li>Turn on MFA; do not create root access keys</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Daily work — never use root for that</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📜 What a policy says</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 252" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A policy statement is made of an effect, an action and a resource; each part narrows what is allowed">
+<defs><marker id="ia2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M470,49 L350,49" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<path d="M470,109 L350,109" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<path d="M470,169 L350,169" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<rect class="bx" x="10" y="24" width="340" height="176" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="24" y="46" text-anchor="start" font-size="9.5" font-family="'JetBrains Mono'" fill="#cdbffc">{</text>
+<text x="38" y="64" text-anchor="start" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">"Effect": "Allow",</text>
+<text x="38" y="82" text-anchor="start" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">"Action": "s3:GetObject",</text>
+<text x="38" y="100" text-anchor="start" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">"Resource": "arn:aws:s3:::reports/*"</text>
+<text x="24" y="118" text-anchor="start" font-size="9.5" font-family="'JetBrains Mono'" fill="#cdbffc">}</text>
+<text class="free" x="180" y="226" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Read one kind of object, in one bucket — and nothing else.</text>
+<rect class="bx" x="470" y="24" width="160" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="550" y="46.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">✅ Effect</text>
+<text x="550" y="59.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Allow or Deny</text>
+<rect class="bx" x="470" y="84" width="160" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="550" y="106.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔧 Action</text>
+<text x="550" y="119.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">which API call</text>
+<rect class="bx" x="470" y="144" width="160" height="50" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="550" y="166.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🎯 Resource</text>
+<text x="550" y="179.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">which thing</text>
+<g class="arrow-pill"><rect x="390.5" y="40" width="39" height="18" rx="9"/><text x="410" y="52.5" text-anchor="middle" font-size="9" font-style="italic">sets</text></g>
+<g class="arrow-pill"><rect x="388" y="100" width="44" height="18" rx="9"/><text x="410" y="112.5" text-anchor="middle" font-size="9" font-style="italic">names</text></g>
+<g class="arrow-pill"><rect x="385" y="160" width="50" height="18" rx="9"/><text x="410" y="172.5" text-anchor="middle" font-size="9" font-style="italic">limits</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a policy is a list of <b>statements</b>. Each says: an <b>Effect</b> (Allow or Deny), an <b>Action</b> (which API call, such as reading an object) and a <b>Resource</b> (which thing). Statements can also have conditions. Least privilege means writing the narrowest statement that still lets the job work — here, reading objects in one bucket and nothing else. IAM Access Analyzer can even draft policies from what a role actually used.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">⚖️ How IAM decides</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 346" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="How IAM decides: an explicit deny always wins; otherwise something must allow the request; otherwise it is denied by default">
+<defs><marker id="ia3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 A request arrives</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🚫 Any explicit Deny that applies?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">in any policy, anywhere</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">Denied</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">a Deny always wins</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">✅ Does a policy allow it?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">and no SCP blocks it</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Allowed</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">least privilege in action</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">⛔ Nothing allows it</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">denied by default</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a request is judged in a fixed order. If any applicable policy has an <b>explicit Deny</b>, it is denied — a Deny always wins. Otherwise something must <b>allow</b> it, and no service control policy (concept 1) may block it. If nothing allows it, it is denied by default. So permissions are the <em>overlap</em> of what the organization lets the account do and what the identity's own policies grant.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 People, apps and root</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">How they get access</th><th scope="col">Credentials</th><th scope="col">Rule of thumb</th></tr></thead><tbody><tr><th scope="row">👤 People</th><td>IAM Identity Center (federation)</td><td>Temporary</td><td>Avoid IAM users with long-lived passwords and keys</td></tr><tr><th scope="row">🤖 Apps and services</th><td>An IAM role on the compute service</td><td>Temporary, rotated automatically</td><td>Never put access keys in code</td></tr><tr><th scope="row">🔗 Another account</th><td>A role that the other account may assume</td><td>Temporary</td><td>Trust a specific account, not everyone</td></tr><tr><th scope="row">👑 Root user</th><td>Email and password with MFA</td><td>Long-lived</td><td>Use only for tasks that require it</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🖥️</span><h5>A web server must read files from storage</h5><p>Nobody should type a key into the server.</p><span class="sc-use">→ A role on the instance, read-only to that bucket</span></div>
+      <div class="scenario"><span class="sc-icon">👩‍💻</span><h5>A new developer joins</h5><p>They need access to two accounts.</p><span class="sc-use">→ Identity Center with a permission set</span></div>
+      <div class="scenario"><span class="sc-icon">🔁</span><h5>A pipeline deploys to production</h5><p>It runs in another account.</p><span class="sc-use">→ A role it can assume, with just the deploy rights</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>An access key is found on a public repository</h5><p>It can act as a person forever.</p><span class="sc-use">→ Rotate or delete it; move to roles</span></div>
+      <div class="scenario"><span class="sc-icon">🧹</span><h5>A role has more permissions than it uses</h5><p>Nobody remembers why.</p><span class="sc-use">→ Check last-accessed data and tighten</span></div>
+      <div class="scenario"><span class="sc-icon">👑</span><h5>Someone wants to "just use root"</h5><p>It works everywhere, too well.</p><span class="sc-use">→ Say no; use a role with the right rights</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="iam-roles.html"><span class="dc-kicker">Deep dive · IAM</span><h4>IAM Roles: trust, permissions and temporary credentials</h4><p>How a role is assumed, what a trust policy is, how an EC2 instance gets its credentials, and how cross-account access works.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — habits AWS recommends</summary>
+    <div class="zoom-inner">
+      <p><b>Temporary credentials first.</b> AWS recommends that people reach accounts through federation (temporary credentials) and that workloads use roles. Where long-term keys are unavoidable, rotate them when needed, for example when someone leaves.</p>
+      <p><b>Root user.</b> Use it only for the few tasks that require it. Do not create root access keys, turn on MFA, and in a multi-account organization remove root credentials from member accounts so nobody can sign in as root there.</p>
+      <p><b>Least privilege.</b> Grant only what a task needs. Start with AWS managed policies, then move to customer managed policies that fit. IAM Access Analyzer can generate a policy from the access activity it sees, and last-accessed data shows permissions nobody uses.</p>
+      <p><b>Guardrails above IAM.</b> Service control policies in an organization limit what accounts can do whatever their own IAM says — they filter and never grant.</p>
+      <p><b>Groups and users.</b> IAM users and groups still exist, but for people, Identity Center is the recommended door.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>IAM: who may do what to which resource. Everything is denied by default; policies grant access.</li><li>A policy statement has Effect, Action, Resource (and optional Condition). An explicit Deny always wins.</li><li>People: IAM Identity Center and temporary credentials. Workloads: IAM roles. Avoid long-lived access keys.</li><li>Root user: only for tasks that need it, with MFA and no root access keys.</li><li>Effective permission = what SCPs allow ∩ what the identity's policies allow. Use IAM Access Analyzer and last-accessed data to tighten.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"IAM is deny-by-default: access exists only where a policy allows it, and an explicit deny always wins. People sign in through IAM Identity Center and get temporary credentials; workloads use IAM roles, so no access keys live in code. I write least-privilege policies with the help of Access Analyzer, keep root locked away with MFA, and use service control policies as guardrails above the accounts."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Putting an access key in the code, an environment file or a pipeline variable.</b> It is a permanent password for your account. Give the workload a role and let AWS hand it temporary credentials.</p>
+      <p>Second trap: <b>fixing a permission error by giving administrator access.</b> It works, and it quietly turns every bug and every leaked token into a full-account incident. Add the one missing action instead.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>👤 IAM user</h5><p>A permanent identity with long-lived credentials. Avoid for people when you can.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🎭 IAM role</h5><p>An identity you assume for a while and get temporary credentials for. The default for workloads.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># see who you are right now — a quick way to check which identity the CLI is using</span>
+aws sts get-caller-identity</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the output shows an account ID, a user ID and an ARN, which differ for every caller.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Identity says who may call what. <b>Networking</b> decides what can physically reach what. Resources need isolation and controlled paths before they hold real traffic. Next: VPC Networking.</span>
+      <a class="next-link" href="vpc-networking.html">VPC Networking <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html" target="_blank" rel="noopener">AWS IAM user guide</a> · <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank" rel="noopener">Security best practices in IAM</a> · <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html" target="_blank" rel="noopener">Root user best practices</a> · <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html" target="_blank" rel="noopener">IAM Identity Center</a> · <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html" target="_blank" rel="noopener">IAM roles</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

@@ -7,11 +7,11 @@ per `../../rules/content-structure.md` and `../../rules/navigation.md`.
 
 | # | Concept | Status | Page |
 |---|---|---|---|
-| 1 | Accounts & Organizations | 🔒 Planned | — |
-| 2 | Regions & Availability Zones | 🔒 Planned | — |
-| 3 | Identity & Access (IAM) | 🔒 Planned | — |
-| 4 | VPC Networking | 🔒 Planned | — |
-| 5 | Compute | 🔒 Planned | — |
+| 1 | Accounts & Organizations | ✅ Written | `aws/concepts/accounts-organizations.html` |
+| 2 | Regions & Availability Zones | ✅ Written | `aws/concepts/regions-availability-zones.html` |
+| 3 | Identity & Access (IAM) | ✅ Written | `aws/concepts/identity-access.html`, `aws/concepts/iam-roles.html` (IAM Roles) |
+| 4 | VPC Networking | ✅ Written | `aws/concepts/vpc-networking.html`, `aws/concepts/vpc-endpoints.html` (VPC Endpoints) |
+| 5 | Compute | ✅ Written | `aws/concepts/compute.html` |
 | 6 | Storage | 🔒 Planned | — |
 | 7 | Databases | 🔒 Planned | — |
 | 8 | Load Balancing & Traffic Routing | 🔒 Planned | — |
@@ -27,6 +27,6 @@ per `../../rules/content-structure.md` and `../../rules/navigation.md`.
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**0 / 19 written.** The hub page (`aws/index.html`) is built with the full locked roadmap;
+**5 / 19 written (batch A, written 2026-10-12 while the user was away).** The hub page (`aws/index.html`) is built with the full locked roadmap;
 concept pages come next, in the order fixed in `concept-taxonomy.md`. Slug convention: kebab-case
 of the concept name, e.g. `aws/concepts/regions-availability-zones.html`.

@@ -1184,5 +1184,187 @@
     "summary": "The classic mistake with Well-Architected & Landing Zones.",
     "keywords": "azure well architected framework pillars reliability security cost optimization operational excellence performance efficiency landing zone cloud adoption framework trade-offs trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "aws-accounts-organizations",
+    "title": "Accounts & Organizations",
+    "category": "AWS",
+    "page": "aws/concepts/accounts-organizations.html",
+    "summary": "AWS accounts, Organizations, OUs, service control policies and consolidated billing.",
+    "keywords": "aws accounts organizations ou scp service control policy consolidated billing management account member account blast radius multi account"
+  },
+  {
+    "id": "aws-accounts-organizations-recall",
+    "title": "Accounts & Organizations — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/accounts-organizations.html",
+    "summary": "Quick recall points: Accounts & Organizations.",
+    "keywords": "aws accounts organizations ou scp service control policy consolidated billing management account member account blast radius multi account interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-accounts-organizations-trap",
+    "title": "Accounts & Organizations — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/accounts-organizations.html",
+    "summary": "The classic mistake with Accounts & Organizations.",
+    "keywords": "aws accounts organizations ou scp service control policy consolidated billing management account member account blast radius multi account trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-regions-availability-zones",
+    "title": "Regions & Availability Zones",
+    "category": "AWS",
+    "page": "aws/concepts/regions-availability-zones.html",
+    "summary": "Regions, Availability Zones, Local Zones and how to choose where to run.",
+    "keywords": "aws region availability zone az local zone wavelength opt-in region latency data residency multi-az"
+  },
+  {
+    "id": "aws-regions-availability-zones-recall",
+    "title": "Regions & Availability Zones — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/regions-availability-zones.html",
+    "summary": "Quick recall points: Regions & Availability Zones.",
+    "keywords": "aws region availability zone az local zone wavelength opt-in region latency data residency multi-az interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-regions-availability-zones-trap",
+    "title": "Regions & Availability Zones — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/regions-availability-zones.html",
+    "summary": "The classic mistake with Regions & Availability Zones.",
+    "keywords": "aws region availability zone az local zone wavelength opt-in region latency data residency multi-az trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-identity-access",
+    "title": "Identity & Access (IAM)",
+    "category": "AWS",
+    "page": "aws/concepts/identity-access.html",
+    "summary": "IAM policies, roles, Identity Center, the root user and least privilege.",
+    "keywords": "aws iam identity access policy role identity center root user mfa least privilege temporary credentials explicit deny"
+  },
+  {
+    "id": "aws-identity-access-recall",
+    "title": "Identity & Access (IAM) — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/identity-access.html",
+    "summary": "Quick recall points: Identity & Access (IAM).",
+    "keywords": "aws iam identity access policy role identity center root user mfa least privilege temporary credentials explicit deny interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-identity-access-trap",
+    "title": "Identity & Access (IAM) — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/identity-access.html",
+    "summary": "The classic mistake with Identity & Access (IAM).",
+    "keywords": "aws iam identity access policy role identity center root user mfa least privilege temporary credentials explicit deny trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-iam-roles",
+    "title": "IAM Roles",
+    "category": "AWS",
+    "page": "aws/concepts/iam-roles.html",
+    "summary": "Trust policies, permissions policies, instance profiles and STS AssumeRole.",
+    "keywords": "aws iam role trust policy permissions policy instance profile sts assume role cross account passrole"
+  },
+  {
+    "id": "aws-iam-roles-recall",
+    "title": "IAM Roles — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/iam-roles.html",
+    "summary": "Quick recall points: IAM Roles.",
+    "keywords": "aws iam role trust policy permissions policy instance profile sts assume role cross account passrole interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-iam-roles-trap",
+    "title": "IAM Roles — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/iam-roles.html",
+    "summary": "The classic mistake with IAM Roles.",
+    "keywords": "aws iam role trust policy permissions policy instance profile sts assume role cross account passrole trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-vpc-networking",
+    "title": "VPC Networking",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-networking.html",
+    "summary": "VPCs, subnets, gateways, security groups, network ACLs, peering and transit gateways.",
+    "keywords": "aws vpc subnet public private internet gateway nat gateway security group network acl peering transit gateway route table"
+  },
+  {
+    "id": "aws-vpc-networking-recall",
+    "title": "VPC Networking — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-networking.html",
+    "summary": "Quick recall points: VPC Networking.",
+    "keywords": "aws vpc subnet public private internet gateway nat gateway security group network acl peering transit gateway route table interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-vpc-networking-trap",
+    "title": "VPC Networking — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-networking.html",
+    "summary": "The classic mistake with VPC Networking.",
+    "keywords": "aws vpc subnet public private internet gateway nat gateway security group network acl peering transit gateway route table trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-vpc-endpoints",
+    "title": "VPC Endpoints",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-endpoints.html",
+    "summary": "Gateway endpoints for S3 and DynamoDB, interface endpoints and PrivateLink.",
+    "keywords": "aws vpc endpoint gateway endpoint interface endpoint privatelink s3 dynamodb private"
+  },
+  {
+    "id": "aws-vpc-endpoints-recall",
+    "title": "VPC Endpoints — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-endpoints.html",
+    "summary": "Quick recall points: VPC Endpoints.",
+    "keywords": "aws vpc endpoint gateway endpoint interface endpoint privatelink s3 dynamodb private interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-vpc-endpoints-trap",
+    "title": "VPC Endpoints — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/vpc-endpoints.html",
+    "summary": "The classic mistake with VPC Endpoints.",
+    "keywords": "aws vpc endpoint gateway endpoint interface endpoint privatelink s3 dynamodb private trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-compute",
+    "title": "Compute",
+    "category": "AWS",
+    "page": "aws/concepts/compute.html",
+    "summary": "Choosing between EC2, ECS, EKS, Fargate, App Runner, Elastic Beanstalk and Lambda.",
+    "keywords": "aws compute ec2 ecs eks fargate lambda app runner elastic beanstalk containers choose"
+  },
+  {
+    "id": "aws-compute-recall",
+    "title": "Compute — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/compute.html",
+    "summary": "Quick recall points: Compute.",
+    "keywords": "aws compute ec2 ecs eks fargate lambda app runner elastic beanstalk containers choose interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-compute-trap",
+    "title": "Compute — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/compute.html",
+    "summary": "The classic mistake with Compute.",
+    "keywords": "aws compute ec2 ecs eks fargate lambda app runner elastic beanstalk containers choose trap mistake",
+    "anchor": "trap"
   }
 ]

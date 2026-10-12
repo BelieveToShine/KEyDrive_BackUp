@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPC Endpoints — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><a href="vpc-networking.html">VPC Networking</a><span class="sep">›</span><span class="cur">VPC Endpoints</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · VPC · 🔌 Endpoints</div>
+    <h1>A VPC endpoint is a private door from your network to an AWS service — <span class="grad-text">so private subnets never need the internet to reach AWS.</span></h1>
+    <p class="sub">Gateway endpoints for S3 and DynamoDB, interface endpoints with PrivateLink, and how to choose between them.</p>
+    <div class="interview-q">❓ "What is a VPC endpoint, and what is the difference between a gateway and an interface endpoint?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 292" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Without an endpoint a private server reaches S3 over the NAT gateway and the internet gateway; with an endpoint the traffic stays on the AWS network">
+<defs><marker id="ve1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ve1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="276" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">WITHOUT AN ENDPOINT</text>
+<rect class="zone" x="325" y="8" width="305" height="276" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">WITH AN ENDPOINT</text>
+<path d="M84,84 L84,120" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ve1A)"/>
+<path d="M84,164 L84,200" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ve1A)"/>
+<path d="M144,222 L230,222" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ve1A)"/>
+<path d="M399,84 L399,120" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ve1A)"/>
+<path d="M459,142 L565,142 L565,200" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ve1A)"/>
+<rect class="bx" x="24" y="40" width="120" height="44" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="84" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">⚙️ Private app</text>
+<rect class="bx" x="24" y="120" width="120" height="44" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="84" y="146" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🔁 NAT gateway</text>
+<rect class="bx" x="24" y="200" width="120" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="84" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🚪 Internet gw</text>
+<rect class="bx" x="230" y="200" width="70" height="44" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="265" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🪣 S3</text>
+<text class="free" x="235" y="120" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Leaves your VPC, uses</text>
+<text class="free" x="235" y="136" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the NAT gateway and</text>
+<text class="free" x="235" y="152" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the internet path.</text>
+<rect class="bx" x="339" y="40" width="120" height="44" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="399" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">⚙️ Private app</text>
+<rect class="bx" x="339" y="120" width="120" height="44" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="399" y="146" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔌 VPC endpoint</text>
+<rect class="bx" x="515" y="200" width="100" height="44" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="565" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🪣 S3</text>
+<text class="free" x="477" y="262" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">No internet path, no NAT gateway needed.</text>
+<g class="arrow-pill"><rect x="113" y="93" width="34" height="18" rx="9"/><text x="130" y="105.5" text-anchor="middle" font-size="9" font-style="italic">out</text></g>
+<g class="arrow-pill"><rect x="113" y="173" width="34" height="18" rx="9"/><text x="130" y="185.5" text-anchor="middle" font-size="9" font-style="italic">out</text></g>
+<g class="arrow-pill"><rect x="162" y="213" width="50" height="18" rx="9"/><text x="187" y="225.5" text-anchor="middle" font-size="9" font-style="italic">public</text></g>
+<g class="arrow-pill"><rect x="421.5" y="93" width="55" height="18" rx="9"/><text x="449" y="105.5" text-anchor="middle" font-size="9" font-style="italic">private</text></g>
+<g class="arrow-pill"><rect x="482" y="133" width="76" height="18" rx="9"/><text x="520" y="145.5" text-anchor="middle" font-size="9" font-style="italic">AWS network</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a private server that talks to S3 has two ways to get there. <b>Without an endpoint</b> (left) the traffic leaves the VPC through a NAT gateway and the internet gateway — it works, but it uses the internet path and costs NAT charges. <b>With a VPC endpoint</b> (right) the traffic goes privately to the service over the AWS network. The server stays in a private subnet and nothing needs to be exposed.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A VPC endpoint is a private door from your network to an AWS service — so private subnets can use S3, DynamoDB and more without ever going out to the internet.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The VPC page put databases and apps in private subnets and gave them a NAT gateway for outbound access. But much of what private servers call is <b>AWS itself</b>: storage, queues, secrets. Sending that traffic through a NAT gateway and out to the internet is slower to reason about, costs money, and widens what must be allowed out.</p>
+      <p>A <b>VPC endpoint</b> keeps that traffic inside AWS. There are two kinds that work differently, and choosing between them is the whole skill.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The two kinds</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>🚪 Gateway endpoint</h4><span class="pk-tag">S3 and DynamoDB only</span><span class="pk-label use">✅ Pick it when</span><ul><li>You are reaching S3 or DynamoDB from inside the VPC</li><li>Routes are added to the route tables you choose</li><li>No additional cost for the endpoint</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Reaching them from on-premises, from a peered VPC in another Region or through a transit gateway — it does not reach those</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🔌 Interface endpoint</h4><span class="pk-tag">built on AWS PrivateLink</span><span class="pk-label use">✅ Pick it when</span><ul><li>Many AWS services (and services shared by others through PrivateLink)</li><li>A network interface with a private IP in your subnet</li><li>Reachable from on-premises over VPN or Direct Connect, and from peered VPCs or transit gateways</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Cost-sensitive S3 traffic from inside the VPC — a gateway endpoint is free to run</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔍 How they differ</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 292" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A gateway endpoint adds a route in your route table for S3 and DynamoDB; an interface endpoint puts a network interface with a private IP in your subnet">
+<defs><marker id="ve2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ve2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="276" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">GATEWAY ENDPOINT · S3 and DynamoDB only</text>
+<rect class="zone" x="325" y="8" width="305" height="276" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">INTERFACE ENDPOINT · many services (PrivateLink)</text>
+<path d="M124,95 L210,95" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ve2A)"/>
+<path d="M439,95 L545,95" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ve2A)"/>
+<rect class="bx" x="24" y="70" width="100" height="50" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="74" y="99" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧭 Route table</text>
+<rect class="bx" x="210" y="70" width="90" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="255" y="91.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🪣 S3 or</text>
+<text x="255" y="106.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">DynamoDB</text>
+<text class="free" x="162" y="168" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A route that points at the service.</text>
+<text class="free" x="162" y="184" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">No extra charge for the endpoint.</text>
+<text class="free" x="162" y="208" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Only works from inside this VPC.</text>
+<rect class="bx" x="339" y="70" width="100" height="50" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="389" y="92.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🔌 Network</text>
+<text x="389" y="105.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">interface</text>
+<rect class="bx" x="545" y="70" width="75" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="582.5" y="92.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">☁️ AWS</text>
+<text x="582.5" y="105.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">service</text>
+<text class="free" x="477" y="168" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A private IP address in your subnet.</text>
+<text class="free" x="477" y="184" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Billed by the hour plus data.</text>
+<text class="free" x="477" y="208" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Reachable from on-premises and peered VPCs.</text>
+<g class="arrow-pill"><rect x="145" y="86" width="44" height="18" rx="9"/><text x="167" y="98.5" text-anchor="middle" font-size="9" font-style="italic">route</text></g>
+<g class="arrow-pill"><rect x="454" y="86" width="76" height="18" rx="9"/><text x="492" y="98.5" text-anchor="middle" font-size="9" font-style="italic">PrivateLink</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a <b>gateway endpoint</b> (left) is a target in your <em>route table</em>: traffic to S3 or DynamoDB is routed to it. It exists only for those two services, has no extra charge, and works only inside the VPC. An <b>interface endpoint</b> (right) is an actual network interface with a private IP address from your subnet, using PrivateLink. It supports many services, is billed hourly plus per data processed, and can be reached from on-premises and from peered networks.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 Which one?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 336" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: gateway endpoint for S3 or DynamoDB from inside the VPC, interface endpoint for other services or for access from outside the VPC">
+<defs><marker id="ve3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ve3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ve3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ve3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ve3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ve3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ve3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 Reaching an AWS service?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🪣 S3 or DynamoDB, from inside this VPC?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the simple, free-to-run case</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Gateway endpoint</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">a route in the route table</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔌 Another service, or from on-premises?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">or from a peered VPC or transit gateway</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Interface endpoint</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">private IP via PrivateLink</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Neither?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the service stays reachable over the internet path</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> for S3 or DynamoDB from inside the VPC, use a <b>gateway endpoint</b>. For other services, or when access must come from on-premises, a peered VPC or a transit gateway, use an <b>interface endpoint</b>. You can use both for S3 in the same VPC: private DNS can send in-VPC traffic through the free gateway endpoint while on-premises traffic uses the interface endpoint, which can lower costs.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📦</span><h5>Private servers upload to S3 all day</h5><p>NAT data charges add up.</p><span class="sc-use">→ A gateway endpoint for S3</span></div>
+      <div class="scenario"><span class="sc-icon">📚</span><h5>A private app reads a DynamoDB table</h5><p>No internet path is wanted.</p><span class="sc-use">→ A gateway endpoint for DynamoDB</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>Private servers read secrets from a secrets service</h5><p>Not an S3 or DynamoDB service.</p><span class="sc-use">→ An interface endpoint</span></div>
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>The office network must reach S3 privately</h5><p>Over VPN or Direct Connect.</p><span class="sc-use">→ An interface endpoint for S3</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Both inside the VPC and on-premises use S3</h5><p>Keep costs down inside.</p><span class="sc-use">→ Both endpoint types, with private DNS</span></div>
+      <div class="scenario"><span class="sc-icon">🛡️</span><h5>Only some buckets should be reachable</h5><p>Limit what the door allows.</p><span class="sc-use">→ An endpoint policy</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details to know</summary>
+    <div class="zoom-inner">
+      <p><b>Gateway endpoints</b> work only with S3 and DynamoDB and do not use PrivateLink. They add routes to route tables you associate with the endpoint, and have no additional cost. They do not extend to on-premises networks, to peered VPCs in other Regions or to transit gateways.</p>
+      <p><b>Interface endpoints</b> use AWS PrivateLink and elastic network interfaces with private IP addresses from your subnets. You pay an hourly charge while the endpoint runs, plus data processing.</p>
+      <p><b>Endpoint policies</b> can restrict what an endpoint may be used for, adding one more guardrail next to IAM and bucket policies.</p>
+      <p><b>Security groups</b> attach to interface endpoints, so you can control which of your resources may use them.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>VPC endpoint = a private path from your VPC to an AWS service, without the internet or a NAT gateway.</li><li>Gateway endpoint: S3 and DynamoDB only, a route in the route table, no extra charge, VPC-only.</li><li>Interface endpoint: PrivateLink, a network interface with a private IP, many services, hourly plus data charges, reachable from on-premises and peered VPCs.</li><li>You can use both for S3 in one VPC.</li><li>Endpoints do not replace IAM or bucket policies — they add a network-level guardrail.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"For private subnets I use VPC endpoints so AWS traffic does not go out through a NAT gateway. For S3 and DynamoDB inside the VPC a gateway endpoint is a route table entry with no extra charge. For other services, or when access comes from on-premises or a peered network, I use interface endpoints, which are PrivateLink network interfaces billed by the hour and by data."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Assuming a gateway endpoint reaches from on-premises.</b> It does not; it works only from inside the VPC. For on-premises access use an interface endpoint.</p>
+      <p>Second trap: <b>thinking an endpoint replaces permissions.</b> It only changes the network path. IAM and resource policies still decide who may do what.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🚪 Gateway endpoint</h5><p>A route-table target for S3 and DynamoDB. Free to run, VPC-only.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🔌 Interface endpoint</h5><p>A network interface with a private IP, via PrivateLink. More services and reach, billed by hour and data.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a gateway endpoint for S3 and attach it to a route table</span>
+aws ec2 create-vpc-endpoint --vpc-id &lt;vpc-id&gt; --service-name com.amazonaws.eu-west-1.s3 \
+    --route-table-ids &lt;rtb-id&gt;</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the Region in the service name is an example, and flags and endpoint types vary by service.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is how private subnets reach AWS services. Back to the VPC page for the whole map — and on to the next concept: Compute.</span>
+      <a class="next-link" href="vpc-networking.html">Back to VPC Networking <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html" target="_blank" rel="noopener">AWS PrivateLink and VPC endpoints</a> · <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" target="_blank" rel="noopener">Amazon VPC user guide</a> · <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html" target="_blank" rel="noopener">Network ACLs</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

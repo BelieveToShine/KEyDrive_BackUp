@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Compute</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 5 of 19 · 🧱 Building blocks</div>
+    <h1>Compute is where your code runs — and the real choice is <span class="grad-text">how much of the machine you want to look after.</span></h1>
+    <p class="sub">EC2, containers on ECS and EKS, Fargate, App Runner, Elastic Beanstalk and Lambda: learn the ladder and how to pick your rung.</p>
+    <div class="interview-q">❓ "How do you choose between EC2, ECS, EKS, Fargate and Lambda?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 276" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="AWS compute options from most control to least to run: EC2, ECS or EKS on EC2, Fargate, Elastic Beanstalk and App Runner, Lambda">
+<defs><marker id="co1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M64,170 L64,210 L576,210 L576,170" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co1A)"/>
+<text class="free" x="10" y="24" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">more control · more to run</text>
+<text class="free" x="630" y="24" text-anchor="end" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">less to run · fewer knobs</text>
+<rect class="bx" x="10" y="40" width="108" height="130" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="64" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ EC2</text>
+<text x="64" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">you manage the OS</text>
+<text x="64" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">full control</text>
+<text x="64" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">lift-and-shift</text>
+<rect class="bx" x="138" y="40" width="108" height="130" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="192" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">☸️ ECS / EKS</text>
+<text x="192" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">containers on</text>
+<text x="192" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">hosts you run</text>
+<text x="192" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">(EC2)</text>
+<rect class="bx" x="266" y="40" width="108" height="130" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📦 Fargate</text>
+<text x="320" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">containers, no</text>
+<text x="320" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">servers to run</text>
+<text x="320" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">(ECS or EKS)</text>
+<rect class="bx" x="394" y="40" width="108" height="130" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="448" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌐 App Runner</text>
+<text x="448" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Beanstalk</text>
+<text x="448" y="116.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">web apps, APIs</text>
+<text x="448" y="129" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">AWS runs it</text>
+<rect class="bx" x="522" y="40" width="108" height="130" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="576" y="96.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Lambda</text>
+<text x="576" y="109" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">code that reacts</text>
+<text x="576" y="121.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">to events</text>
+<text class="free" x="320" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">A rough guide, not a ranking — start at the managed end and move left only when you must.</text>
+<g class="arrow-pill"><rect x="234" y="201" width="172" height="18" rx="9"/><text x="320" y="213.5" text-anchor="middle" font-size="9" font-style="italic">AWS takes on more of the work</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> five ways to run code on AWS, from the most control on the left to the least to look after on the right. <b>EC2</b> gives you a whole server — and its patching. <b>ECS and EKS</b> run containers (EKS is managed Kubernetes). <b>Fargate</b> runs those containers without servers for you to manage. <b>App Runner</b> and <b>Elastic Beanstalk</b> host web apps and APIs while AWS runs the platform. <b>Lambda</b> runs small functions when something happens. As you move right, AWS does more — and you get fewer knobs.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Compute is where your code runs. The real choice is how much of the machine you want to look after — the more you hand to AWS, the less you manage and the fewer knobs you get.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You now have a safe network. Your code still needs somewhere to <b>run</b>. The oldest answer is a virtual server (EC2): rent a computer in the cloud. It works for everything, but you inherit everything — patching the operating system, installing the runtime, planning how to add more copies when traffic grows.</p>
+      <p>AWS offers a ladder because teams want different trade-offs: <b>control</b> or <b>convenience</b>. AWS's own guidance is to start at the managed end (App Runner or Fargate) and move toward self-management only when your workload needs it.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The options</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#93a0b8"><h4>🖥️ Amazon EC2</h4><span class="pk-tag">virtual servers</span><span class="pk-label use">✅ Pick it when</span><ul><li>You need the operating system or special software on the machine</li><li>Lift-and-shift of an existing server</li><li>The most control over instance types and the host</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A normal web app — you take on patching you do not need</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🌐 App Runner and Elastic Beanstalk</h4><span class="pk-tag">AWS runs the platform for web apps</span><span class="pk-label use">✅ Pick it when</span><ul><li>App Runner: the simplest way to put a web app or API online from an image or source code</li><li>Elastic Beanstalk: web apps with several languages and Docker; it manages the EC2 runtime and patching</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need fine control over networking and orchestration → ECS or EKS</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📦 Amazon ECS</h4><span class="pk-tag">AWS-native container service</span><span class="pk-label use">✅ Pick it when</span><ul><li>Containers with more control over networking and security than App Runner</li><li>AWS's most popular container service for teams that do not need Kubernetes</li><li>Run on Fargate (no servers) or on EC2</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Kubernetes is already your standard → EKS</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>☸️ Amazon EKS</h4><span class="pk-tag">managed Kubernetes</span><span class="pk-label use">✅ Pick it when</span><ul><li>You already use Kubernetes, or want its ecosystem and portability</li><li>Run on Fargate or on EC2</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A small team that wants less to operate → ECS on Fargate</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>⚡ AWS Lambda</h4><span class="pk-tag">functions that react to events</span><span class="pk-label use">✅ Pick it when</span><ul><li>Event-driven work: a file, a message, a timer, an API call</li><li>Short, bursty tasks where you pay while it runs</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Long-running steady services — a container service fits better</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📦 AWS Fargate</h4><span class="pk-tag">serverless compute for containers</span><span class="pk-label use">✅ Pick it when</span><ul><li>Run ECS or EKS containers without managing EC2 instances</li><li>Spiky workloads, where it tends to win on cost</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Steady, highly utilised workloads — EC2 can be cheaper</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 708" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for choosing AWS compute: EC2, Elastic Beanstalk or App Runner, ECS, EKS or Lambda">
+<defs><marker id="co2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M340,487 L410,487" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#co2A)"/>
+<path d="M175,514 L175,560" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#co2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What are you running?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ Need the whole OS, or lift-and-shift?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">special software, a legacy app</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">EC2</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">you control the server</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 A web app or API — just code or an image?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">AWS should run the platform</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">App Runner</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">or Elastic Beanstalk</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Containers, and AWS-native simplicity?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">less to configure</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">ECS on Fargate</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">containers, no servers</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">☸️ Kubernetes is your standard?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its API and ecosystem</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">EKS</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">managed Kubernetes</text>
+<rect class="bx" x="10" y="460" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚡ Small code that reacts to an event?</text>
+<text x="175" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a file, a message, a timer, a request</text>
+<rect class="bx" x="410" y="460" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Lambda</text>
+<text x="520" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">event-driven code</text>
+<rect class="bx" x="10" y="560" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="582.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="595.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with the most managed option</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="478" width="34" height="18" rx="9"/><text x="375" y="490.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="523" width="29" height="18" rx="9"/><text x="199" y="535.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> read the questions from the top; the first "yes" is usually your answer. The questions run from <b>most control</b> (do you need the whole server?) to <b>most specific</b> (a small function that reacts to an event). If none fits, do not agonise: start with the most managed option that meets your needs, and move toward more control only when a real requirement forces you.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📦 Fargate or Lambda?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Fargate runs a steady container service that keeps running, while Lambda runs a function only for the moment an event arrives">
+<defs><marker id="co3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="co3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="284" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">FARGATE · a container keeps running</text>
+<rect class="zone" x="325" y="8" width="305" height="284" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">LAMBDA · a function runs per event</text>
+<path d="M104,98 L200,98" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#co3A)"/>
+<path d="M419,98 L515,98" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#co3A)"/>
+<rect class="bx" x="24" y="70" width="80" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="64" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👥 Users</text>
+<rect class="bx" x="200" y="70" width="100" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="250" y="95.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📦 Container</text>
+<text x="250" y="108.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">always on</text>
+<text class="free" x="162" y="180" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Good for steady, long-running</text>
+<text class="free" x="162" y="196" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">services and web APIs.</text>
+<text class="free" x="162" y="226" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">You think in tasks and services.</text>
+<rect class="bx" x="339" y="70" width="80" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="379" y="102" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚡ Event</text>
+<rect class="bx" x="515" y="70" width="100" height="56" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="565" y="95.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">λ Function</text>
+<text x="565" y="108.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">runs, then stops</text>
+<text class="free" x="477" y="180" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Good for short, bursty, event-driven</text>
+<text class="free" x="477" y="196" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">work. You pay while it runs.</text>
+<text class="free" x="477" y="226" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">You think in functions and triggers.</text>
+<g class="arrow-pill"><rect x="119" y="89" width="66" height="18" rx="9"/><text x="152" y="101.5" text-anchor="middle" font-size="9" font-style="italic">served by</text></g>
+<g class="arrow-pill"><rect x="442" y="89" width="50" height="18" rx="9"/><text x="467" y="101.5" text-anchor="middle" font-size="9" font-style="italic">starts</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> both are "serverless" but they think differently. <b>Fargate</b> (left) runs a container that stays up and serves requests — good for steady services and long-running work. <b>Lambda</b> (right) starts a function for each event and you pay while it runs — good for short, bursty tasks. AWS's guidance is that Lambda fits short, bursty tasks better than long-running services.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Who looks after what</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">You look after</th><th scope="col">AWS looks after</th><th scope="col">Scaling</th></tr></thead><tbody><tr><th scope="row">🖥️ EC2</th><td>The OS, patches, runtime, your app</td><td>The physical hardware and host</td><td>You set it up (Auto Scaling — a later concept)</td></tr><tr><th scope="row">🌐 Elastic Beanstalk</th><td>Your code and its settings</td><td>Provisioning, and the EC2 runtime and patching</td><td>Managed with the environment</td></tr><tr><th scope="row">🌐 App Runner</th><td>Your image or source</td><td>Build, deploy and scaling</td><td>Automatic</td></tr><tr><th scope="row">📦 ECS / EKS on EC2</th><td>Containers and the hosts</td><td>The control plane</td><td>You scale the hosts and tasks</td></tr><tr><th scope="row">📦 ECS / EKS on Fargate</th><td>Containers</td><td>The servers underneath</td><td>Per task or pod</td></tr><tr><th scope="row">⚡ Lambda</th><td>Your function</td><td>Almost everything else</td><td>Per event</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🏭</span><h5>Old Windows app with an installed agent</h5><p>It cannot be changed and needs software on the machine.</p><span class="sc-use">→ EC2</span></div>
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Company website and API</h5><p>A normal web app. The team wants to push code and move on.</p><span class="sc-use">→ App Runner or Elastic Beanstalk</span></div>
+      <div class="scenario"><span class="sc-icon">🧩</span><h5>Ten small services in containers</h5><p>The team wants AWS-native simplicity.</p><span class="sc-use">→ ECS on Fargate</span></div>
+      <div class="scenario"><span class="sc-icon">🔧</span><h5>The platform team runs Kubernetes everywhere</h5><p>They need its API and ecosystem.</p><span class="sc-use">→ EKS</span></div>
+      <div class="scenario"><span class="sc-icon">📬</span><h5>React to a new file in storage</h5><p>Run a few lines of code each time.</p><span class="sc-use">→ Lambda</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>A steady API busy all day</h5><p>High, even utilisation.</p><span class="sc-use">→ Containers on EC2 can be cheaper than Fargate</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — the shared-responsibility line</summary>
+    <div class="zoom-inner">
+      <p><b>EC2:</b> AWS looks after the hardware and the host. The guest operating system is yours to patch and secure.</p>
+      <p><b>Fargate</b> is not an orchestrator by itself. It is the serverless compute that ECS and EKS can run on, so you do not manage EC2 instances for those containers. ECS and EKS can both run on Fargate or on EC2, so the choices are not exclusive.</p>
+      <p><b>Fargate vs EC2</b> is mainly a cost question: Fargate tends to win for spiky workloads, while steady, highly utilised workloads can be cheaper on EC2. Check the pricing pages before deciding.</p>
+      <p><b>Not covered here:</b> how to add more copies automatically and survive failures (Scaling &amp; Resilience), and how Lambda really works (Serverless &amp; Orchestration). Both are later concepts.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Compute is a ladder: EC2 (most control) → ECS/EKS → Fargate → App Runner/Elastic Beanstalk → Lambda (least to run).</li><li>EC2: you patch the OS. Beanstalk and App Runner: AWS runs the platform. ECS: AWS-native containers. EKS: managed Kubernetes. Fargate: serverless compute for ECS and EKS.</li><li>Lambda = event-driven functions, best for short and bursty work.</li><li>Fargate vs EC2 is mostly cost: Fargate for spiky, EC2 for steady and highly utilised.</li><li>Start at the managed end and move toward control only for a hard requirement.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Compute on AWS is a trade-off between control and effort. EC2 gives full control but I patch the OS. App Runner and Elastic Beanstalk host web apps with AWS running the platform. ECS is the AWS-native container service and EKS is managed Kubernetes, and both can run on Fargate so I manage no servers. Lambda runs event-driven functions. I start at the managed end and move left only for a real requirement."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Do not pick EC2 just because it feels familiar.</b> It works for everything, but it is the option that gives you the most work: patching, hardening, backup and scaling are all yours.</p>
+      <p>Second trap: <b>Kubernetes is a tool, not a goal.</b> Choosing EKS "because everyone does" means taking on more to operate. If you do not need the Kubernetes API or ecosystem, ECS is usually simpler.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📦 ECS</h5><p>AWS-native container orchestration. Simpler, closely tied to AWS.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>☸️ EKS</h5><p>Managed Kubernetes. Portable and rich in tooling, with more to learn and operate.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># start one small virtual server — you choose the image, the size and the subnet</span>
+aws ec2 run-instances --image-id &lt;ami-id&gt; --instance-type t3.micro --subnet-id &lt;subnet-id&gt;</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the image ID, size and subnet are placeholders, and real launches add a role, a security group and storage.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box locked">
+      <span>Your code now has a place to run. But code needs somewhere to <b>keep things</b> — files, images, backups, disks. Next: Storage.</span>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/decision-guides/latest/compute-on-aws-how-to-choose/choosing-aws-compute-service.html" target="_blank" rel="noopener">Choosing an AWS compute service</a> · <a href="https://docs.aws.amazon.com/decision-guides/latest/containers-on-aws-how-to-choose/choosing-aws-container-service.html" target="_blank" rel="noopener">Choosing an AWS container service</a> · <a href="https://docs.aws.amazon.com/decision-guides/latest/decision-guides/fargate-or-lambda.html" target="_blank" rel="noopener">Fargate or Lambda?</a> · <a href="https://docs.aws.amazon.com/ec2/" target="_blank" rel="noopener">Amazon EC2 documentation</a> · <a href="https://docs.aws.amazon.com/ecs/" target="_blank" rel="noopener">Amazon ECS documentation</a> · <a href="https://docs.aws.amazon.com/eks/" target="_blank" rel="noopener">Amazon EKS documentation</a> · <a href="https://docs.aws.amazon.com/lambda/" target="_blank" rel="noopener">AWS Lambda documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

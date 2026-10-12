@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPC Networking — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">VPC Networking</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 4 of 19 · 🏗️ Foundations</div>
+    <h1>A VPC is your own walled network in AWS — <span class="grad-text">and the subnet a resource sits in decides what can reach it.</span></h1>
+    <p class="sub">VPCs, subnets, route tables, internet and NAT gateways, security groups, network ACLs, peering and transit gateways: how to keep private things private.</p>
+    <div class="interview-q">❓ "How would you design a VPC for a web app with a database on AWS?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A VPC with a public subnet that has a route to the internet gateway and a private subnet that reaches the internet only outbound through a NAT gateway">
+<defs><marker id="vp1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="vp1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="124" width="620" height="228" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="143" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">VPC · your private network</text>
+<rect class="zone" x="24" y="150" width="592" height="76" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="38" y="169" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">PUBLIC SUBNET</text>
+<rect class="zone" x="24" y="252" width="592" height="88" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="38" y="271" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">PRIVATE SUBNET</text>
+<path d="M320,40 L320,66" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#vp1A)" marker-start="url(#vp1S)"/>
+<path d="M160,216 L160,280" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp1A)"/>
+<path d="M200,176 L200,128 L260,128 L260,100" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#vp1A)"/>
+<path d="M230,280 L230,238 L440,238 L440,216" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#vp1A)"/>
+<path d="M260,302 L380,302" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#vp1A)"/>
+<path d="M480,176 L480,88 L420,88" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#vp1A)"/>
+<rect class="bx" x="220" y="6" width="200" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="27" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Internet</text>
+<rect class="bx" x="220" y="66" width="200" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="87" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🚪 Internet gateway</text>
+<rect class="bx" x="60" y="176" width="200" height="40" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="160" y="200" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Web server</text>
+<rect class="bx" x="380" y="176" width="200" height="40" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="480" y="200" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🔁 NAT gateway</text>
+<rect class="bx" x="60" y="280" width="200" height="44" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="160" y="306" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">⚙️ App server</text>
+<rect class="bx" x="380" y="280" width="200" height="44" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="480" y="306" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🗄️ Database</text>
+<g class="arrow-pill"><rect x="369.5" y="44" width="71" height="18" rx="9"/><text x="405" y="56.5" text-anchor="middle" font-size="9" font-style="italic">in and out</text></g>
+<g class="arrow-pill"><rect x="178" y="239" width="44" height="18" rx="9"/><text x="200" y="251.5" text-anchor="middle" font-size="9" font-style="italic">calls</text></g>
+<g class="arrow-pill"><rect x="213" y="119" width="34" height="18" rx="9"/><text x="230" y="131.5" text-anchor="middle" font-size="9" font-style="italic">web</text></g>
+<g class="arrow-pill"><rect x="291.5" y="229" width="87" height="18" rx="9"/><text x="335" y="241.5" text-anchor="middle" font-size="9" font-style="italic">outbound only</text></g>
+<g class="arrow-pill"><rect x="298" y="293" width="44" height="18" rx="9"/><text x="320" y="305.5" text-anchor="middle" font-size="9" font-style="italic">reads</text></g>
+<g class="arrow-pill"><rect x="431" y="103" width="98" height="18" rx="9"/><text x="480" y="115.5" text-anchor="middle" font-size="9" font-style="italic">to the internet</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a <b>VPC</b> is your own private network inside AWS. You cut it into <b>subnets</b>. A <b>public subnet</b> has a route to the <b>internet gateway</b>, so things in it (like a web server) can be reached from the internet. A <b>private subnet</b> has no route in from the internet — the app and the database live there. If a private server needs to reach out (to download updates, say), it goes through a <b>NAT gateway</b> that allows outbound connections and blocks unsolicited inbound ones.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A VPC is your own walled network in AWS — and what lives in a public or private subnet, and which rules guard it, decides what can reach what.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>IAM says who may call what. But before any caller arrives, there is a more basic question: can the packet even get there? A database that the whole internet can reach is a problem no policy fixes after the fact. <b>Networking decides what can physically reach what.</b></p>
+      <p>So resources get a <b>VPC</b>: an isolated network you define, with <b>subnets</b> in specific Availability Zones, <b>route tables</b> that decide where traffic goes, and <b>firewalls</b> at two levels. The habit to build: put only what must be public in a public subnet — and everything else in a private one.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🕸️ VPC and subnets</h4><span class="pk-tag">your network, cut into pieces</span><span class="pk-label use">✅ Pick it when</span><ul><li>A VPC is your isolated network; a subnet lives in one Availability Zone</li><li>Make several subnets across zones for resilience</li><li>Public subnet = a route to the internet gateway; private = no direct route</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Putting databases in a public subnet "to make it easy"</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧭 Route tables, internet gateway, NAT gateway</h4><span class="pk-tag">where traffic goes</span><span class="pk-label use">✅ Pick it when</span><ul><li>A route table pairs a destination range with a target</li><li>Internet gateway: lets public resources talk to the internet</li><li>NAT gateway: private resources start outbound connections; unsolicited inbound is blocked</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting a NAT gateway to let the internet in — it does not</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🛡️ Security groups</h4><span class="pk-tag">a firewall around a resource</span><span class="pk-label use">✅ Pick it when</span><ul><li>Your main tool: allow rules only, stateful</li><li>Reference another security group as the source ("only the web tier")</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Trying to write a deny rule — security groups only allow</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🚧 Network ACLs</h4><span class="pk-tag">a firewall around a subnet</span><span class="pk-label use">✅ Pick it when</span><ul><li>Stateless, with allow and deny rules checked in order</li><li>AWS suggests them as a secondary control or subnet-level guardrails</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Forgetting the reply rule — stateless means replies need their own rule</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🛡️ Two firewalls, two behaviours</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 292" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A security group is stateful so replies need no rule; a network ACL is stateless so every packet is checked in both directions">
+<defs><marker id="vp2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="vp2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="276" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">SECURITY GROUP · around a resource</text>
+<rect class="zone" x="325" y="8" width="305" height="276" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">NETWORK ACL · around a subnet</text>
+<path d="M94,102 L210,102" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp2A)"/>
+<path d="M210,126 L94,126" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp2A)"/>
+<path d="M409,102 L525,102" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#vp2A)"/>
+<path d="M525,126 L409,126" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#vp2A)"/>
+<rect class="bx" x="24" y="84" width="70" height="60" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="59" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 Client</text>
+<rect class="bx" x="210" y="84" width="90" height="60" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="255" y="111.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Server</text>
+<text x="255" y="124.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">protected</text>
+<text class="free" x="162" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Stateful: it remembers the request,</text>
+<text class="free" x="162" y="208" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">so the reply needs no rule.</text>
+<text class="free" x="162" y="232" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Allow rules only.</text>
+<rect class="bx" x="339" y="84" width="70" height="60" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="374" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 Client</text>
+<rect class="bx" x="525" y="84" width="90" height="60" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="570" y="111.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📦 Subnet</text>
+<text x="570" y="124.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">protected</text>
+<text class="free" x="477" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Stateless: every packet is checked,</text>
+<text class="free" x="477" y="208" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">so replies need their own rule.</text>
+<text class="free" x="477" y="232" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Allow and deny; rules in order.</text>
+<g class="arrow-pill"><rect x="116.5" y="93" width="71" height="18" rx="9"/><text x="152" y="105.5" text-anchor="middle" font-size="9" font-style="italic">request in</text></g>
+<g class="arrow-pill"><rect x="114" y="117" width="76" height="18" rx="9"/><text x="152" y="129.5" text-anchor="middle" font-size="9" font-style="italic">reply: auto</text></g>
+<g class="arrow-pill"><rect x="423.5" y="93" width="87" height="18" rx="9"/><text x="467" y="105.5" text-anchor="middle" font-size="9" font-style="italic">rules checked</text></g>
+<g class="arrow-pill"><rect x="423.5" y="117" width="87" height="18" rx="9"/><text x="467" y="129.5" text-anchor="middle" font-size="9" font-style="italic">checked again</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a <b>security group</b> (left) is <em>stateful</em>: if it let the request in, the reply goes out without another rule. It only has <em>allow</em> rules, and AWS evaluates all of them. A <b>network ACL</b> (right) is <em>stateless</em>: every packet in each direction is checked, so replies need their own rule. It has allow and deny rules, checked in number order until one matches. In most cases security groups are enough; ACLs add a layer.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔗 Connecting networks</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 312" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="VPC peering connects two VPCs one-to-one and does not pass traffic through a middle VPC, while a transit gateway is a hub that connects many VPCs">
+<defs><marker id="vp3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="vp3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="296" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">PEERING · one-to-one, not transitive</text>
+<rect class="zone" x="325" y="8" width="305" height="296" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">TRANSIT GATEWAY · a hub</text>
+<path d="M150,88 L150,124" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#vp3A)" marker-start="url(#vp3S)"/>
+<path d="M150,168 L150,204" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#vp3A)" marker-start="url(#vp3S)"/>
+<path d="M200,66 L270,66 L270,226 L200,226" fill="none" stroke="#fb7185" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#vp3A)"/>
+<path d="M440,66 L480,66 L480,125 L520,125" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp3A)"/>
+<path d="M440,146 L520,146" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp3A)"/>
+<path d="M440,226 L480,226 L480,167 L520,167" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#vp3A)"/>
+<rect class="bx" x="100" y="44" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="150" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC A</text>
+<rect class="bx" x="100" y="124" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="150" y="150" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC B</text>
+<rect class="bx" x="100" y="204" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="150" y="230" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC C</text>
+<text class="free" x="162" y="272" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">A cannot reach C through B.</text>
+<rect class="bx" x="340" y="44" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="390" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC A</text>
+<rect class="bx" x="340" y="124" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="390" y="150" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC B</text>
+<rect class="bx" x="340" y="204" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="390" y="230" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕸️ VPC C</text>
+<rect class="bx" x="520" y="104" width="100" height="84" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="136.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔀 Transit</text>
+<text x="570" y="151.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Gateway</text>
+<text x="570" y="163.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">the hub</text>
+<text class="free" x="477" y="272" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Any attached network can reach the others.</text>
+<g class="arrow-pill"><rect x="197.5" y="97" width="55" height="18" rx="9"/><text x="225" y="109.5" text-anchor="middle" font-size="9" font-style="italic">peering</text></g>
+<g class="arrow-pill"><rect x="197.5" y="177" width="55" height="18" rx="9"/><text x="225" y="189.5" text-anchor="middle" font-size="9" font-style="italic">peering</text></g>
+<g class="arrow-pill"><rect x="234.5" y="137" width="71" height="18" rx="9"/><text x="270" y="149.5" text-anchor="middle" font-size="9" font-style="italic">no transit</text></g>
+<g class="arrow-pill"><rect x="455" y="87" width="50" height="18" rx="9"/><text x="480" y="99.5" text-anchor="middle" font-size="9" font-style="italic">attach</text></g>
+<g class="arrow-pill"><rect x="455" y="137" width="50" height="18" rx="9"/><text x="480" y="149.5" text-anchor="middle" font-size="9" font-style="italic">attach</text></g>
+<g class="arrow-pill"><rect x="455" y="187" width="50" height="18" rx="9"/><text x="480" y="199.5" text-anchor="middle" font-size="9" font-style="italic">attach</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> when one VPC is not enough, you connect them. <b>VPC peering</b> (left) joins exactly two VPCs and is not transitive: A↔B and B↔C does not give A↔C, and a VPN or Direct Connect on one VPC cannot be borrowed by its peer. With many VPCs the peerings pile up. A <b>transit gateway</b> (right) is a hub: you attach each VPC, and the hub routes between them, including to VPNs and Direct Connect.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Level</th><th scope="col">Stateful?</th><th scope="col">Rules</th><th scope="col">Use it for</th></tr></thead><tbody><tr><th scope="row">🛡️ Security group</th><td>A resource (like an instance)</td><td>Yes</td><td>Allow only</td><td>Your main firewall; reference other groups</td></tr><tr><th scope="row">🚧 Network ACL</th><td>A subnet</td><td>No</td><td>Allow and deny, in order</td><td>Subnet-level guardrails, explicit blocks</td></tr><tr><th scope="row">🔁 NAT gateway</th><td>A subnet's outbound path</td><td>—</td><td>—</td><td>Private servers that must reach out</td></tr><tr><th scope="row">🔗 Peering</th><td>Two VPCs</td><td>—</td><td>—</td><td>A few VPCs that need to talk directly</td></tr><tr><th scope="row">🔀 Transit gateway</th><td>Many VPCs and on-premises links</td><td>—</td><td>Route tables</td><td>A growing hub-and-spoke network</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>A public website with a database</h5><p>The database must not face the internet.</p><span class="sc-use">→ Web tier in public subnets, database in private subnets</span></div>
+      <div class="scenario"><span class="sc-icon">📦</span><h5>Private servers must download updates</h5><p>But nobody may connect in.</p><span class="sc-use">→ A NAT gateway</span></div>
+      <div class="scenario"><span class="sc-icon">🧱</span><h5>Only the web tier may reach the app tier</h5><p>Not the whole network.</p><span class="sc-use">→ A security group that allows the web tier's group</span></div>
+      <div class="scenario"><span class="sc-icon">🚫</span><h5>Block one bad address range right now</h5><p>An explicit deny.</p><span class="sc-use">→ A network ACL rule</span></div>
+      <div class="scenario"><span class="sc-icon">🔗</span><h5>Two teams' VPCs need to talk</h5><p>Just those two.</p><span class="sc-use">→ VPC peering</span></div>
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>Thirty VPCs and a data center</h5><p>Peering would be a mess.</p><span class="sc-use">→ A transit gateway</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="vpc-endpoints.html"><span class="dc-kicker">Deep dive · VPC</span><h4>VPC Endpoints: reaching AWS services privately</h4><p>How private subnets reach S3, DynamoDB and other AWS services without going out to the internet: gateway endpoints, interface endpoints and PrivateLink.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — what AWS says</summary>
+    <div class="zoom-inner">
+      <p>A public subnet has a direct route to an internet gateway; a private subnet does not, so its resources need a NAT device to reach the internet. A route table holds routes; each route pairs a destination range with a target such as a gateway.</p>
+      <p>Security groups act at the resource level and are stateful; network ACLs act at the subnet level and are stateless. AWS suggests using network ACLs as a secondary control or high-level subnet guardrails, because security groups meet most needs.</p>
+      <p>VPC peering is point-to-point and does not support transitive routing. For a full mesh of many VPCs you would need a huge number of peerings, so AWS points to Transit Gateway, which supports transitive routing and can attach VPNs and Direct Connect.</p>
+      <p><b>Spread across zones.</b> A subnet lives in a single Availability Zone, so make subnets in several zones and put copies of your app in each (concept 2).</p>
+      <p><b>Pricing.</b> NAT gateways and some connectivity options are billed by the hour and by data processed; check the pricing page before you design around many of them.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>VPC = your isolated network; subnets live in one AZ. Public subnet = route to an internet gateway; private = no direct route.</li><li>NAT gateway lets private resources start outbound connections and blocks unsolicited inbound ones.</li><li>Security group: resource-level, stateful, allow rules only. Network ACL: subnet-level, stateless, allow and deny, rules in order.</li><li>Peering is one-to-one and not transitive; a transit gateway is a hub with transitive routing.</li><li>Only what must be public goes in a public subnet; databases go in private subnets.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I build a VPC with subnets in several Availability Zones. Anything that must face the internet sits in a public subnet with a route to the internet gateway; apps and databases sit in private subnets, with a NAT gateway for outbound-only access. Security groups are my main firewall — stateful, allow-only — and network ACLs are a stateless subnet-level layer. For many VPCs I use a transit gateway, because peering is not transitive."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Putting the database in a public subnet.</b> Even with a good password, you have made it reachable by the world. A private subnet takes it off the map.</p>
+      <p>Second trap: <b>writing network ACL rules for one direction.</b> They are stateless, so the reply traffic needs its own rule. Most "it works in a security group but not here" bugs are this.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🛡️ Security group</h5><p>Around a resource. Stateful and allow-only. Your everyday firewall.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🚧 Network ACL</h5><p>Around a subnet. Stateless, with allow and deny rules in order. An extra layer.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a VPC and one subnet inside it</span>
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+aws ec2 create-subnet --vpc-id &lt;vpc-id&gt; --cidr-block 10.0.1.0/24 --availability-zone eu-west-1a</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the address ranges, Region and zone are examples, and a real network also needs route tables, gateways and firewall rules.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>The network is ready. Now your code needs somewhere to <b>run</b> — and how much of the machine you manage (a server, a container, a function) is the first big trade-off. Next: Compute.</span>
+      <a class="next-link" href="compute.html">Compute <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html" target="_blank" rel="noopener">Amazon VPC user guide</a> · <a href="https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html" target="_blank" rel="noopener">How Amazon VPC works</a> · <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" target="_blank" rel="noopener">Security groups</a> · <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html" target="_blank" rel="noopener">Network ACLs</a> · <a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html" target="_blank" rel="noopener">VPC peering</a> · <a href="https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html" target="_blank" rel="noopener">AWS Transit Gateway</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

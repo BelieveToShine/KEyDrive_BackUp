@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounts &amp; Organizations — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Accounts &amp; Organizations</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 1 of 19 · 🏗️ Foundations</div>
+    <h1>An AWS account is the wall around your resources, permissions and bill — <span class="grad-text">and an organization manages many walls together.</span></h1>
+    <p class="sub">Accounts, AWS Organizations, OUs, service control policies and consolidated billing: how to give every workload a safe place to live.</p>
+    <div class="interview-q">❓ "Why do AWS teams use multiple accounts, and what does AWS Organizations add?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 336" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="An AWS organization is a tree: a management account creates it, a root holds organizational units, and accounts sit inside the units">
+<defs><marker id="ac1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ac1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="240" y="8" width="390" height="320" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="254" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">ORGANIZATION · a tree of accounts</text>
+<path d="M200,56 L240,56" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<path d="M400,74 L400,97 L341,97 L341,120" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<path d="M470,74 L470,97 L533,97 L533,120" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<path d="M294,160 L294,214" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<path d="M388,160 L388,214" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<path d="M533,160 L533,214" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ac1A)"/>
+<rect class="bx" x="10" y="24" width="190" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="105" y="53.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">👑 Management account</text>
+<text x="105" y="66.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">pays the bill, no workloads</text>
+<rect class="bx" x="350" y="38" width="170" height="36" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="435" y="60" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌳 Root</text>
+<rect class="bx" x="256" y="120" width="170" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="341" y="144" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📁 OU: Production</text>
+<rect class="bx" x="452" y="120" width="162" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="533" y="144" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📁 OU: Dev and test</text>
+<rect class="bx" x="256" y="214" width="76" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="294" y="243" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 App A</text>
+<rect class="bx" x="350" y="214" width="76" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="388" y="243" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 App B</text>
+<rect class="bx" x="452" y="214" width="162" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="533" y="243" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 Dev account</text>
+<text class="free" x="105" y="130" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A service control policy</text>
+<text class="free" x="105" y="146" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">attached to a unit limits</text>
+<text class="free" x="105" y="162" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">every account below it.</text>
+<text class="free" x="105" y="190" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">It filters. It never grants.</text>
+<g class="arrow-pill"><rect x="349" y="88" width="44" height="18" rx="9"/><text x="371" y="100.5" text-anchor="middle" font-size="9" font-style="italic">holds</text></g>
+<g class="arrow-pill"><rect x="479" y="88" width="44" height="18" rx="9"/><text x="501" y="100.5" text-anchor="middle" font-size="9" font-style="italic">holds</text></g>
+<g class="arrow-pill"><rect x="312" y="178" width="44" height="18" rx="9"/><text x="334" y="190.5" text-anchor="middle" font-size="9" font-style="italic">holds</text></g>
+<g class="arrow-pill"><rect x="556" y="178" width="44" height="18" rx="9"/><text x="578" y="190.5" text-anchor="middle" font-size="9" font-style="italic">holds</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> an <b>AWS organization</b> is a tree. A <b>management account</b> creates it and pays the bill. Under the <b>root</b> you make <b>organizational units</b> (OUs) — folders for accounts that need similar rules — and the <b>accounts</b> sit inside them. A policy attached to a unit flows down to every account below it. That is the whole idea: accounts are the walls, the tree is how you manage many walls at once.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">An AWS account is the basic container for everything you build — the wall around your resources, your permissions and your bill — and an organization lets you manage many of those walls together.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Before you deploy anything on AWS you need three things: <b>a place for it to live</b>, <b>a unit that gets billed</b>, and <b>a boundary that permissions attach to</b>. In AWS all three are the same thing: the <b>account</b>. Nothing comes before it in this journey.</p>
+      <p>The first account is easy. The trouble comes later, when production, test, a second team and a regulated project all end up in it. One wrong delete or one leaked key then reaches everything. So AWS practice is <b>many accounts</b> — one per environment or workload — tied together by <b>AWS Organizations</b> so they can still be billed, governed and secured as one.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>📦 Account</h4><span class="pk-tag">the container and the boundary</span><span class="pk-label use">✅ Pick it when</span><ul><li>Holds your resources, permissions and usage for one workload or environment</li><li>A natural unit for billing and for limiting blast radius</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Putting every workload in one account — the boundary then protects nothing</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🌳 Organization, root and OUs</h4><span class="pk-tag">manage many accounts as a tree</span><span class="pk-label use">✅ Pick it when</span><ul><li>A management account, member accounts and organizational units</li><li>Attach a policy to a unit and it flows to all accounts below</li><li>A member account belongs to one organization; an account sits in exactly one OU</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Treating OUs as billing groups — they are for applying policy</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🛡️ Service control policies (SCPs)</h4><span class="pk-tag">guardrails for whole accounts</span><span class="pk-label use">✅ Pick it when</span><ul><li>Limit what accounts may do, whatever their own IAM says</li><li>Block regions or services you never use</li><li>They filter — they never grant access</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting an SCP to give someone permission — IAM (concept 3) does that</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>💳 Consolidated billing</h4><span class="pk-tag">one bill for the whole organization</span><span class="pk-label use">✅ Pick it when</span><ul><li>The management account pays for all member accounts</li><li>Combined usage can share volume pricing discounts, Reserved Instance discounts and Savings Plans</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Consolidated billing alone gives no policies — the "all features" mode does (and is the default)</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to create a new account</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 428" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: a different environment, team or compliance need earns its own account; otherwise tag within one account">
+<defs><marker id="ac3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ac3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ac3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 New workload?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏭 Production vs non-production?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">different risk and different people</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Separate accounts</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">prod apart from dev</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💳 Different bill or owner?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a team or product that pays its own way</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Own account</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">bill by account</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📜 Different compliance rules?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">regulated data needs its own guardrails</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Own account + OU</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">policies per unit</text>
+<rect class="bx" x="10" y="366" width="330" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="388.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏷️ None of these?</text>
+<text x="175" y="401.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">stay in one account, use tags</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a new account is cheap and a missing boundary is expensive, so ask in order. <b>Production versus non-production?</b> Separate accounts. <b>A different bill or owner?</b> Its own account. <b>Different compliance rules?</b> Its own account, often in its own OU so the right policies attach. If none of these is true, stay in one account and separate things with tags.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">💥 Why one account is not enough</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 262" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="In one big account a mistake in dev can reach production; separate accounts keep each workload behind its own boundary">
+<defs><marker id="ac2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ac2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="246" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">ONE ACCOUNT · one shared boundary</text>
+<rect class="zone" x="325" y="8" width="305" height="246" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">ACCOUNT PER WORKLOAD · separate boundaries</text>
+<path d="M114,102 L210,102" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ac2A)"/>
+<path d="M429,102 L525,102" fill="none" stroke="#34d399" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ac2A)"/>
+<rect class="bx" x="24" y="74" width="90" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="69" y="99.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧪 Dev</text>
+<text x="69" y="112.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">experiments</text>
+<rect class="bx" x="210" y="74" width="90" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="255" y="99.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏭 Prod</text>
+<text x="255" y="112.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">customers</text>
+<text class="free" x="162" y="176" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">One wrong delete or one leaked</text>
+<text class="free" x="162" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">key can touch everything.</text>
+<rect class="bx" x="339" y="74" width="90" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="384" y="99.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧪 Dev</text>
+<text x="384" y="112.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">own account</text>
+<rect class="bx" x="525" y="74" width="90" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="99.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏭 Prod</text>
+<text x="570" y="112.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">own account</text>
+<text class="free" x="477" y="176" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Crossing needs explicit access.</text>
+<text class="free" x="477" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">The blast radius stays small.</text>
+<g class="arrow-pill"><rect x="129" y="93" width="66" height="18" rx="9"/><text x="162" y="105.5" text-anchor="middle" font-size="9" font-style="italic">can reach</text></g>
+<g class="arrow-pill"><rect x="452" y="93" width="50" height="18" rx="9"/><text x="477" y="105.5" text-anchor="middle" font-size="9" font-style="italic">opt-in</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> on the left, dev and production share a single boundary: a bad script or a leaked key in dev can reach production. On the right, each workload has its own account. Reaching across is not impossible, but it has to be allowed on purpose — so a mistake stays small. This idea is called limiting the <b>blast radius</b>.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Account, OU and organization</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">What it is</th><th scope="col">Use it for</th><th scope="col">Watch out for</th></tr></thead><tbody><tr><th scope="row">📦 Account</th><td>The container and boundary for resources, permissions and billing</td><td>One workload, environment or team</td><td>Many accounts need a tool to manage them</td></tr><tr><th scope="row">📁 OU</th><td>A folder of accounts (can nest; one parent each)</td><td>Applying the same policies to similar accounts</td><td>Each account is in exactly one OU</td></tr><tr><th scope="row">👑 Management account</th><td>The account that created the organization</td><td>Creating accounts, attaching policies, paying the bill</td><td>Keep workloads out of it; SCPs do not apply to it</td></tr><tr><th scope="row">🛡️ SCP</th><td>A filter on what accounts may use</td><td>Guardrails across many accounts</td><td>Effective permissions = what the SCP allows AND what IAM allows</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🏭</span><h5>Production and test on one account</h5><p>A test script deletes the wrong database.</p><span class="sc-use">→ Separate prod and non-prod accounts</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Finance asks "what does team B cost?"</h5><p>One bill, no split.</p><span class="sc-use">→ An account per team, consolidated billing</span></div>
+      <div class="scenario"><span class="sc-icon">🌍</span><h5>Only two Regions are allowed by law</h5><p>Developers can pick any Region.</p><span class="sc-use">→ An SCP on the OU</span></div>
+      <div class="scenario"><span class="sc-icon">🔐</span><h5>Audit logs must never be changed by app teams</h5><p>Different people, different trust.</p><span class="sc-use">→ A separate security account</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>A new project, same team, same rules</h5><p>No new boundary needed.</p><span class="sc-use">→ Stay in the account, use tags</span></div>
+      <div class="scenario"><span class="sc-icon">👑</span><h5>Someone runs workloads in the management account</h5><p>Its mistakes cannot be limited by SCPs.</p><span class="sc-use">→ Move workloads to member accounts</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — who does what in an organization</summary>
+    <div class="zoom-inner">
+      <p><b>Management account.</b> The account that created the organization; this cannot be changed later. It can create accounts, invite others, attach policies and pays the charges for the whole organization. AWS recommends keeping workloads out of it, because SCPs and similar policies do not apply to the management account.</p>
+      <p><b>Member accounts</b> are every other account. An account can belong to only one organization at a time.</p>
+      <p><b>SCPs are filters.</b> An SCP never grants permissions; it limits what permissions can be used. A principal's effective permissions are the overlap between the SCPs and its own IAM policies.</p>
+      <p><b>Feature sets.</b> "All features" (the default) turns on policies and service integrations. "Consolidated billing" alone covers only billing.</p>
+      <p><b>Landing zones.</b> Setting up the standard set of accounts and guardrails once, so every new account starts safe, is the idea behind a landing zone — the last concept in this journey.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>An account is the container, the permission boundary and the billing unit. Use several to limit blast radius.</li><li>Organizations: a management account, member accounts, OUs in a tree. Policies attached to a node flow down.</li><li>SCPs filter what accounts may use; they never grant access. Effective permission = SCP ∩ IAM.</li><li>Consolidated billing: one bill, shared volume and commitment discounts. "All features" is the default and adds policies.</li><li>Keep workloads out of the management account.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"In AWS the account is the basic boundary for resources, permissions and billing, so I use separate accounts for production and non-production and for teams with different needs. AWS Organizations ties them into a tree of OUs under a management account, gives one consolidated bill and lets me attach service control policies, which only limit — never grant — what the accounts can do. I keep workloads out of the management account."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>One big account "for now".</b> It is the easiest start and the hardest thing to untangle later. Create the accounts you need early; they cost nothing by themselves.</p>
+      <p>Second trap: <b>thinking an SCP gives access.</b> It does not. If IAM does not allow an action, the SCP cannot make it allowed — it can only take permission away.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📦 Account</h5><p>The wall: one container for resources, permissions and cost.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🌳 Organization</h5><p>The tree: how many walls are created, grouped, governed and billed together.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a member account inside an existing organization</span>
+aws organizations create-account --email prod-app@example.com --account-name "prod-app"</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real setups also place the account in an OU, set up access for people, and use automation; flags can change.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You now have accounts to put things in. Next question: <b>where</b> on the planet do those resources run, and what happens if one location fails? Next: Regions &amp; Availability Zones.</span>
+      <a class="next-link" href="regions-availability-zones.html">Regions &amp; Availability Zones <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html" target="_blank" rel="noopener">AWS Organizations user guide</a> · <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html" target="_blank" rel="noopener">Terminology and concepts for AWS Organizations</a> · <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html" target="_blank" rel="noopener">Consolidated billing for AWS Organizations</a> · <a href="https://docs.aws.amazon.com/whitepapers/latest/organizing-your-aws-environment/organizing-your-aws-environment.html" target="_blank" rel="noopener">Organizing your AWS environment using multiple accounts</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

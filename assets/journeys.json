@@ -106,5 +106,65 @@
       "private-endpoints": "Private Endpoints",
       "disaster-recovery": "Disaster Recovery"
     }
+  },
+  "aws": {
+    "title": "AWS",
+    "order": [
+      "accounts-organizations",
+      "regions-availability-zones",
+      "identity-access",
+      "vpc-networking",
+      "compute",
+      "storage",
+      "databases",
+      "load-balancing",
+      "scaling-resilience",
+      "caching-edge",
+      "messaging",
+      "serverless-orchestration",
+      "infrastructure-as-code",
+      "ci-cd-deployment",
+      "secrets-configuration",
+      "security-governance",
+      "monitoring-observability",
+      "cost-management",
+      "well-architected"
+    ],
+    "titles": {
+      "accounts-organizations": "Accounts & Organizations",
+      "regions-availability-zones": "Regions & Availability Zones",
+      "identity-access": "Identity & Access (IAM)",
+      "vpc-networking": "VPC Networking",
+      "compute": "Compute",
+      "storage": "Storage",
+      "databases": "Databases",
+      "load-balancing": "Load Balancing & Traffic Routing",
+      "scaling-resilience": "Scaling & Resilience",
+      "caching-edge": "Caching & Edge Delivery",
+      "messaging": "Messaging & Events",
+      "serverless-orchestration": "Serverless & Orchestration",
+      "infrastructure-as-code": "Infrastructure as Code",
+      "ci-cd-deployment": "CI/CD & Deployment Strategies",
+      "secrets-configuration": "Secrets & Configuration",
+      "security-governance": "Security & Governance",
+      "monitoring-observability": "Monitoring & Observability",
+      "cost-management": "Cost Management",
+      "well-architected": "Well-Architected & Landing Zones"
+    },
+    "written": [
+      "accounts-organizations",
+      "regions-availability-zones",
+      "identity-access",
+      "vpc-networking",
+      "compute"
+    ],
+    "sub": {
+      "iam-roles": "identity-access",
+      "vpc-endpoints": "vpc-networking"
+    },
+    "subTitles": {
+      "iam-roles": "IAM Roles",
+      "vpc-endpoints": "VPC Endpoints"
+    }
   }
 }
