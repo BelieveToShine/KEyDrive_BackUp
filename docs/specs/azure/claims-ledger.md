@@ -276,11 +276,67 @@ Doc roots (stable): [Storage](https://learn.microsoft.com/en-us/azure/storage/) 
 | CP12 | `az containerapp create` flags and the quickstart image name | 🟨 K | |
 | CP-I | "VM 1/2/3", "App A/B", "Ten small services" | 🟦 I | |
 
+## Load Balancing & Traffic Routing (`load-balancing.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| LB1 | Load Balancer = layer 4 (TCP/UDP), regional, health probes, no TLS termination or URL routing | ✅ V | `/azure/load-balancer/load-balancer-overview`, `/azure/architecture/guide/technology-choices/load-balancing-overview` |
+| LB2 | Application Gateway = layer 7, regional, TLS termination, URL path-based routing, multi-site hosting, cookie-based affinity, optional WAF (v2) | ✅ V | `/azure/application-gateway/overview` |
+| LB3 | Front Door = layer 7, global, edge entry, WAF, caching, fast failover; Standard and Premium are current | ✅ V | `/azure/frontdoor/front-door-overview` |
+| LB4 | Traffic Manager = DNS-based, global, any protocol; routing by priority, weight, performance, geography; failover lags because DNS answers are cached | ✅ V | `/azure/traffic-manager/traffic-manager-overview` |
+| LB5 | Decision rule: web + one region → Application Gateway; web + global → Front Door; non-web + one region → Load Balancer; non-web + multi-region → Traffic Manager (a "two regions"-style setup is the multi-region case) | ✅ V | load-balancing-overview (Architecture Center) |
+| LB6 | Basic Load Balancer was retired on 30 Sept 2025 — use Standard | ✅ V | `/azure/load-balancer/load-balancer-faqs` |
+| LB7 | Application Gateway V1 retired (28 April 2026) — use V2 | ✅ V | `/azure/application-gateway/v1-retirement` |
+| LB8 | Front Door stays in the request path, Traffic Manager does not (client connects directly after DNS) | ✅ V | follows from LB3/LB4 |
+| LB9 | The layered diagram (Front Door → App Gateway → internal LB) is one common shape | 🟦 I | illustrative; Microsoft guidance on combining the tools varies, the page says "example, not a rule" |
+| LB10 | `az network lb create` flags | 🟨 K | |
+| LB-I | "Region 1/2", "Web VMs", scenario names | 🟦 I | |
+
+## Scaling & Resilience (`scaling-resilience.html`) and Disaster Recovery (`disaster-recovery.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SC1 | Autoscale is horizontal; metric-based (CPU, queue length, memory) or schedule-based | ✅ V | `/azure/azure-monitor/autoscale/autoscale-overview` |
+| SC2 | Rules use a time window; always pair scale-out with scale-in; keep a margin between thresholds to avoid flapping | ✅ V | `/azure/azure-monitor/autoscale/autoscale-best-practices` |
+| SC3 | Scale sets = a group of load-balanced VMs that can autoscale; Flexible orchestration mode is recommended | ✅ V | `/azure/virtual-machine-scale-sets/overview` |
+| SC4 | Spreading across zones protects against datacenter failure but does not replicate data | ✅ V | scale-set / reliability docs |
+| SC5 | Scale up = bigger machine, scale out = more copies; scale up has a ceiling | 🟨 K | general term |
+| SC6 | Transient faults: retry with exponential back-off + jitter; add a circuit breaker | ✅ V | `/azure/well-architected/design-guides/handle-transient-faults` |
+| SC7 | Layered redundancy, no single point of failure, failure-mode analysis first | ✅ V | `/azure/well-architected/reliability/principles`, `/checklist` |
+| SC8 | Health checks should probe real dependencies (database, cache, messaging) | ✅ V | `/azure/well-architected/service-guides/app-service-web-apps` |
+| SC9 | Design Functions for idempotency | ✅ V | `/azure/well-architected/service-guides/azure-functions` |
+| SC10 | Three failure sizes (server / datacenter / region) and the matching protections ("two zones" = copies in zones) | 🟦 I | teaching model built on SC3, SC4, DR1 |
+| SC11 | `az monitor autoscale rule create` flags; "CPU > 70 avg 10m" values | 🟨 K | example numbers are 🟦 illustrative |
+| DR1 | RPO = acceptable data loss (time); RTO = acceptable downtime (time) | ✅ V | `/azure/well-architected/reliability/disaster-recovery` |
+| DR2 | Three multi-region patterns: active-active (hot), active-passive warm standby, active-passive cold standby; active-active roughly doubles spend | ✅ V | `/azure/well-architected/design-guides/disaster-recovery` |
+| DR3 | Failover = shifting traffic to the unaffected region; failback = shifting it back | ✅ V | same page |
+| DR4 | Site Recovery = replication and failover for VMs; do not use it for databases (use native replication) | ✅ V | `/azure/site-recovery/` docs and Q&A guidance |
+| DR5 | Azure Backup restores data (files, disks, databases, workloads); soft delete, immutable vaults, Cross Region Restore exist | ✅ V | `/azure/backup/backup-overview`, `/azure/backup/backup-azure-recovery-services-vault-overview` |
+| DR6 | A replica copies deletions/corruption, a backup lets you go back in time | 🟨 K | general principle |
+| DR7 | Regular DR drills find hidden region dependencies; define environments as code | ✅ V | WAF disaster-recovery pages |
+| DR-I | Scenarios, "last good copy" timeline | 🟦 I | |
+
+## Caching & Edge Delivery (`caching-edge.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CE1 | Cache-aside: check cache, on miss read the store and add to cache; on update write to the store then invalidate the cached item | ✅ V | `/azure/architecture/patterns/cache-aside` |
+| CE2 | Cache-aside does not guarantee consistency; expiry too early/late hurts; avoid sensitive data; poor fit when most requests miss | ✅ V | same page |
+| CE3 | Per-instance in-memory caches are private; a distributed cache such as Azure Managed Redis suits shared data | ✅ V | same page |
+| CE4 | A cache can act as a limited fallback if the origin store is briefly unavailable | ✅ V | `/azure/well-architected/reliability/design-patterns` |
+| CE5 | Azure Managed Redis is Microsoft's recommended Redis cache; tiers Memory Optimized, Balanced, Compute Optimized, Flash Optimized (flash moves less-used data to NVMe) | ✅ V | `/azure/redis/overview`, `/azure/redis/plan-tiers-and-capacity` |
+| CE6 | Older Azure Cache for Redis tiers are being retired; Microsoft recommends migrating to Azure Managed Redis (page gives no dates) | ✅ V | `/azure/redis/migrate/migrate-basic-standard-premium-understand` |
+| CE7 | Front Door (classic) and Azure CDN Standard (classic) are being retired; Front Door Standard/Premium is current (page gives no dates) | ✅ V | Front Door / CDN retirement notices |
+| CE8 | Front Door caching: expiry (TTL), purge, query-string caching, compression | ✅ V | `/azure/frontdoor/front-door-caching` |
+| CE9 | Browser cache is controlled by response headers; the visitor's device holds it | 🟨 K | |
+| CE10 | Moving a look-aside cache means create new → repoint app → let it refill | ✅ V | migration guidance |
+| CE-I | Pseudo-code, "Visitor A/B", scenarios | 🟦 I | |
+
 ---
 
 ## Open verification list (do these with direct docs access)
 
 Everything marked 🟨 K above, in priority order: **RH4 / RH10 / RH11** (management-group and ARM wording), **RG8 / RG10** (region price differences), **VN9 / VN10** (peering overlap; VPN vs ExpressRoute wording), **CP10 / CP11** (App Service plan and AKS control-plane wording), **PE8**, **ID10**, **MI7**, **S7** (Table storage wording), **S10** (three copies),
-**D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
+**SC5 / DR6 / CE9 / LB10 / SC11** (general terms and CLI flags), **D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
 **E2** (same key → same partition), and the SDK method names (**B16, C14, M12, SB-I, E9**).
 After checking a row, change 🟨 K to ✅ V and add the exact page URL.

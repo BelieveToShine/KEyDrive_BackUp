@@ -9,7 +9,7 @@ design/content rules themselves, see `rules/`. For a specific category's own con
 | Category | Status | Concepts written | Hub page |
 |---|---|---|---|
 | AI | 🟢 Live, complete | 19 / 19 | `ai/index.html` — spec: `specs/ai/` |
-| Azure | 🟢 Hub + foundation (1–5) and Storage, Databases, Messaging live, with 6 deep dives | 8 / 19 | `azure/index.html` — spec: `specs/azure/` |
+| Azure | 🟢 Hub + foundation (1–5), Storage, Databases, Load Balancing, Scaling, Caching and Messaging live, with 7 deep dives | 11 / 19 | `azure/index.html` — spec: `specs/azure/` |
 | AWS | 🟡 Hub + locked roadmap, no concept pages yet | 0 / 19 | `aws/index.html` — spec: `specs/aws/` |
 | Cloud Systems | 🔒 Placeholder tile only, no hub page yet | 0 | — |
 | Data Systems | 🔒 Placeholder tile only, no hub page yet | 0 | — |

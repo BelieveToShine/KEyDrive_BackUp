@@ -75,6 +75,9 @@
       "compute",
       "storage",
       "databases",
+      "load-balancing",
+      "scaling-resilience",
+      "caching-edge",
       "messaging"
     ],
     "sub": {
@@ -83,7 +86,8 @@
       "service-bus": "messaging",
       "event-hubs": "messaging",
       "managed-identities": "identity-access",
-      "private-endpoints": "virtual-networks"
+      "private-endpoints": "virtual-networks",
+      "disaster-recovery": "scaling-resilience"
     },
     "subTitles": {
       "blob-storage": "Blob Storage in Depth",
@@ -91,7 +95,8 @@
       "service-bus": "Service Bus: Queues & Topics",
       "event-hubs": "Event Hubs",
       "managed-identities": "Managed Identities",
-      "private-endpoints": "Private Endpoints"
+      "private-endpoints": "Private Endpoints",
+      "disaster-recovery": "Disaster Recovery"
     }
   }
 }

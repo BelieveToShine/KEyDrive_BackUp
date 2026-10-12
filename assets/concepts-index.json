@@ -872,5 +872,109 @@
     "summary": "The classic mistake with Compute.",
     "keywords": "azure compute virtual machines vm app service container apps aks kubernetes functions container instances choose trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "azure-load-balancing",
+    "title": "Load Balancing & Traffic Routing",
+    "category": "Azure",
+    "page": "azure/concepts/load-balancing.html",
+    "summary": "Choosing between Load Balancer, Application Gateway, Front Door and Traffic Manager.",
+    "keywords": "azure load balancing load balancer application gateway front door traffic manager layer 4 layer 7 dns waf health probe"
+  },
+  {
+    "id": "azure-load-balancing-recall",
+    "title": "Load Balancing & Traffic Routing — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/load-balancing.html",
+    "summary": "Quick recall points: Load Balancing & Traffic Routing.",
+    "keywords": "azure load balancing load balancer application gateway front door traffic manager layer 4 layer 7 dns waf health probe interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-load-balancing-trap",
+    "title": "Load Balancing & Traffic Routing — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/load-balancing.html",
+    "summary": "The classic mistake with Load Balancing & Traffic Routing.",
+    "keywords": "azure load balancing load balancer application gateway front door traffic manager layer 4 layer 7 dns waf health probe trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-scaling-resilience",
+    "title": "Scaling & Resilience",
+    "category": "Azure",
+    "page": "azure/concepts/scaling-resilience.html",
+    "summary": "Autoscale, scale sets, zones and regions: scaling with load and surviving failures.",
+    "keywords": "azure scaling resilience autoscale scale out scale up vmss scale set availability zones retry circuit breaker flapping"
+  },
+  {
+    "id": "azure-scaling-resilience-recall",
+    "title": "Scaling & Resilience — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/scaling-resilience.html",
+    "summary": "Quick recall points: Scaling & Resilience.",
+    "keywords": "azure scaling resilience autoscale scale out scale up vmss scale set availability zones retry circuit breaker flapping interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-scaling-resilience-trap",
+    "title": "Scaling & Resilience — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/scaling-resilience.html",
+    "summary": "The classic mistake with Scaling & Resilience.",
+    "keywords": "azure scaling resilience autoscale scale out scale up vmss scale set availability zones retry circuit breaker flapping trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-disaster-recovery",
+    "title": "Disaster Recovery",
+    "category": "Azure",
+    "page": "azure/concepts/disaster-recovery.html",
+    "summary": "RPO and RTO, cold/warm/active-active patterns, Site Recovery vs Backup vs database replication.",
+    "keywords": "azure disaster recovery rpo rto site recovery backup failover failback warm standby active-active"
+  },
+  {
+    "id": "azure-disaster-recovery-recall",
+    "title": "Disaster Recovery — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/disaster-recovery.html",
+    "summary": "Quick recall points: Disaster Recovery.",
+    "keywords": "azure disaster recovery rpo rto site recovery backup failover failback warm standby active-active interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-disaster-recovery-trap",
+    "title": "Disaster Recovery — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/disaster-recovery.html",
+    "summary": "The classic mistake with Disaster Recovery.",
+    "keywords": "azure disaster recovery rpo rto site recovery backup failover failback warm standby active-active trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-caching-edge",
+    "title": "Caching & Edge Delivery",
+    "category": "Azure",
+    "page": "azure/concepts/caching-edge.html",
+    "summary": "Browser, edge and Redis caching on Azure and the cache-aside pattern.",
+    "keywords": "azure caching cache redis managed redis front door cdn edge cache-aside ttl"
+  },
+  {
+    "id": "azure-caching-edge-recall",
+    "title": "Caching & Edge Delivery — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/caching-edge.html",
+    "summary": "Quick recall points: Caching & Edge Delivery.",
+    "keywords": "azure caching cache redis managed redis front door cdn edge cache-aside ttl interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-caching-edge-trap",
+    "title": "Caching & Edge Delivery — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/caching-edge.html",
+    "summary": "The classic mistake with Caching & Edge Delivery.",
+    "keywords": "azure caching cache redis managed redis front door cdn edge cache-aside ttl trap mistake",
+    "anchor": "trap"
   }
 ]

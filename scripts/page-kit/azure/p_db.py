@@ -138,7 +138,7 @@ def build_databases():
 <span class="cmt">// Cosmos DB (NoSQL API): one order = one JSON item, read fast by id + partition key</span>
 <span class="kw">const</span> { resource } = <span class="kw">await</span> container.item(<span class="str">"order-1001"</span>, <span class="str">"customer-42"</span>).read();''',
       'Illustrative shapes only — real code adds error handling, retries and connection setup.'))
-    body += next_box('One database plus one app server is a working instance. But what happens when one instance is not enough? Next: spreading traffic across many.', None)
+    body += next_box('One database plus one app server is one working instance — but one instance is a single point of failure. Next: Load Balancing &amp; Traffic Routing.', 'load-balancing.html', 'Load Balancing &amp; Traffic Routing')
     body = body.replace('One database plus one app server is a working instance. But what happens when one instance is not enough? Next: spreading traffic across many.',
                         'One database plus one app server is one working instance — but one instance is a single point of failure. Next: Load Balancing &amp; Traffic Routing <i>(coming soon)</i>.')
     body += fact_note('Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs.', [DOCS_SQL, DOCS_COS])
