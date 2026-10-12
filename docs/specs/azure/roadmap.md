@@ -19,20 +19,20 @@ journey-map node and concept-list row from locked to written** (and adds its slu
 | 9 | Scaling & Resilience | ✅ Written | `azure/concepts/scaling-resilience.html`, `azure/concepts/disaster-recovery.html` (Disaster Recovery) |
 | 10 | Caching & Edge Delivery | ✅ Written | `azure/concepts/caching-edge.html` |
 | 11 | Messaging & Events | ✅ Written | `azure/concepts/messaging.html`, `azure/concepts/service-bus.html` (Service Bus: Queues & Topics), `azure/concepts/event-hubs.html` (Event Hubs) |
-| 12 | Serverless & Orchestration | 🔒 Planned | — |
-| 13 | Infrastructure as Code | 🔒 Planned | — |
-| 14 | CI/CD & Deployment Strategies | 🔒 Planned | — |
+| 12 | Serverless & Orchestration | ✅ Written | `azure/concepts/serverless-orchestration.html` |
+| 13 | Infrastructure as Code | ✅ Written | `azure/concepts/infrastructure-as-code.html` |
+| 14 | CI/CD & Deployment Strategies | ✅ Written | `azure/concepts/ci-cd-deployment.html` |
 | 15 | Secrets & Configuration | 🔒 Planned | — |
 | 16 | Security & Governance | 🔒 Planned | — |
 | 17 | Monitoring & Observability | 🔒 Planned | — |
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**11 / 19 written, plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
+**14 / 19 written, plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
 request): Storage, Databases, Messaging & Events. Batch 2 (roadmap order): concepts 1–5 — the whole foundation
-(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge.
+(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge. Batch 4 (roadmap order): 12 Serverless, 13 Infrastructure as Code, 14 CI/CD.
 
 Slug convention: kebab-case of the concept name (the slugs for all 19 are fixed in `assets/journeys.json`).
 
-**Next in order when asked:** Serverless & Orchestration (12), then 13 onward.
+**Next in order when asked:** Secrets & Configuration (15), then 16 onward.
 Verify every fact first (`../../rules/fact-check-and-currency.md`).

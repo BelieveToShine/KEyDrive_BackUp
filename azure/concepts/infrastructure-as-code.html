@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure as Code — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Infrastructure as Code</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 13 of 19 · 🛠️ Shipping and operating</div>
+    <h1>Infrastructure as code turns your environment into files you can <span class="grad-text">review, repeat and roll back.</span></h1>
+    <p class="sub">Bicep, Terraform and ARM templates: why clicking resources together stops working, how a preview protects you, and which tool to pick.</p>
+    <div class="interview-q">❓ "What is infrastructure as code, and would you use Bicep or Terraform on Azure?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Infrastructure as code flow: a file in Git, a what-if preview, a deployment, and Azure resources that match the file">
+<defs><marker id="ia1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,88 L240,88" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<path d="M390,88 L510,88" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<rect class="bx" x="10" y="56" width="110" height="64" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="65" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📄 Bicep file</text>
+<text x="65" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">lives in Git</text>
+<rect class="bx" x="240" y="56" width="150" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="315" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">👀 Preview</text>
+<text x="315" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">what will change?</text>
+<rect class="bx" x="510" y="56" width="120" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">☁️ Azure</text>
+<text x="570" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">matches the file</text>
+<text class="free" x="320" y="168" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Want a change? Edit the file and review it — do not click it into the portal.</text>
+<text class="free" x="320" y="188" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Then the same file can build the same environment again, anywhere.</text>
+<g class="arrow-pill"><rect x="152.5" y="79" width="55" height="18" rx="9"/><text x="180" y="91.5" text-anchor="middle" font-size="9" font-style="italic">what-if</text></g>
+<g class="arrow-pill"><rect x="425" y="79" width="50" height="18" rx="9"/><text x="450" y="91.5" text-anchor="middle" font-size="9" font-style="italic">deploy</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the environment lives in a <b>file</b>, kept in Git like any other code. Before deploying, <b>what-if</b> shows what would be created, changed or deleted — a preview, without touching anything. Then the deployment makes Azure match the file. To change the environment, you change the file and get it reviewed. The same file can build the same environment again, in a new subscription or a new region.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Infrastructure as code means your environment is described in files that you can review, repeat and roll back — instead of being a pile of clicks nobody remembers.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>By now the system is dozens of resources: networks, apps, databases, caches, queues, functions. Someone clicked them together in the portal. Ask three questions: <b>Can we build the same thing again?</b> (a second environment, or after a disaster) <b>Who changed what, and why?</b> <b>Does production really match staging?</b> With clicking, the honest answer to all three is "not sure".</p>
+      <p>Infrastructure as code (IaC) answers all three. You write what you want — <i>declaratively</i>: "there should be a storage account like this" — and a tool makes Azure match. The file is the record, it goes through review like code, and it is the plan for the disaster-recovery day from the Scaling concept.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 Which tool?</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#a78bfa"><h4>💪 Bicep</h4><span class="pk-tag">Azure-native, declarative</span><span class="pk-label use">✅ Pick it when</span><ul><li>You work on Azure only</li><li>Microsoft's own language for Azure resources</li><li>No state file — Azure itself tracks deployments</li><li>The default tool for the Azure Developer CLI</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You also manage other clouds or non-Azure services in the same code</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🌐 Terraform</h4><span class="pk-tag">multi-provider, with a state file</span><span class="pk-label use">✅ Pick it when</span><ul><li>One tool across Azure, other clouds and services</li><li>Plan and apply with a recorded state</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You want Azure to hold the record — Terraform keeps its own state file that you must store and protect</li></ul></div>
+      <div class="pick-card" style="--pick:#93a0b8"><h4>📜 ARM templates (JSON)</h4><span class="pk-tag">what Azure Resource Manager runs</span><span class="pk-label use">✅ Pick it when</span><ul><li>You already have working templates</li><li>Bicep files are turned into this format when deployed</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Writing new ones by hand — Bicep is shorter and easier to read</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 428" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for infrastructure-as-code tools: Bicep for Azure only, Terraform for several providers, ARM templates for existing JSON">
+<defs><marker id="ia3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 Which tool?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">☁️ Only Azure, and no state file to look after?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Azure-native, deployed through ARM</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Bicep</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">the usual Azure choice</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Other clouds or providers in the same code?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">one tool and workflow for all</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Terraform</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">keeps a state file</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📜 Already have JSON templates that work?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">keep them; Bicep compiles to this</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">ARM templates</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">what Azure runs underneath</text>
+<rect class="bx" x="10" y="366" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="388.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="401.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with Bicep for Azure-only teams</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> if your world is Azure only, <b>Bicep</b> is the usual starting point. If the same code must also manage other clouds or services, <b>Terraform</b> is the common choice. If you already have JSON <b>ARM templates</b> that work, keep them — Azure Resource Manager (concept 1) is what runs everything underneath anyway.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Bicep vs Terraform</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Bicep</th><th scope="col">Terraform</th></tr></thead><tbody><tr><th scope="row">Scope</th><td>Azure resources</td><td>Azure plus other providers</td></tr><tr><th scope="row">State</th><td>No state file; relies on incremental deployments</td><td>Keeps a state file, which you store remotely and protect</td></tr><tr><th scope="row">Where the work happens</th><td>On the Azure side</td><td>Planning runs on your side, using state and its own language</td></tr><tr><th scope="row">Sign-in</th><td>Uses your deployment token</td><td>Uses provider credentials</td></tr><tr><th scope="row">Ready-made modules</th><td>Azure Verified Modules</td><td>Azure Verified Modules</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">⚠️ The one setting that can delete things</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 258" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Incremental mode leaves resources that are not in the file alone; complete mode deletes them">
+<defs><marker id="ia2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="242" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">INCREMENTAL · the default</text>
+<rect class="zone" x="325" y="8" width="305" height="242" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">COMPLETE · be careful</text>
+<path d="M114,94 L206,94" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<path d="M429,94 L521,94" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<rect class="bx" x="24" y="64" width="90" height="60" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="69" y="91.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📄 File</text>
+<text x="69" y="104.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A and B</text>
+<rect class="bx" x="206" y="64" width="94" height="60" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="253" y="91.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🗂️ Group</text>
+<text x="253" y="104.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">A, B, C all stay</text>
+<text class="free" x="162" y="176" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">C is not in the file,</text>
+<text class="free" x="162" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">so it is left alone.</text>
+<rect class="bx" x="339" y="64" width="90" height="60" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="384" y="91.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📄 File</text>
+<text x="384" y="104.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A and B</text>
+<rect class="bx" x="521" y="64" width="94" height="60" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="568" y="91.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🗂️ Group</text>
+<text x="568" y="104.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">A, B only</text>
+<text class="free" x="477" y="176" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">C is not in the file,</text>
+<text class="free" x="477" y="192" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">so it is deleted.</text>
+<text class="free" x="477" y="220" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Run what-if first.</text>
+<g class="arrow-pill"><rect x="135" y="85" width="50" height="18" rx="9"/><text x="160" y="97.5" text-anchor="middle" font-size="9" font-style="italic">deploy</text></g>
+<g class="arrow-pill"><rect x="450" y="85" width="50" height="18" rx="9"/><text x="475" y="97.5" text-anchor="middle" font-size="9" font-style="italic">deploy</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a deployment has a <b>mode</b>. <b>Incremental</b> (the default) adds and updates what is in the file and leaves everything else in the resource group alone. <b>Complete</b> also deletes anything in the group that is <em>not</em> in the file. That can be what you want for a tidy group — and a disaster if you forgot a resource. Microsoft's advice: run <b>what-if</b> before any complete-mode deployment.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Spin up a test copy of production</h5><p>Same shape, smaller sizes, deleted on Friday.</p><span class="sc-use">→ Parameters on one Bicep file</span></div>
+      <div class="scenario"><span class="sc-icon">🆘</span><h5>The primary region is gone</h5><p>Build the second region fast, not by memory.</p><span class="sc-use">→ Deploy the same file to the other region</span></div>
+      <div class="scenario"><span class="sc-icon">👀</span><h5>A teammate wants to change a firewall rule</h5><p>Someone should review it first.</p><span class="sc-use">→ Pull request on the file + what-if</span></div>
+      <div class="scenario"><span class="sc-icon">🧹</span><h5>Clean up a resource group</h5><p>Remove everything not in the file.</p><span class="sc-use">→ Complete mode — after what-if</span></div>
+      <div class="scenario"><span class="sc-icon">☁️</span><h5>Azure plus another cloud, one team</h5><p>Same workflow for both.</p><span class="sc-use">→ Terraform</span></div>
+      <div class="scenario"><span class="sc-icon">🧩</span><h5>Repeating the same pattern 20 times</h5><p>Do not copy and paste.</p><span class="sc-use">→ A reusable module (e.g. Azure Verified Modules)</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — modules, parameters and drift</summary>
+    <div class="zoom-inner">
+      <p><b>Parameters</b> let one file build many environments (dev, test, prod) with different names and sizes. <b>Modules</b> package a pattern so you reuse it instead of copying it. <b>Azure Verified Modules</b> are ready-made, versioned modules from Microsoft for both Bicep and Terraform, aligned with the Well-Architected Framework.</p>
+      <p><b>Idempotent:</b> deploying the same Bicep file twice leaves the existing resources as they are — the result is the same, not a duplicate.</p>
+      <p><b>Drift</b> is when the real environment stops matching the file, usually because someone changed something in the portal. Treat the portal as read-only for anything the code owns, and let the pipeline (next concept) do the deploying.</p>
+      <p><b>Scopes.</b> A deployment can target a resource group, a subscription, a management group or the tenant — matching the hierarchy from concept 1.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>IaC = the environment described in reviewed, versioned files; repeatable, reviewable, recoverable.</li><li>Bicep: declarative, Azure-native, no state file. Terraform: multi-provider, keeps a state file. ARM templates: the JSON underneath.</li><li>what-if previews changes (create, modify, delete) without changing anything.</li><li>Incremental mode (default) leaves extra resources alone; complete mode deletes resources not in the file — what-if first.</li><li>Drift = reality no longer matches the file; avoid portal edits for code-managed resources.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I define environments as code so they are repeatable, reviewable and recoverable. On Azure only I use Bicep, which is declarative and needs no state file; if I must manage several providers I use Terraform and protect its state. Before deploying I run what-if, I use incremental mode by default, and I keep the portal read-only for anything the code owns so there is no drift."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Complete mode with a missing resource.</b> It will delete whatever is not in the file. Always preview with what-if, and use complete mode on purpose, not by habit.</p>
+      <p>Second trap: <b>leaving the Terraform state file somewhere unprotected.</b> It is the tool's record of your infrastructure and can contain sensitive data; store it remotely, with access limited and backups on.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>💪 Bicep</h5><p>Azure-only, declarative. Azure itself tracks deployments, so there is no state file to look after.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🌐 Terraform</h5><p>Many providers in one workflow. It keeps its own state file that you must store and protect.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt">// a storage account in Bicep — declare what you want, not the steps to get it</span>
+param location string = resourceGroup().location
+
+resource sa 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+  name: 'stshopprod001'
+  location: location
+  sku: { name: 'Standard_LRS' }
+  kind: 'StorageV2'
+}</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative only — the API version, the name and the SKU are examples; storage account names must be globally unique, and real files add tags, network rules and more.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Environments are now code. But code needs a safe, automatic way to <b>build, test and roll out</b> — and to roll back when something goes wrong. Next: CI/CD &amp; Deployment Strategies.</span>
+      <a class="next-link" href="ci-cd-deployment.html">CI/CD &amp; Deployment Strategies <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Tools and versions change often. This page teaches the ideas; for current syntax, versions and features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview" target="_blank" rel="noopener">What is Bicep?</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if" target="_blank" rel="noopener">Bicep what-if</a> · <a href="https://learn.microsoft.com/en-us/azure/developer/terraform/comparing-terraform-and-bicep" target="_blank" rel="noopener">Comparing Terraform and Bicep</a> · <a href="https://learn.microsoft.com/en-us/community/content/azure-verified-modules" target="_blank" rel="noopener">Azure Verified Modules</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/" target="_blank" rel="noopener">Azure Resource Manager documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serverless &amp; Orchestration — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Serverless &amp; Orchestration</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 12 of 19 · ⚙️ Handling load</div>
+    <h1>Serverless runs your work only when something triggers it — <span class="grad-text">so you pay for work done, not for a machine waiting.</span></h1>
+    <p class="sub">Event Grid, Azure Functions, Logic Apps and Durable Functions: what each one is for, how they work together, and how to choose.</p>
+    <div class="interview-q">❓ "When would you use Azure Functions, Logic Apps, Durable Functions or Event Grid?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 262" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="An event is routed by Event Grid to a Function or a Logic App, and a Logic App can call a Function">
+<defs><marker id="sv1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sv1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,131 L200,131" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sv1A)"/>
+<path d="M320,131 L375,131 L375,59 L430,59" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#sv1A)"/>
+<path d="M320,131 L375,131 L375,203 L430,203" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sv1A)"/>
+<path d="M530,172 L530,90" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv1A)"/>
+<rect class="bx" x="10" y="100" width="110" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="128.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📁 Source</text>
+<text x="65" y="141.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a file lands</text>
+<rect class="bx" x="200" y="100" width="120" height="62" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="260" y="128.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📣 Event Grid</text>
+<text x="260" y="141.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">routes events</text>
+<rect class="bx" x="430" y="28" width="200" height="62" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="530" y="56.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Azure Function</text>
+<text x="530" y="69.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">your own code runs</text>
+<rect class="bx" x="430" y="172" width="200" height="62" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="530" y="200.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🔀 Logic App</text>
+<text x="530" y="213.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">designer-built workflow</text>
+<g class="arrow-pill"><rect x="138" y="122" width="44" height="18" rx="9"/><text x="160" y="134.5" text-anchor="middle" font-size="9" font-style="italic">event</text></g>
+<g class="arrow-pill"><rect x="345" y="86" width="60" height="18" rx="9"/><text x="375" y="98.5" text-anchor="middle" font-size="9" font-style="italic">triggers</text></g>
+<g class="arrow-pill"><rect x="345" y="158" width="60" height="18" rx="9"/><text x="375" y="170.5" text-anchor="middle" font-size="9" font-style="italic">triggers</text></g>
+<g class="arrow-pill"><rect x="500" y="122" width="60" height="18" rx="9"/><text x="530" y="134.5" text-anchor="middle" font-size="9" font-style="italic">can call</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> something happens — a file lands in storage. <b>Event Grid</b> routes that event to whoever cares. One handler can be an <b>Azure Function</b>, which runs your own code. Another can be a <b>Logic App</b>, a workflow built in a designer. A Logic App can also call a Function, and the other way round — so you mix them: workflow for the glue, code for the clever part. None of them needs a server that you keep running.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Serverless means you give Azure a piece of work and a trigger, and Azure runs it only when the trigger fires — so you pay for work done, not for a machine waiting.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Look at what the earlier concepts gave you: an app that scales and is fast. But not all work looks like a web app. A file arrives. A timer fires. An order is approved. Between those moments, <b>nothing happens</b>. Keeping a server running just to wait for them is paying for idle capacity.</p>
+      <p>Serverless flips that. You write a small unit of work, tell Azure what should start it, and Azure supplies the compute when it fires. When there is a lot to do it scales out; when there is nothing, it can scale to zero. The skill is picking the right tool for <b>what kind of work</b> it is: reacting, coding, connecting, or orchestrating many steps.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The four tools</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📣 Event Grid</h4><span class="pk-tag">routes "something happened" events</span><span class="pk-label use">✅ Pick it when</span><ul><li>React to changes without polling</li><li>One event, many interested handlers</li><li>Azure service and SaaS events</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need strict order, transactions or duplicate detection → Service Bus</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>⚡ Azure Functions</h4><span class="pk-tag">small code, run on a trigger</span><span class="pk-label use">✅ Pick it when</span><ul><li>Your own logic: transform data, call an API, run a job</li><li>HTTP, timer, queue, event and storage triggers</li><li>Unique data transformations and utility code</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Long, multi-step flows in plain functions — use Durable Functions</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🔀 Logic Apps</h4><span class="pk-tag">workflows built in a designer</span><span class="pk-label use">✅ Pick it when</span><ul><li>Connect many systems with prebuilt connectors</li><li>Business processes, approvals, notifications</li><li>Little or no code</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Heavy custom code or tight performance work → a Function</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🎼 Durable Functions</h4><span class="pk-tag">code-based orchestration</span><span class="pk-label use">✅ Pick it when</span><ul><li>Several steps in order, or in parallel then combined</li><li>Work that waits and must survive restarts</li><li>You prefer to write the flow as code</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A single quick action — a plain Function is enough</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 620" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for serverless tools: Event Grid, Functions, Logic Apps, Durable Functions or Service Bus">
+<defs><marker id="sv2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sv2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M340,487 L410,487" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<path d="M175,514 L175,560" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sv2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What is the job?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📣 Tell others that something happened?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a file landed, a resource changed</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Event Grid</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">routes the event</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚡ A small piece of your own code?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">runs when something triggers it</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Azure Functions</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">code-first</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔀 Connect many systems, little code?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">approvals, emails, SaaS tools</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Logic Apps</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">designer-first</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🎼 Many steps in code that must survive?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">chains, parallel work, waiting</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Durable Functions</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">code that remembers</text>
+<rect class="bx" x="10" y="460" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📨 Strict order, transactions, safe retry?</text>
+<text x="175" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">money, orders, reliable hand-off</text>
+<rect class="bx" x="410" y="460" width="220" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="520" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">Service Bus</text>
+<text x="520" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">see Messaging</text>
+<rect class="bx" x="10" y="560" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="582.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="595.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with a Function and grow from there</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="478" width="34" height="18" rx="9"/><text x="375" y="490.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="523" width="29" height="18" rx="9"/><text x="199" y="535.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> read from the top and stop at the first "yes". The questions run from <b>telling others</b> (Event Grid), to <b>small code</b> (Functions), to <b>connecting systems</b> (Logic Apps), to <b>code with many steps</b> (Durable Functions). The last row is a hand-off: when order, transactions and safe retries matter, you want a message broker — that is Service Bus from the Messaging concept. Microsoft also notes these tools are often combined.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎼 What "orchestration" looks like</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 292" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A Durable Functions orchestrator starts several activities in parallel and combines their results">
+<defs><marker id="sv3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sv3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="220" y="12" width="210" height="240" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="234" y="31" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">ACTIVITIES · in parallel</text>
+<path d="M130,135 L220,135" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sv3A)"/>
+<path d="M430,135 L540,135" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sv3A)"/>
+<rect class="bx" x="10" y="100" width="120" height="70" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="70" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🎼 Orchestrator</text>
+<text x="70" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">remembers progress</text>
+<rect class="bx" x="234" y="44" width="182" height="48" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="325" y="65.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Activity 1</text>
+<text x="325" y="78.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one unit of work</text>
+<rect class="bx" x="234" y="112" width="182" height="48" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="325" y="133.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Activity 2</text>
+<text x="325" y="146.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one unit of work</text>
+<rect class="bx" x="234" y="180" width="182" height="48" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="325" y="201.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Activity 3</text>
+<text x="325" y="214.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one unit of work</text>
+<rect class="bx" x="540" y="100" width="90" height="70" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="585" y="131.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧮 Combined</text>
+<text x="585" y="146.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">result</text>
+<text class="free" x="320" y="278" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">The orchestrator saves a checkpoint as it goes, so a restart does not lose its place.</text>
+<g class="arrow-pill"><rect x="147.5" y="126" width="55" height="18" rx="9"/><text x="175" y="138.5" text-anchor="middle" font-size="9" font-style="italic">fan out</text></g>
+<g class="arrow-pill"><rect x="460" y="126" width="50" height="18" rx="9"/><text x="485" y="138.5" text-anchor="middle" font-size="9" font-style="italic">fan in</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> in Durable Functions the <b>orchestrator</b> is the conductor. It does not do the work; it starts <b>activities</b> (single units of work), here in parallel (<em>fan-out</em>), then waits and combines the answers (<em>fan-in</em>). The orchestrator checkpoints its progress, so if the host restarts it picks up where it left off. The other common pattern is <em>function chaining</em>: run activity A, pass its output to B, then to C.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Functions: which hosting plan?</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Plan</th><th scope="col">How it scales</th><th scope="col">Good for</th><th scope="col">Watch out for</th></tr></thead><tbody><tr><th scope="row">Flex Consumption</th><td>Event-driven, can scale to zero; Microsoft's recommended serverless plan for new apps</td><td>New serverless apps; optional always-ready instances to reduce start delay</td><td>Code deployments are Linux-only</td></tr><tr><th scope="row">Premium</th><td>Event-driven with pre-warmed workers; at least one instance stays running</td><td>Apps that run continuously, or nearly so</td><td>You pay for the warm capacity</td></tr><tr><th scope="row">Dedicated (App Service)</th><td>Does not scale on events — a set number of instances</td><td>Spare App Service capacity, steady work</td><td>No event-driven scale-out</td></tr><tr><th scope="row">Consumption (legacy)</th><td>Event-driven, scales to zero</td><td>Existing apps</td><td>Microsoft recommends moving to Flex Consumption</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🖼️</span><h5>A photo is uploaded</h5><p>Make a thumbnail. Idle most of the day, busy in bursts.</p><span class="sc-use">→ Event Grid + a Function</span></div>
+      <div class="scenario"><span class="sc-icon">⏰</span><h5>Every night at 2 AM</h5><p>Clean up old records. It runs for a minute, then nothing.</p><span class="sc-use">→ A timer-triggered Function</span></div>
+      <div class="scenario"><span class="sc-icon">✅</span><h5>New hire onboarding</h5><p>Notify HR, create accounts in three SaaS tools, wait for approval.</p><span class="sc-use">→ Logic Apps</span></div>
+      <div class="scenario"><span class="sc-icon">🧬</span><h5>Process 500 files in parallel</h5><p>Then build one summary report from all the results.</p><span class="sc-use">→ Durable Functions (fan-out / fan-in)</span></div>
+      <div class="scenario"><span class="sc-icon">💳</span><h5>Process a payment order</h5><p>Order matters, and a message must never be lost or doubled.</p><span class="sc-use">→ Service Bus (not Event Grid)</span></div>
+      <div class="scenario"><span class="sc-icon">🔗</span><h5>Workflow with one smart step</h5><p>Mostly connectors, but one step needs custom code.</p><span class="sc-use">→ Logic App calling a Function</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — habits that keep serverless safe</summary>
+    <div class="zoom-inner">
+      <p><b>Triggers and bindings.</b> A Function starts from a <i>trigger</i> (a message, a timer, an HTTP call) and can read or write other services through <i>bindings</i>, so you write less plumbing code.</p>
+      <p><b>Cold start.</b> When nothing is running and a trigger fires, the platform must start an instance first, which adds a delay. Plans differ: Flex Consumption can keep always-ready instances, Premium keeps pre-warmed workers, and Dedicated runs continuously. Pick based on how much delay the user can accept.</p>
+      <p><b>Be idempotent.</b> Events and messages can arrive more than once, and retries happen. Design the work so doing it twice is safe.</p>
+      <p><b>Keep functions short and stateless.</b> Anything that needs to remember something between steps belongs in a database, storage, or a Durable Functions orchestrator — not in the function's memory.</p>
+      <p><b>Use managed identity</b> (concept 3) so a Function can reach storage, databases and other services without secrets in its settings.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Serverless = you supply the work and the trigger; Azure supplies compute only while it runs, and it can scale to zero.</li><li>Event Grid routes events. Functions = code-first. Logic Apps = designer-first with many connectors. Durable Functions = code-based orchestration that checkpoints progress.</li><li>Fan-out/fan-in = start activities in parallel then combine; function chaining = run steps in order.</li><li>Flex Consumption is the recommended serverless plan for new Functions apps; Premium keeps pre-warmed workers; Dedicated does not scale on events.</li><li>Need order, transactions or duplicate detection → Service Bus, not Event Grid.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Serverless means I provide the code or workflow and a trigger, and Azure runs it only when needed. Event Grid routes events, Functions run my own code, Logic Apps connect systems with a designer, and Durable Functions orchestrate multi-step work in code with checkpoints. For new Functions apps I start with the Flex Consumption plan, and I make the work idempotent. When I need ordering or transactions I use Service Bus instead."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>"Serverless" does not mean "no servers" — and it is not always the right tool.</b> There are still servers; you just do not manage them. Long-running, steady, heavy work may fit a plan with always-on capacity better than one built for short bursts.</p>
+      <p>Second trap: <b>using Event Grid where you need guarantees.</b> Event Grid routes events; it does not give ordering, transactions or duplicate detection. When losing or reordering a message would hurt, use Service Bus.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>⚡ Azure Functions</h5><p>You write code. Great for custom logic and transformations; you decide how it is structured.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🔀 Logic Apps</h5><p>You design a workflow with connectors. Great for gluing systems together with little code.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a Function app on the Flex Consumption plan — Azure runs it only when triggered</span>
+az functionapp create --name func-thumbs --resource-group rg-shop-prod \
+    --flexconsumption-location westeurope --runtime python --runtime-version 3.11 \
+    --storage-account stfuncthumbs</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real setups also add identity, networking and deployment, and the flags and supported runtimes change.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Your system now has many parts: apps, databases, networks, functions, workflows. Clicking them together in the portal is slow and cannot be repeated or reviewed. Next: Infrastructure as Code.</span>
+      <a class="next-link" href="infrastructure-as-code.html">Infrastructure as Code <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often — hosting plans especially. This page teaches the ideas; for current plans, limits and prices, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale" target="_blank" rel="noopener">Azure Functions hosting options</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan" target="_blank" rel="noopener">Flex Consumption plan</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview" target="_blank" rel="noopener">Durable Functions overview</a> · <a href="https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview" target="_blank" rel="noopener">Azure Logic Apps overview</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-compare-logic-apps-ms-flow-webjobs" target="_blank" rel="noopener">Integration and automation options in Azure</a> · <a href="https://learn.microsoft.com/en-us/azure/event-grid/overview" target="_blank" rel="noopener">Azure Event Grid documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

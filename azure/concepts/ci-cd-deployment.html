@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD &amp; Deployment Strategies — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">CI/CD &amp; Deployment</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 14 of 19 · 🛠️ Shipping and operating</div>
+    <h1>CI/CD makes every release the same automatic steps — <span class="grad-text">so shipping is routine, and undoing a bad release is one move.</span></h1>
+    <p class="sub">Pipelines, deployment slots, swaps, traffic splits and passwordless sign-in: how to ship to Azure safely and roll back fast.</p>
+    <div class="interview-q">❓ "How would you set up CI/CD to Azure with zero downtime and a safe rollback?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 352" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A deployment pipeline: a commit triggers build and test, deploy to a staging slot, then a swap into production that can be reversed">
+<defs><marker id="cd1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,62 L320,96" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<path d="M320,148 L320,182" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<path d="M320,234 L320,268" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<rect class="bx" x="20" y="10" width="600" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="33.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 Commit to Git</text>
+<text x="320" y="46.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the pipeline starts by itself</text>
+<rect class="bx" x="20" y="96" width="600" height="52" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧪 Build and test</text>
+<text x="320" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">the same package every time</text>
+<rect class="bx" x="20" y="182" width="600" height="52" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="205.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🚦 Deploy to a staging slot</text>
+<text x="320" y="218.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">production is untouched</text>
+<rect class="bx" x="20" y="268" width="600" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="291.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔁 Swap into production</text>
+<text x="320" y="304.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">swap again to roll back</text>
+<g class="arrow-pill"><rect x="390" y="70" width="60" height="18" rx="9"/><text x="420" y="82.5" text-anchor="middle" font-size="9" font-style="italic">triggers</text></g>
+<g class="arrow-pill"><rect x="384.5" y="156" width="71" height="18" rx="9"/><text x="420" y="168.5" text-anchor="middle" font-size="9" font-style="italic">tests pass</text></g>
+<g class="arrow-pill"><rect x="363.5" y="242" width="113" height="18" rx="9"/><text x="420" y="254.5" text-anchor="middle" font-size="9" font-style="italic">warmed up, checked</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a change goes through the same steps every time. A <b>commit</b> starts the pipeline. It <b>builds and tests</b> the code and makes one package. That package is <b>deployed to a staging slot</b> — a second copy of the app next to production — where it is warmed up and checked. Then a <b>swap</b> puts it into production. If something is wrong, swap again and the old version is back.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">CI/CD means every change is built, tested and released by the same automatic steps — so shipping is routine, and undoing a bad release is one move.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The environment is code now. The app is code too. If a person still copies files onto a server by hand, every release is different, every release is slow, and every release is a little scary — so teams release rarely, in big batches, which makes each one riskier.</p>
+      <p><b>CI</b> (continuous integration) builds and tests every change automatically. <b>CD</b> (continuous delivery or deployment) takes the tested package and ships it by a repeatable path. The second half of the skill is <b>how</b> it goes live: all at once, to a few users first, or beside the old version with a quick way back.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🐙 GitHub Actions</h4><span class="pk-tag">pipelines in your repository</span><span class="pk-label use">✅ Pick it when</span><ul><li>Your code is already on GitHub</li><li>Workflows live as files next to the code</li><li>Deploy to App Service, Functions, containers</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Your team already runs everything in Azure DevOps</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔷 Azure Pipelines</h4><span class="pk-tag">pipelines in Azure DevOps</span><span class="pk-label use">✅ Pick it when</span><ul><li>You use Azure DevOps boards and repos</li><li>Tasks to deploy to a slot and to swap slots</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You are fully on GitHub and want one place</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🚦 Deployment slots</h4><span class="pk-tag">a staging copy of an App Service app</span><span class="pk-label use">✅ Pick it when</span><ul><li>Zero-downtime releases: warm up, then swap</li><li>Fast rollback by swapping back</li><li>Available on Standard, Premium and Isolated tiers</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Free and basic tiers do not have slots</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🔐 OIDC sign-in</h4><span class="pk-tag">workload identity federation</span><span class="pk-label use">✅ Pick it when</span><ul><li>The pipeline needs to deploy without a stored secret</li><li>Microsoft recommends it over passwords or publish profiles</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Nothing — treat stored deployment passwords as the thing to avoid</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 How a release goes live</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 252" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Swap moves all users to the new version at once; a traffic split sends only a small share first">
+<defs><marker id="cd2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="236" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">SWAP · all at once</text>
+<rect class="zone" x="325" y="8" width="305" height="236" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">SPLIT · a small share first</text>
+<path d="M94,121 L147,121 L147,65 L200,65" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<path d="M250,150 L250,90" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#cd2A)" marker-start="url(#cd2S)"/>
+<path d="M409,111 L462,111 L462,65 L515,65" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<path d="M409,131 L462,131 L462,175 L515,175" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<rect class="bx" x="24" y="96" width="70" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="59" y="125" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👥 Users</text>
+<rect class="bx" x="200" y="40" width="100" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="250" y="62.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔵 Production</text>
+<text x="250" y="75.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">old version</text>
+<rect class="bx" x="200" y="150" width="100" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="250" y="172.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🟢 Staging</text>
+<text x="250" y="185.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">new version</text>
+<text class="free" x="162" y="222" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Swap back to undo.</text>
+<rect class="bx" x="339" y="96" width="70" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="374" y="125" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👥 Users</text>
+<rect class="bx" x="515" y="40" width="100" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="565" y="62.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔵 Production</text>
+<text x="565" y="75.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">most traffic</text>
+<rect class="bx" x="515" y="150" width="100" height="50" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="565" y="172.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🟢 Staging</text>
+<text x="565" y="185.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">a small share</text>
+<text class="free" x="477" y="222" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Watch it, then send everyone — or no one.</text>
+<g class="arrow-pill"><rect x="109" y="84" width="76" height="18" rx="9"/><text x="147" y="96.5" text-anchor="middle" font-size="9" font-style="italic">all traffic</text></g>
+<g class="arrow-pill"><rect x="262.5" y="111" width="39" height="18" rx="9"/><text x="282" y="123.5" text-anchor="middle" font-size="9" font-style="italic">swap</text></g>
+<g class="arrow-pill"><rect x="442.5" y="79" width="39" height="18" rx="9"/><text x="462" y="91.5" text-anchor="middle" font-size="9" font-style="italic">most</text></g>
+<g class="arrow-pill"><rect x="440" y="144" width="44" height="18" rx="9"/><text x="462" y="156.5" text-anchor="middle" font-size="9" font-style="italic">a few</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Swap</b> (left, "blue-green"): the new version waits in a staging slot, gets warmed up and checked, then takes over all traffic at once. Rolling back is swapping again. <b>Split</b> (right, "canary"): App Service can send a chosen percentage of requests to the staging slot while the rest stay on production. You watch errors and speed, then send everyone — or pull the slot back to zero. A user routed to a slot stays pinned to it for a while, so their session is consistent.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔑 Deploy without a stored password</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 214" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A pipeline signs in to Azure with a short-lived token from Microsoft Entra ID instead of a stored password">
+<defs><marker id="cd3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,84 L250,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#cd3A)"/>
+<path d="M390,84 L510,84" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#cd3A)"/>
+<rect class="bx" x="10" y="52" width="120" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="70" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🤖 Pipeline</text>
+<text x="70" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">GitHub Actions</text>
+<rect class="bx" x="250" y="52" width="140" height="64" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔐 Entra ID</text>
+<text x="320" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">trusts this repo</text>
+<rect class="bx" x="510" y="52" width="120" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">☁️ Azure</text>
+<text x="570" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">deploy allowed</text>
+<text class="free" x="320" y="166" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">No long-lived password or key is stored in the pipeline to leak.</text>
+<text class="free" x="320" y="186" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">This is called workload identity federation (OpenID Connect).</text>
+<g class="arrow-pill"><rect x="146.5" y="75" width="87" height="18" rx="9"/><text x="190" y="87.5" text-anchor="middle" font-size="9" font-style="italic">sends a token</text></g>
+<g class="arrow-pill"><rect x="412" y="75" width="76" height="18" rx="9"/><text x="450" y="87.5" text-anchor="middle" font-size="9" font-style="italic">gets access</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> old pipelines kept a password or key to log in to Azure — a secret that can leak. With <b>OpenID Connect</b> the pipeline asks Microsoft Entra ID for a short-lived token, proving who it is (this repo, this workflow). Entra ID trusts it and Azure lets the deployment through. This is the identity idea from concept 3, applied to the pipeline itself.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Choosing a release style</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Style</th><th scope="col">What happens</th><th scope="col">Rollback</th><th scope="col">Best when</th></tr></thead><tbody><tr><th scope="row">🔁 Swap (blue-green)</th><td>New version warmed up beside the old, then takes all traffic</td><td>Swap again</td><td>You want zero downtime and a clean cut-over</td></tr><tr><th scope="row">🐤 Traffic split (canary)</th><td>A small share of users hits the new version first</td><td>Set the share back to zero</td><td>You are not sure and want real-user proof</td></tr><tr><th scope="row">⏩ Direct to production</th><td>Files replace the running app</td><td>Redeploy the old version</td><td>Only for tiny, low-risk apps</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Release the shop on a Friday afternoon</h5><p>No downtime, and a fast way back if checkout breaks.</p><span class="sc-use">→ Staging slot + swap</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>A risky pricing change</h5><p>Try it on a few users and watch conversion.</p><span class="sc-use">→ Traffic split to a slot</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>The team stores a deploy password in a secret</h5><p>It leaked in a log once.</p><span class="sc-use">→ OIDC sign-in (no stored password)</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Every pull request must be tested</h5><p>Nothing merges if tests fail.</p><span class="sc-use">→ CI on each change</span></div>
+      <div class="scenario"><span class="sc-icon">🏗️</span><h5>Release app and infrastructure together</h5><p>The Bicep file and the code change as one.</p><span class="sc-use">→ One pipeline: deploy infra, then app</span></div>
+      <div class="scenario"><span class="sc-icon">⏪</span><h5>A bad release reaches production</h5><p>Customers see errors right now.</p><span class="sc-use">→ Swap back to the previous slot</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details that bite</summary>
+    <div class="zoom-inner">
+      <p><b>Build once, deploy the same package everywhere.</b> If each environment builds its own copy, "it worked in staging" proves little.</p>
+      <p><b>Slot settings.</b> Some settings (such as connection strings marked "slot setting") stay with the slot and do not move during a swap. Mark them deliberately, or the swapped app can end up pointing at the wrong database.</p>
+      <p><b>Slots share the plan.</b> A staging slot runs on the same App Service plan as production, so it uses the same capacity; scaling the plan affects all slots.</p>
+      <p><b>Preview the swap.</b> App Service can apply the target slot's settings to the source slot before the swap completes, so you can check behaviour first and then complete or cancel.</p>
+      <p><b>Other services.</b> Containers and Functions have their own release features (revisions, slots) — the ideas are the same: ship beside, check, switch, and keep a way back.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>CI builds and tests every change automatically; CD ships the tested package by a repeatable path.</li><li>Deployment slots (Standard tier and above): deploy to staging, warm up, swap into production; swap again to roll back.</li><li>Traffic routing can send a percentage of requests to a slot first — a canary-style test in production.</li><li>Prefer OIDC / workload identity federation to stored passwords for pipeline sign-in.</li><li>Build once and deploy the same package everywhere; mind slot-specific settings.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I use a pipeline in GitHub Actions or Azure Pipelines: every change is built and tested, then deployed to a staging slot, warmed up, and swapped into production — swapping back is my rollback. For risky changes I route a small share of traffic to the slot first. The pipeline signs in with OpenID Connect so there is no stored secret, and it deploys the Bicep file and the app together."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Deploying straight to production.</b> Microsoft's guidance is to deploy to a non-production slot and swap, so you can validate first and roll back by swapping again.</p>
+      <p>Second trap: <b>a stored deployment password.</b> It is a long-lived secret that leaks through logs, forks and screenshots. Use short-lived tokens through OIDC.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🔁 Swap (blue-green)</h5><p>Everyone moves to the new version at the same moment, after it has been warmed up and checked.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🐤 Traffic split (canary)</h5><p>A small share goes to the new version first, so real users test it before everyone does.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># deploy the new version to the staging slot, then swap it into production</span>
+az webapp deploy --resource-group rg-shop-prod --name app-shop --slot staging --src-path app.zip
+az webapp deployment slot swap --resource-group rg-shop-prod --name app-shop --slot staging --target-slot production</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — a real pipeline builds and tests first, and runs these steps with an OIDC sign-in; flags and options can change.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box locked">
+      <span>You can now ship changes safely. But apps and pipelines need credentials and settings — database passwords, API keys, feature switches — and hard-coding them is the classic leak. Next: Secrets &amp; Configuration.</span>
+    </div>
+  </section>  <p class="fact-note">📌 Tools and features change often. This page teaches the ideas; for current tasks, actions and limits, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots" target="_blank" rel="noopener">Set up staging slots in App Service</a> · <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices" target="_blank" rel="noopener">App Service deployment best practices</a> · <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-azure-pipelines" target="_blank" rel="noopener">CI/CD with Azure Pipelines for App Service</a> · <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-continuous-deployment" target="_blank" rel="noopener">Continuous deployment for App Service</a> · <a href="https://learn.microsoft.com/en-us/cli/azure/webapp/traffic-routing" target="_blank" rel="noopener">az webapp traffic-routing</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

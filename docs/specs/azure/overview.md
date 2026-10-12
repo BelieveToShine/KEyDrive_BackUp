@@ -2,17 +2,18 @@
 
 ## Status
 
-Hub page, full roadmap and **three batches of pages** are done: 11 / 19 concepts + 7 deep dives.
+Hub page, full roadmap and **four batches of pages** are done: 14 / 19 concepts + 7 deep dives.
 Batch 1: Storage, Databases, Messaging & Events (+ Blob Storage in depth, Cosmos DB vs Azure SQL, Service Bus, Event Hubs).
 Batch 2 (roadmap order): Tenants/Subscriptions/Resource Groups, Regions & Availability Zones, Identity & Access (+ Managed Identities),
 Virtual Networks (+ Private Endpoints), Compute.
-Batch 3 (roadmap order): Load Balancing & Traffic Routing, Scaling & Resilience (+ Disaster Recovery), Caching & Edge Delivery. Added at the user's
+Batch 3 (roadmap order): Load Balancing & Traffic Routing, Scaling & Resilience (+ Disaster Recovery), Caching & Edge Delivery.
+Batch 4 (roadmap order): Serverless & Orchestration, Infrastructure as Code, CI/CD & Deployment Strategies. Added at the user's
 explicit request (2026-10-12), which lifts the platform-wide "don't start a new category without
 being asked" rule for this category only.
 
 ## What's built
 
-- `azure/concepts/*.html` — 18 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 53 diagrams in total. Facts are logged in `claims-ledger.md`.
+- `azure/concepts/*.html` — 21 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 62 diagrams in total. Facts are logged in `claims-ledger.md`.
 - `azure/index.html` — category hub: hero, the 19-node journey-map diagram (written nodes are links, the rest locked) (every connector
   labeled with the limit that made the next concept necessary, two grouping containers, legend)
   and the full concept list with 🔒 planned badges. Nodes and rows are not links yet.

@@ -976,5 +976,83 @@
     "summary": "The classic mistake with Caching & Edge Delivery.",
     "keywords": "azure caching cache redis managed redis front door cdn edge cache-aside ttl trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "azure-serverless-orchestration",
+    "title": "Serverless & Orchestration",
+    "category": "Azure",
+    "page": "azure/concepts/serverless-orchestration.html",
+    "summary": "Event Grid, Functions, Logic Apps and Durable Functions: what each is for and how to choose.",
+    "keywords": "azure serverless functions logic apps durable functions event grid orchestration fan-out flex consumption cold start"
+  },
+  {
+    "id": "azure-serverless-orchestration-recall",
+    "title": "Serverless & Orchestration — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/serverless-orchestration.html",
+    "summary": "Quick recall points: Serverless & Orchestration.",
+    "keywords": "azure serverless functions logic apps durable functions event grid orchestration fan-out flex consumption cold start interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-serverless-orchestration-trap",
+    "title": "Serverless & Orchestration — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/serverless-orchestration.html",
+    "summary": "The classic mistake with Serverless & Orchestration.",
+    "keywords": "azure serverless functions logic apps durable functions event grid orchestration fan-out flex consumption cold start trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-infrastructure-as-code",
+    "title": "Infrastructure as Code",
+    "category": "Azure",
+    "page": "azure/concepts/infrastructure-as-code.html",
+    "summary": "Bicep, Terraform and ARM templates; what-if previews and deployment modes.",
+    "keywords": "azure infrastructure as code iac bicep terraform arm template what-if incremental complete deployment mode state drift"
+  },
+  {
+    "id": "azure-infrastructure-as-code-recall",
+    "title": "Infrastructure as Code — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/infrastructure-as-code.html",
+    "summary": "Quick recall points: Infrastructure as Code.",
+    "keywords": "azure infrastructure as code iac bicep terraform arm template what-if incremental complete deployment mode state drift interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-infrastructure-as-code-trap",
+    "title": "Infrastructure as Code — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/infrastructure-as-code.html",
+    "summary": "The classic mistake with Infrastructure as Code.",
+    "keywords": "azure infrastructure as code iac bicep terraform arm template what-if incremental complete deployment mode state drift trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-ci-cd-deployment",
+    "title": "CI/CD & Deployment Strategies",
+    "category": "Azure",
+    "page": "azure/concepts/ci-cd-deployment.html",
+    "summary": "Pipelines, deployment slots, swap vs traffic split, and passwordless OIDC sign-in.",
+    "keywords": "azure ci cd pipeline github actions azure pipelines deployment slots swap blue green canary oidc workload identity federation rollback"
+  },
+  {
+    "id": "azure-ci-cd-deployment-recall",
+    "title": "CI/CD & Deployment Strategies — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/ci-cd-deployment.html",
+    "summary": "Quick recall points: CI/CD & Deployment Strategies.",
+    "keywords": "azure ci cd pipeline github actions azure pipelines deployment slots swap blue green canary oidc workload identity federation rollback interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-ci-cd-deployment-trap",
+    "title": "CI/CD & Deployment Strategies — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/ci-cd-deployment.html",
+    "summary": "The classic mistake with CI/CD & Deployment Strategies.",
+    "keywords": "azure ci cd pipeline github actions azure pipelines deployment slots swap blue green canary oidc workload identity federation rollback trap mistake",
+    "anchor": "trap"
   }
 ]

@@ -332,6 +332,47 @@ Doc roots (stable): [Storage](https://learn.microsoft.com/en-us/azure/storage/) 
 | CE10 | Moving a look-aside cache means create new → repoint app → let it refill | ✅ V | migration guidance |
 | CE-I | Pseudo-code, "Visitor A/B", scenarios | 🟦 I | |
 
+## Serverless & Orchestration (`serverless-orchestration.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SV1 | Functions plans: Flex Consumption is the recommended serverless plan for new apps (scale to zero, optional always-ready instances, Linux-only code deployments); Premium has pre-warmed workers with at least one instance running; Dedicated does not scale on events; Consumption is legacy | ✅ V | `/azure/azure-functions/functions-scale`, `/flex-consumption-plan` |
+| SV2 | Durable Functions: orchestrator coordinates, activities do single units of work; function chaining and fan-out/fan-in; orchestrator checkpoints progress | ✅ V | `/azure/azure-functions/durable/durable-functions-overview` and durable-task pattern pages |
+| SV3 | Logic Apps = designer-first with many prebuilt connectors; Functions = code-first; a Logic App can call a Function and vice versa | ✅ V | `/azure/azure-functions/functions-compare-logic-apps-ms-flow-webjobs` |
+| SV4 | Event Grid = event routing; no ordering guarantee, transactions or duplicate detection; Service Bus offers sessions, transactions, duplicate detection | ✅ V | `/azure/service-bus-messaging/compare-messaging-services` |
+| SV5 | Functions triggers and bindings; cold start differs by plan; idempotency for retried work | ✅ V (idempotency), 🟨 K (binding wording) | WAF Functions guide; scale pages |
+| SV6 | `az functionapp create` flags (flexconsumption-location, runtime, version) | 🟨 K | |
+| SV7 | Steady heavy work may fit an always-on plan better than a burst-oriented one | 🟨 K | general guidance |
+| SV-I | Scenario names, "Activity 1/2/3", file counts | 🟦 I | |
+
+## Infrastructure as Code (`infrastructure-as-code.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| IA1 | Bicep is a declarative language for Azure resources; deployments are idempotent | ✅ V | `/azure/azure-resource-manager/bicep/overview` |
+| IA2 | what-if previews changes (Create, Modify, Delete, NoChange…) without modifying resources; run it before complete mode | ✅ V | `/azure/azure-resource-manager/bicep/deploy-what-if` |
+| IA3 | Incremental mode (default) leaves resources not in the template; complete mode deletes them | ✅ V | ARM deployment REST reference |
+| IA4 | Bicep has no state file; Terraform keeps state and can manage non-Azure resources; azd uses Bicep by default | ✅ V | `/azure/developer/terraform/comparing-terraform-and-bicep` |
+| IA5 | Azure Verified Modules: Microsoft-maintained, versioned modules for Bicep and Terraform | ✅ V | `/community/content/azure-verified-modules` |
+| IA6 | Deployment scopes: resource group, subscription, management group, tenant | ✅ V | what-if docs |
+| IA7 | Store Terraform state remotely and protect it | ✅ V | `/azure/developer/azure-developer-cli/use-terraform-for-azd` |
+| IA8 | Bicep compiles to ARM templates | 🟨 K | |
+| IA-I | Bicep sample (`Microsoft.Storage/storageAccounts@2023-05-01`, name `stshopprod001`, SKU) and scenarios; the API version "2023" is an example only | 🟦 I | |
+
+## CI/CD & Deployment Strategies (`ci-cd-deployment.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CD1 | Deployment slots exist on Standard, Premium and Isolated tiers; the target stays online while the source slot is warmed up | ✅ V | `/azure/app-service/deploy-staging-slots` |
+| CD2 | Swap can run in Preview (apply the target's settings to the source, then complete or cancel) | ✅ V | same page |
+| CD3 | Traffic can be split by percentage to a slot; a client routed to a slot stays pinned for a time | ✅ V | same page, `/cli/azure/webapp/traffic-routing` |
+| CD4 | Deploy to a non-production slot and swap; rollback by swapping again | ✅ V | `/azure/app-service/deploy-continuous-deployment`, `/deploy-best-practices` |
+| CD5 | Azure Pipelines tasks deploy to a slot and swap; workload identity federation is recommended; OIDC avoids stored publishing credentials | ✅ V | `/azure/app-service/deploy-azure-pipelines`, deploy-continuous-deployment |
+| CD6 | Slots share the App Service plan with production | ✅ V (Q&A) | Microsoft Q&A answer; consistent with docs |
+| CD7 | Slot-specific settings do not move on swap | ✅ V | deploy-staging-slots |
+| CD8 | `az webapp deploy` / `slot swap` flags | 🟨 K | |
+| CD-I | Pipeline picture, scenarios | 🟦 I | |
+
 ---
 
 ## Open verification list (do these with direct docs access)

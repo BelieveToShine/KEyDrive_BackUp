@@ -78,7 +78,10 @@
       "load-balancing",
       "scaling-resilience",
       "caching-edge",
-      "messaging"
+      "messaging",
+      "serverless-orchestration",
+      "infrastructure-as-code",
+      "ci-cd-deployment"
     ],
     "sub": {
       "blob-storage": "storage",

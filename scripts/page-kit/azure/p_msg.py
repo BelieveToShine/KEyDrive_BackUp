@@ -234,7 +234,7 @@ client = ServiceBusClient(<span class="str">"mynamespace.servicebus.windows.net"
 <span class="kw">with</span> client.get_queue_sender(<span class="str">"orders"</span>) <span class="kw">as</span> sender:
     sender.send_messages(ServiceBusMessage(<span class="str">'{"orderId": 42}'</span>))   <span class="cmt"># returns fast — the worker handles it later</span>''',
       'Illustrative shape only — the app\'s identity needs a role such as Azure Service Bus Data Sender, and real code adds error handling.'))
-    body += next_box('Messages and events now have a home. Next: running small pieces of code only when a message or event arrives — Serverless &amp; Orchestration <i>(coming soon)</i>.', None)
+    body += next_box('Messages and events now have a home. Next: running small pieces of code only when a message or event arrives — Serverless &amp; Orchestration.', 'serverless-orchestration.html', 'Serverless &amp; Orchestration')
     body += fact_note(FOOT, [DOCS_MSG, DOCS_SB, DOCS_EH, DOCS_EG])
     return page('messaging', 'Messaging & Events', 'Concept 11 of 19 · ⚙️ Handling load',
         'Messaging lets one part of your app <span class="grad-text">hand off work</span> without waiting — and without crashing together.',
@@ -368,7 +368,7 @@ producer = EventHubProducerClient(<span class="str">"mynamespace.servicebus.wind
     batch.add(EventData(<span class="str">'{"deviceId": "d1", "temp": 21.5}'</span>))
     producer.send_batch(batch)           <span class="cmt"># many events go in one efficient call</span>''',
       'Illustrative shape only — real producers choose a partition key, handle errors, and the identity needs a role such as Azure Event Hubs Data Sender.'))
-    body += next_box('That is Event Hubs. Back to the Messaging page for the full picture of all four tools — and on to the next concept: Serverless &amp; Orchestration <i>(coming soon)</i>.', 'messaging.html', 'Back to Messaging')
+    body += next_box('That is Event Hubs. Back to the Messaging page for the full picture of all four tools — and on to the next concept: Serverless &amp; Orchestration'., 'messaging.html', 'Back to Messaging')
     body += fact_note(FOOT, [DOCS_EH, DOCS_MSG])
     return page('event-hubs', 'Event Hubs', 'Deep dive · Messaging · 🌊 Event Hubs',
         'Event Hubs is <span class="grad-text">a giant, replayable log</span> for huge streams of events — many readers, each at its own position.',
