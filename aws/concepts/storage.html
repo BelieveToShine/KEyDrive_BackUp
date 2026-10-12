@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Storage</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 6 of 19 · 🧱 Building blocks</div>
+    <h1>Compute is disposable but data is not — <span class="grad-text">pick the storage shape by how the data is read.</span></h1>
+    <p class="sub">S3, EBS, EFS and FSx: object, block and file storage, what each is for and how to choose.</p>
+    <div class="interview-q">❓ "When would you use S3, EBS or EFS?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Three storage shapes on AWS: S3 for objects over an API, EBS for a disk attached to one server, EFS and FSx for shared file systems">
+<defs><marker id="st1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="st1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M110,190 L110,230 L530,230 L530,190" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#st1A)"/>
+<rect class="bx" x="10" y="40" width="200" height="150" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="110" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🪣 S3</text>
+<text x="110" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">object storage</text>
+<text x="110" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">files in buckets</text>
+<text x="110" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">reached over an API</text>
+<text x="110" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">web scale</text>
+<rect class="bx" x="220" y="40" width="200" height="150" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">💽 EBS</text>
+<text x="320" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">block storage</text>
+<text x="320" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">a disk for one server</text>
+<text x="320" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">inside one zone</text>
+<text x="320" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">fast and simple</text>
+<rect class="bx" x="430" y="40" width="200" height="150" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="530" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📂 EFS and FSx</text>
+<text x="530" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">file storage</text>
+<text x="530" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">shared folders</text>
+<text x="530" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">many servers at once</text>
+<text x="530" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">NFS, Windows, Lustre…</text>
+<text class="free" x="320" y="278" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Compute is disposable; data is not — keep it somewhere durable and separate.</text>
+<g class="arrow-pill"><rect x="231.5" y="221" width="177" height="18" rx="9"/><text x="320" y="233.5" text-anchor="middle" font-size="9" font-style="italic">pick by the shape of your data</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> AWS gives you three shapes of storage. <b>S3</b> keeps <b>objects</b> — files plus their metadata — in buckets, reached over a web API. <b>EBS</b> is a <b>block</b> disk that attaches to one server. <b>EFS and FSx</b> are <b>file</b> systems that many servers can mount as a shared folder. You pick by the <em>shape of your data</em> and by how it is accessed.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Compute is disposable but data is not — pick the storage shape (object, block or file) by how the data is read, and keep it somewhere durable.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You have places to run code. But a server can be replaced at any time; the data on it cannot. Photos, invoices, logs, backups and the disk under a database all need <b>durable homes</b> that outlive any one server.</p>
+      <p>AWS offers three shapes because data is accessed three ways: <b>by name over the web</b> (objects), <b>as a raw disk</b> for one machine (blocks), or <b>as shared folders</b> (files). A wrong pick costs money or speed — object storage is not a database disk, and a disk is not a shared folder.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The storage services</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>🪣 Amazon S3</h4><span class="pk-tag">object storage</span><span class="pk-label use">✅ Pick it when</span><ul><li>Images, documents, backups, logs, data-lake files</li><li>Read by apps and people over a web API</li><li>Grows without planning; storage classes and lifecycle rules control cost</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Active write-heavy file workloads that need in-place edits and file locking</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>💽 Amazon EBS</h4><span class="pk-tag">block storage for one server</span><span class="pk-label use">✅ Pick it when</span><ul><li>The operating-system disk of an EC2 instance</li><li>A database volume that needs a fast dedicated disk</li><li>Data is stored redundantly in a single Availability Zone</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Sharing one volume between many servers — use a file system</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📂 Amazon EFS</h4><span class="pk-tag">shared file system (NFS)</span><span class="pk-label use">✅ Pick it when</span><ul><li>A shared folder that many servers or containers mount</li><li>Traditional file permissions and a directory tree</li><li>A cheaper archive class for cold file data</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Plain web assets and media — S3 is simpler and cheaper</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🗄️ Amazon FSx</h4><span class="pk-tag">managed file systems</span><span class="pk-label use">✅ Pick it when</span><ul><li>Specific file systems: Windows File Server, Lustre, NetApp ONTAP, OpenZFS</li><li>Windows clients that need Windows-style shares</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A simple Linux shared folder — EFS is usually enough</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 436" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: one server needs a disk use EBS; many servers need a shared folder use EFS or FSx; otherwise store objects in S3">
+<defs><marker id="st2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="st2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#st2A)"/>
+<path d="M175,326 L175,372" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#st2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What are you storing?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💽 A disk for one server?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its operating system or a database volume</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">EBS</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">block storage, one zone</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📂 A shared folder many servers mount?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">real file paths and permissions</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">EFS or FSx</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">shared file system</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🪣 Files, images, backups, data-lake files?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">read by apps over a web API</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">S3</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">object storage</text>
+<rect class="bx" x="10" y="372" width="330" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="396.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="409.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with S3 — it fits most things</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> ask in order. <b>A disk for one server?</b> EBS. <b>A shared folder many servers mount?</b> EFS or FSx. <b>Files that apps read over a web API?</b> S3 — and when unsure, S3 is the right default for most data. AWS's own guide uses the same split: block for a single host, file for shared access, object for web-scale access.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📍 Where the data lives</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 296" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="EBS data lives in one Availability Zone, S3 data is spread across zones in the Region, and EFS is a regional file system">
+<defs><marker id="st3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="st3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="620" height="214" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">ONE REGION</text>
+<rect class="zone" x="24" y="48" width="180" height="150" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="38" y="67" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">AZ a</text>
+<rect class="zone" x="224" y="48" width="180" height="150" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="238" y="67" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">AZ b</text>
+<rect class="zone" x="424" y="48" width="180" height="150" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="438" y="67" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">AZ c</text>
+<rect class="bx" x="36" y="100" width="156" height="44" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="114" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">💽 An EBS volume</text>
+<text x="114" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">this zone only</text>
+<rect class="bx" x="236" y="100" width="156" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="314" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📂 EFS mount</text>
+<text x="314" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">same file system</text>
+<rect class="bx" x="436" y="100" width="156" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="514" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📂 EFS mount</text>
+<text x="514" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">same file system</text>
+<text class="free" x="320" y="244" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">S3 stores each object redundantly across zones in the Region (except One Zone classes).</text>
+<text class="free" x="320" y="262" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">An EBS volume stays in one zone — copy it with snapshots to survive a zone loss.</text>
+</svg>
+<figcaption><strong>What you're seeing:</strong> where storage lives decides what it survives. An <b>EBS volume</b> sits in one Availability Zone, so if that zone is lost, so is the volume — protect it with snapshots. <b>S3</b> stores objects redundantly across zones in the Region (the One Zone classes are the exception). <b>EFS</b> is regional and can be mounted from servers in several zones.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Shape</th><th scope="col">Shared?</th><th scope="col">Scope</th><th scope="col">Use it for</th></tr></thead><tbody><tr><th scope="row">🪣 S3</th><td>Object</td><td>Yes, over an API</td><td>Region</td><td>Files, media, backups, data lakes</td></tr><tr><th scope="row">💽 EBS</th><td>Block</td><td>One server at a time</td><td>One zone</td><td>OS and database disks</td></tr><tr><th scope="row">📂 EFS</th><td>File (NFS)</td><td>Yes, many servers</td><td>Region</td><td>Shared Linux folders</td></tr><tr><th scope="row">🗄️ FSx</th><td>File (several kinds)</td><td>Yes</td><td>Depends on the type</td><td>Windows shares, high-performance computing</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🖼️</span><h5>Users upload profile photos</h5><p>Millions of small files, read by the web app.</p><span class="sc-use">→ S3</span></div>
+      <div class="scenario"><span class="sc-icon">🗃️</span><h5>A database server needs a fast disk</h5><p>One server, one volume.</p><span class="sc-use">→ EBS</span></div>
+      <div class="scenario"><span class="sc-icon">🧑‍🤝‍🧑</span><h5>Ten web servers share uploaded themes</h5><p>They all need the same folder.</p><span class="sc-use">→ EFS</span></div>
+      <div class="scenario"><span class="sc-icon">🪟</span><h5>A Windows file share for an office app</h5><p>Windows clients, SMB shares.</p><span class="sc-use">→ FSx for Windows File Server</span></div>
+      <div class="scenario"><span class="sc-icon">📦</span><h5>Nightly backups kept for years</h5><p>Rarely read, must be cheap.</p><span class="sc-use">→ S3 with a cold storage class</span></div>
+      <div class="scenario"><span class="sc-icon">💾</span><h5>A server dies; its disk held the only copy</h5><p>Data was tied to a machine.</p><span class="sc-use">→ Keep data in S3 or take EBS snapshots</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="s3-in-depth.html"><span class="dc-kicker">Deep dive · Storage</span><h4>S3 in Depth: classes, lifecycle, presigned URLs and safe access</h4><p>Storage classes, lifecycle rules, versioning, presigned URLs, Block Public Access and how to keep a bucket safe and cheap.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — keep data safe, not just stored</summary>
+    <div class="zoom-inner">
+      <p><b>Durable is not the same as protected.</b> Designing for very high durability means data is unlikely to be lost to hardware failure. It does not protect you from someone — or a script — deleting it. Use versioning and backups for that.</p>
+      <p><b>Block vs file vs object.</b> Block storage gives you a raw disk to format. File storage gives you folders with permissions. Object storage gives you whole objects by key; you replace an object, you do not edit it in place.</p>
+      <p><b>Access.</b> Use IAM roles (concept 3), and for S3 also bucket policies and Block Public Access. Private subnets can reach S3 through a VPC endpoint (concept 4).</p>
+      <p><b>Cost.</b> Prices depend on class, Region and requests; this page gives no figures. Check the pricing pages.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Object (S3), block (EBS) and file (EFS, FSx) — pick by access shape.</li><li>S3: buckets and objects over an API, regional, many storage classes. EBS: a disk for one server in one AZ. EFS/FSx: shared file systems.</li><li>EBS volumes live in one zone; use snapshots. S3 spreads objects across zones (except One Zone classes).</li><li>Durability does not protect against deletion — use versioning and backups.</li><li>When unsure, S3 is the default for most data.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I pick storage by its shape. S3 is object storage over an API — my default for files, media and backups. EBS is a block disk for one server in one zone, so I snapshot it. EFS or FSx is for shared file systems that many servers mount. And I remember that high durability is not protection from deletion, so I use versioning and backups."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Using a server's local disk as the only home for important data.</b> Servers get replaced. Keep the data in S3, a database or an EBS volume that is backed up.</p>
+      <p>Second trap: <b>an S3 bucket left open "for now".</b> Public buckets are the classic data leak. Keep Block Public Access on and share with presigned URLs or roles instead.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🪣 S3 (object)</h5><p>Whole objects by key, over an API. Replace, do not edit in place. Regional.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>📂 EFS (file)</h5><p>Folders and files with permissions, mounted like a drive by many servers.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a bucket and upload one file</span>
+aws s3 mb s3://my-example-bucket-12345 --region eu-west-1
+aws s3 cp report.pdf s3://my-example-bucket-12345/reports/report.pdf</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — bucket names are globally unique and the name and Region here are examples; real setups also set encryption, access rules and lifecycle rules.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Files and disks now have homes. But when you need to <b>search</b>, <b>join</b> and <b>update records safely</b>, storage alone is not enough. Next: Databases.</span>
+      <a class="next-link" href="databases.html">Databases <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/decision-guides/latest/storage-on-aws-how-to-choose/choosing-aws-storage-service.html" target="_blank" rel="noopener">Choosing an AWS storage service</a> · <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html" target="_blank" rel="noopener">What is Amazon S3?</a> · <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank" rel="noopener">Amazon S3 storage classes</a> · <a href="https://docs.aws.amazon.com/ebs/" target="_blank" rel="noopener">Amazon EBS documentation</a> · <a href="https://docs.aws.amazon.com/efs/" target="_blank" rel="noopener">Amazon EFS documentation</a> · <a href="https://docs.aws.amazon.com/fsx/" target="_blank" rel="noopener">Amazon FSx documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

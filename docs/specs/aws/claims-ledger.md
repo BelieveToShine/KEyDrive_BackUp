@@ -90,6 +90,81 @@ Legend: ✅ V verified against AWS documentation via search snippet · 🟨 K kn
 
 Batch A: "Only two Regions" (scenario: a law allows two Regions) · "30 minutes" (scenario: temporary admin for half an hour) · "at least two zones" (our resilience baseline, see RG7) · "60 seconds" (reading-time label on every page).
 
+## Storage and S3 in Depth (`storage.html`, `s3-in-depth.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| ST1 | Block (EBS) for a single host, file (EFS, FSx) for shared access, object (S3) for web-scale API access; S3 bucket = container for objects | ✅ V | `/decision-guides/latest/storage-on-aws-how-to-choose/choosing-aws-storage-service.html`, `/AWSEC2/latest/UserGuide/Storage.html` |
+| ST2 | EBS data stored redundantly within a single AZ; EFS via NFSv4 with hierarchical directories; FSx offers Windows File Server, Lustre, NetApp ONTAP, OpenZFS; EFS has an archive class | ✅ V | same pages, EFS docs |
+| ST3 | Object storage is not suited to active write-heavy file workloads (whole-object writes, no POSIX locking) | ✅ V (blog) | AWS gametech blog on storage backends |
+| ST4 | Storage classes: Standard (frequent, ms), Intelligent-Tiering (unknown/changing; per-object monitoring fee; small objects not monitored), Infrequent Access, Glacier Instant/Flexible/Deep Archive; One Zone-IA is not resilient to loss of the AZ | ✅ V | `/AmazonS3/latest/userguide/storage-class-intro.html`, `aws.amazon.com/s3/storage-classes/` |
+| ST5 | Minimum storage durations: Glacier Instant Retrieval 90 days, Deep Archive 180 days | ✅ V | storage classes page (check current values) |
+| ST6 | Lifecycle rules transition/expire objects; versioning without lifecycle grows without bound | ✅ V | S3 lifecycle docs |
+| ST7 | Presigned URLs: made with SDK/CLI, GET or PUT, valid up to seven days, reusable until expiry, work without making the bucket public, revoked if the signing role is deleted | ✅ V | `/AmazonS3/latest/userguide/using-presigned-url.html` and AWS security blog |
+| ST8 | Block Public Access: buckets created since April 2023 block public access by default; keep all settings on | ✅ V | `/AmazonS3/latest/userguide/access-control-block-public-access.html` |
+| ST9 | Durability design does not protect against deletion; versioning and Object Lock address it | ✅ V | S3 docs |
+| ST10 | Very high durability design figures exist but are deliberately not quoted | 🟦 I | |
+| ST11 | `aws s3 mb`, `aws s3 cp`, `aws s3 presign --expires-in 3600` (3600 seconds = one hour) flags; bucket name `my-example-bucket-12345`; eu-west-1 | 🟨 K / 🟦 I | |
+| ST-I | Scenarios, diagrams | 🟦 I | |
+
+## Databases and DynamoDB vs RDS/Aurora (`databases.html`, `dynamodb-vs-rds-aurora.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| DB1 | RDS Multi-AZ instance: synchronous standby in another AZ, cannot serve reads; read replicas: asynchronous, for scaling reads, not autoscaled by RDS, not automatic failover targets | ✅ V | `/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html`, `/USER_ReadRepl.html` |
+| DB2 | Multi-AZ DB cluster: a writer and two readers in three AZs; readers are failover targets | ✅ V | RDS Multi-AZ docs |
+| DB3 | Aurora storage: six copies across three AZs ("six copies", "three Availability Zones"), independent of instance count; tolerates losing copies without losing write availability; asynchronous readers, failover priorities | ✅ V | `/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html`, Aurora FAQ |
+| DB4 | RDS handles provisioning, patching and backups; Aurora is MySQL/PostgreSQL compatible | ✅ V (first), 🟨 K (compat.) | AWS overview whitepaper |
+| DB5 | DynamoDB partition key: choose high cardinality; low-cardinality keys cause hot partitions; write sharding spreads writes but complicates reads; adaptive capacity | ✅ V | `/amazondynamodb/latest/developerguide/bp-partition-key-design.html` and related |
+| DB6 | A read unit = one strongly consistent read/s or two eventually consistent reads/s for an item up to 4 KB; eventually consistent reads cost half; ~3,000 read and 1,000 write units per partition ("1001" in the sample key `u-1001` is an example value) | ✅ V (4 KB, 3,000/1,000 from the best-practices pages) | same pages |
+| DB7 | GSI keys can distribute differently from the base table; low-variety index keys cause write throttling | ✅ V | same pages |
+| DB8 | DynamoDB global tables replicate across Regions; on-demand and provisioned capacity modes | 🟨 K | not covered by the search |
+| DB9 | RDS engines list (MySQL, PostgreSQL, MariaDB, SQL Server, Oracle) | 🟨 K | |
+| DB10 | `aws rds create-db-instance` flags; `db.t3.micro`; `aws dynamodb get-item` | 🟨 K / 🟦 I | |
+| DB-I | Scenarios, "Carts" table, `u-1001` | 🟦 I | |
+
+## Load Balancing & Traffic Routing (`load-balancing.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| LB1 | ALB = layer 7, HTTP/HTTPS, path-based routing; NLB = layer 4 TCP/UDP, handles bursts, keeps client source IP, fixed IP for its life; GWLB = third-party virtual appliances, needs extra integration | ✅ V | `/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html` and guides |
+| LB2 | Classic Load Balancer is the previous generation; AWS recommends migrating to ALB/NLB; the migration wizard creates an equivalent new load balancer and you redirect traffic (no end-of-life date stated) | ✅ V | `/elasticloadbalancing/latest/userguide/migrate-classic-load-balancer.html` |
+| LB3 | Route 53 policies: failover, weighted (weight 0 stops routing), latency, geolocation, geoproximity, IP-based, multivalue; health checks; weighted-as-failover sends to zero-weight records only when all non-zero are unhealthy | ✅ V | `/Route53/latest/DeveloperGuide/routing-policy.html` |
+| LB4 | DNS answers can be cached so failover is not instant | 🟨 K | general DNS behaviour (Azure analogue verified) |
+| LB5 | `aws elbv2 create-load-balancer` flags | 🟨 K | |
+| LB-I | Scenarios | 🟦 I | |
+
+## Scaling & Resilience and Disaster Recovery (`scaling-resilience.html`, `disaster-recovery.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SC1 | Dynamic scaling types: target tracking (strongly recommended), step, simple (discouraged, with cooldowns); conflicts between target tracking and step policies can cause bad behaviour | ✅ V | `/autoscaling/ec2/userguide/as-scale-based-on-demand.html`, `/as-scaling-simple-step.html` |
+| SC2 | Default instance warm-up: strongly recommended, not enabled by default; policy-level warm-up overrides the default | ✅ V | `/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html` |
+| SC3 | Scheduled scaling can start an activity at its scheduled time | ✅ V | EC2 Auto Scaling docs |
+| SC4 | Scale up = bigger machine, scale out = more copies | 🟨 K | general term |
+| SC5 | Retry with exponential back-off and jitter, circuit breaker, idempotency | 🟨 K | analogue verified for Azure; AWS Builders Library not searched |
+| DR1 | RPO = acceptable data loss; RTO = acceptable downtime | ✅ V | DR whitepaper |
+| DR2 | Four strategies: backup and restore, pilot light, warm standby, multi-site active/active; pilot light cannot process requests without extra action, warm standby can handle reduced traffic immediately; active/active serves from all Regions and still needs backups for corruption | ✅ V | `/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html`, Reliability Pillar REL13-BP02 |
+| DR3 | All strategies need data backed up in-Region with copies in the recovery Region; AWS Backup gives central configuration, scheduling and monitoring | ✅ V | DR whitepaper |
+| DR4 | Elastic Disaster Recovery uses a pilot-light approach with continuous data protection (targets deliberately not quoted; RTO/RPO ranges differ across AWS documents) | ✅ V | Reliability Pillar, DRS docs |
+| DR5 | A replica copies deletions; a backup lets you go back in time | 🟨 K | general principle |
+| DR6 | Drills and failback planning | 🟨 K | |
+| SC-I | Group name `shop-asg`, scenarios, Copy 1/2/3 | 🟦 I | |
+
+## Caching & Edge Delivery (`caching-edge.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CE1 | Lazy loading: read cache first, on miss read the database and write to cache; weakness is staleness | ✅ V | `/AmazonElastiCache/latest/dg/Strategies.html` |
+| CE2 | Write-through keeps cache fresh but missing data on new nodes and cache churn; combine with lazy loading and add a TTL | ✅ V | same page |
+| CE3 | Invalidate (delete) on write rather than update; a narrow race remains | ✅ V (guide example) | ElastiCache Valkey e-commerce guide |
+| CE4 | CloudFront serves from edge until expiry; Cache-Control from the origin; default/min/max TTL; regional edge caches; invalidation takes minutes and is charged beyond a free allowance; versioned names avoid it; cache-tag invalidation | ✅ V | `/AmazonCloudFront/latest/DeveloperGuide/Expiration.html`, `/Invalidation.html`, `/HowCloudFrontWorks.html` |
+| CE5 | ElastiCache engines include Valkey and Memcached (names change; check docs) | ✅ V (names appear in current docs) | `/AmazonElastiCache/latest/dg/` |
+| CE6 | Browser cache controlled by response headers | 🟨 K | |
+| CE-I | Pseudo-code, scenarios | 🟦 I | |
+
+Batch B illustrative phrases: "at least two zones" is not used here · "three zones" in diagrams is the teaching layout (RG2).
+
 ---
 
 ## Open verification list

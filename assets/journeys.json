@@ -156,15 +156,26 @@
       "regions-availability-zones",
       "identity-access",
       "vpc-networking",
-      "compute"
+      "compute",
+      "storage",
+      "databases",
+      "load-balancing",
+      "scaling-resilience",
+      "caching-edge"
     ],
     "sub": {
       "iam-roles": "identity-access",
-      "vpc-endpoints": "vpc-networking"
+      "vpc-endpoints": "vpc-networking",
+      "s3-in-depth": "storage",
+      "dynamodb-vs-rds-aurora": "databases",
+      "disaster-recovery": "scaling-resilience"
     },
     "subTitles": {
       "iam-roles": "IAM Roles",
-      "vpc-endpoints": "VPC Endpoints"
+      "vpc-endpoints": "VPC Endpoints",
+      "s3-in-depth": "S3 in Depth",
+      "dynamodb-vs-rds-aurora": "DynamoDB vs RDS and Aurora",
+      "disaster-recovery": "Disaster Recovery"
     }
   }
 }

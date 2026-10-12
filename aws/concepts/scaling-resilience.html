@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scaling &amp; Resilience — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Scaling &amp; Resilience</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 9 of 19 · ⚙️ Handling load</div>
+    <h1>Scaling adds copies when load grows; resilience keeps you running when something fails — <span class="grad-text">both come from never relying on just one of anything.</span></h1>
+    <p class="sub">Auto Scaling, zones and Regions: how scaling decides, what each size of failure needs, and the coding habits that survive trouble.</p>
+    <div class="interview-q">❓ "How do you scale an AWS app and keep it available when a server, a zone or a Region fails?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Three sizes of failure — one server, one zone, one Region — and the protection that covers each">
+<defs><marker id="sc1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sc1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M240,71 L400,71" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sc1A)"/>
+<path d="M240,157 L400,157" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sc1A)"/>
+<path d="M240,243 L400,243" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sc1A)"/>
+<text class="free" x="130" y="22" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">WHAT FAILS</text>
+<text class="free" x="510" y="22" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">WHAT KEEPS YOU UP</text>
+<rect class="bx" x="20" y="40" width="220" height="62" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="130" y="68.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🖥️ One server</text>
+<text x="130" y="81.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">a crash or a bad update</text>
+<rect class="bx" x="400" y="40" width="220" height="62" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="510" y="68.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Several copies</text>
+<text x="510" y="81.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">in an Auto Scaling group</text>
+<rect class="bx" x="20" y="126" width="220" height="62" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="130" y="154.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🏢 One Availability Zone</text>
+<text x="130" y="167.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">power, cooling or network</text>
+<rect class="bx" x="400" y="126" width="220" height="62" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="510" y="154.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Copies in several zones</text>
+<text x="510" y="167.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">one in each zone</text>
+<rect class="bx" x="20" y="212" width="220" height="62" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="130" y="240.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🌍 A whole Region</text>
+<text x="130" y="253.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">every zone in the area</text>
+<rect class="bx" x="400" y="212" width="220" height="62" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="510" y="240.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">A second Region</text>
+<text x="510" y="253.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">with backups and failover</text>
+<g class="arrow-pill"><rect x="276.5" y="62" width="87" height="18" rx="9"/><text x="320" y="74.5" text-anchor="middle" font-size="9" font-style="italic">is covered by</text></g>
+<g class="arrow-pill"><rect x="276.5" y="148" width="87" height="18" rx="9"/><text x="320" y="160.5" text-anchor="middle" font-size="9" font-style="italic">is covered by</text></g>
+<g class="arrow-pill"><rect x="276.5" y="234" width="87" height="18" rx="9"/><text x="320" y="246.5" text-anchor="middle" font-size="9" font-style="italic">is covered by</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> failures come in three sizes, and each needs its own protection. A <b>server</b> can crash — keep several copies in an Auto Scaling group. A whole <b>Availability Zone</b> can go dark — spread those copies across zones. A whole <b>Region</b> can go down — keep a second Region ready, with backups and a plan to fail over. The bigger the failure you survive, the more it costs, so you choose how far to go.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Scaling adds copies when load grows. Resilience keeps the app running when a copy, a zone or a Region fails. They use the same trick: never rely on just one of anything.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The last concept put a load balancer in front of several copies. Two questions follow at once. <b>How many copies do you need?</b> Too few and the app is slow at peak; too many and you pay for idle servers. <b>What if a copy — or a whole zone — fails?</b></p>
+      <p>AWS answers the first with <b>Auto Scaling</b>: add copies when load rises, remove them when it falls. It answers the second with <b>redundancy</b>: copies in several Availability Zones and, for the worst day, a second Region. AWS's reliability guidance is to plan recovery before the failure, not after.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📏 Scale up or scale out?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Scale up makes one machine bigger; scale out adds more copies of it">
+<defs><marker id="sc3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sc3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="234" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">SCALE UP · a bigger machine</text>
+<rect class="zone" x="325" y="8" width="305" height="234" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">SCALE OUT · more copies</text>
+<rect class="zone" x="470" y="36" width="150" height="150" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="484" y="55" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">COPIES</text>
+<path d="M110,112 L190,112" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#sc3A)"/>
+<path d="M399,112 L470,112" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sc3A)"/>
+<rect class="bx" x="30" y="84" width="80" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="70" y="109.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ Small</text>
+<text x="70" y="122.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">one server</text>
+<rect class="bx" x="190" y="64" width="100" height="96" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="240" y="109.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🖥️ Big</text>
+<text x="240" y="122.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one server</text>
+<text class="free" x="162" y="196" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Still one machine: it has a ceiling</text>
+<text class="free" x="162" y="212" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">and is still one point of failure.</text>
+<rect class="bx" x="335" y="84" width="64" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="367" y="109.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ One</text>
+<text x="367" y="122.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">copy</text>
+<rect class="bx" x="484" y="62" width="122" height="34" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="545" y="83" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Copy 1</text>
+<rect class="bx" x="484" y="102" width="122" height="34" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="545" y="123" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Copy 2</text>
+<rect class="bx" x="484" y="142" width="122" height="34" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="545" y="163" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Copy 3</text>
+<text class="free" x="477" y="212" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">No single ceiling; one copy can fail</text>
+<text class="free" x="477" y="228" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">while the others carry on.</text>
+<g class="arrow-pill"><rect x="125" y="103" width="50" height="18" rx="9"/><text x="150" y="115.5" text-anchor="middle" font-size="9" font-style="italic">resize</text></g>
+<g class="arrow-pill"><rect x="415.5" y="103" width="39" height="18" rx="9"/><text x="435" y="115.5" text-anchor="middle" font-size="9" font-style="italic">more</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Scale up</b> (left) means a bigger machine: easy, but it has a ceiling and is still one point of failure. <b>Scale out</b> (right) means more copies behind a load balancer: no single ceiling, and one copy can fail while the rest carry on. Auto Scaling is <em>horizontal</em> — it adds and removes copies — so your app should be happy running as several identical copies.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔁 How Auto Scaling decides</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 290" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Auto Scaling watches a metric and a policy adds or removes instances; target tracking keeps a metric near a target value">
+<defs><marker id="sc2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sc2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,82 L255,82" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sc2A)"/>
+<path d="M385,82 L490,82" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#sc2A)"/>
+<path d="M560,114 L560,164 L75,164 L75,114" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#sc2A)"/>
+<rect class="bx" x="10" y="50" width="130" height="64" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="75" y="79.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Metric</text>
+<text x="75" y="92.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">CPU, requests</text>
+<rect class="bx" x="255" y="50" width="130" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="79.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📏 Scaling policy</text>
+<text x="320" y="92.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">target tracking</text>
+<rect class="bx" x="490" y="50" width="140" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="560" y="79.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🖥️ Group</text>
+<text x="560" y="92.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">how many copies</text>
+<text class="free" x="320" y="214" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Target tracking: pick a target (say, average CPU) and AWS adds or removes copies to hold it.</text>
+<text class="free" x="320" y="234" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Warm-up: a new instance is ignored in the metrics until it is ready to serve.</text>
+<text class="free" x="320" y="266" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">AWS recommends target tracking over simple scaling and cooldowns.</text>
+<g class="arrow-pill"><rect x="169.5" y="73" width="55" height="18" rx="9"/><text x="197" y="85.5" text-anchor="middle" font-size="9" font-style="italic">watched</text></g>
+<g class="arrow-pill"><rect x="412" y="73" width="50" height="18" rx="9"/><text x="437" y="85.5" text-anchor="middle" font-size="9" font-style="italic">scales</text></g>
+<g class="arrow-pill"><rect x="226" y="155" width="188" height="18" rx="9"/><text x="320" y="167.5" text-anchor="middle" font-size="9" font-style="italic">load per copy changes the metric</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> an <b>Auto Scaling group</b> keeps a set of copies, spread across zones. A <b>scaling policy</b> watches a metric and changes the group size. The simplest good choice is <b>target tracking</b>: you choose a target for a metric, such as average CPU, and AWS adds or removes copies to hold it. <b>Step scaling</b> fits metrics that do not move in proportion to capacity, and <b>scheduled scaling</b> handles a rush you know is coming. Set a default <b>instance warm-up</b> so brand-new copies are not counted before they are ready.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The tools</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>📈 EC2 Auto Scaling</h4><span class="pk-tag">add and remove copies automatically</span><span class="pk-label use">✅ Pick it when</span><ul><li>Traffic that rises and falls</li><li>Target tracking, step scaling or a schedule</li><li>Spread across zones; replaces unhealthy instances</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A single database server — it is not a pool of identical copies</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🏢 Multiple Availability Zones</h4><span class="pk-tag">copies in separate zones</span><span class="pk-label use">✅ Pick it when</span><ul><li>Survive the loss of one zone</li><li>Put each tier's copies in at least two zones</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting zones to protect against deletion or corruption</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📦 Service-level scaling</h4><span class="pk-tag">each service scales its own way</span><span class="pk-label use">✅ Pick it when</span><ul><li>ECS services, DynamoDB capacity and Aurora readers have their own autoscaling</li><li>Lambda scales per event</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Assuming one setting scales everything</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🛟 A second Region</h4><span class="pk-tag">for the biggest failures</span><span class="pk-label use">✅ Pick it when</span><ul><li>The business cannot stop if a Region fails</li><li>Backups and failover for a real disaster</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>The cost is not justified by the app → zones are often enough</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🎟️</span><h5>Ticket sales open at noon</h5><p>A huge spike, then quiet.</p><span class="sc-use">→ Scheduled scaling plus target tracking</span></div>
+      <div class="scenario"><span class="sc-icon">📬</span><h5>A queue of jobs piles up</h5><p>Workers should grow with the backlog.</p><span class="sc-use">→ Scale on queue depth</span></div>
+      <div class="scenario"><span class="sc-icon">🛍️</span><h5>Weekend shopping peak</h5><p>Traffic doubles on Saturday, drops Monday.</p><span class="sc-use">→ Target tracking with scale-in</span></div>
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>One Availability Zone loses power</h5><p>Nobody wakes up at 3 AM.</p><span class="sc-use">→ Copies spread across zones</span></div>
+      <div class="scenario"><span class="sc-icon">🌪️</span><h5>A whole Region is unavailable</h5><p>Rare, but costly.</p><span class="sc-use">→ A second Region and a recovery plan</span></div>
+      <div class="scenario"><span class="sc-icon">🔌</span><h5>A call to a dependency fails once</h5><p>The next try would succeed.</p><span class="sc-use">→ Retry with back-off and jitter</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="disaster-recovery.html"><span class="dc-kicker">Deep dive · Scaling &amp; Resilience</span><h4>Disaster Recovery: RPO, RTO and the four strategies</h4><p>What to do on the worst day: how much data you can lose, how long you can be down, and the four AWS strategies from backup and restore to multi-site active/active.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details that matter</summary>
+    <div class="zoom-inner">
+      <p><b>Policy types.</b> AWS describes target tracking, step and simple scaling as dynamic scaling types, and strongly recommends target tracking where it fits. It recommends against simple scaling policies and scaling cooldowns in favour of target tracking or step scaling. Mixing target tracking and step policies on the same metric can conflict.</p>
+      <p><b>Warm-up.</b> The default instance warm-up sets how long after an instance is in service it waits before contributing metrics, so scaling does not react to instances that are not yet serving. AWS strongly recommends configuring it; it is not set by default.</p>
+      <p><b>Retry wisely.</b> Retrying a transient failure with growing waits and some random jitter stops clients from all retrying at once. Add a circuit breaker so a truly dead dependency is not hammered, and make operations idempotent.</p>
+      <p><b>Zones are not backups.</b> Spreading copies across zones keeps the app up; it does not recover deleted or corrupted data. That is the job of replication and backup (see the deep dive).</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Scale up = bigger machine (ceiling). Scale out = more copies (Auto Scaling works this way).</li><li>Prefer target tracking: pick a metric target and AWS holds it. Step scaling for non-proportional metrics; scheduled scaling for known rushes.</li><li>Configure the default instance warm-up; avoid simple scaling and cooldowns.</li><li>Zones survive a zone failure; a second Region survives a Region failure. Zones do not replace backups.</li><li>Retry with back-off and jitter, add a circuit breaker, make operations idempotent.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I design for failure at three sizes: a server, a zone and a Region. An Auto Scaling group spread across zones covers the first two, a second Region with backups covers the third. For load I use target tracking on a metric like CPU, scheduled scaling for known rushes and a configured warm-up. In code I retry with back-off and jitter, and keep operations idempotent."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Autoscale only helps if the app runs as many copies.</b> If it keeps sessions or files on one server, a new copy will not know about them. Keep state outside the copies.</p>
+      <p>Second trap: <b>"we are in two zones, so we have backups".</b> Zones keep the app running; they do not protect against deletion or corruption. Redundancy and backup are different things.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📈 Scaling</h5><p>Match the number of copies to the load, both ways. Mostly performance and cost.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🛟 Resilience</h5><p>Keep working when something fails. Mostly availability and recovery.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># target tracking: keep average CPU of the group near a target value</span>
+aws autoscaling put-scaling-policy --auto-scaling-group-name shop-asg --policy-name cpu-target \
+    --policy-type TargetTrackingScaling --target-tracking-configuration file://target.json</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the group name is an example and target.json would hold the metric and target value you choose.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You can now match capacity to load and survive failures. But even a fast app is slow if every request goes all the way to the database. Next: Caching &amp; Edge Delivery.</span>
+      <a class="next-link" href="caching-edge.html">Caching &amp; Edge Delivery <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html" target="_blank" rel="noopener">Amazon EC2 Auto Scaling user guide</a> · <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html" target="_blank" rel="noopener">Dynamic scaling for EC2 Auto Scaling</a> · <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html" target="_blank" rel="noopener">Default instance warmup</a> · <a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html" target="_blank" rel="noopener">Well-Architected Reliability Pillar</a> · <a href="https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html" target="_blank" rel="noopener">Disaster recovery of workloads on AWS</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

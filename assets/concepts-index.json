@@ -1366,5 +1366,213 @@
     "summary": "The classic mistake with Compute.",
     "keywords": "aws compute ec2 ecs eks fargate lambda app runner elastic beanstalk containers choose trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "aws-storage",
+    "title": "Storage",
+    "category": "AWS",
+    "page": "aws/concepts/storage.html",
+    "summary": "S3, EBS, EFS and FSx: object, block and file storage.",
+    "keywords": "aws storage s3 ebs efs fsx object block file bucket"
+  },
+  {
+    "id": "aws-storage-recall",
+    "title": "Storage — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/storage.html",
+    "summary": "Quick recall points: Storage.",
+    "keywords": "aws storage s3 ebs efs fsx object block file bucket interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-storage-trap",
+    "title": "Storage — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/storage.html",
+    "summary": "The classic mistake with Storage.",
+    "keywords": "aws storage s3 ebs efs fsx object block file bucket trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-s3-in-depth",
+    "title": "S3 in Depth",
+    "category": "AWS",
+    "page": "aws/concepts/s3-in-depth.html",
+    "summary": "Storage classes, lifecycle rules, versioning, presigned URLs and Block Public Access.",
+    "keywords": "aws s3 storage classes lifecycle presigned url block public access versioning glacier intelligent tiering"
+  },
+  {
+    "id": "aws-s3-in-depth-recall",
+    "title": "S3 in Depth — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/s3-in-depth.html",
+    "summary": "Quick recall points: S3 in Depth.",
+    "keywords": "aws s3 storage classes lifecycle presigned url block public access versioning glacier intelligent tiering interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-s3-in-depth-trap",
+    "title": "S3 in Depth — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/s3-in-depth.html",
+    "summary": "The classic mistake with S3 in Depth.",
+    "keywords": "aws s3 storage classes lifecycle presigned url block public access versioning glacier intelligent tiering trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-databases",
+    "title": "Databases",
+    "category": "AWS",
+    "page": "aws/concepts/databases.html",
+    "summary": "RDS, Aurora and DynamoDB: relational vs NoSQL, Multi-AZ vs read replicas.",
+    "keywords": "aws database rds aurora dynamodb relational nosql multi-az read replica sql"
+  },
+  {
+    "id": "aws-databases-recall",
+    "title": "Databases — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/databases.html",
+    "summary": "Quick recall points: Databases.",
+    "keywords": "aws database rds aurora dynamodb relational nosql multi-az read replica sql interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-databases-trap",
+    "title": "Databases — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/databases.html",
+    "summary": "The classic mistake with Databases.",
+    "keywords": "aws database rds aurora dynamodb relational nosql multi-az read replica sql trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-dynamodb-vs-rds-aurora",
+    "title": "DynamoDB vs RDS and Aurora",
+    "category": "AWS",
+    "page": "aws/concepts/dynamodb-vs-rds-aurora.html",
+    "summary": "Strengths, partition keys, consistency and when to use both.",
+    "keywords": "aws dynamodb rds aurora partition key hot partition consistency capacity polyglot"
+  },
+  {
+    "id": "aws-dynamodb-vs-rds-aurora-recall",
+    "title": "DynamoDB vs RDS and Aurora — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/dynamodb-vs-rds-aurora.html",
+    "summary": "Quick recall points: DynamoDB vs RDS and Aurora.",
+    "keywords": "aws dynamodb rds aurora partition key hot partition consistency capacity polyglot interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-dynamodb-vs-rds-aurora-trap",
+    "title": "DynamoDB vs RDS and Aurora — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/dynamodb-vs-rds-aurora.html",
+    "summary": "The classic mistake with DynamoDB vs RDS and Aurora.",
+    "keywords": "aws dynamodb rds aurora partition key hot partition consistency capacity polyglot trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-load-balancing",
+    "title": "Load Balancing & Traffic Routing",
+    "category": "AWS",
+    "page": "aws/concepts/load-balancing.html",
+    "summary": "Application, Network and Gateway Load Balancers and Route 53.",
+    "keywords": "aws load balancing alb nlb gateway load balancer elastic load balancing route 53 dns failover latency weighted"
+  },
+  {
+    "id": "aws-load-balancing-recall",
+    "title": "Load Balancing & Traffic Routing — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/load-balancing.html",
+    "summary": "Quick recall points: Load Balancing & Traffic Routing.",
+    "keywords": "aws load balancing alb nlb gateway load balancer elastic load balancing route 53 dns failover latency weighted interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-load-balancing-trap",
+    "title": "Load Balancing & Traffic Routing — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/load-balancing.html",
+    "summary": "The classic mistake with Load Balancing & Traffic Routing.",
+    "keywords": "aws load balancing alb nlb gateway load balancer elastic load balancing route 53 dns failover latency weighted trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-scaling-resilience",
+    "title": "Scaling & Resilience",
+    "category": "AWS",
+    "page": "aws/concepts/scaling-resilience.html",
+    "summary": "Auto Scaling, zones and Regions: scaling with load and surviving failures.",
+    "keywords": "aws scaling resilience auto scaling target tracking warm-up multi-az scale out retry circuit breaker"
+  },
+  {
+    "id": "aws-scaling-resilience-recall",
+    "title": "Scaling & Resilience — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/scaling-resilience.html",
+    "summary": "Quick recall points: Scaling & Resilience.",
+    "keywords": "aws scaling resilience auto scaling target tracking warm-up multi-az scale out retry circuit breaker interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-scaling-resilience-trap",
+    "title": "Scaling & Resilience — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/scaling-resilience.html",
+    "summary": "The classic mistake with Scaling & Resilience.",
+    "keywords": "aws scaling resilience auto scaling target tracking warm-up multi-az scale out retry circuit breaker trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-disaster-recovery",
+    "title": "Disaster Recovery",
+    "category": "AWS",
+    "page": "aws/concepts/disaster-recovery.html",
+    "summary": "RPO and RTO, the four AWS strategies, Elastic Disaster Recovery and AWS Backup.",
+    "keywords": "aws disaster recovery rpo rto pilot light warm standby backup and restore multi-site active active elastic disaster recovery backup failover"
+  },
+  {
+    "id": "aws-disaster-recovery-recall",
+    "title": "Disaster Recovery — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/disaster-recovery.html",
+    "summary": "Quick recall points: Disaster Recovery.",
+    "keywords": "aws disaster recovery rpo rto pilot light warm standby backup and restore multi-site active active elastic disaster recovery backup failover interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-disaster-recovery-trap",
+    "title": "Disaster Recovery — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/disaster-recovery.html",
+    "summary": "The classic mistake with Disaster Recovery.",
+    "keywords": "aws disaster recovery rpo rto pilot light warm standby backup and restore multi-site active active elastic disaster recovery backup failover trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-caching-edge",
+    "title": "Caching & Edge Delivery",
+    "category": "AWS",
+    "page": "aws/concepts/caching-edge.html",
+    "summary": "Browser, CloudFront and ElastiCache caching, lazy loading and write-through.",
+    "keywords": "aws caching cloudfront elasticache lazy loading write-through ttl invalidation edge cache cdn"
+  },
+  {
+    "id": "aws-caching-edge-recall",
+    "title": "Caching & Edge Delivery — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/caching-edge.html",
+    "summary": "Quick recall points: Caching & Edge Delivery.",
+    "keywords": "aws caching cloudfront elasticache lazy loading write-through ttl invalidation edge cache cdn interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-caching-edge-trap",
+    "title": "Caching & Edge Delivery — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/caching-edge.html",
+    "summary": "The classic mistake with Caching & Edge Delivery.",
+    "keywords": "aws caching cloudfront elasticache lazy loading write-through ttl invalidation edge cache cdn trap mistake",
+    "anchor": "trap"
   }
 ]

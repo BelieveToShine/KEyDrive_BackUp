@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Load Balancing &amp; Traffic Routing — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Load Balancing</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 8 of 19 · ⚙️ Handling load</div>
+    <h1>A load balancer spreads traffic across healthy copies — and the real choice is <span class="grad-text">how much of the request it should understand, and how far it should reach.</span></h1>
+    <p class="sub">Application, Network and Gateway Load Balancers and Route 53: what each sees, how far it reaches and when to pick it.</p>
+    <div class="interview-q">❓ "When would you use an Application Load Balancer, a Network Load Balancer or Route 53?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="AWS traffic tools by what they understand and how far they reach: ALB for web traffic in a Region, NLB for TCP and UDP, Gateway Load Balancer for appliances, Route 53 for DNS across Regions">
+<defs><marker id="lb1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="lb1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<text class="free" x="335" y="22" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">INSIDE ONE REGION</text>
+<text class="free" x="555" y="22" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">ACROSS REGIONS</text>
+<text class="free" x="95" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="#93a0b8">Web traffic</text>
+<text class="free" x="95" y="116" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">(HTTP and HTTPS)</text>
+<text class="free" x="95" y="224" text-anchor="middle" font-size="10.5" font-weight="700" fill="#93a0b8">Any traffic</text>
+<text class="free" x="95" y="240" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">(TCP and UDP)</text>
+<rect class="bx" x="210" y="40" width="250" height="110" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="335" y="80.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🚪 Application Load Balancer</text>
+<text x="335" y="92.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">layer 7 · one Region</text>
+<text x="335" y="105.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">reads the web request</text>
+<text x="335" y="117.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">path and host routing</text>
+<rect class="bx" x="480" y="40" width="150" height="240" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="555" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧭 Route 53</text>
+<text x="555" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">DNS · global</text>
+<text x="555" y="157.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">answers "which Region?"</text>
+<text x="555" y="170.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">health-checked</text>
+<text x="555" y="182.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">the only one here</text>
+<text x="555" y="195.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">that spans Regions</text>
+<rect class="bx" x="210" y="170" width="120" height="110" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="270" y="210.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">⚖️ Network LB</text>
+<text x="270" y="222.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">layer 4</text>
+<text x="270" y="235.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">TCP and UDP</text>
+<text x="270" y="247.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">bursts, fixed IP</text>
+<rect class="bx" x="340" y="170" width="120" height="110" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="400" y="210.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧱 Gateway LB</text>
+<text x="400" y="222.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">for virtual</text>
+<text x="400" y="235.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">appliances like</text>
+<text x="400" y="247.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">firewalls</text>
+</svg>
+<figcaption><strong>What you're seeing:</strong> AWS has a small family of traffic tools, arranged by two questions. <b>Across</b>: inside one Region, or spread across Regions? <b>Down</b>: does it read the web request (HTTP and HTTPS), or just move connections (TCP and UDP)? The <b>Application Load Balancer</b> reads the web request; the <b>Network Load Balancer</b> moves raw connections; the <b>Gateway Load Balancer</b> fronts firewall-style appliances; <b>Route 53</b> works at the DNS level across Regions.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A load balancer spreads traffic across healthy copies — and the real choice is how much of the request it should understand, and how far it should reach.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Compute, storage and a database make one working instance. But one instance is a <b>single point of failure</b> and a ceiling on throughput. The obvious fix is more copies. The new problem: <b>who decides which copy gets each request?</b></p>
+      <p>That is what a load balancer does. It sits in front, spreads requests across targets, and <b>stops sending traffic to a target that is unhealthy</b>. On AWS the tools differ in what layer they work at and how far they reach — and "spread the traffic" inside a Region is a different job from sending a visitor to the nearest healthy Region.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The tools</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>🚪 Application Load Balancer (ALB)</h4><span class="pk-tag">layer 7 · HTTP and HTTPS</span><span class="pk-label use">✅ Pick it when</span><ul><li>Web apps and APIs in one Region</li><li>Route by URL path or host name</li><li>Targets can be instances, containers and Lambda functions</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Raw TCP or UDP traffic → Network Load Balancer</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>⚖️ Network Load Balancer (NLB)</h4><span class="pk-tag">layer 4 · TCP and UDP</span><span class="pk-label use">✅ Pick it when</span><ul><li>Handling sudden traffic bursts</li><li>Keeping the client's source IP</li><li>A fixed IP for the life of the load balancer</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need to route by URL — that is an ALB</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🧱 Gateway Load Balancer (GWLB)</h4><span class="pk-tag">for third-party virtual appliances</span><span class="pk-label use">✅ Pick it when</span><ul><li>Send traffic through firewalls or inspection appliances and scale them</li><li>Needs extra integration — read the guide first</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Ordinary application load balancing</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧭 Amazon Route 53</h4><span class="pk-tag">DNS routing and health checks</span><span class="pk-label use">✅ Pick it when</span><ul><li>Send users to the right Region: failover, weighted, latency, geolocation and other policies</li><li>Health checks decide which answers are used</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need instant failover — DNS answers can be cached by clients</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 428" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: web traffic in one Region use an Application Load Balancer; TCP or UDP use a Network Load Balancer; appliances use a Gateway Load Balancer; several Regions add Route 53">
+<defs><marker id="lb2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="lb2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#lb2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What is the traffic?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 A web app or API (HTTP or HTTPS)?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">path and host routing</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Application LB</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">layer 7, one Region</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔌 TCP or UDP, bursts, fixed IPs?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">games, voice, databases</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Network LB</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">layer 4, very fast</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧱 Traffic through a firewall appliance?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">third-party virtual appliances</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Gateway LB</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">scales the appliances</text>
+<rect class="bx" x="10" y="366" width="330" height="52" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="175" y="389.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧭 More than one Region?</text>
+<text x="175" y="402.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">put Route 53 in front</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> ask in order. <b>A web app or API?</b> An Application Load Balancer. <b>TCP or UDP, bursts, fixed IPs?</b> A Network Load Balancer. <b>Traffic through a firewall appliance?</b> A Gateway Load Balancer. And if the app runs in more than one Region, put <b>Route 53</b> in front to send people to the right one. The older <b>Classic Load Balancer</b> is the previous generation; AWS recommends migrating to the current types.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 How Route 53 routes</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 312" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Route 53 answers DNS with the address of a healthy Region and the client connects to it directly, so failover depends on how long DNS answers are cached">
+<defs><marker id="lb3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="lb3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,142 L250,142" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#lb3A)" marker-start="url(#lb3S)"/>
+<path d="M390,128 L450,128 L450,48 L510,48" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#lb3A)"/>
+<path d="M390,156 L450,156 L450,236 L510,236" fill="none" stroke="#fb7185" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#lb3A)"/>
+<rect class="bx" x="10" y="110" width="110" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="146" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 Client</text>
+<rect class="bx" x="250" y="110" width="140" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="139.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧭 Route 53</text>
+<text x="320" y="152.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">health checks</text>
+<rect class="bx" x="510" y="20" width="120" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="45.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌍 Region A</text>
+<text x="570" y="58.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">healthy</text>
+<rect class="bx" x="510" y="208" width="120" height="56" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="570" y="233.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🌍 Region B</text>
+<text x="570" y="246.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">unhealthy</text>
+<text class="free" x="320" y="296" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">After the answer, the client talks to the Region directly; a cached answer can lag a failover.</text>
+<g class="arrow-pill"><rect x="149.5" y="133" width="71" height="18" rx="9"/><text x="185" y="145.5" text-anchor="middle" font-size="9" font-style="italic">DNS lookup</text></g>
+<g class="arrow-pill"><rect x="409" y="79" width="82" height="18" rx="9"/><text x="450" y="91.5" text-anchor="middle" font-size="9" font-style="italic">answers with</text></g>
+<g class="arrow-pill"><rect x="422.5" y="187" width="55" height="18" rx="9"/><text x="450" y="199.5" text-anchor="middle" font-size="9" font-style="italic">skipped</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> Route 53 is a <b>DNS</b> service: the client asks "where is the app?", Route 53 answers with the address of a healthy Region, and the client then connects <em>directly</em>. Its routing policies decide the answer — <b>failover</b> (active-passive), <b>weighted</b> (split by proportion), <b>latency</b> (lowest delay), <b>geolocation</b> (by user location). Health checks take unhealthy answers out. Because answers can be cached, failover is not instant.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Layer</th><th scope="col">Reach</th><th scope="col">Reads the web request?</th><th scope="col">Good first use</th></tr></thead><tbody><tr><th scope="row">🚪 ALB</th><td>7 (HTTP/HTTPS)</td><td>One Region</td><td>Yes — path, host</td><td>Web apps and APIs</td></tr><tr><th scope="row">⚖️ NLB</th><td>4 (TCP/UDP)</td><td>One Region</td><td>No</td><td>Bursty or non-web traffic, fixed IPs</td></tr><tr><th scope="row">🧱 GWLB</th><td>3 (network)</td><td>One Region</td><td>No</td><td>Firewall and inspection appliances</td></tr><tr><th scope="row">🧭 Route 53</th><td>DNS</td><td>Global</td><td>No — it only answers DNS</td><td>Routing between Regions, failover</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>A shop with /api and /images paths</h5><p>Different targets per path.</p><span class="sc-use">→ Application Load Balancer</span></div>
+      <div class="scenario"><span class="sc-icon">🎮</span><h5>Game servers over UDP</h5><p>Not web traffic, many bursts.</p><span class="sc-use">→ Network Load Balancer</span></div>
+      <div class="scenario"><span class="sc-icon">🛡️</span><h5>All traffic must pass a third-party firewall</h5><p>Scale the appliances with demand.</p><span class="sc-use">→ Gateway Load Balancer</span></div>
+      <div class="scenario"><span class="sc-icon">🌍</span><h5>Users in two continents</h5><p>Send each to the closest healthy Region.</p><span class="sc-use">→ Route 53 latency routing</span></div>
+      <div class="scenario"><span class="sc-icon">🆘</span><h5>The primary Region fails</h5><p>Move users to the standby.</p><span class="sc-use">→ Route 53 failover with health checks</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Try a new version on a few users</h5><p>Send a small share first.</p><span class="sc-use">→ Weighted records or weighted target groups</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — health, targets and the old one</summary>
+    <div class="zoom-inner">
+      <p><b>Health checks decide where traffic goes.</b> A load balancer sends requests only to healthy targets, and Route 53 uses health checks to decide which answers to give. Make the health check meaningful: it should test what the app really needs, not just "the process is up".</p>
+      <p><b>Weighted records:</b> a weight of 0 stops routing to that resource. If you use weighted records for failover, zero-weight records get traffic only when all non-zero records are unhealthy.</p>
+      <p><b>Other Route 53 policies:</b> geoproximity, IP-based and multivalue answer also exist.</p>
+      <p><b>Classic Load Balancer:</b> the previous generation. ALB and NLB are the purpose-built replacements and AWS offers a migration wizard that creates an equivalent new load balancer; you then redirect traffic yourself.</p>
+      <p><b>Edge:</b> content delivery and edge caching (CloudFront) are in the Caching &amp; Edge concept.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>ALB = layer 7, HTTP/HTTPS, path and host routing. NLB = layer 4, TCP/UDP, bursts, fixed IP. GWLB = third-party appliances. Route 53 = DNS across Regions.</li><li>Load balancers send traffic only to healthy targets; health checks should test real dependencies.</li><li>Route 53 policies: failover, weighted, latency, geolocation (and more). DNS answers can be cached, so failover is not instant.</li><li>Classic Load Balancer is the previous generation — migrate to ALB or NLB.</li><li>A load balancer does not make a single database highly available.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"For web traffic in a Region I use an Application Load Balancer with path and host routing; for TCP or UDP and bursts I use a Network Load Balancer; for firewall appliances a Gateway Load Balancer. Across Regions I put Route 53 in front with latency or failover policies and health checks, remembering that DNS caching means failover is not instant."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Expecting Route 53 failover to be instant.</b> It answers DNS; clients and resolvers may keep the old answer for a while.</p>
+      <p>Second trap: <b>a load balancer is not high availability for the data tier.</b> It spreads traffic to the copies you have; if all copies depend on one database, that database is still your single point of failure.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🚪 ALB</h5><p>Understands the web request (layer 7): routes by path and host.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>⚖️ NLB</h5><p>Moves connections (layer 4): TCP and UDP, bursts, fixed IPs. Cannot see the URL.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create an internet-facing Application Load Balancer across two subnets</span>
+aws elbv2 create-load-balancer --name shop-alb --type application \
+    --subnets &lt;subnet-a&gt; &lt;subnet-b&gt; --security-groups &lt;sg-id&gt;</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real setups also add a target group, a listener and health checks.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Traffic now reaches many copies. But how many copies do you need — and what happens when a server, a datacenter or a Region fails? Next: Scaling &amp; Resilience.</span>
+      <a class="next-link" href="scaling-resilience.html">Scaling &amp; Resilience <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/elasticloadbalancing/" target="_blank" rel="noopener">Elastic Load Balancing documentation</a> · <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html" target="_blank" rel="noopener">How Elastic Load Balancing works</a> · <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html" target="_blank" rel="noopener">Choosing a Route 53 routing policy</a> · <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html" target="_blank" rel="noopener">Route 53 failover types</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

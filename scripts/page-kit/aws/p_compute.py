@@ -137,7 +137,7 @@ def build_compute():
 '''<span class="cmt"># start one small virtual server — you choose the image, the size and the subnet</span>
 aws ec2 run-instances --image-id &lt;ami-id&gt; --instance-type t3.micro --subnet-id &lt;subnet-id&gt;''',
       'Illustrative shape only — the image ID, size and subnet are placeholders, and real launches add a role, a security group and storage.'))
-    body += next_box('Your code now has a place to run. But code needs somewhere to <b>keep things</b> — files, images, backups, disks. Next: Storage.', None)
+    body += next_box('Your code now has a place to run. But code needs somewhere to <b>keep things</b> — files, images, backups, disks. Next: Storage.', 'storage.html', 'Storage')
     body += fact_note(FOOT, [DOCS_CMP, DOCS_CON, DOCS_FL, DOCS_EC2, DOCS_ECS, DOCS_EKS, DOCS_LAM])
     return page('compute', 'Compute', 'Concept 5 of 19 · 🧱 Building blocks',
         'Compute is where your code runs — and the real choice is <span class="grad-text">how much of the machine you want to look after.</span>',

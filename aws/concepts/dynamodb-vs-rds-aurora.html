@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DynamoDB vs RDS and Aurora — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><a href="databases.html">Databases</a><span class="sep">›</span><span class="cur">DynamoDB vs RDS and Aurora</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Databases · ⚖️ Choosing</div>
+    <h1>DynamoDB and relational databases are not rivals — <span class="grad-text">the difference is whether you know your questions up front.</span></h1>
+    <p class="sub">Strengths and watch-outs of each, the DynamoDB partition key, consistency and capacity, and when to use both.</p>
+    <div class="interview-q">❓ "When would you pick DynamoDB, and when RDS or Aurora?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 296" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A typical system uses both: DynamoDB for fast key lookups like carts and sessions, and a relational database for orders and reports">
+<defs><marker id="dd2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="dd2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,128 L185,128 L185,60 L250,60" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#dd2A)"/>
+<path d="M120,152 L185,152 L185,228 L250,228" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#dd2A)"/>
+<path d="M410,228 L570,228 L570,172" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#dd2A)"/>
+<rect class="bx" x="10" y="108" width="110" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="137.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📱 App</text>
+<text x="65" y="150.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">your service</text>
+<rect class="bx" x="250" y="28" width="160" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="330" y="57.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ DynamoDB</text>
+<text x="330" y="70.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">carts, sessions</text>
+<rect class="bx" x="250" y="196" width="160" height="64" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="330" y="225.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🛢️ Aurora / RDS</text>
+<text x="330" y="238.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">orders, reports</text>
+<rect class="bx" x="510" y="108" width="120" height="64" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="570" y="137.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Reports</text>
+<text x="570" y="150.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">joins, totals</text>
+<g class="arrow-pill"><rect x="160" y="85" width="50" height="18" rx="9"/><text x="185" y="97.5" text-anchor="middle" font-size="9" font-style="italic">by key</text></g>
+<g class="arrow-pill"><rect x="168" y="181" width="34" height="18" rx="9"/><text x="185" y="193.5" text-anchor="middle" font-size="9" font-style="italic">SQL</text></g>
+<g class="arrow-pill"><rect x="454.5" y="219" width="71" height="18" rx="9"/><text x="490" y="231.5" text-anchor="middle" font-size="9" font-style="italic">queried by</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a typical system uses <b>both</b>. Carts and sessions are looked up by key, so they live in <b>DynamoDB</b>. Orders, invoices and the reports on them need joins, so they live in <b>Aurora or RDS</b>. The app talks to each in the way it is good at. This is called <em>polyglot persistence</em> — the right store for each job.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">DynamoDB and relational databases are not rivals — DynamoDB wins when you know your questions and need steady speed at scale; relational wins when your questions keep changing.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The Databases page gave a rule of thumb. This page goes one level deeper on the pair you will be asked about most. They differ in how you <b>design</b> (tables first or queries first), how you <b>scale</b> (up and out with replicas, or out by partitioning) and what you give up.</p>
+      <p>The single most important decision in DynamoDB is the <b>partition key</b>. A good one spreads load evenly. A poor one creates a hot partition and throttling. Understanding this one idea explains most of DynamoDB.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">⚖️ Strengths and watch-outs</div>
+    <h4 class="pc-title">🛢️ RDS and Aurora</h4>
+    <div class="pros-cons">
+      <div class="pc-side pro"><h5>✅ Strengths</h5><ul><li>SQL, joins and multi-row transactions</li><li>Open-ended questions: new reports need no redesign</li><li>Multi-AZ, read replicas and (Aurora) shared storage across three zones</li></ul></div>
+      <div class="pc-side con"><h5>⚠️ Watch out for</h5><ul><li>Scale mostly by a bigger instance and read replicas</li><li>You manage connections and schema changes</li><li>RDS does not autoscale read replicas — add them yourself</li></ul></div>
+    </div>    <h4 class="pc-title">⚡ DynamoDB</h4>
+    <div class="pros-cons">
+      <div class="pc-side pro"><h5>✅ Strengths</h5><ul><li>Steady low latency at huge scale</li><li>On-demand mode or provisioned capacity; no servers to size</li><li>Replicates for resilience and can span Regions (global tables)</li></ul></div>
+      <div class="pc-side con"><h5>⚠️ Watch out for</h5><ul><li>No joins; ad-hoc queries are hard</li><li>You must design the keys and indexes around known queries</li><li>A poor partition key causes hot partitions and throttling</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔑 The partition key</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A good DynamoDB partition key has many distinct values so requests spread evenly; a low-variety key sends them all to one hot partition">
+<defs><marker id="dd1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="dd1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="284" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">GOOD KEY · many distinct values</text>
+<rect class="zone" x="325" y="8" width="305" height="284" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">BAD KEY · few distinct values</text>
+<path d="M114,82 L150,82 L150,66 L190,66" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#dd1A)"/>
+<path d="M114,82 L150,82 L150,124 L190,124" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#dd1A)"/>
+<path d="M114,82 L150,82 L150,182 L190,182" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#dd1A)"/>
+<path d="M429,82 L515,66" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#dd1A)"/>
+<rect class="bx" x="24" y="60" width="90" height="44" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="69" y="86" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔑 user_id</text>
+<rect class="bx" x="190" y="44" width="110" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="245" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Partition 1</text>
+<rect class="bx" x="190" y="102" width="110" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="245" y="128" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Partition 2</text>
+<rect class="bx" x="190" y="160" width="110" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="245" y="186" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Partition 3</text>
+<text class="free" x="162" y="238" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Load is even; no partition</text>
+<text class="free" x="162" y="254" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">gets all the heat.</text>
+<rect class="bx" x="339" y="60" width="90" height="44" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="384" y="86" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🏷️ status</text>
+<rect class="bx" x="515" y="44" width="100" height="44" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="565" y="63.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🔥 Hot</text>
+<text x="565" y="76.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">partition</text>
+<rect class="bx" x="515" y="104" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="565" y="130" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Idle</text>
+<rect class="bx" x="515" y="164" width="100" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="565" y="190" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Idle</text>
+<text class="free" x="477" y="238" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">A few values take all traffic and</text>
+<text class="free" x="477" y="254" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">throttle while others sit idle.</text>
+<g class="arrow-pill"><rect x="114.5" y="141" width="71" height="18" rx="9"/><text x="150" y="153.5" text-anchor="middle" font-size="9" font-style="italic">spread out</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> DynamoDB spreads items across <b>partitions</b> by their partition key. A key with <b>many distinct values</b> (such as a user ID) spreads requests evenly. A key with few values (such as a status) sends most traffic to a few partitions, which become <b>hot</b> and throttle while others sit idle. AWS advises choosing a high-cardinality, evenly used attribute; write sharding (adding a suffix) can help but makes reads harder because you must query every suffix.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 Which one?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 346" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for the deep dive: unknown questions or joins mean relational; known key lookups at scale mean DynamoDB; a lot of both means use both">
+<defs><marker id="dd3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="dd3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#dd3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#dd3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#dd3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#dd3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#dd3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 Can you list your queries today?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📋 Yes, and mostly lookups by key?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">fixed access patterns, huge scale</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">DynamoDB</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">design the key first</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔗 No, or you need joins and reports?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">questions will change</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">RDS or Aurora</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQL flexibility</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤝 Both kinds of access?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">use each where it fits</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> start with a question: <b>can you list your queries today?</b> If yes, and they are mostly lookups by key at scale, design for DynamoDB. If not, or you need joins and reports, choose relational. If your system has both kinds of access, use both.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">RDS / Aurora</th><th scope="col">DynamoDB</th></tr></thead><tbody><tr><th scope="row">Model</th><td>Tables, rows, SQL</td><td>Items with keys; attributes</td></tr><tr><th scope="row">Design starts from</th><td>The data and its relations</td><td>The queries you will run</td></tr><tr><th scope="row">Joins and ad-hoc queries</th><td>Yes</td><td>No</td></tr><tr><th scope="row">Scaling</th><td>Bigger instance, read replicas, Aurora storage</td><td>Partitioning; on-demand or provisioned capacity</td></tr><tr><th scope="row">Consistency</th><td>Transactional (ACID)</td><td>Eventually consistent reads by default; strongly consistent reads available, at higher read cost</td></tr><tr><th scope="row">Availability</th><td>Multi-AZ, replicas, Aurora across three zones</td><td>Replicated across zones; global tables for Regions</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Cart lookup by user ID at sale-time scale</h5><p>Predictable key, huge bursts.</p><span class="sc-use">→ DynamoDB</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>Finance wants a new report every week</h5><p>Questions keep changing.</p><span class="sc-use">→ RDS or Aurora</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Orders must join customers and products</h5><p>Relational shape.</p><span class="sc-use">→ RDS or Aurora</span></div>
+      <div class="scenario"><span class="sc-icon">🪪</span><h5>Session data with a short expiry</h5><p>Key lookup, short life.</p><span class="sc-use">→ DynamoDB</span></div>
+      <div class="scenario"><span class="sc-icon">🧨</span><h5>All writes use status = "ACTIVE" as the key</h5><p>Three values only.</p><span class="sc-use">→ Redesign the key (hot partition)</span></div>
+      <div class="scenario"><span class="sc-icon">🤝</span><h5>A shop with carts and orders</h5><p>Two shapes of access.</p><span class="sc-use">→ Use both</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — capacity and consistency</summary>
+    <div class="zoom-inner">
+      <p><b>Consistency.</b> A read unit covers one strongly consistent read per second, or two eventually consistent reads per second, for an item up to 4 KB. Eventually consistent reads cost half as much, which is why AWS suggests them as a quick fix for throttled key ranges when freshness allows.</p>
+      <p><b>Capacity.</b> Each partition is designed for about 3,000 read units and 1,000 write units per second; table throughput is limited by provisioned capacity or, in on-demand mode, by table-level limits. Adaptive capacity and automatic partition splitting often help hot partitions.</p>
+      <p><b>Indexes.</b> Global secondary indexes can have their own key distribution; low-variety index keys commonly cause write throttling.</p>
+      <p><b>Relational scale.</b> Read replicas are updated asynchronously; Multi-AZ gives a synchronous standby for failover; Aurora readers use asynchronous replication with failover priorities.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>DynamoDB: design for your queries; partition key with many distinct values; hot partitions throttle.</li><li>Relational: design for the data, ask any question later; Multi-AZ for failover, replicas for reads.</li><li>DynamoDB reads are eventually consistent by default; strongly consistent reads cost double.</li><li>Write sharding spreads hot keys but complicates reads.</li><li>Use both when a system has key lookups and relational reporting.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I choose DynamoDB when I know my access patterns and need steady speed at scale, and I spend my design effort on the partition key — many distinct values, evenly used — to avoid hot partitions. I choose RDS or Aurora when I need joins, transactions and questions that will change. Many systems use both, each for what it does best."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>A low-variety partition key.</b> Keys like a status or a date bucket that everyone writes to today create a hot partition; throughput that looked ample is wasted.</p>
+      <p>Second trap: <b>using DynamoDB like a relational database.</b> If you keep wishing for joins, the access patterns were not known — choose relational.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🛢️ Aurora</h5><p>A relational engine with shared storage across three zones and many read replicas.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>⚡ DynamoDB</h5><p>A key-value / document database that scales by partitioning, designed around known queries.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># read one item by its key</span>
+aws dynamodb get-item --table-name Carts --key '{"user_id": {"S": "u-1001"}}'</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the table name, key and value are examples; add --consistent-read for a strongly consistent read.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is DynamoDB versus relational. Back to the Databases page for the big picture — and on to the next concept: Load Balancing &amp; Traffic Routing.</span>
+      <a class="next-link" href="databases.html">Back to Databases <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="noopener">Amazon DynamoDB developer guide</a> · <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html" target="_blank" rel="noopener">Partition key design in DynamoDB</a> · <a href="https://docs.aws.amazon.com/rds/" target="_blank" rel="noopener">Amazon RDS documentation</a> · <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html" target="_blank" rel="noopener">Amazon Aurora user guide</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

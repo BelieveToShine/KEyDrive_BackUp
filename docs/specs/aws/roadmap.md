@@ -12,11 +12,11 @@ per `../../rules/content-structure.md` and `../../rules/navigation.md`.
 | 3 | Identity & Access (IAM) | ✅ Written | `aws/concepts/identity-access.html`, `aws/concepts/iam-roles.html` (IAM Roles) |
 | 4 | VPC Networking | ✅ Written | `aws/concepts/vpc-networking.html`, `aws/concepts/vpc-endpoints.html` (VPC Endpoints) |
 | 5 | Compute | ✅ Written | `aws/concepts/compute.html` |
-| 6 | Storage | 🔒 Planned | — |
-| 7 | Databases | 🔒 Planned | — |
-| 8 | Load Balancing & Traffic Routing | 🔒 Planned | — |
-| 9 | Scaling & Resilience | 🔒 Planned | — |
-| 10 | Caching & Edge Delivery | 🔒 Planned | — |
+| 6 | Storage | ✅ Written | `aws/concepts/storage.html`, `aws/concepts/s3-in-depth.html` (S3 in Depth) |
+| 7 | Databases | ✅ Written | `aws/concepts/databases.html`, `aws/concepts/dynamodb-vs-rds-aurora.html` (DynamoDB vs RDS and Aurora) |
+| 8 | Load Balancing & Traffic Routing | ✅ Written | `aws/concepts/load-balancing.html` |
+| 9 | Scaling & Resilience | ✅ Written | `aws/concepts/scaling-resilience.html`, `aws/concepts/disaster-recovery.html` (Disaster Recovery) |
+| 10 | Caching & Edge Delivery | ✅ Written | `aws/concepts/caching-edge.html` |
 | 11 | Messaging & Events | 🔒 Planned | — |
 | 12 | Serverless & Orchestration | 🔒 Planned | — |
 | 13 | Infrastructure as Code | 🔒 Planned | — |
@@ -27,6 +27,6 @@ per `../../rules/content-structure.md` and `../../rules/navigation.md`.
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**5 / 19 written (batch A, written 2026-10-12 while the user was away).** The hub page (`aws/index.html`) is built with the full locked roadmap;
+**10 / 19 written (batches A and B, written 2026-10-12 while the user was away).** The hub page (`aws/index.html`) is built with the full locked roadmap;
 concept pages come next, in the order fixed in `concept-taxonomy.md`. Slug convention: kebab-case
 of the concept name, e.g. `aws/concepts/regions-availability-zones.html`.

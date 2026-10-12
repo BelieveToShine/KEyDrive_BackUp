@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S3 in Depth — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><a href="storage.html">Storage</a><span class="sep">›</span><span class="cur">S3 in Depth</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Storage · 🪣 S3</div>
+    <h1>S3 stays cheap and safe when you <span class="grad-text">match data to a storage class, keep the bucket private and let lifecycle rules tidy up.</span></h1>
+    <p class="sub">Storage classes, lifecycle rules, versioning, presigned URLs and Block Public Access.</p>
+    <div class="interview-q">❓ "How do S3 storage classes and lifecycle rules work, and how do you share a file safely?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="S3 storage classes arranged from frequently accessed to archive: Standard, Intelligent-Tiering, infrequent access, Glacier archives">
+<defs><marker id="s31A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="s31S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M64,170 L64,214 L576,214 L576,170" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#s31A)"/>
+<text class="free" x="10" y="24" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">hot · accessed often</text>
+<text class="free" x="630" y="24" text-anchor="end" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">cold · accessed rarely</text>
+<rect class="bx" x="10" y="40" width="108" height="130" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="64" y="96.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">S3 Standard</text>
+<text x="64" y="109" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">frequent access</text>
+<text x="64" y="121.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">millisecond reads</text>
+<rect class="bx" x="138" y="40" width="108" height="130" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="192" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Intelligent-</text>
+<text x="192" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Tiering</text>
+<text x="192" y="116.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">unknown pattern</text>
+<text x="192" y="129" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">moves for you</text>
+<rect class="bx" x="266" y="40" width="108" height="130" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Infrequent</text>
+<text x="320" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Access</text>
+<text x="320" y="116.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">less often, still</text>
+<text x="320" y="129" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">instant reads</text>
+<rect class="bx" x="394" y="40" width="108" height="130" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="448" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Glacier</text>
+<text x="448" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">archive classes</text>
+<text x="448" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">cheap to keep</text>
+<text x="448" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">slower to read</text>
+<rect class="bx" x="522" y="40" width="108" height="130" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="576" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">Deep Archive</text>
+<text x="576" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">rarely, ever</text>
+<text x="576" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">lowest cost</text>
+<text x="576" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">hours to restore</text>
+<text class="free" x="320" y="268" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Lifecycle rules can move data down this line for you as it ages.</text>
+<g class="arrow-pill"><rect x="221" y="205" width="198" height="18" rx="9"/><text x="320" y="217.5" text-anchor="middle" font-size="9" font-style="italic">cheaper to store, costlier to read</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> S3 has several <b>storage classes</b> — one price tag for how often you read the data. <b>Standard</b> is for data you use often. <b>Intelligent-Tiering</b> is for data with an unknown or changing pattern; it moves objects for you. <b>Infrequent Access</b> is cheaper to store but costs more per read. The <b>Glacier</b> classes are archives: cheap to keep, slower and costlier to read, some needing a restore first. The durability design is the same across them; the trade is access speed and cost.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">S3 is cheap and durable when you match each object to the right class, keep the bucket private, and let lifecycle rules do the housekeeping.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The Storage page said S3 is your default for files. Real buckets grow for years, and most of what is in them stops being read. Paying "hot" prices for cold data is the most common S3 waste. And a bucket that is too open is the most common S3 leak.</p>
+      <p>So S3 comes with levers: <b>storage classes and lifecycle rules</b> for cost, <b>versioning</b> for mistakes, <b>presigned URLs</b> for sharing, and <b>Block Public Access</b> for safety.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The levers</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>🔥 Standard and Intelligent-Tiering</h4><span class="pk-tag">the hot end</span><span class="pk-label use">✅ Pick it when</span><ul><li>Standard: data accessed frequently, millisecond reads</li><li>Intelligent-Tiering: unknown or changing access; it moves objects between tiers and charges a small monitoring fee per object</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Very small objects in Intelligent-Tiering — those below a minimum size are not monitored</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧊 Infrequent Access classes</h4><span class="pk-tag">the middle</span><span class="pk-label use">✅ Pick it when</span><ul><li>Data you read rarely but need instantly</li><li>One Zone-IA costs less but keeps data in a single zone</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>One Zone-IA for data you cannot lose to a zone-level disaster</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🏔️ Glacier classes</h4><span class="pk-tag">archives</span><span class="pk-label use">✅ Pick it when</span><ul><li>Instant Retrieval: archives you still read in milliseconds</li><li>Flexible Retrieval: archive data read about once a year, minutes to hours</li><li>Deep Archive: read less than once a year, hours to restore</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Anything you may need right now — archived objects may need a restore first</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>⏳ Lifecycle rules</h4><span class="pk-tag">automatic transitions and expiry</span><span class="pk-label use">✅ Pick it when</span><ul><li>Move objects to another class as they age</li><li>Expire objects (and old versions) you no longer need</li><li>Essential once versioning is on</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Forgetting minimum storage durations — early deletes can still be billed</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔗 Sharing without opening the bucket</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="An app with permission signs a time-limited URL; the user downloads from the private bucket without making it public">
+<defs><marker id="s32A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="s32S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,122 L250,122" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#s32A)"/>
+<path d="M250,148 L120,148" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#s32A)"/>
+<path d="M60,100 L60,40 L570,40 L570,100" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#s32A)"/>
+<rect class="bx" x="10" y="100" width="110" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="129.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 User</text>
+<text x="65" y="142.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">wants a file</text>
+<rect class="bx" x="250" y="100" width="140" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="129.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📱 Your app</text>
+<text x="320" y="142.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">has permission</text>
+<rect class="bx" x="510" y="100" width="120" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="128.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🪣 Private</text>
+<text x="570" y="143.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">bucket</text>
+<text class="free" x="320" y="224" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">The bucket stays private. The URL carries the app's permission and an expiry.</text>
+<text class="free" x="320" y="242" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Anyone holding the link can use it until it expires — keep the time short.</text>
+<g class="arrow-pill"><rect x="165.5" y="113" width="39" height="18" rx="9"/><text x="185" y="125.5" text-anchor="middle" font-size="9" font-style="italic">asks</text></g>
+<g class="arrow-pill"><rect x="149.5" y="139" width="71" height="18" rx="9"/><text x="185" y="151.5" text-anchor="middle" font-size="9" font-style="italic">signed URL</text></g>
+<g class="arrow-pill"><rect x="224" y="31" width="182" height="18" rx="9"/><text x="315" y="43.5" text-anchor="middle" font-size="9" font-style="italic">downloads until the URL expires</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a <b>presigned URL</b> is a link your app signs using its own permissions. It lets one person do one thing (for example, download one object) until it expires. The bucket stays private and Block Public Access stays on. The link works for anyone who holds it, as many times as they like, until it expires — so keep the lifetime short. If the role that signed it is deleted, the URL stops working.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🛡️ Keep it safe and tidy</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 338" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Layers that keep a bucket safe: Block Public Access, least-privilege IAM and bucket policies, versioning and lifecycle">
+<defs><marker id="s33A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="s33S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,62 L320,92" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#s33A)"/>
+<path d="M320,144 L320,174" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#s33A)"/>
+<path d="M320,226 L320,256" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#s33A)"/>
+<rect class="bx" x="20" y="10" width="600" height="52" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="320" y="33.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🚫 Block Public Access</text>
+<text x="320" y="46.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">keep the bucket off the public internet</text>
+<rect class="bx" x="20" y="92" width="600" height="52" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="115.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🪪 IAM and bucket policies</text>
+<text x="320" y="128.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">only the roles that need it, only the actions they need</text>
+<rect class="bx" x="20" y="174" width="600" height="52" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="197.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">♻️ Versioning</text>
+<text x="320" y="210.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">undo overwrites and deletes</text>
+<rect class="bx" x="20" y="256" width="600" height="52" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="279.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⏳ Lifecycle rules</text>
+<text x="320" y="292.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">move old data to cheaper classes, expire what you do not need</text>
+<g class="arrow-pill"><rect x="360.5" y="68" width="39" height="18" rx="9"/><text x="380" y="80.5" text-anchor="middle" font-size="9" font-style="italic">then</text></g>
+<g class="arrow-pill"><rect x="360.5" y="150" width="39" height="18" rx="9"/><text x="380" y="162.5" text-anchor="middle" font-size="9" font-style="italic">then</text></g>
+<g class="arrow-pill"><rect x="360.5" y="232" width="39" height="18" rx="9"/><text x="380" y="244.5" text-anchor="middle" font-size="9" font-style="italic">then</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> four layers, outermost first. <b>Block Public Access</b> (on by default for new buckets) keeps the bucket off the open internet. <b>IAM and bucket policies</b> give each role only what it needs. <b>Versioning</b> lets you undo overwrites and deletes, and <b>lifecycle rules</b> keep the cost under control — without them, every old version is kept forever.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Choosing a class</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Class family</th><th scope="col">Read pattern</th><th scope="col">Access speed</th><th scope="col">Watch out for</th></tr></thead><tbody><tr><th scope="row">Standard</th><td>Frequently</td><td>Milliseconds</td><td>Highest storage price of the family</td></tr><tr><th scope="row">Intelligent-Tiering</th><td>Unknown or changing</td><td>Automatic tiers</td><td>Per-object monitoring fee; small objects not monitored</td></tr><tr><th scope="row">Infrequent Access</th><td>Rarely, but instantly when needed</td><td>Milliseconds</td><td>Retrieval charges and minimum duration</td></tr><tr><th scope="row">Glacier Flexible Retrieval</th><td>About once a year</td><td>Minutes to hours</td><td>Needs a restore request</td></tr><tr><th scope="row">Glacier Deep Archive</th><td>Less than once a year</td><td>Hours</td><td>Longest minimum duration</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📸</span><h5>User photos: hot for a week, then rarely</h5><p>Access pattern changes with age.</p><span class="sc-use">→ Lifecycle: Standard → Infrequent Access</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Tax records kept for years</h5><p>Almost never read.</p><span class="sc-use">→ Glacier archive class</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>New data of unknown popularity</h5><p>No idea what will be read.</p><span class="sc-use">→ Intelligent-Tiering</span></div>
+      <div class="scenario"><span class="sc-icon">📤</span><h5>A customer needs to download one invoice</h5><p>The bucket must stay private.</p><span class="sc-use">→ A presigned URL with a short expiry</span></div>
+      <div class="scenario"><span class="sc-icon">🗑️</span><h5>A script overwrites the wrong files</h5><p>They were the only copy.</p><span class="sc-use">→ Versioning, with lifecycle for old versions</span></div>
+      <div class="scenario"><span class="sc-icon">🔓</span><h5>A public bucket is found in an audit</h5><p>Customer data was exposed.</p><span class="sc-use">→ Block Public Access and least-privilege policies</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details that cost money or data</summary>
+    <div class="zoom-inner">
+      <p><b>Durability design.</b> AWS publishes a very high durability design for the main classes — but durability does not protect against deletion by an authorized user or process. Versioning and Object Lock cover that gap.</p>
+      <p><b>Minimum durations.</b> Some archive classes have minimum storage durations (for example, Glacier Instant Retrieval 90 days and Deep Archive 180 days). Deleting earlier can still be billed for the minimum.</p>
+      <p><b>Versioning without lifecycle</b> can lead to unbounded storage growth, because every modification creates a new version that is kept indefinitely.</p>
+      <p><b>Presigned URLs</b> are generated with the SDK or CLI, can grant GET or PUT, and are valid up to a maximum of seven days. They can be used many times until they expire.</p>
+      <p><b>Block Public Access.</b> Buckets created since April 2023 block all public access by default. AWS recommends keeping all four settings on unless you know you need otherwise. A presigned URL does not require turning it off.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>S3 classes trade storage price against access speed and retrieval cost: Standard → Intelligent-Tiering → Infrequent Access → Glacier → Deep Archive.</li><li>Lifecycle rules transition and expire objects; essential with versioning.</li><li>Presigned URL: a time-limited signed link; the bucket stays private; anyone with the link can use it until expiry.</li><li>Block Public Access on; least-privilege IAM and bucket policies; versioning for mistakes.</li><li>High durability ≠ protection from deletion.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I match each S3 object to a storage class by how often it is read and let lifecycle rules move data as it ages — Intelligent-Tiering when the pattern is unknown. Buckets stay private with Block Public Access on and least-privilege policies; I share single objects with short-lived presigned URLs, and I turn on versioning with lifecycle for old versions so mistakes are recoverable."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Turning on versioning and forgetting lifecycle rules.</b> Every overwrite keeps a new version forever, and the bill grows quietly.</p>
+      <p>Second trap: <b>making a bucket public to share one file.</b> A presigned URL does the job with a time limit and without opening everything.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🧊 Infrequent Access</h5><p>Rarely read, but instantly available when needed. Retrieval is billed.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🏔️ Glacier archive</h5><p>Archive for data you almost never need. Some classes require a restore before you can read.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># make a link that lets someone download one object for one hour</span>
+aws s3 presign s3://my-example-bucket-12345/reports/report.pdf --expires-in 3600</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the bucket and key are examples, and the 3600 seconds (one hour) is an example expiry.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is S3 in depth. Back to the Storage page for the big picture — and on to the next concept: Databases.</span>
+      <a class="next-link" href="storage.html">Back to Storage <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html" target="_blank" rel="noopener">What is Amazon S3?</a> · <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank" rel="noopener">Amazon S3 storage classes</a> · <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html" target="_blank" rel="noopener">S3 presigned URLs</a> · <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html" target="_blank" rel="noopener">S3 Block Public Access</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

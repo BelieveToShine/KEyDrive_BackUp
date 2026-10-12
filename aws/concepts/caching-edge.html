@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caching &amp; Edge Delivery — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Caching &amp; Edge</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 10 of 19 · ⚙️ Handling load</div>
+    <h1>A cache keeps a copy of an answer close to whoever asks — <span class="grad-text">so the slow, expensive place is asked far less often.</span></h1>
+    <p class="sub">The layers of caching on AWS — browser, CloudFront, ElastiCache — lazy loading, write-through and the freshness trade-off.</p>
+    <div class="interview-q">❓ "What is caching, where would you cache on AWS, and what is lazy loading?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 372" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Four places a copy can live between a visitor and the database: the browser, the CloudFront edge, an ElastiCache cache and the database itself">
+<defs><marker id="ce1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ce1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,68 L320,106" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ce1A)"/>
+<path d="M320,164 L320,202" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ce1A)"/>
+<path d="M320,260 L320,298" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ce1A)"/>
+<rect class="bx" x="20" y="10" width="600" height="58" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="36.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🌐 Browser cache</text>
+<text x="320" y="49.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">files kept on the visitor's own device</text>
+<rect class="bx" x="20" y="106" width="600" height="58" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌍 Edge cache (CloudFront)</text>
+<text x="320" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">a copy at an edge location near the visitor</text>
+<rect class="bx" x="20" y="202" width="600" height="58" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="228.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ App cache (ElastiCache)</text>
+<text x="320" y="241.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">shared, in memory, between the app and the database</text>
+<rect class="bx" x="20" y="298" width="600" height="58" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="324.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗄️ Database or origin</text>
+<text x="320" y="337.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the source of truth — the slowest place to ask</text>
+<g class="arrow-pill"><rect x="377.5" y="78" width="145" height="18" rx="9"/><text x="450" y="90.5" text-anchor="middle" font-size="9" font-style="italic">miss: ask the next layer</text></g>
+<g class="arrow-pill"><rect x="377.5" y="174" width="145" height="18" rx="9"/><text x="450" y="186.5" text-anchor="middle" font-size="9" font-style="italic">miss: ask the next layer</text></g>
+<g class="arrow-pill"><rect x="377.5" y="270" width="145" height="18" rx="9"/><text x="450" y="282.5" text-anchor="middle" font-size="9" font-style="italic">miss: ask the next layer</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a request travels down the layers until something has the answer. The <b>browser</b> may already hold the file. If not, a nearby <b>CloudFront edge</b> may have a copy. If not, an <b>ElastiCache</b> cache may hold the data. Only if all of those miss does the request reach the <b>database</b> — the slowest and most expensive place to ask. Each layer you answer from is a trip you did not make.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A cache keeps a copy of an answer closer to whoever asks, so the slow, expensive place — usually the database — is asked far less often.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You have copies of your app, a load balancer and Auto Scaling. But look at what every copy does: for the same product page, every request asks the <b>same database</b> the <b>same question</b>. Adding more app servers makes it worse, because now more servers ask the database.</p>
+      <p>A cache fixes that by remembering recent answers. The result is faster pages and less load on the database. The price: a cached copy can be <b>out of date</b>. So caching is always a decision about <i>what</i> to copy, <i>where</i> to keep it, and <i>how long</i> it may stay.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 Where to cache</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🌐 Browser cache</h4><span class="pk-tag">on the visitor's device</span><span class="pk-label use">✅ Pick it when</span><ul><li>Images, scripts and style files that rarely change</li><li>Controlled by the response headers your app or origin sends</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Anything private or fast-changing that must be fresh on every visit</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🌍 Amazon CloudFront</h4><span class="pk-tag">a copy near the visitor</span><span class="pk-label use">✅ Pick it when</span><ul><li>Static files and responses that are the same for everyone</li><li>Visitors spread across the world</li><li>You control expiry with Cache-Control headers or TTL settings, and can invalidate early</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Personal data that is different for every user</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>⚡ Amazon ElastiCache</h4><span class="pk-tag">a shared in-memory cache</span><span class="pk-label use">✅ Pick it when</span><ul><li>Data many app copies read again and again</li><li>Results of slow database queries, sessions</li><li>Engines such as Valkey and Memcached</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Data you cannot afford to lose — a cache is a copy, not the source of truth</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧠 In-app memory cache</h4><span class="pk-tag">inside one app instance</span><span class="pk-label use">✅ Pick it when</span><ul><li>Tiny, hot data that is the same everywhere</li><li>The fastest possible reads, with no network trip</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Several instances need to agree — each has its own private copy; use a shared cache</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔁 The most common pattern: lazy loading</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 262" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Lazy loading, also called cache-aside: the app checks the cache first, reads the database on a miss, then saves a copy in the cache">
+<defs><marker id="ce2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ce2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,66 L300,66" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ce2A)"/>
+<path d="M130,98 L300,98" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ce2A)"/>
+<path d="M130,190 L300,190" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ce2A)"/>
+<rect class="bx" x="20" y="40" width="110" height="150" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="75" y="112.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📱 App</text>
+<text x="75" y="125.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">your code</text>
+<rect class="bx" x="300" y="30" width="150" height="80" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="375" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Cache</text>
+<text x="375" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">ElastiCache</text>
+<rect class="bx" x="300" y="150" width="150" height="80" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="375" y="187.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🗄️ Database</text>
+<text x="375" y="200.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">source of truth</text>
+<text class="free" x="470" y="58" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">Hit: the answer comes</text>
+<text class="free" x="470" y="74" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">straight from the cache.</text>
+<text class="free" x="470" y="170" text-anchor="start" font-size="9.5" font-weight="700" fill="#93a0b8">Data changed? Write to the</text>
+<text class="free" x="470" y="186" text-anchor="start" font-size="9.5" font-weight="700" fill="#93a0b8">database, then delete the</text>
+<text class="free" x="470" y="202" text-anchor="start" font-size="9.5" font-weight="700" fill="#93a0b8">cached copy (or set a TTL).</text>
+<g class="arrow-pill"><rect x="166" y="57" width="98" height="18" rx="9"/><text x="215" y="69.5" text-anchor="middle" font-size="9" font-style="italic">1 · check cache</text></g>
+<g class="arrow-pill"><rect x="166" y="89" width="98" height="18" rx="9"/><text x="215" y="101.5" text-anchor="middle" font-size="9" font-style="italic">3 · save a copy</text></g>
+<g class="arrow-pill"><rect x="161" y="181" width="108" height="18" rx="9"/><text x="215" y="193.5" text-anchor="middle" font-size="9" font-style="italic">2 · miss: read DB</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> AWS calls it <b>lazy loading</b> (also known as cache-aside). <b>1</b> The app looks in the cache first. <b>2</b> On a miss, it reads the database. <b>3</b> It saves a copy in the cache for next time. Its weakness is <em>staleness</em>: if data changes in the database, the cached copy does not know. Fixes: set a <b>TTL</b> (time to live) on each item, or delete the cached item when you write.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🌍 Caching at the edge</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 246" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Visitors reach a nearby CloudFront edge location; only a cache miss travels on to the origin">
+<defs><marker id="ce3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ce3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,55 L270,55" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ce3A)"/>
+<path d="M120,175 L270,175" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ce3A)"/>
+<path d="M390,55 L450,55 L450,110 L510,110" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ce3A)"/>
+<path d="M390,175 L450,175 L450,130 L510,130" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ce3A)"/>
+<rect class="bx" x="10" y="30" width="110" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="59" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 Visitor A</text>
+<rect class="bx" x="10" y="150" width="110" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="179" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 Visitor B</text>
+<rect class="bx" x="270" y="30" width="120" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="330" y="52.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌍 Edge</text>
+<text x="330" y="65.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">near A</text>
+<rect class="bx" x="270" y="150" width="120" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="330" y="172.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌍 Edge</text>
+<text x="330" y="185.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">near B</text>
+<rect class="bx" x="510" y="90" width="120" height="60" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="117.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🏠 Origin</text>
+<text x="570" y="130.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">S3 or your app</text>
+<text class="free" x="320" y="230" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">A hit never leaves the edge; only a miss travels to the origin.</text>
+<g class="arrow-pill"><rect x="159.5" y="46" width="71" height="18" rx="9"/><text x="195" y="58.5" text-anchor="middle" font-size="9" font-style="italic">short trip</text></g>
+<g class="arrow-pill"><rect x="159.5" y="166" width="71" height="18" rx="9"/><text x="195" y="178.5" text-anchor="middle" font-size="9" font-style="italic">short trip</text></g>
+<g class="arrow-pill"><rect x="400.5" y="46" width="39" height="18" rx="9"/><text x="420" y="58.5" text-anchor="middle" font-size="9" font-style="italic">miss</text></g>
+<g class="arrow-pill"><rect x="400.5" y="166" width="39" height="18" rx="9"/><text x="420" y="178.5" text-anchor="middle" font-size="9" font-style="italic">miss</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> with CloudFront, each visitor talks to an <b>edge location</b> near them. If it holds a copy (a <i>hit</i>), it answers at once. If not (a <i>miss</i>), it fetches from your origin and keeps the copy until it expires. CloudFront also has <b>regional edge caches</b> between the origin and the edge locations. You can remove content early with an <b>invalidation</b>, which takes a few minutes to complete; versioned file names avoid the need.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Where it lives</th><th scope="col">Shared?</th><th scope="col">Best for</th><th scope="col">Watch out for</th></tr></thead><tbody><tr><th scope="row">🌐 Browser</th><td>Visitor's device</td><td>No — one per visitor</td><td>Static files</td><td>You cannot clear it remotely</td></tr><tr><th scope="row">🌍 CloudFront</th><td>Edge locations near visitors</td><td>Yes, for people near that edge</td><td>Static and public content</td><td>Stale copies until they expire or are invalidated</td></tr><tr><th scope="row">⚡ ElastiCache</th><td>Beside your app</td><td>Yes, for all app copies</td><td>Query results, sessions</td><td>Out-of-date data; it is only a copy</td></tr><tr><th scope="row">🧠 In-app</th><td>Inside one instance</td><td>No — private to the instance</td><td>Tiny hot lookups</td><td>Each copy can hold different data</td></tr></tbody></table></div>
+  </section>
+    <h4 class="pc-title">⚖️ Lazy loading: the trade-offs</h4>
+    <div class="pros-cons">
+      <div class="pc-side pro"><h5>✅ Strengths</h5><ul><li>Only data that is actually asked for gets cached</li><li>If a cache node fails or is empty, the app still works — it just reads the database</li></ul></div>
+      <div class="pc-side con"><h5>⚠️ Watch out for</h5><ul><li>A miss costs three trips: cache, database, write back</li><li>Data can go stale; add a TTL or invalidate on write</li><li>A newly started cache is empty, so the first requests are slower</li></ul></div>
+    </div>  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛍️</span><h5>Product pages, read a lot, changed rarely</h5><p>Every visit asks the database the same question.</p><span class="sc-use">→ ElastiCache, lazy loading with a TTL</span></div>
+      <div class="scenario"><span class="sc-icon">🖼️</span><h5>Logo, images and style files</h5><p>The same bytes for every visitor, everywhere.</p><span class="sc-use">→ CloudFront + browser cache</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>A "my account balance" page</h5><p>Different for every user and must be correct.</p><span class="sc-use">→ Do not cache — or only briefly</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>Login sessions with many app copies</h5><p>Any copy must recognise the user.</p><span class="sc-use">→ A shared cache</span></div>
+      <div class="scenario"><span class="sc-icon">📰</span><h5>A news homepage hit by a spike</h5><p>Many see the same page at once.</p><span class="sc-use">→ CloudFront with a short TTL</span></div>
+      <div class="scenario"><span class="sc-icon">📦</span><h5>A deploy changes a stylesheet</h5><p>Visitors still get the old file.</p><span class="sc-use">→ Versioned file names, or an invalidation</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — freshness and write strategies</summary>
+    <div class="zoom-inner">
+      <p><b>Freshness is the whole game.</b> Every cached item needs an expiry time, and a way to throw it away when the source changes. A short TTL is fresher but misses more; a long one is faster but staler.</p>
+      <p><b>Write-through</b> writes to the database and the cache together, so the cache stays current — but a new empty node has no data, and much of what is cached may never be read. AWS commonly recommends combining lazy loading with write-through, and adding a TTL to each write to get the benefits of both.</p>
+      <p><b>Invalidate rather than update.</b> A simple guide for writes is to delete the cached entry rather than update it; a narrow race remains, so strict consistency may need locks or versioned writes.</p>
+      <p><b>CloudFront TTLs.</b> Caching is governed by the origin's Cache-Control headers; without them the behaviour's default TTL applies, bounded by the minimum and maximum TTL. Invalidation requests are not immediate and can be charged beyond a free allowance; versioned names avoid that. Origins can also tag objects so you invalidate by tag.</p>
+      <p><b>Engines and names change.</b> Check the ElastiCache documentation for the engines and node options available today.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>A cache keeps copies closer to the asker so the slow source is asked less. The price is possible staleness.</li><li>Layers: browser → CloudFront edge → ElastiCache → database.</li><li>Lazy loading: check cache; on miss read the database and save a copy. Weakness: stale data — use a TTL or delete on write.</li><li>Write-through keeps the cache fresh but fills it with data that may never be read; combine with lazy loading and a TTL.</li><li>CloudFront serves from the edge until expiry; invalidations take minutes; versioned file names avoid them.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"A cache trades freshness for speed. I cache in layers: the browser, CloudFront at the edge for content that is the same for everyone, and ElastiCache in front of the database. I use lazy loading with a TTL, sometimes combined with write-through, and I invalidate or version content when it changes. I never treat the cache as the source of truth."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Do not treat the cache as the source of truth.</b> It is a copy and can disappear or go stale. Your app must still work, and recover, from the database alone.</p>
+      <p>Second trap: <b>caching personal data in a shared place.</b> An edge or shared cache that stores one user's page and serves it to another is a serious bug. Cache only what is the same for everyone, or key the cache carefully.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>⚡ ElastiCache</h5><p>Sits next to your app and holds data and query results, shared by all your app copies.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🌍 CloudFront</h5><p>Sits near the visitor and holds whole responses and files. Saves the trip across the world.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># lazy loading in plain pseudo-code</span>
+item = cache.get(key)
+if item is None:               <span class="cmt"># miss</span>
+    item = database.read(key)  <span class="cmt"># slow path</span>
+    cache.set(key, item, ttl=minutes)  <span class="cmt"># save a copy, with an expiry</span>
+return item</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative pseudo-code only — real client libraries have their own method names and options.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box locked">
+      <span>Your app is now fast and can take heavier load. But some work should not happen while a user waits — it should be handed off and done in the background. Next: Messaging &amp; Events.</span>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often — caching products especially. This page teaches the ideas; for current product names, engines and limits, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html" target="_blank" rel="noopener">How CloudFront delivers content</a> · <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html" target="_blank" rel="noopener">Managing how long content stays in the CloudFront cache</a> · <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html" target="_blank" rel="noopener">Invalidating files in CloudFront</a> · <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html" target="_blank" rel="noopener">Amazon ElastiCache documentation</a> · <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html" target="_blank" rel="noopener">Caching strategies (ElastiCache)</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>
