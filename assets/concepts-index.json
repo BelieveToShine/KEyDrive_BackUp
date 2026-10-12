@@ -690,5 +690,187 @@
     "page": "azure/index.html",
     "summary": "The 19-concept Azure journey for developers growing into architects.",
     "keywords": "azure microsoft cloud architect roadmap entra rbac vnet app service aks functions cosmos key vault bicep well-architected"
+  },
+  {
+    "id": "azure-resource-hierarchy",
+    "title": "Tenants, Subscriptions & Resource Groups",
+    "category": "Azure",
+    "page": "azure/concepts/resource-hierarchy.html",
+    "summary": "Azure resource hierarchy: tenant, management groups, subscriptions, resource groups, resources — and how roles and policies flow down.",
+    "keywords": "azure tenant subscription resource group management group hierarchy arm resource manager entra billing scope inheritance"
+  },
+  {
+    "id": "azure-resource-hierarchy-recall",
+    "title": "Tenants, Subscriptions & Resource Groups — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/resource-hierarchy.html",
+    "summary": "Quick recall points: Tenants, Subscriptions & Resource Groups.",
+    "keywords": "azure tenant subscription resource group management group hierarchy arm resource manager entra billing scope inheritance interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-resource-hierarchy-trap",
+    "title": "Tenants, Subscriptions & Resource Groups — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/resource-hierarchy.html",
+    "summary": "The classic mistake with Tenants, Subscriptions & Resource Groups.",
+    "keywords": "azure tenant subscription resource group management group hierarchy arm resource manager entra billing scope inheritance trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-regions-availability-zones",
+    "title": "Regions & Availability Zones",
+    "category": "Azure",
+    "page": "azure/concepts/regions-availability-zones.html",
+    "summary": "Regions, availability zones, zonal vs zone-redundant, region pairs and how to choose a region.",
+    "keywords": "azure region availability zone zone redundant zonal region pair disaster recovery latency data residency"
+  },
+  {
+    "id": "azure-regions-availability-zones-recall",
+    "title": "Regions & Availability Zones — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/regions-availability-zones.html",
+    "summary": "Quick recall points: Regions & Availability Zones.",
+    "keywords": "azure region availability zone zone redundant zonal region pair disaster recovery latency data residency interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-regions-availability-zones-trap",
+    "title": "Regions & Availability Zones — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/regions-availability-zones.html",
+    "summary": "The classic mistake with Regions & Availability Zones.",
+    "keywords": "azure region availability zone zone redundant zonal region pair disaster recovery latency data residency trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-identity-access",
+    "title": "Identity & Access",
+    "category": "Azure",
+    "page": "azure/concepts/identity-access.html",
+    "summary": "Microsoft Entra ID vs Azure RBAC: authentication, authorization, role assignments, scopes and the first roles.",
+    "keywords": "azure identity access entra id rbac role assignment owner contributor reader authentication authorization service principal least privilege"
+  },
+  {
+    "id": "azure-identity-access-recall",
+    "title": "Identity & Access — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/identity-access.html",
+    "summary": "Quick recall points: Identity & Access.",
+    "keywords": "azure identity access entra id rbac role assignment owner contributor reader authentication authorization service principal least privilege interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-identity-access-trap",
+    "title": "Identity & Access — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/identity-access.html",
+    "summary": "The classic mistake with Identity & Access.",
+    "keywords": "azure identity access entra id rbac role assignment owner contributor reader authentication authorization service principal least privilege trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-managed-identities",
+    "title": "Managed Identities",
+    "category": "Azure",
+    "page": "azure/concepts/managed-identities.html",
+    "summary": "System-assigned vs user-assigned managed identities, and using Azure resources without passwords.",
+    "keywords": "azure managed identity system assigned user assigned service principal token no secret defaultazurecredential"
+  },
+  {
+    "id": "azure-managed-identities-recall",
+    "title": "Managed Identities — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/managed-identities.html",
+    "summary": "Quick recall points: Managed Identities.",
+    "keywords": "azure managed identity system assigned user assigned service principal token no secret defaultazurecredential interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-managed-identities-trap",
+    "title": "Managed Identities — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/managed-identities.html",
+    "summary": "The classic mistake with Managed Identities.",
+    "keywords": "azure managed identity system assigned user assigned service principal token no secret defaultazurecredential trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-virtual-networks",
+    "title": "Virtual Networks",
+    "category": "Azure",
+    "page": "azure/concepts/virtual-networks.html",
+    "summary": "VNets, subnets, NSG rule evaluation, peering and ways to connect networks.",
+    "keywords": "azure virtual network vnet subnet nsg network security group peering vpn expressroute address space cidr private"
+  },
+  {
+    "id": "azure-virtual-networks-recall",
+    "title": "Virtual Networks — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/virtual-networks.html",
+    "summary": "Quick recall points: Virtual Networks.",
+    "keywords": "azure virtual network vnet subnet nsg network security group peering vpn expressroute address space cidr private interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-virtual-networks-trap",
+    "title": "Virtual Networks — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/virtual-networks.html",
+    "summary": "The classic mistake with Virtual Networks.",
+    "keywords": "azure virtual network vnet subnet nsg network security group peering vpn expressroute address space cidr private trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-private-endpoints",
+    "title": "Private Endpoints",
+    "category": "Azure",
+    "page": "azure/concepts/private-endpoints.html",
+    "summary": "Private endpoint vs service endpoint, Private Link and the DNS detail that decides the path.",
+    "keywords": "azure private endpoint service endpoint private link private dns zone storage sql disable public access"
+  },
+  {
+    "id": "azure-private-endpoints-recall",
+    "title": "Private Endpoints — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/private-endpoints.html",
+    "summary": "Quick recall points: Private Endpoints.",
+    "keywords": "azure private endpoint service endpoint private link private dns zone storage sql disable public access interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-private-endpoints-trap",
+    "title": "Private Endpoints — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/private-endpoints.html",
+    "summary": "The classic mistake with Private Endpoints.",
+    "keywords": "azure private endpoint service endpoint private link private dns zone storage sql disable public access trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-compute",
+    "title": "Compute",
+    "category": "Azure",
+    "page": "azure/concepts/compute.html",
+    "summary": "Choosing between VMs, App Service, Container Apps, AKS, Functions and Container Instances.",
+    "keywords": "azure compute virtual machines vm app service container apps aks kubernetes functions container instances choose"
+  },
+  {
+    "id": "azure-compute-recall",
+    "title": "Compute — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/compute.html",
+    "summary": "Quick recall points: Compute.",
+    "keywords": "azure compute virtual machines vm app service container apps aks kubernetes functions container instances choose interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-compute-trap",
+    "title": "Compute — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/compute.html",
+    "summary": "The classic mistake with Compute.",
+    "keywords": "azure compute virtual machines vm app service container apps aks kubernetes functions container instances choose trap mistake",
+    "anchor": "trap"
   }
 ]

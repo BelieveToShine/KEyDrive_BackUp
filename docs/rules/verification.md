@@ -23,7 +23,7 @@ matches your own command line and kills the shell. Use a unique port per session
 | Journeys | `written` ⊄ `order`; a written slug has no file; a file is in neither `order` nor `sub`; a sub page lacks `subTitles`; a title is missing |
 | Concept pages | missing `#why/#recall/#trap/#next`; wrong `data-root`; missing `site.js`; `<title>` not ending "— KeyDrive"; eyebrow number ≠ position in `order`; next box is not a real link to the next **written** concept / not `.next-box.locked` when the next one is unwritten; undefined SVG marker; duplicate marker ids; figcaption not starting "What you're seeing:"; placeholder text |
 | Hubs | node/row counts ≠ `order`; `done` counts ≠ `written`; no link to a written concept; footer count wrong (WARN) |
-| **Volatile claims (WARN)** | a number+unit, price, year, percentage, "N by default/tries", or a word like preview/deprecated/retired appears in page text but **not** in `docs/specs/<cat>/claims-ledger.md` |
+| **Volatile claims (WARN)** | a number+unit, price, year, percentage, "N by default/tries", a 3–5 digit number (port, priority), a count ("three zones", "five addresses"), or a word like preview/deprecated/retired appears in page text but **not** in `docs/specs/<cat>/claims-ledger.md` |
 
 Treat every WARN as a to-do: add the claim to the ledger with a status (and fix the page if the
 claim cannot be supported). Do not silence the scanner.

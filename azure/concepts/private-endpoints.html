@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Endpoints — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><a href="virtual-networks.html">Virtual Networks</a><span class="sep">›</span><span class="cur">Private endpoints</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Virtual Networks · 🔌 Private endpoints</div>
+    <h1>A private endpoint puts an Azure service <span class="grad-text">inside your own network</span>, with a private IP address.</h1>
+    <p class="sub">Azure services have public addresses by default. Learn how a private endpoint brings one into your network, how it differs from a service endpoint, and the DNS detail that decides whether it works.</p>
+    <div class="interview-q">❓ "What is the difference between a service endpoint and a private endpoint in Azure?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 316" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Reaching storage over its public address through the internet versus through a private endpoint that has a private IP address in your subnet">
+<defs><marker id="pe1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="pe1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="300" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">PUBLIC PATH · over the internet</text>
+<rect class="zone" x="325" y="8" width="305" height="300" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">PRIVATE PATH · a private endpoint</text>
+<path d="M160,88 L160,136" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#pe1A)"/>
+<path d="M160,184 L160,232" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#pe1A)"/>
+<path d="M475,88 L475,136" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#pe1A)"/>
+<path d="M475,184 L475,232" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#pe1A)"/>
+<rect class="bx" x="100" y="40" width="120" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="160" y="61.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 Your app</text>
+<text x="160" y="74.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">in your VNet</text>
+<rect class="bx" x="100" y="136" width="120" height="48" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="160" y="157.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🌍 Internet</text>
+<text x="160" y="170.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">public IP address</text>
+<rect class="bx" x="60" y="232" width="200" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="160" y="253.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗂️ Storage account</text>
+<text x="160" y="266.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its public endpoint</text>
+<rect class="bx" x="415" y="40" width="120" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="475" y="61.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 Your app</text>
+<text x="475" y="74.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">in your VNet</text>
+<rect class="bx" x="395" y="136" width="160" height="48" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="475" y="157.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔌 Private endpoint</text>
+<text x="475" y="170.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">10.0.3.4 in your subnet</text>
+<rect class="bx" x="375" y="232" width="200" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="475" y="253.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗂️ Storage account</text>
+<text x="475" y="266.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">reached over Private Link</text>
+<g class="arrow-pill"><rect x="175.5" y="103" width="119" height="18" rx="9"/><text x="235" y="115.5" text-anchor="middle" font-size="9" font-style="italic">goes to a public IP</text></g>
+<g class="arrow-pill"><rect x="175.5" y="199" width="119" height="18" rx="9"/><text x="235" y="211.5" text-anchor="middle" font-size="9" font-style="italic">reaches the service</text></g>
+<g class="arrow-pill"><rect x="483" y="103" width="124" height="18" rx="9"/><text x="545" y="115.5" text-anchor="middle" font-size="9" font-style="italic">goes to a private IP</text></g>
+<g class="arrow-pill"><rect x="499" y="199" width="82" height="18" rx="9"/><text x="540" y="211.5" text-anchor="middle" font-size="9" font-style="italic">Private Link</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Left:</b> your app reaches a storage account by its public address, so the traffic goes out and back over the internet path. <b>Right:</b> a <b>private endpoint</b> is a network interface with a <b>private IP address inside your own subnet</b>. Your app connects to that private address, and <b>Private Link</b> carries the connection to the storage account. With a private endpoint in place you can also turn off the storage account's public access.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A private endpoint gives an Azure service a private IP address inside your own network — so your app reaches it privately, and you can close its public door.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The Virtual Networks page showed how to keep <i>your</i> resources private. But your app also calls Azure services — storage, SQL, a vault — and those have <b>public addresses</b> by default. How do you let your network reach them without sending that traffic over the public internet, and without leaving them open to everyone?</p>
+      <p>Azure offers two answers. <b>Service endpoints</b> are the older, simpler one: the service keeps its public IP but can be told to trust your subnet. <b>Private endpoints</b> (built on <b>Private Link</b>) go further: the service gets a private IP in your network. Microsoft recommends Private Link.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔎 The part that trips everybody up: DNS</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="DNS decides the path: without a private DNS zone the storage name resolves to a public IP; with one it resolves to the private endpoint address">
+<defs><marker id="pe2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="pe2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M110,135 L200,135" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#pe2A)"/>
+<path d="M310,135 L350,135 L350,64 L470,64" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#pe2A)"/>
+<path d="M310,135 L350,135 L350,206 L470,206" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#pe2A)"/>
+<rect class="bx" x="10" y="107" width="100" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="60" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 Your app</text>
+<text x="60" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">wants the name</text>
+<rect class="bx" x="200" y="107" width="110" height="56" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="255" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📖 DNS</text>
+<text x="255" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">name → an IP</text>
+<rect class="bx" x="470" y="36" width="160" height="56" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="550" y="61.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🌍 Public IP</text>
+<text x="550" y="74.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">over the internet</text>
+<rect class="bx" x="470" y="178" width="160" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="550" y="203.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔒 10.0.3.4</text>
+<text x="550" y="216.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">your private endpoint</text>
+<text class="free" x="240" y="56" text-anchor="middle" font-size="9" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">Name: mystorage.blob.core.windows.net</text>
+<text class="free" x="240" y="250" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">With a private DNS zone the answer is private.</text>
+<g class="arrow-pill"><rect x="135.5" y="126" width="39" height="18" rx="9"/><text x="155" y="138.5" text-anchor="middle" font-size="9" font-style="italic">asks</text></g>
+<g class="arrow-pill"><rect x="366.5" y="55" width="87" height="18" rx="9"/><text x="410" y="67.5" text-anchor="middle" font-size="9" font-style="italic">public answer</text></g>
+<g class="arrow-pill"><rect x="364" y="197" width="92" height="18" rx="9"/><text x="410" y="209.5" text-anchor="middle" font-size="9" font-style="italic">private answer</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> your code still uses the same name, such as <code>mystorage.blob.core.windows.net</code>. <b>DNS</b> turns that name into an address. Unless you set up a <b>private DNS zone</b>, the name still resolves to the <i>public</i> IP — and your traffic ignores the private endpoint. With the zone in place, the same name resolves to the private endpoint's address. That is why a private endpoint always comes with a DNS step.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">⚖️ Service endpoint vs private endpoint</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Service endpoint</th><th scope="col">Private endpoint</th></tr></thead><tbody><tr><th scope="row">What you connect to</th><td>The service's public IP — still public</td><td>A private IP in your own subnet</td></tr><tr><th scope="row">What it covers</th><td>The whole service</td><td>One specific resource (one instance)</td></tr><tr><th scope="row">From on-premises (VPN / ExpressRoute)</th><td>Not supported</td><td>Supported</td></tr><tr><th scope="row">DNS</th><td>Nothing changes</td><td>The name must resolve to the private IP (usually a private DNS zone)</td></tr><tr><th scope="row">Can you turn off public access?</th><td>Not the goal of this feature</td><td>Yes — a private endpoint lets you disable public access</td></tr><tr><th scope="row">Microsoft's advice</th><td>Fine for simple subnet allow-listing</td><td>The recommended option (Private Link)</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 Which one?</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧱 Service endpoint</h4><span class="pk-tag">the quick subnet-level allow-list</span><span class="pk-label use">✅ Pick it when</span><ul><li>You only need "allow my subnet" on the service's firewall</li><li>You want zero DNS changes</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need access from on-premises</li><li>You need to restrict to one specific instance</li><li>You want the service to have no public path</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🔌 Private endpoint</h4><span class="pk-tag">a private IP for one resource</span><span class="pk-label use">✅ Pick it when</span><ul><li>You want private-only access to a specific resource</li><li>On-premises users must reach it over VPN or ExpressRoute</li><li>You want to disable public access</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You cannot manage the DNS side</li><li>A simple subnet allow-list is enough</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛢️</span><h5>Database no one can reach from the internet</h5><p>The app must reach the SQL database, and nothing else may.</p><span class="sc-use">→ Private endpoint + public access off</span></div>
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>Office reads a storage account</h5><p>Staff on the corporate network connect over a VPN.</p><span class="sc-use">→ Private endpoint</span></div>
+      <div class="scenario"><span class="sc-icon">⚡</span><h5>Quick lock-down for a demo</h5><p>Limit a storage account to one subnet, fast, no DNS work.</p><span class="sc-use">→ Service endpoint</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>Web app reads secrets</h5><p>Keep the vault off the public internet.</p><span class="sc-use">→ Private endpoint to the vault</span></div>
+      <div class="scenario"><span class="sc-icon">🐛</span><h5>"It still uses the public IP!"</h5><p>The private endpoint exists, but traffic ignores it.</p><span class="sc-use">→ Fix the DNS: private DNS zone</span></div>
+      <div class="scenario"><span class="sc-icon">🎯</span><h5>One storage account of many</h5><p>Only this one account should be reachable privately.</p><span class="sc-use">→ Private endpoint (per instance)</span></div>
+    </div>
+  </section>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>A private endpoint = a network interface with a private IP in your subnet, connecting you to one resource over Private Link.</li><li>A service endpoint keeps the service's public IP and only changes what the service sees (your subnet).</li><li>Service endpoints cover the whole service and do not work from on-premises; private endpoints are per resource and do.</li><li>DNS must resolve the service name to the private IP — usually with a private DNS zone.</li><li>A private endpoint lets you disable public access. Microsoft recommends Private Link.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"A private endpoint puts a network interface with a private IP from my subnet in front of a specific Azure resource, using Private Link, so traffic stays private and I can disable public access. A service endpoint keeps the service's public IP and just lets the service trust my subnet; it covers the whole service and does not help on-premises users. With private endpoints I must also fix DNS so the service name resolves to the private IP."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>"I made a private endpoint but nothing changed."</b> Almost always DNS. If the service name still resolves to the public IP, your app still goes over the public path. Check what the name resolves to from inside the network.</p>
+      <p>Second trap: <b>creating a private endpoint does not close the public door.</b> It adds a private one. Turn off public network access on the resource separately when you are ready.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🧱 Service endpoint</h5><p>Public IP stays. The service learns the request came from your subnet. Whole-service scope.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🔌 Private endpoint</h5><p>A private IP in your subnet for one resource. Works from on-premises. Needs DNS.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre>az network private-endpoint create --name pe-storage --resource-group rg-shop-prod \
+    --vnet-name vnet-shop --subnet data \
+    --private-connection-resource-id <span class="str">"&lt;storage-account-resource-id&gt;"</span> \
+    --group-id blob --connection-name conn-storage</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — you also create a private DNS zone, link it to the network, and then disable public access on the storage account.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is private access to Azure services. Back to the Virtual Networks page for the full picture — and on to the next concept: Compute.</span>
+      <a class="next-link" href="virtual-networks.html">Back to Virtual Networks <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/private-link/" target="_blank" rel="noopener">Azure Private Link documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/virtual-network/" target="_blank" rel="noopener">Azure Virtual Network documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

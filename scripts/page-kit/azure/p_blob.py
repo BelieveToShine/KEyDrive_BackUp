@@ -17,7 +17,7 @@ def d_anatomy():
     for cx, name, blobs, typ in conts:
         d.zone(cx, 104, 192, 150, 'amber', f'CONTAINER  ·  {name}')
         for i, b in enumerate(blobs):
-            d.box(cx + 12, 136 + i*38, 168, 32, [(b,'t')] if False else [(b,'b'),(typ,'s')], 'emerald')
+            d.box(cx + 12, 136 + i*38, 168, 32, [(b,'b'),(typ,'s')], 'emerald')
     return d
 
 def d_sas_flow():

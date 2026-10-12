@@ -68,6 +68,11 @@
       "well-architected": "Well-Architected & Landing Zones"
     },
     "written": [
+      "resource-hierarchy",
+      "regions-availability-zones",
+      "identity-access",
+      "virtual-networks",
+      "compute",
       "storage",
       "databases",
       "messaging"
@@ -76,13 +81,17 @@
       "blob-storage": "storage",
       "cosmos-db-vs-azure-sql": "databases",
       "service-bus": "messaging",
-      "event-hubs": "messaging"
+      "event-hubs": "messaging",
+      "managed-identities": "identity-access",
+      "private-endpoints": "virtual-networks"
     },
     "subTitles": {
       "blob-storage": "Blob Storage in Depth",
       "cosmos-db-vs-azure-sql": "Cosmos DB vs Azure SQL",
       "service-bus": "Service Bus: Queues & Topics",
-      "event-hubs": "Event Hubs"
+      "event-hubs": "Event Hubs",
+      "managed-identities": "Managed Identities",
+      "private-endpoints": "Private Endpoints"
     }
   }
 }

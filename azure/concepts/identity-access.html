@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identity &amp; Access — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Identity &amp; Access</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 3 of 19 · 🏗️ Foundations</div>
+    <h1>Identity answers two questions: <span class="grad-text">who are you, and what may you do?</span></h1>
+    <p class="sub">Microsoft Entra ID proves who a person or an app is. Azure RBAC decides what they may do — and where. Learn the role-assignment sentence, the first three roles, and how to keep access small and safe.</p>
+    <div class="interview-q">❓ "What is the difference between authentication and authorization in Azure, and how does Azure RBAC work?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A role assignment is who plus what plus where: a security principal, a role definition and a scope; example: Asha has Reader on rg-shop-prod">
+<defs><marker id="id1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="id1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M160,78 L245,78" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#id1A)"/>
+<path d="M395,78 L480,78" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#id1A)"/>
+<path d="M160,200 L245,200" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#id1A)"/>
+<path d="M395,200 L480,200" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#id1A)"/>
+<text class="free" x="10" y="14" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">ONE ROLE ASSIGNMENT = WHO + WHAT + WHERE</text>
+<rect class="bx" x="10" y="26" width="150" height="104" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="85" y="57" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">👤 WHO</text>
+<text x="85" y="69.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">security principal</text>
+<text x="85" y="82" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">user · group</text>
+<text x="85" y="94.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">service principal</text>
+<text x="85" y="107" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">managed identity</text>
+<rect class="bx" x="245" y="26" width="150" height="104" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="57" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🎟️ WHAT</text>
+<text x="320" y="69.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">role definition</text>
+<text x="320" y="82" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Owner · Contributor</text>
+<text x="320" y="94.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Reader</text>
+<text x="320" y="107" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">or a custom role</text>
+<rect class="bx" x="480" y="26" width="150" height="104" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="555" y="57" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📍 WHERE</text>
+<text x="555" y="69.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">scope</text>
+<text x="555" y="82" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">management group</text>
+<text x="555" y="94.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">subscription</text>
+<text x="555" y="107" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">resource group · resource</text>
+<text class="free" x="10" y="160" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">EXAMPLE</text>
+<rect class="bx" x="10" y="172" width="150" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="85" y="197.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">👤 Asha</text>
+<text x="85" y="210.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">a user</text>
+<rect class="bx" x="245" y="172" width="150" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="197.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Reader</text>
+<text x="320" y="210.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">view, not change</text>
+<rect class="bx" x="480" y="172" width="150" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="555" y="197.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 rg-shop-prod</text>
+<text x="555" y="210.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">a resource group</text>
+<text class="free" x="320" y="262" text-anchor="middle" font-size="10" font-weight="700" fill="#93a0b8">= Asha can view everything in rg-shop-prod — but cannot change it.</text>
+<g class="arrow-pill"><rect x="182.5" y="69" width="39" height="18" rx="9"/><text x="202" y="81.5" text-anchor="middle" font-size="9" font-style="italic">gets</text></g>
+<g class="arrow-pill"><rect x="422.5" y="69" width="29" height="18" rx="9"/><text x="437" y="81.5" text-anchor="middle" font-size="9" font-style="italic">at</text></g>
+<g class="arrow-pill"><rect x="182.5" y="191" width="39" height="18" rx="9"/><text x="202" y="203.5" text-anchor="middle" font-size="9" font-style="italic">gets</text></g>
+<g class="arrow-pill"><rect x="422.5" y="191" width="29" height="18" rx="9"/><text x="437" y="203.5" text-anchor="middle" font-size="9" font-style="italic">at</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> access in Azure is always a sentence with three parts: <b>who</b> (a user, a group, an app's service principal, or a managed identity), <b>what</b> (a role — a bundle of permissions such as Reader or Contributor) and <b>where</b> (a scope: management group, subscription, resource group or one resource). Put the three together and you have a <b>role assignment</b>. In the example, Asha gets the Reader role on one resource group, so she can look at everything in it but change nothing.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Identity answers two questions: who are you (Microsoft Entra ID) and what may you do (Azure RBAC). Access is always who + what + where.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Your resources now have a home and a place in the world. The next risk is people — and apps. Who may create a database, who may delete a resource group, and how does your own app get permission to read a file without anyone typing a password?</p>
+      <p>Azure splits this into two clear steps. <b>Microsoft Entra ID</b> proves <i>who</i> you are (authentication). <b>Azure RBAC</b> decides <i>what you may do</i>, and <i>where</i> (authorization). Keeping the two apart is what lets you give each person and each app exactly the access it needs — no more.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔁 Two checks, in order</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 332" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Authentication versus authorization: the user signs in to Microsoft Entra ID and gets a token, then sends it to Azure where RBAC decides what is allowed">
+<defs><marker id="id2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="id2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,58 L270,58" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#id2A)"/>
+<path d="M270,80 L140,80" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#id2A)"/>
+<path d="M75,96 L75,202 L270,202" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#id2A)"/>
+<path d="M365,230 L365,268" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#id2A)"/>
+<rect class="bx" x="10" y="40" width="130" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="75" y="65.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👤 User or app</text>
+<text x="75" y="78.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">wants to act</text>
+<rect class="bx" x="270" y="40" width="190" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="365" y="65.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🪪 Microsoft Entra ID</text>
+<text x="365" y="78.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">AUTHENTICATION: who are you?</text>
+<rect class="bx" x="270" y="174" width="190" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="365" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🛡️ Azure (RBAC check)</text>
+<text x="365" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">AUTHORIZATION: what may you do?</text>
+<rect class="bx" x="270" y="268" width="190" height="48" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="365" y="289.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 Resource</text>
+<text x="365" y="302.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">storage, VM, database…</text>
+<g class="arrow-pill"><rect x="164" y="49" width="82" height="18" rx="9"/><text x="205" y="61.5" text-anchor="middle" font-size="9" font-style="italic">1 · signs in</text></g>
+<g class="arrow-pill"><rect x="170" y="71" width="76" height="18" rx="9"/><text x="208" y="83.5" text-anchor="middle" font-size="9" font-style="italic">2 · a token</text></g>
+<g class="arrow-pill"><rect x="112.5" y="193" width="119" height="18" rx="9"/><text x="172" y="205.5" text-anchor="middle" font-size="9" font-style="italic">3 · sends the token</text></g>
+<g class="arrow-pill"><rect x="397.5" y="240" width="145" height="18" rx="9"/><text x="470" y="252.5" text-anchor="middle" font-size="9" font-style="italic">only if a role allows it</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>1–2 · Authentication.</b> The user or app signs in to Microsoft Entra ID, which proves who they are and returns a <b>token</b>. <b>3 · Authorization.</b> The caller sends the token to Azure. Azure RBAC looks at the role assignments for that identity at that scope, and the request only reaches the resource if a role allows it. Signing in alone gives you nothing — a new identity has no access until someone assigns a role.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧑‍🤝‍🧑 Who can be given a role?</div>
+    <div class="taxonomy-strip">
+      <div class="tax-item"><h5>👤 User</h5><p>A person with an account in your Microsoft Entra tenant.</p></div>
+      <div class="tax-item"><h5>👥 Group</h5><p>A set of users. Assign the role to the group once, then add or remove people — easier than assigning to each person.</p></div>
+      <div class="tax-item"><h5>🤖 Service principal</h5><p>The identity of an application inside your tenant. Used when an app (or a pipeline) must act on its own.</p></div>
+      <div class="tax-item"><h5>🪪 Managed identity</h5><p>A special service principal that Azure manages for an Azure resource — so your code needs no secret. See the deep dive below.</p></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎟️ The three roles you meet first</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Role</th><th scope="col">What it can do</th><th scope="col">Typical person</th></tr></thead><tbody><tr><th scope="row">Owner</th><td>Full management of resources <b>and</b> can assign roles to others</td><td>A small number of trusted admins</td></tr><tr><th scope="row">Contributor</th><td>Full management of resources, but <b>cannot</b> assign roles</td><td>Developers who build and run the app</td></tr><tr><th scope="row">Reader</th><td>View resources, change nothing</td><td>Auditors, support, new team members</td></tr></tbody></table></div>
+    <div class="kd-card" style="margin-top:14px">Permissions <b>add up</b>: if someone has Reader and Contributor on the same scope, the result is Contributor. And a role given at a higher scope is <b>inherited</b> by everything below it (see the resource hierarchy). Aim for <b>least privilege</b>: the smallest role at the lowest scope that lets the person or app do its job.</div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">⚠️ Two kinds of roles — do not mix them up</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 276" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Microsoft Entra roles manage the directory (users, groups, apps); Azure roles manage Azure resources; they are separate systems">
+<defs><marker id="id3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="id3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="240" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">ENTRA ROLES · manage the directory</text>
+<rect class="zone" x="325" y="8" width="305" height="240" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">AZURE ROLES · manage Azure resources</text>
+<rect class="bx" x="26" y="44" width="273" height="46" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="162.5" y="64.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🛡️ Global Administrator</text>
+<text x="162.5" y="77.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">the top Entra role</text>
+<rect class="bx" x="26" y="98" width="273" height="46" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="162.5" y="118.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🎛️ They control</text>
+<text x="162.5" y="131.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">users · groups · app registrations</text>
+<text class="free" x="162" y="176" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Scope: the tenant, an administrative unit,</text>
+<text class="free" x="162" y="192" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">or a single object.</text>
+<rect class="bx" x="341" y="44" width="273" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="477.5" y="61.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">👑 Owner</text>
+<text x="477.5" y="74.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">manage everything and assign roles</text>
+<rect class="bx" x="341" y="92" width="273" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="477.5" y="109.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">✍️ Contributor</text>
+<text x="477.5" y="122.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">manage everything, but cannot assign roles</text>
+<rect class="bx" x="341" y="140" width="273" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="477.5" y="157.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">👀 Reader</text>
+<text x="477.5" y="170.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">view only</text>
+<text class="free" x="477" y="204" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Scope: management group, subscription,</text>
+<text class="free" x="477" y="220" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">resource group, or a single resource.</text>
+<text class="free" x="320" y="266" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Separate systems: permissions from one cannot be used in the other's custom roles.</text>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Microsoft Entra roles</b> (left) manage the <em>directory</em>: users, groups, app registrations. Their top role is Global Administrator. <b>Azure roles</b> (right) manage <em>Azure resources</em>: Owner, Contributor, Reader and many more. They are separate systems with different scopes. Being a Global Administrator is not the same as being an Owner of a subscription.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🧑‍💻</span><h5>New developer joins</h5><p>They must deploy the web app but never touch billing or other teams.</p><span class="sc-use">→ Contributor on their resource group</span></div>
+      <div class="scenario"><span class="sc-icon">🔍</span><h5>Auditor reviews Prod</h5><p>Needs to see everything, change nothing.</p><span class="sc-use">→ Reader on the Prod subscription</span></div>
+      <div class="scenario"><span class="sc-icon">👥</span><h5>Ten people, same job</h5><p>Assigning ten roles by hand is slow and error-prone.</p><span class="sc-use">→ One role to a group</span></div>
+      <div class="scenario"><span class="sc-icon">🤖</span><h5>Pipeline deploys the app</h5><p>A script, not a person, needs access.</p><span class="sc-use">→ A service principal (or managed identity) with a role</span></div>
+      <div class="scenario"><span class="sc-icon">🌐</span><h5>Web app reads blobs</h5><p>The code must read files without a password in its settings.</p><span class="sc-use">→ Managed identity + Blob data role</span></div>
+      <div class="scenario"><span class="sc-icon">🛑</span><h5>"Everyone is Owner"</h5><p>It works today, until one mistake deletes everything.</p><span class="sc-use">→ Least privilege: lowest role, lowest scope</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="managed-identities.html"><span class="dc-kicker">Deep dive · Identity & Access</span><h4>Managed identities</h4><p>How an Azure app gets a token with no password in its code, system-assigned vs user-assigned, and the three steps to set one up.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Authentication = who are you (Microsoft Entra ID → a token). Authorization = what may you do (Azure RBAC).</li><li>A role assignment = security principal (who) + role definition (what) + scope (where). Scopes: management group, subscription, resource group, resource.</li><li>Owner can assign roles; Contributor manages resources but cannot assign roles; Reader only views. Permissions add up and are inherited downward.</li><li>Microsoft Entra roles (the directory) and Azure roles (resources) are separate systems.</li><li>Prefer groups and managed identities; give least privilege at the lowest useful scope.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"In Azure, Microsoft Entra ID handles authentication — proving who a user or workload is and issuing a token — and Azure RBAC handles authorization. A role assignment combines a security principal, a role definition and a scope, and it is inherited down the hierarchy. I assign roles to groups, use managed identities for apps so there are no secrets, and follow least privilege at the narrowest scope that works."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Signing in is not the same as having access.</b> A user who can sign in to the tenant, or a brand-new managed identity, can do nothing in Azure until a role is assigned. "I can log in but get an authorization error" almost always means a missing role at the right scope.</p>
+      <p>Second trap: <b>Owner is powerful because it can hand out access</b>. Giving Owner to "make things work" lets that person (or app) grant anyone anything. Reach for Contributor, or a narrower role, first.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🪪 Authentication</h5><p>Proves who you are. Done by Microsoft Entra ID. Result: a token.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🛡️ Authorization</h5><p>Decides what that identity may do, and where. Done by Azure RBAC role assignments.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># give a user the Reader role on one resource group (who + what + where)</span>
+az role assignment create \
+    --assignee <span class="str">"asha@contoso.com"</span> \
+    --role <span class="str">"Reader"</span> \
+    --scope <span class="str">"/subscriptions/&lt;subscription-id&gt;/resourceGroups/rg-shop-prod"</span></pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — replace the placeholders; in real teams roles are usually assigned to groups, and defined in templates.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>People and apps now have identities and roles. Next: the <b>network</b> — how resources talk to each other and to the outside world, and who is allowed through the door.</span>
+      <a class="next-link" href="virtual-networks.html">Virtual Networks <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/" target="_blank" rel="noopener">Azure RBAC documentation</a> · <a href="https://learn.microsoft.com/en-us/entra/" target="_blank" rel="noopener">Microsoft Entra documentation</a> · <a href="https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/" target="_blank" rel="noopener">Managed identities for Azure resources</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

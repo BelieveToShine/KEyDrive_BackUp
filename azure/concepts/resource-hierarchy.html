@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenants, Subscriptions &amp; Resource Groups — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Resource Hierarchy</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 1 of 19 · 🏗️ Foundations</div>
+    <h1>Before you deploy anything, Azure asks <span class="grad-text">where it lives, who pays, and who may touch it.</span></h1>
+    <p class="sub">Every Azure resource sits in a family tree: tenant, management groups, subscriptions, resource groups, resources. Learn what each level is for — and why a role or policy set high in the tree reaches everything below.</p>
+    <div class="interview-q">❓ "Explain Azure's resource hierarchy — what are tenants, management groups, subscriptions and resource groups for?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 388" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Azure resource hierarchy: a tenant contains management groups, which contain subscriptions, which contain resource groups, which contain resources; roles and policies flow downward">
+<defs><marker id="rh1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="rh1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="470" height="368" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">TENANT · Microsoft Entra ID (your directory)</text>
+<rect class="zone" x="22" y="36" width="446" height="330" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="36" y="55" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">MANAGEMENT GROUPS · optional folders of subscriptions</text>
+<rect class="zone" x="34" y="64" width="208" height="290" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="48" y="83" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">SUBSCRIPTION · Prod</text>
+<rect class="zone" x="254" y="64" width="208" height="290" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="268" y="83" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">SUBSCRIPTION · Dev</text>
+<rect class="zone" x="46" y="92" width="184" height="122" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="60" y="111" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">RESOURCE GROUP · rg-web</text>
+<rect class="zone" x="46" y="226" width="184" height="118" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="60" y="245" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">RESOURCE GROUP · rg-data</text>
+<rect class="zone" x="266" y="92" width="184" height="122" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="280" y="111" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">RESOURCE GROUP · rg-dev</text>
+<path d="M560,134 L560,300" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#rh1A)"/>
+<rect class="bx" x="58" y="120" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="138" y="141" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Web app</text>
+<rect class="bx" x="58" y="162" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="138" y="183" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔌 API app</text>
+<rect class="bx" x="58" y="254" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="138" y="275" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🛢️ SQL database</text>
+<rect class="bx" x="58" y="296" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="138" y="317" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗂️ Storage account</text>
+<rect class="bx" x="278" y="120" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="358" y="141" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧪 Test web app</text>
+<rect class="bx" x="278" y="162" width="160" height="34" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="358" y="183" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧪 Test database</text>
+<rect class="bx" x="490" y="78" width="140" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="560" y="103.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📌 Assign a role</text>
+<text x="560" y="116.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">or a policy here</text>
+<rect class="bx" x="490" y="300" width="140" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="560" y="325.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">✅ Applies to</text>
+<text x="560" y="338.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">everything below it</text>
+<g class="arrow-pill"><rect x="487.5" y="208" width="71" height="18" rx="9"/><text x="523" y="220.5" text-anchor="middle" font-size="9" font-style="italic">flows down</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> every Azure resource lives in a family tree. At the top is your <b>tenant</b> — your organization's Microsoft Entra ID directory. Under it you can add <b>management groups</b> (optional folders), then <b>subscriptions</b>, then <b>resource groups</b>, and finally the <b>resources</b> themselves: web apps, databases, storage accounts. The box on the right is the most important rule: a <b>role or a policy assigned at one level applies to everything below it</b>.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Before you deploy anything, Azure asks three questions: where does it live, who pays for it, and who may touch it. The hierarchy answers all three.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>This is where the journey starts, so nothing came before it. Think about what happens without structure: fifty resources dropped into one pile. You cannot tell which ones belong to which app, you cannot send one team its own bill, and you cannot give a contractor access to one app without handing over the keys to everything.</p>
+      <p>The hierarchy fixes that with four simple layers, each with one job: the <b>tenant</b> says who can sign in, <b>management groups</b> apply rules to many subscriptions at once, a <b>subscription</b> is the unit of billing and access, and a <b>resource group</b> keeps one app's resources together so they can be managed — and deleted — as one.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The four layers — what each one is for</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🏢 Tenant</h4><span class="pk-tag">your organization's directory of identities (Microsoft Entra ID)</span><span class="pk-label use">✅ Pick it when</span><ul><li>Decide who can sign in: users, groups and apps</li><li>One directory that many subscriptions trust</li><li>Every subscription trusts exactly one tenant</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Separating Dev from Prod — use subscriptions for that</li><li>Thinking of it as a bill — the tenant itself holds identities, not costs</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🗂️ Management group</h4><span class="pk-tag">an optional folder that holds subscriptions</span><span class="pk-label use">✅ Pick it when</span><ul><li>Apply the same role or policy to many subscriptions at once</li><li>Mirror your company: departments, environments</li><li>Keep rules in one place instead of copying them</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A single subscription — you do not need one</li><li>Holding resources — resources never sit directly in a management group</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>💳 Subscription</h4><span class="pk-tag">the unit of billing and access, where resources are created</span><span class="pk-label use">✅ Pick it when</span><ul><li>Give a team or environment its own bill and budget</li><li>A strong boundary for access and limits</li><li>Keep Prod and Dev apart</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Grouping the pieces of one app — that is a resource group</li><li>Creating dozens with no plan — decide a pattern first</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>📦 Resource group</h4><span class="pk-tag">a container for resources that share a lifecycle</span><span class="pk-label use">✅ Pick it when</span><ul><li>Keep one app's resources together</li><li>Delete everything for an app in one step</li><li>Give a role to just that app</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Grouping by type ("all databases") — it scatters each app</li><li>Using it as a security wall — permissions come from roles</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧱 Grouping resources: by lifecycle, not by type</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 252" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Grouping resources by lifecycle (one group per app) versus by type (all databases together)">
+<defs><marker id="rh2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="rh2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="236" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">GROUP BY LIFECYCLE ✅</text>
+<rect class="zone" x="24" y="38" width="134" height="136" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="38" y="57" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">rg-shop-prod</text>
+<rect class="zone" x="168" y="38" width="134" height="136" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="182" y="57" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">rg-blog-prod</text>
+<rect class="zone" x="325" y="8" width="305" height="236" rx="14" fill="rgba(251,113,133,.05)" stroke="#fb7185" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fda4af">GROUP BY TYPE ⚠️</text>
+<rect class="zone" x="339" y="38" width="134" height="136" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="353" y="57" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">rg-all-web</text>
+<rect class="zone" x="483" y="38" width="134" height="136" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="497" y="57" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">rg-all-databases</text>
+<rect class="bx" x="36" y="64" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="91" y="80.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🌐 shop-web</text>
+<rect class="bx" x="36" y="98" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="91" y="114.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🛢️ shop-db</text>
+<rect class="bx" x="36" y="132" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="91" y="148.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🗂️ shop-files</text>
+<rect class="bx" x="180" y="64" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="235" y="80.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🌐 blog-web</text>
+<rect class="bx" x="180" y="98" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="235" y="114.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🛢️ blog-db</text>
+<text class="free" x="162" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Retire the blog? Delete one group.</text>
+<text class="free" x="162" y="216" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Things that live and die together stay together.</text>
+<rect class="bx" x="351" y="64" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="406" y="80.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🌐 shop-web</text>
+<rect class="bx" x="351" y="98" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="406" y="114.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🌐 blog-web</text>
+<rect class="bx" x="495" y="64" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="80.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🛢️ shop-db</text>
+<rect class="bx" x="495" y="98" width="110" height="28" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="114.75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#e7ebf3">🛢️ blog-db</text>
+<text class="free" x="477" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Retire the blog? Hunt through every group.</text>
+<text class="free" x="477" y="216" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">One app is scattered across many groups.</text>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the rule of thumb is to put resources that <b>deploy together and retire together</b> into one resource group. On the left, each app has its own group, so retiring the blog means deleting one group. On the right, resources are grouped by type — all web apps in one group, all databases in another — so one app is scattered over many groups and every change touches several of them.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 The levels side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Level</th><th scope="col">What sits inside it</th><th scope="col">Its main job</th></tr></thead><tbody><tr><th scope="row">Tenant</th><td>Users, groups, apps — and the subscriptions that trust it</td><td>Identity: who can sign in</td></tr><tr><th scope="row">Management group</th><td>Subscriptions and other management groups</td><td>Governance: roles and policy for many subscriptions</td></tr><tr><th scope="row">Subscription</th><td>Resource groups</td><td>Billing and access boundary</td></tr><tr><th scope="row">Resource group</th><td>Resources</td><td>Lifecycle: manage and delete together</td></tr><tr><th scope="row">Resource</th><td>—</td><td>The real thing: a VM, a database, a storage account</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios — which level?</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">💰</span><h5>Finance wants its own bill</h5><p>The finance team should see and control its own costs.</p><span class="sc-use">→ Its own subscription</span></div>
+      <div class="scenario"><span class="sc-icon">📜</span><h5>"Only EU regions" for every team</h5><p>One rule must apply to every subscription in the company.</p><span class="sc-use">→ Policy on a management group</span></div>
+      <div class="scenario"><span class="sc-icon">🧹</span><h5>Delete the demo on Friday</h5><p>A demo with a web app, a database and storage should vanish in one step.</p><span class="sc-use">→ One resource group per demo</span></div>
+      <div class="scenario"><span class="sc-icon">🧑‍💻</span><h5>A contractor sees one app</h5><p>They must work on the web app and nothing else.</p><span class="sc-use">→ A role on that resource group</span></div>
+      <div class="scenario"><span class="sc-icon">🚧</span><h5>Dev must never touch Prod</h5><p>A mistake in Dev must not be able to reach Prod.</p><span class="sc-use">→ Separate subscriptions (plus roles)</span></div>
+      <div class="scenario"><span class="sc-icon">🏷️</span><h5>Cost report by project</h5><p>Costs must roll up by project across many groups.</p><span class="sc-use">→ Tags on resources</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — Azure Resource Manager</summary>
+    <div class="zoom-inner">
+<figure class="diagram-card">
+<svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Every tool sends its request to Azure Resource Manager, which passes it to the resource provider that owns each kind of resource">
+<defs><marker id="rh3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="rh3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M150,38 L250,38" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M150,96 L250,96" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M150,154 L250,154" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M150,212 L250,212" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M390,59 L490,59" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M390,123 L490,123" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<path d="M390,187 L490,187" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#rh3A)"/>
+<rect class="bx" x="250" y="16" width="140" height="218" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="102.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧭 Azure Resource</text>
+<text x="320" y="117.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Manager (ARM)</text>
+<text x="320" y="130.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">checks who you are,</text>
+<text x="320" y="142.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">what you may do,</text>
+<text x="320" y="155.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">and the policy</text>
+<rect class="bx" x="10" y="16" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="80" y="35.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖱️ Portal</text>
+<text x="80" y="48.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the web UI</text>
+<rect class="bx" x="10" y="74" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="80" y="93.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⌨️ CLI</text>
+<text x="80" y="106.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">and PowerShell</text>
+<rect class="bx" x="10" y="132" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="80" y="151.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 SDKs</text>
+<text x="80" y="164.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">from your code</text>
+<rect class="bx" x="10" y="190" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="80" y="209.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📄 Bicep</text>
+<text x="80" y="222.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">templates (IaC)</text>
+<rect class="bx" x="490" y="36" width="140" height="46" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="560" y="56.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Microsoft.Compute</text>
+<text x="560" y="69.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">virtual machines</text>
+<rect class="bx" x="490" y="100" width="140" height="46" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="560" y="120.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Microsoft.Storage</text>
+<text x="560" y="133.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">storage accounts</text>
+<rect class="bx" x="490" y="164" width="140" height="46" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="560" y="184.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Microsoft.Network</text>
+<text x="560" y="197.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">virtual networks</text>
+<text class="free" x="560" y="252" text-anchor="middle" font-size="9" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">resource providers</text>
+<g class="arrow-pill"><rect x="167" y="29" width="66" height="18" rx="9"/><text x="200" y="41.5" text-anchor="middle" font-size="9" font-style="italic">REST call</text></g>
+<g class="arrow-pill"><rect x="167" y="87" width="66" height="18" rx="9"/><text x="200" y="99.5" text-anchor="middle" font-size="9" font-style="italic">REST call</text></g>
+<g class="arrow-pill"><rect x="167" y="145" width="66" height="18" rx="9"/><text x="200" y="157.5" text-anchor="middle" font-size="9" font-style="italic">REST call</text></g>
+<g class="arrow-pill"><rect x="167" y="203" width="66" height="18" rx="9"/><text x="200" y="215.5" text-anchor="middle" font-size="9" font-style="italic">REST call</text></g>
+<g class="arrow-pill"><rect x="407" y="50" width="66" height="18" rx="9"/><text x="440" y="62.5" text-anchor="middle" font-size="9" font-style="italic">routes to</text></g>
+<g class="arrow-pill"><rect x="407" y="114" width="66" height="18" rx="9"/><text x="440" y="126.5" text-anchor="middle" font-size="9" font-style="italic">routes to</text></g>
+<g class="arrow-pill"><rect x="407" y="178" width="66" height="18" rx="9"/><text x="440" y="190.5" text-anchor="middle" font-size="9" font-style="italic">routes to</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> whichever tool you use — the portal, the CLI, an SDK in your code, or a Bicep template — it sends a REST request to <b>Azure Resource Manager (ARM)</b>. ARM checks who you are, what you may do and which policies apply, then hands the work to the <b>resource provider</b> that owns that kind of resource. That is why the same roles and policies work no matter which tool you use.</figcaption>
+</figure>      <p><b>Good to know.</b> A subscription trusts one tenant; one tenant can have many subscriptions. Each resource belongs to exactly one resource group (you can move it). '
+      The <i>location</i> of a resource group is only where its metadata is stored — its resources can live in other regions. Deleting a resource group deletes every resource inside it.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Hierarchy: tenant → management groups (optional) → subscriptions → resource groups → resources.</li><li>Roles and policies assigned at a level are inherited by everything below it.</li><li>Subscription = billing and access boundary. Resource group = lifecycle container. Tenant = identity directory.</li><li>A subscription trusts one tenant; a resource belongs to one resource group; deleting a resource group deletes its resources.</li><li>Group resources by lifecycle (one app together), not by type.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Azure organizes everything in a hierarchy: a Microsoft Entra tenant for identity, optional management groups to apply governance across subscriptions, subscriptions as the billing and access boundary, and resource groups to hold resources that share a lifecycle. Roles and policies are inherited downward, so I assign them at the highest sensible level. I group resources by application lifecycle, not by type."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>A resource group is not a region, and not a security wall.</b> Its location only says where its metadata is stored. Resources inside it can be in other regions, and being in the same group gives nobody any permission by itself — permissions come from role assignments.</p>
+      <p>Second trap: <b>deleting a resource group deletes everything inside it</b> — including the database. Use resource locks and separate groups for anything you cannot afford to lose.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🏢 Tenant</h5><p>The directory of identities (Microsoft Entra ID). It decides who you are. It is not where resources live.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>💳 Subscription</h5><p>The container where resources are created and billed. It trusts one tenant, and a tenant can have many subscriptions.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># create a resource group — its location says where the group's metadata is stored</span>
+az group create --name rg-shop-prod --location westeurope
+
+<span class="cmt"># delete it — this removes EVERY resource inside the group (the CLI asks you to confirm)</span>
+az group delete --name rg-shop-demo</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real teams create groups from templates (Bicep) and protect important ones with locks.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You now know how Azure is organized. Next question: <b>where in the world</b> do those resources physically live — and what happens if a datacenter fails?</span>
+      <a class="next-link" href="regions-availability-zones.html">Regions &amp; Availability Zones <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/" target="_blank" rel="noopener">Azure Resource Manager documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/governance/" target="_blank" rel="noopener">Azure governance (management groups) documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/" target="_blank" rel="noopener">Cloud Adoption Framework</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

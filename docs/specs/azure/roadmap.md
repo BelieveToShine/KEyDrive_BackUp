@@ -8,11 +8,11 @@ journey-map node and concept-list row from locked to written** (and adds its slu
 
 | # | Concept | Status | Page(s) |
 |---|---|---|---|
-| 1 | Tenants, Subscriptions & Resource Groups | 🔒 Planned | — |
-| 2 | Regions & Availability Zones | 🔒 Planned | — |
-| 3 | Identity & Access | 🔒 Planned | — |
-| 4 | Virtual Networks | 🔒 Planned | — |
-| 5 | Compute | 🔒 Planned | — |
+| 1 | Tenants, Subscriptions & Resource Groups | ✅ Written | `azure/concepts/resource-hierarchy.html` |
+| 2 | Regions & Availability Zones | ✅ Written | `azure/concepts/regions-availability-zones.html` |
+| 3 | Identity & Access | ✅ Written | `azure/concepts/identity-access.html`, `azure/concepts/managed-identities.html` (Managed Identities) |
+| 4 | Virtual Networks | ✅ Written | `azure/concepts/virtual-networks.html`, `azure/concepts/private-endpoints.html` (Private Endpoints) |
+| 5 | Compute | ✅ Written | `azure/concepts/compute.html` |
 | 6 | Storage | ✅ Written | `azure/concepts/storage.html`, `azure/concepts/blob-storage.html` (Blob Storage in Depth) |
 | 7 | Databases | ✅ Written | `azure/concepts/databases.html`, `azure/concepts/cosmos-db-vs-azure-sql.html` (Cosmos DB vs Azure SQL) |
 | 8 | Load Balancing & Traffic Routing | 🔒 Planned | — |
@@ -28,12 +28,11 @@ journey-map node and concept-list row from locked to written** (and adds its slu
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**3 / 19 written, plus 4 deep-dive pages** (2026-10-12). The first batch was written out of order at the
-user's request (they asked for Storage, Databases and Messaging first); the bottom bar and the previous
-concepts' "next" boxes show unwritten neighbours as locked "coming soon" until they ship.
+**8 / 19 written, plus 6 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
+request): Storage, Databases, Messaging & Events. Batch 2 (roadmap order): concepts 1–5 — the whole foundation
+(hierarchy, regions, identity, networking, compute).
 
-Slug convention: kebab-case of the concept name, e.g. `azure/concepts/regions-availability-zones.html`
-(the slugs for all 19 are fixed in `assets/journeys.json`).
+Slug convention: kebab-case of the concept name (the slugs for all 19 are fixed in `assets/journeys.json`).
 
-**Next in order when asked:** 1 Resource Hierarchy → 2 Regions & Zones → 3 Identity & Access → 4 Virtual
-Networks → 5 Compute, then 8 onward. Verify every fact first (`../../rules/fact-check-and-currency.md`).
+**Next in order when asked:** Load Balancing & Traffic Routing → Scaling & Resilience → Caching & Edge Delivery (concepts 8, 9, 10), then 12 onward.
+Verify every fact first (`../../rules/fact-check-and-currency.md`).

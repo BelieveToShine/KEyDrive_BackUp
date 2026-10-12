@@ -103,6 +103,8 @@ const volatileRe = [
   [/\b(?:preview|deprecated|retire[sd]?|retirement|end of life|generally available)\b/gi, 'lifecycle word'],
   [/\b\d+(?:\.\d+)?\s?%/g, 'percentage'],
   [/\b\d+\s?(?:by default|tries|attempts|retries)\b/gi, 'default/limit'],
+  [/(?<![\d,.])\b\d{3,5}\b(?![\/.,\d])/g, 'port/priority/number'],
+  [/\b(?:at least |up to |about |only )?(?:two|three|four|five|six|seven|eight|nine|ten|\d+)\s+(?:availability zones|zones|addresses|IP addresses|levels|copies|regions)\b/gi, 'count'],
 ];
 const ledgerCache = {};
 const noLedgerNoted = new Set();

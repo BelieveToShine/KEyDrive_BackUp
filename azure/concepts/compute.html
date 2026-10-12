@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compute — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Compute</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 5 of 19 · 🧱 Building blocks</div>
+    <h1>Compute is where your code runs — and the real choice is <span class="grad-text">how much of the machine you want to look after.</span></h1>
+    <p class="sub">Azure offers virtual machines, web hosting, containers and functions. The more you hand to Azure, the less you manage — and the fewer knobs you can turn. Learn the ladder and how to pick your rung.</p>
+    <div class="interview-q">❓ "How do you choose between Azure VMs, App Service, Container Apps, AKS, Functions and Container Instances?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 276" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Azure compute options from most control to least to run: virtual machines, AKS, Container Apps, App Service, Functions">
+<defs><marker id="cp1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cp1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M64,170 L64,210 L576,210 L576,170" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#cp1A)"/>
+<text class="free" x="10" y="24" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">more control · more to run</text>
+<text class="free" x="630" y="24" text-anchor="end" font-size="9.5" font-weight="400" fill="#93a0b8" font-family="'JetBrains Mono'">less to run · fewer knobs</text>
+<rect class="bx" x="10" y="40" width="108" height="130" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="64" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ VMs</text>
+<text x="64" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">you patch the OS</text>
+<text x="64" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">full control</text>
+<text x="64" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">lift-and-shift</text>
+<rect class="bx" x="138" y="40" width="108" height="130" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="192" y="90.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">☸️ AKS</text>
+<text x="192" y="102.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Kubernetes itself</text>
+<text x="192" y="115.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">full Kubernetes API</text>
+<text x="192" y="127.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">most to operate</text>
+<rect class="bx" x="266" y="40" width="108" height="130" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📦 Container</text>
+<text x="320" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Apps</text>
+<text x="320" y="116.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">containers, no</text>
+<text x="320" y="129" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">Kubernetes to run</text>
+<rect class="bx" x="394" y="40" width="108" height="130" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="448" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🌐 App</text>
+<text x="448" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Service</text>
+<text x="448" y="116.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">web apps and APIs</text>
+<text x="448" y="129" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Azure runs the OS</text>
+<rect class="bx" x="522" y="40" width="108" height="130" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="576" y="96.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">⚡ Functions</text>
+<text x="576" y="109" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">code that reacts</text>
+<text x="576" y="121.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">to events</text>
+<text class="free" x="320" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">A rough guide, not a ranking — pick the most managed option that fits.</text>
+<g class="arrow-pill"><rect x="229" y="201" width="182" height="18" rx="9"/><text x="320" y="213.5" text-anchor="middle" font-size="9" font-style="italic">Azure takes on more of the work</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> five ways to run code on Azure, from the most control on the left to the least to look after on the right. <b>VMs</b> give you a whole machine — and its patching. <b>AKS</b> gives you Kubernetes itself. <b>Container Apps</b> runs your containers without making you run a cluster. <b>App Service</b> hosts web apps and APIs while Azure runs the operating system. <b>Functions</b> runs small pieces of code when something happens. As you move right, Azure does more of the work — and you get fewer knobs to turn.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Compute is where your code runs. The real choice is how much of the machine you want to look after — the more you hand to Azure, the less you manage and the fewer knobs you get.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>You now have a safe network. Your code still needs somewhere to <b>run</b>. The oldest answer is a virtual machine: rent a computer in the cloud. It works for everything, but you inherit everything — patching the operating system, installing the runtime, planning how to add more copies when traffic grows.</p>
+      <p>Azure offers a ladder of options because teams want different trade-offs: <b>control</b> or <b>convenience</b>. The skill is picking the <i>most managed</i> option that still meets your needs — and moving down the ladder only for a hard requirement.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The six options</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#93a0b8"><h4>🖥️ Virtual Machines</h4><span class="pk-tag">a whole computer in the cloud</span><span class="pk-label use">✅ Pick it when</span><ul><li>You need the operating system itself, or software installed on the machine</li><li>Lift-and-shift of an existing server</li><li>Special needs such as GPUs or long-running batch work</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A normal web app — you would take on patching you do not need</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🌐 App Service</h4><span class="pk-tag">managed hosting for web apps and APIs</span><span class="pk-label use">✅ Pick it when</span><ul><li>A web app or HTTP API that you want to just deploy</li><li>Azure should handle the OS and runtime</li><li>Built-in autoscaling and deployment slots</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need per-service scaling for many small containers</li><li>You need scale to zero — App Service does not scale to zero</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📦 Container Apps</h4><span class="pk-tag">containers, without running Kubernetes</span><span class="pk-label use">✅ Pick it when</span><ul><li>Microservices or containerised APIs</li><li>Each app should scale on its own, and most can scale to zero</li><li>Microsoft suggests looking at it first for containers when you do not need the Kubernetes API</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need direct access to the Kubernetes API → AKS</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>☸️ Azure Kubernetes Service (AKS)</h4><span class="pk-tag">managed Kubernetes</span><span class="pk-label use">✅ Pick it when</span><ul><li>You need Kubernetes itself: its API, custom controllers, CRDs</li><li>The most customisation and control for containers</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A small team that wants less to operate → Container Apps</li><li>It takes the most operational effort of the container options</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>⚡ Azure Functions</h4><span class="pk-tag">small code that reacts to events</span><span class="pk-label use">✅ Pick it when</span><ul><li>Event-driven work: a message, a timer, a webhook</li><li>Small pieces of logic that do not need a server of their own</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A long-lived web app with many routes → App Service or Container Apps</li></ul></div>
+      <div class="pick-card" style="--pick:#93a0b8"><h4>⏱️ Container Instances</h4><span class="pk-tag">run a single container, no cluster</span><span class="pk-label use">✅ Pick it when</span><ul><li>A one-off job or a quick task in a container</li><li>You do not want to provision a VM or a bigger service</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Autoscaling services — it does not scale beyond the container group</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 708" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for choosing an Azure compute service: virtual machines, App Service, Container Apps, AKS, Functions or Container Instances">
+<defs><marker id="cp2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cp2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,487 L410,487" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,514 L175,554" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M340,581 L410,581" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<path d="M175,608 L175,648" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cp2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What are you running?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ Need the whole OS, or a lift-and-shift?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">an installed agent, a legacy app</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">Virtual Machines</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">you control the OS</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 A web app or HTTP API — just code?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">no containers to manage</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">App Service</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Azure runs the platform</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Already a container, no Kubernetes needed?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">each app scales on its own</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Container Apps</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">containers without the cluster</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">☸️ Need Kubernetes itself?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its API, custom controllers, sidecars</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">AKS</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">full Kubernetes control</text>
+<rect class="bx" x="10" y="460" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚡ Small code that reacts to an event?</text>
+<text x="175" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a message, a timer, a webhook</text>
+<rect class="bx" x="410" y="460" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Azure Functions</text>
+<text x="520" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">event-driven code</text>
+<rect class="bx" x="10" y="554" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="578.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⏱️ One container for a one-off job?</text>
+<text x="175" y="591.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">no orchestration needed</text>
+<rect class="bx" x="410" y="554" width="220" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="520" y="578.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">Container Instances</text>
+<text x="520" y="591.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">run it, then it ends</text>
+<rect class="bx" x="10" y="648" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="670.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="683.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with the most managed option that fits</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="478" width="34" height="18" rx="9"/><text x="375" y="490.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="523" width="29" height="18" rx="9"/><text x="199" y="535.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="572" width="34" height="18" rx="9"/><text x="375" y="584.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="617" width="29" height="18" rx="9"/><text x="199" y="629.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> read the questions from the top; the first "yes" is usually your answer. The questions run from <b>most control</b> (do you need the whole operating system?) to <b>most specific</b> (a one-off container job). If none fits, do not agonise: start with the most managed option that meets your needs, and move toward more control only when a real requirement forces you.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Who looks after what</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">You look after</th><th scope="col">Azure looks after</th><th scope="col">Scaling</th></tr></thead><tbody><tr><th scope="row">Virtual Machines</th><td>The OS, patches, runtime, your app</td><td>The physical hardware and host</td><td>You set it up (scale sets — a later concept)</td></tr><tr><th scope="row">App Service</th><td>Your code and its settings</td><td>The OS, patching and runtime</td><td>Built-in autoscale, scaled per App Service plan</td></tr><tr><th scope="row">Container Apps</th><td>Your container images</td><td>The cluster and the scaling engine</td><td>Per app; most apps can scale to zero</td></tr><tr><th scope="row">AKS</th><td>Containers and the Kubernetes setup</td><td>The control plane; node patching is shared</td><td>Kubernetes rules, as you configure them</td></tr><tr><th scope="row">Functions</th><td>Your code</td><td>Almost everything else</td><td>On events (details in the Serverless concept)</td></tr><tr><th scope="row">Container Instances</th><td>One container</td><td>The host</td><td>Not beyond the container group</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📏 Two different ways to scale</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 312" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="App Service scales the whole plan so its apps scale together; Container Apps scales each app on its own">
+<defs><marker id="cp3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cp3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="296" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">APP SERVICE · you scale the plan</text>
+<rect class="zone" x="24" y="40" width="277" height="150" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="38" y="59" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">APP SERVICE PLAN</text>
+<rect class="zone" x="325" y="8" width="305" height="296" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">CONTAINER APPS · each app scales alone</text>
+<rect class="bx" x="34" y="72" width="76" height="100" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="72" y="113.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">VM 1</text>
+<text x="72" y="126" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App A</text>
+<text x="72" y="138.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App B</text>
+<rect class="bx" x="122" y="72" width="76" height="100" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="160" y="113.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">VM 2</text>
+<text x="160" y="126" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App A</text>
+<text x="160" y="138.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App B</text>
+<rect class="bx" x="210" y="72" width="76" height="100" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="248" y="113.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">VM 3</text>
+<text x="248" y="126" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App A</text>
+<text x="248" y="138.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">App B</text>
+<text class="free" x="162" y="222" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Both apps share the plan's instances</text>
+<text class="free" x="162" y="238" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">and scale together.</text>
+<text class="free" x="162" y="262" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">It does not scale to zero.</text>
+<rect class="bx" x="339" y="72" width="62" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="370" y="101" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">App A</text>
+<rect class="bx" x="411" y="72" width="60" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="441" y="94.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">A</text>
+<text x="441" y="107.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">replica</text>
+<rect class="bx" x="481" y="72" width="60" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="511" y="94.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">A</text>
+<text x="511" y="107.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">replica</text>
+<rect class="bx" x="551" y="72" width="60" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="581" y="94.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">A</text>
+<text x="581" y="107.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">replica</text>
+<rect class="bx" x="339" y="142" width="62" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="370" y="171" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">App B</text>
+<rect class="bx" x="411" y="142" width="60" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="441" y="164.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">B</text>
+<text x="441" y="177.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">replica</text>
+<text class="free" x="477" y="222" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Each app has its own scale rules.</text>
+<text class="free" x="477" y="238" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Most apps can scale to zero</text>
+<text class="free" x="477" y="254" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">(not when scaling on CPU or memory).</text>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>App Service</b> (left) scales the <em>plan</em>: you add more VM instances, and every app in the plan runs on all of them, so the apps scale together — and the plan does not scale down to zero. <b>Container Apps</b> (right) scales <em>each app</em> on its own rules, so a busy app can have many replicas while a quiet one has one — or none. This difference is often what decides between the two.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🏭</span><h5>Old Windows app with an installed agent</h5><p>It cannot be changed and needs software on the machine.</p><span class="sc-use">→ Virtual Machines</span></div>
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Company website and API</h5><p>A normal web app. The team wants to deploy code and move on.</p><span class="sc-use">→ App Service</span></div>
+      <div class="scenario"><span class="sc-icon">🧩</span><h5>Ten small services in containers</h5><p>Each scales differently, some are idle at night.</p><span class="sc-use">→ Container Apps</span></div>
+      <div class="scenario"><span class="sc-icon">🔧</span><h5>Custom Kubernetes operators</h5><p>The platform team needs the Kubernetes API and CRDs.</p><span class="sc-use">→ AKS</span></div>
+      <div class="scenario"><span class="sc-icon">📬</span><h5>React to a new message</h5><p>Run a few lines of code every time something arrives.</p><span class="sc-use">→ Azure Functions</span></div>
+      <div class="scenario"><span class="sc-icon">📊</span><h5>A nightly data crunch in a container</h5><p>It runs once, then it should end.</p><span class="sc-use">→ Container Instances</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — patching and the shared-responsibility line</summary>
+    <div class="zoom-inner">
+      <p><b>Virtual machines (IaaS):</b> Microsoft looks after everything below the operating system — the datacenter, hardware and host. The guest OS is yours to patch, with help from tools such as Azure Update Manager.</p>
+      <p><b>App Service (PaaS):</b> Azure patches the OS and the runtime for you. You look after your application and its data.</p>
+      <p><b>Container Apps</b> is built on Kubernetes and uses KEDA for event-driven scaling, but it does not expose the Kubernetes API. If you need that API, that is the reason to choose AKS.</p>
+      <p><b>Not covered here:</b> how to add more copies automatically and survive failures (Scaling &amp; Resilience), and how Functions really work (Serverless &amp; Orchestration). Both are later concepts in this journey.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Compute is a ladder: VMs (most control) → AKS → Container Apps → App Service → Functions (least to run).</li><li>VMs: you patch the OS. App Service: Azure runs the OS and runtime. Container Apps: containers without Kubernetes. AKS: you need the Kubernetes API.</li><li>Functions = event-driven code. Container Instances = a single container or a one-off job.</li><li>App Service scales the plan and does not scale to zero; Container Apps scales each app and most can scale to zero.</li><li>Start with the most managed option that fits; move toward control only for a hard requirement.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Compute on Azure is a trade-off between control and operational effort. Virtual Machines give full control but I patch the OS. App Service is managed hosting for web apps and APIs. Container Apps runs containers without exposing Kubernetes, with per-app scaling. AKS is for when I really need the Kubernetes API. Functions is for event-driven code, and Container Instances for one-off containers. I start with the most managed option that meets the requirement."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Do not pick a VM just because it feels familiar.</b> A VM works for everything, but it is the option that gives you the most work: patching, hardening, backup and scaling are all yours. Use it when you have a reason.</p>
+      <p>Second trap: <b>Kubernetes is a tool, not a goal.</b> Choosing AKS "because everyone does" means taking on the most operational effort of the container options. If you do not need the Kubernetes API, Container Apps is usually enough.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🌐 App Service</h5><p>A single web process or API, deployed as code, scaled per plan. No Dockerfile needed.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>📦 Container Apps</h5><p>Containers, with each service scaled on its own and most able to scale to zero.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># run a container as a Container App — Azure runs and scales it, no cluster for you to manage</span>
+az containerapp create --name shop-api --resource-group rg-shop-prod \
+    --environment env-shop --image mcr.microsoft.com/k8se/quickstart:latest \
+    --target-port 80 --ingress external</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — you first create the environment, and real apps use their own image, identity, secrets and scale rules.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Your code now has a place to run. But code needs somewhere to <b>keep things</b> — photos, files, messages, records. Next: Storage.</span>
+      <a class="next-link" href="storage.html">Storage <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree" target="_blank" rel="noopener">Choose an Azure compute service (Architecture Center)</a> · <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/" target="_blank" rel="noopener">Azure Virtual Machines documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/app-service/" target="_blank" rel="noopener">Azure App Service documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/container-apps/" target="_blank" rel="noopener">Azure Container Apps documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/aks/" target="_blank" rel="noopener">Azure Kubernetes Service documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

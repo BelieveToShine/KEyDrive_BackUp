@@ -2,14 +2,16 @@
 
 ## Status
 
-Hub page, full roadmap and the **first batch of pages** are done: 3 / 19 concepts (Storage, Databases,
-Messaging & Events) + 4 deep dives (Blob Storage in depth, Cosmos DB vs Azure SQL, Service Bus, Event Hubs). Added at the user's
+Hub page, full roadmap and **two batches of pages** are done: 8 / 19 concepts + 6 deep dives.
+Batch 1: Storage, Databases, Messaging & Events (+ Blob Storage in depth, Cosmos DB vs Azure SQL, Service Bus, Event Hubs).
+Batch 2 (roadmap order): Tenants/Subscriptions/Resource Groups, Regions & Availability Zones, Identity & Access (+ Managed Identities),
+Virtual Networks (+ Private Endpoints), Compute. Added at the user's
 explicit request (2026-10-12), which lifts the platform-wide "don't start a new category without
 being asked" rule for this category only.
 
 ## What's built
 
-- `azure/concepts/*.html` — 7 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 21 diagrams in total. Facts are logged in `claims-ledger.md`.
+- `azure/concepts/*.html` — 14 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 40 diagrams in total. Facts are logged in `claims-ledger.md`.
 - `azure/index.html` — category hub: hero, the 19-node journey-map diagram (written nodes are links, the rest locked) (every connector
   labeled with the limit that made the next concept necessary, two grouping containers, legend)
   and the full concept list with 🔒 planned badges. Nodes and rows are not links yet.
@@ -48,3 +50,12 @@ merges, spine arrows): arrowheads meet box edges, pills clear all boxes/containe
   retirement dates, Event Hubs retention numbers.
 - **Tooling added** for this and future categories: `scripts/check-site.js`, `scripts/diagram-lint.js`,
   `scripts/shoot-diagrams.js`, `scripts/page-kit/` — see `docs/rules/verification.md`.
+
+## Batch 2 decisions (2026-10-12)
+
+- **Written in roadmap order** (1–5). Deep dives only where a classic confusion exists: Managed Identities (secret vs identity,
+  system- vs user-assigned) and Private Endpoints (service vs private endpoint, and the DNS trap).
+- **Left out on purpose:** management-group depth/limits numbers, quotas, region lists and region/zone counts per region, price differences,
+  Azure Firewall / Bastion / NAT details (later concepts), Functions plan details (Serverless concept).
+- **Scanner tightened:** `scripts/check-site.js` now also flags 3–5 digit numbers (ports, priorities) and spelled/numeric counts
+  ("three zones", "five addresses") that are not in the claims ledger.

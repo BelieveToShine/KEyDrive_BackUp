@@ -121,7 +121,6 @@ def d_lifecycle():
 
 def d_hub_log():
     d = Diagram('eh1', 640, 424, 'Event Hubs: producers send events into partitions; each consumer group reads the same events at its own position; Capture saves them to storage')
-    d.box(210, 10, 220, 44, [('📱 Devices · 🌐 Apps · 📋 Logs','t')], 'n') if False else None
     d.box(180, 10, 280, 44, [('📱 Devices · 🌐 Apps · 📋 Logs','t')], 'n')
     d.zone(10, 100, 620, 186, 'cyan', 'AN EVENT HUB · one stream split into partitions')
     for i in range(4):
