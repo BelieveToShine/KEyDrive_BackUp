@@ -118,7 +118,7 @@ def build_ci_cd_deployment():
 az webapp deploy --resource-group rg-shop-prod --name app-shop --slot staging --src-path app.zip
 az webapp deployment slot swap --resource-group rg-shop-prod --name app-shop --slot staging --target-slot production''',
       'Illustrative shape only — a real pipeline builds and tests first, and runs these steps with an OIDC sign-in; flags and options can change.'))
-    body += next_box('You can now ship changes safely. But apps and pipelines need credentials and settings — database passwords, API keys, feature switches — and hard-coding them is the classic leak. Next: Secrets &amp; Configuration.', None)
+    body += next_box('You can now ship changes safely. But apps and pipelines need credentials and settings — database passwords, API keys, feature switches — and hard-coding them is the classic leak. Next: Secrets &amp; Configuration.', 'secrets-configuration.html', 'Secrets &amp; Configuration')
     body += fact_note(FOOT, [DOCS_SLOTS, DOCS_BP, DOCS_AP, DOCS_GH, DOCS_TR])
     return page('ci-cd-deployment', 'CI/CD & Deployment Strategies', 'Concept 14 of 19 · 🛠️ Shipping and operating',
         'CI/CD makes every release the same automatic steps — <span class="grad-text">so shipping is routine, and undoing a bad release is one move.</span>',

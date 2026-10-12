@@ -81,7 +81,9 @@
       "messaging",
       "serverless-orchestration",
       "infrastructure-as-code",
-      "ci-cd-deployment"
+      "ci-cd-deployment",
+      "secrets-configuration",
+      "security-governance"
     ],
     "sub": {
       "blob-storage": "storage",

@@ -1054,5 +1054,57 @@
     "summary": "The classic mistake with CI/CD & Deployment Strategies.",
     "keywords": "azure ci cd pipeline github actions azure pipelines deployment slots swap blue green canary oidc workload identity federation rollback trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "azure-secrets-configuration",
+    "title": "Secrets & Configuration",
+    "category": "Azure",
+    "page": "azure/concepts/secrets-configuration.html",
+    "summary": "Managed identity, Key Vault and App Configuration: where secrets and settings belong.",
+    "keywords": "azure secrets configuration key vault app configuration managed identity feature flags rotation soft delete purge protection key vault reference"
+  },
+  {
+    "id": "azure-secrets-configuration-recall",
+    "title": "Secrets & Configuration — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/secrets-configuration.html",
+    "summary": "Quick recall points: Secrets & Configuration.",
+    "keywords": "azure secrets configuration key vault app configuration managed identity feature flags rotation soft delete purge protection key vault reference interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-secrets-configuration-trap",
+    "title": "Secrets & Configuration — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/secrets-configuration.html",
+    "summary": "The classic mistake with Secrets & Configuration.",
+    "keywords": "azure secrets configuration key vault app configuration managed identity feature flags rotation soft delete purge protection key vault reference trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-security-governance",
+    "title": "Security & Governance",
+    "category": "Azure",
+    "page": "azure/concepts/security-governance.html",
+    "summary": "Zero Trust, defense in depth, Azure Policy, Defender for Cloud, WAF and private access.",
+    "keywords": "azure security governance zero trust defense in depth azure policy defender for cloud waf ddos deny audit modify deployifnotexists remediation"
+  },
+  {
+    "id": "azure-security-governance-recall",
+    "title": "Security & Governance — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/security-governance.html",
+    "summary": "Quick recall points: Security & Governance.",
+    "keywords": "azure security governance zero trust defense in depth azure policy defender for cloud waf ddos deny audit modify deployifnotexists remediation interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-security-governance-trap",
+    "title": "Security & Governance — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/security-governance.html",
+    "summary": "The classic mistake with Security & Governance.",
+    "keywords": "azure security governance zero trust defense in depth azure policy defender for cloud waf ddos deny audit modify deployifnotexists remediation trap mistake",
+    "anchor": "trap"
   }
 ]

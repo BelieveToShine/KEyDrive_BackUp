@@ -373,11 +373,42 @@ Doc roots (stable): [Storage](https://learn.microsoft.com/en-us/azure/storage/) 
 | CD8 | `az webapp deploy` / `slot swap` flags | 🟨 K | |
 | CD-I | Pipeline picture, scenarios | 🟦 I | |
 
+## Secrets & Configuration (`secrets-configuration.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SX1 | Key Vault stores secrets, keys and certificates; HSM-backed keys on the Premium tier | ✅ V | `/azure/key-vault/general/overview` |
+| SX2 | Data-plane access via Azure RBAC (roles such as Key Vault Secrets User) or legacy access policies | ✅ V | `/azure/key-vault/general/rbac-guide` |
+| SX3 | Soft delete keeps deleted vaults and items recoverable for a retention period; purge protection blocks permanent deletion until it ends and cannot be disabled once on | ✅ V | `/azure/key-vault/general/key-vault-recovery` (retention numbers deliberately left off the page) |
+| SX4 | App Configuration: central store for settings and feature flags; change without redeploy; point-in-time replay; managed identities; sentinel-key best practice | ✅ V | `/azure/azure-app-configuration/overview`, `/howto-best-practices` |
+| SX5 | App Configuration can hold Key Vault references; App Service resolves Key Vault references; needs App Configuration Data Reader and vault access | ✅ V | `/azure/app-service/app-service-configuration-references`, `/app-service-key-vault-references` |
+| SX6 | Rotate regularly; use two credentials for zero-downtime rotation; apps read the latest version and refresh cached values | ✅ V | `/azure/key-vault/general/autorotation`, `/secrets/tutorial-rotation-dual`, `/azure/security/fundamentals/secrets-best-practices` |
+| SX7 | Prefer managed identity over stored secrets; where unavoidable fetch from Key Vault; for Storage prefer Entra ID over shared keys and disable shared-key access where allowed | ✅ V | Safe Secrets Standard (`/security/zero-trust/sfi/safe-secrets-standard`) |
+| SX8 | `az keyvault create` / `az role assignment create` flags | 🟨 K | |
+| SX-I | "10% of users" scenario, vault and app names | 🟦 I | |
+
+## Security & Governance (`security-governance.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SG1 | Zero Trust: verify explicitly, least privilege, assume breach | ✅ V | `/azure/security/fundamentals/zero-trust` |
+| SG2 | Defense in depth layers (identity, network, compute, data); identity is the primary line, network supports it | ✅ V | `/azure/security/fundamentals/overview`, `/azure/well-architected/security/segmentation` |
+| SG3 | Policy effects deny, audit, modify, deployIfNotExists; deny stops the request, audit logs it; modify changes resources on create/update and only marks existing ones non-compliant; DINE deploys a template; deny is evaluated before audit | ✅ V | `/azure/governance/policy/concepts/effect-basics`, `/effect-modify` |
+| SG4 | Start with audit before enforcing | ✅ V | same pages |
+| SG5 | Modify and deployIfNotExists need a managed identity with the minimum role; remediation tasks fix existing resources; initiatives need a task per policy | ✅ V | `/azure/governance/policy/how-to/remediate-resources` |
+| SG6 | A policy assigned at a scope applies to resources beneath it (inheritance) | ✅ V (secondary) | policy overview + Q&A on child-scope inheritance |
+| SG7 | Defender for Cloud: CSPM (free foundational plan, paid Defender CSPM), secure score, workload-protection plans for servers, containers, storage, databases | ✅ V | `/azure/defender-for-cloud/defender-for-cloud-introduction`, `/concept-cloud-security-posture-management` |
+| SG8 | WAF is layer 7, OWASP-based rules, regional on Application Gateway and at the edge on Front Door; Front Door managed rule sets need Premium (Standard has custom rules); custom rules and rate limiting | ✅ V | `/azure/web-application-firewall/*` |
+| SG9 | WAF does not mitigate volumetric network DDoS; use DDoS Protection together with a WAF | ✅ V | WAF docs |
+| SG10 | Resource locks can protect against accidental deletion | 🟨 K | not searched |
+| SG11 | `az policy assignment create` flags | 🟨 K | |
+| SG-I | Scenario names, subscription A/B | 🟦 I | |
+
 ---
 
 ## Open verification list (do these with direct docs access)
 
 Everything marked 🟨 K above, in priority order: **RH4 / RH10 / RH11** (management-group and ARM wording), **RG8 / RG10** (region price differences), **VN9 / VN10** (peering overlap; VPN vs ExpressRoute wording), **CP10 / CP11** (App Service plan and AKS control-plane wording), **PE8**, **ID10**, **MI7**, **S7** (Table storage wording), **S10** (three copies),
-**SC5 / DR6 / CE9 / LB10 / SC11** (general terms and CLI flags), **D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
+**SC5 / DR6 / CE9 / LB10 / SC11** (general terms and CLI flags), **SG10 / SX8 / SG11 / SV6 / SV7 / CD8 / IA8** (locks, CLI flags, general guidance), **D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
 **E2** (same key → same partition), and the SDK method names (**B16, C14, M12, SB-I, E9**).
 After checking a row, change 🟨 K to ✅ V and add the exact page URL.

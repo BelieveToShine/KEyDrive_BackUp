@@ -22,17 +22,17 @@ journey-map node and concept-list row from locked to written** (and adds its slu
 | 12 | Serverless & Orchestration | ✅ Written | `azure/concepts/serverless-orchestration.html` |
 | 13 | Infrastructure as Code | ✅ Written | `azure/concepts/infrastructure-as-code.html` |
 | 14 | CI/CD & Deployment Strategies | ✅ Written | `azure/concepts/ci-cd-deployment.html` |
-| 15 | Secrets & Configuration | 🔒 Planned | — |
-| 16 | Security & Governance | 🔒 Planned | — |
+| 15 | Secrets & Configuration | ✅ Written | `azure/concepts/secrets-configuration.html` |
+| 16 | Security & Governance | ✅ Written | `azure/concepts/security-governance.html` |
 | 17 | Monitoring & Observability | 🔒 Planned | — |
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**14 / 19 written, plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
+**16 / 19 written, plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
 request): Storage, Databases, Messaging & Events. Batch 2 (roadmap order): concepts 1–5 — the whole foundation
-(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge. Batch 4 (roadmap order): 12 Serverless, 13 Infrastructure as Code, 14 CI/CD.
+(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge. Batch 4 (roadmap order): 12 Serverless, 13 Infrastructure as Code, 14 CI/CD. Batch 5 (roadmap order): 15 Secrets & Configuration, 16 Security & Governance.
 
 Slug convention: kebab-case of the concept name (the slugs for all 19 are fixed in `assets/journeys.json`).
 
-**Next in order when asked:** Secrets & Configuration (15), then 16 onward.
+**Next in order when asked:** Monitoring & Observability (17), Cost Management (18), Well-Architected & Landing Zones (19).
 Verify every fact first (`../../rules/fact-check-and-currency.md`).
