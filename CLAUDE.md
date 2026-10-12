@@ -11,6 +11,9 @@ file first in any new session; it routes to everything else rather than trying t
   (What is AI? through Production — including Embeddings & Vector Search and Context
   Engineering, added after a production-verification review found them missing from the
   original 17). Journey map, concept list, and search index are all fully wired to match.
+- **Azure** and **AWS** have a hub page + full locked 19-concept roadmap (developer-to-architect
+  journey, same shape for both, only service names differ) and spec folders, added at the user's
+  request — **no concept pages written yet**. Next step when asked: write them in roadmap order.
 - Three other categories (Cloud Systems, Data Systems, Web Platforms) exist only as "coming
   soon" placeholder tiles on the platform home — no hub page, no spec folder yet.
 - **Status: the user is verifying the AI category in production and applying corrections as
@@ -36,8 +39,8 @@ Full detail: `docs/keydrive-overview.md`.
 
 Each category has a `docs/specs/<category>/` folder: `concept-taxonomy.md` (fixed order + why
 each concept exists), `roadmap.md` (written/planned status, updated the moment a page ships),
-`overview.md` (status + deferred-features list + category-specific decisions). Currently only
-`docs/specs/ai/` exists.
+`overview.md` (status + deferred-features list + category-specific decisions). Currently `docs/specs/ai/`,
+`docs/specs/azure/` and `docs/specs/aws/` exist.
 
 ## Explicitly deferred, platform-wide — do not build until asked
 

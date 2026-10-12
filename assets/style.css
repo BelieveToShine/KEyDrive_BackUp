@@ -159,7 +159,7 @@ a.kd-card:active{ transform:translateY(-1px) scale(.98); box-shadow:0 6px 16px r
 .cat-tile h3{ font-size:18px; margin-bottom:6px; }
 .cat-tile p{ color:var(--ink-soft); font-size:13.5px; margin:0; }
 .cat-tile.soon{ opacity:.55; cursor:default; }
-.cat-tile.soon .ribbon{
+.cat-tile .ribbon{
   position:absolute; top:14px; right:-8px; font-family:'JetBrains Mono'; font-size:10px; font-weight:600;
   color:var(--ink-faint); background:var(--surface-2); border:1px solid var(--border); border-radius:6px; padding:3px 10px;
 }
@@ -167,6 +167,11 @@ a.kd-card:active{ transform:translateY(-1px) scale(.98); box-shadow:0 6px 16px r
   position:absolute; inset:-40% -40% auto auto; width:140px; height:140px; border-radius:50%;
   background:var(--grad); opacity:.14; filter:blur(30px); pointer-events:none;
 }
+
+/* ---------- category hub: roadmap-only state ---------- */
+.hub-note{ display:inline-block; margin:18px auto 0; padding:10px 18px; border-radius:12px; font-size:13.5px; color:var(--ink-soft);
+  background:var(--surface); border:1px dashed var(--border); max-width:640px; }
+.cat-tile .ribbon.live{ right:14px; color:var(--cyan-ink); background:var(--cyan-bg); border-color:rgba(34,211,238,.3); }
 
 /* ---------- journey map (SVG diagram) ---------- */
 .journey-wrap{ margin:36px 0; padding:28px; overflow-x:auto; }
@@ -206,7 +211,8 @@ a.jm-hit:active .jm-node{ transform:translateY(-1px) scale(.97); }
 .concept-row .cr-status{ margin-left:auto; font-family:'JetBrains Mono'; font-size:11px; flex:0 0 auto; }
 .concept-row .cr-status.done{ color:var(--emerald-ink); }
 .concept-row .cr-status.soon{ color:var(--ink-faint); }
-.concept-row.soon{ opacity:.5; }
+.concept-row .cr-name{ color:var(--ink); font-weight:600; font-size:14.5px; }
+.concept-row.soon{ opacity:.6; }
 .concept-row.soon a{ pointer-events:none; }
 
 /* ---------- section blocks on concept pages ---------- */

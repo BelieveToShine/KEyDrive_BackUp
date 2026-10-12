@@ -492,5 +492,21 @@
     "anchor": "trap",
     "summary": "Why guardrails, cost, and scale are standard engineering discipline, applied carefully.",
     "keywords": "production trap engineering discipline ai skill"
+  },
+  {
+    "id": "azure-hub",
+    "title": "Azure — roadmap",
+    "category": "Azure",
+    "page": "azure/index.html",
+    "summary": "The 19-concept Azure journey for developers growing into architects: resource hierarchy to well-architected.",
+    "keywords": "azure microsoft cloud architect roadmap entra rbac vnet app service aks functions cosmos key vault bicep well-architected"
+  },
+  {
+    "id": "aws-hub",
+    "title": "AWS — roadmap",
+    "category": "AWS",
+    "page": "aws/index.html",
+    "summary": "The 19-concept AWS journey for developers growing into architects: accounts to well-architected.",
+    "keywords": "aws amazon cloud architect roadmap iam vpc ec2 s3 lambda dynamodb cloudformation well-architected"
   }
 ]
