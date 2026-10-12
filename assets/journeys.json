@@ -161,21 +161,30 @@
       "databases",
       "load-balancing",
       "scaling-resilience",
-      "caching-edge"
+      "caching-edge",
+      "messaging",
+      "serverless-orchestration",
+      "infrastructure-as-code",
+      "ci-cd-deployment",
+      "secrets-configuration"
     ],
     "sub": {
       "iam-roles": "identity-access",
       "vpc-endpoints": "vpc-networking",
       "s3-in-depth": "storage",
       "dynamodb-vs-rds-aurora": "databases",
-      "disaster-recovery": "scaling-resilience"
+      "disaster-recovery": "scaling-resilience",
+      "sqs-sns-eventbridge": "messaging",
+      "kinesis": "messaging"
     },
     "subTitles": {
       "iam-roles": "IAM Roles",
       "vpc-endpoints": "VPC Endpoints",
       "s3-in-depth": "S3 in Depth",
       "dynamodb-vs-rds-aurora": "DynamoDB vs RDS and Aurora",
-      "disaster-recovery": "Disaster Recovery"
+      "disaster-recovery": "Disaster Recovery",
+      "sqs-sns-eventbridge": "SQS, SNS and EventBridge",
+      "kinesis": "Kinesis Data Streams"
     }
   }
 }

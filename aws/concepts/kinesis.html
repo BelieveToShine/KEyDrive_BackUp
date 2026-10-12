@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinesis Data Streams — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><a href="messaging.html">Messaging &amp; Events</a><span class="sep">›</span><span class="cur">Kinesis Data Streams</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Messaging · 🌊 Kinesis</div>
+    <h1>A Kinesis stream is a log many readers can read at their own pace — <span class="grad-text">the right tool when order, volume and replay matter.</span></h1>
+    <p class="sub">Shards, partition keys, retention, capacity modes and enhanced fan-out: when a stream beats a queue.</p>
+    <div class="interview-q">❓ "What is Kinesis Data Streams, and when would you choose it over SQS?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Producers write records with a partition key; Kinesis hashes the key to pick a shard, and consumers read each shard in order">
+<defs><marker id="kn1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="kn1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="430" y="8" width="200" height="284" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="444" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">STREAM · shards</text>
+<path d="M120,142 L210,142" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#kn1A)"/>
+<path d="M340,142 L385,142 L385,76 L446,76" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#kn1A)"/>
+<path d="M340,142 L385,142 L385,152 L446,152" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#kn1A)"/>
+<path d="M340,142 L385,142 L385,228 L446,228" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#kn1A)"/>
+<rect class="bx" x="10" y="110" width="110" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="65" y="139.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📱 Producers</text>
+<text x="65" y="152.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">write records</text>
+<rect class="bx" x="210" y="110" width="130" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="275" y="139.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🔑 Partition key</text>
+<text x="275" y="152.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">hashed</text>
+<rect class="bx" x="446" y="48" width="168" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="530" y="73.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Shard 1</text>
+<text x="530" y="86.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">ordered records</text>
+<rect class="bx" x="446" y="124" width="168" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="530" y="149.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Shard 2</text>
+<text x="530" y="162.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">ordered records</text>
+<rect class="bx" x="446" y="200" width="168" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="530" y="225.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📦 Shard 3</text>
+<text x="530" y="238.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">ordered records</text>
+<g class="arrow-pill"><rect x="140" y="133" width="50" height="18" rx="9"/><text x="165" y="145.5" text-anchor="middle" font-size="9" font-style="italic">record</text></g>
+<g class="arrow-pill"><rect x="349.5" y="99" width="71" height="18" rx="9"/><text x="385" y="111.5" text-anchor="middle" font-size="9" font-style="italic">hash picks</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> producers write <b>records</b>, each with a <b>partition key</b>. Kinesis hashes the key to choose a <b>shard</b>, and records on one shard stay in order. A stream is a set of shards. This is why the key matters: the same key always lands on the same shard, so the order for that key is kept — and a few very busy keys can overload one shard.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A Kinesis stream is a log of events that many readers can read at their own pace and replay — the right tool when order, volume and several consumers matter.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>A queue is a to-do list: one worker takes a task and it is gone. But some data is a <b>flow</b>: clicks, logs, sensor readings. Many different systems want the same flow — one for analytics, one for alerts, one for an archive — and sometimes you need to read it again.</p>
+      <p>A stream keeps the records for a retention period and lets every consumer read at its own position. <b>Reading does not delete.</b> That is a feature (replay), but it means each consumer must remember where it stopped.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The vocabulary</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🔑 Partition key</h4><span class="pk-tag">decides the shard</span><span class="pk-label use">✅ Pick it when</span><ul><li>Hashed to choose a shard; same key, same shard, so order is kept per key</li><li>Pick a key with many distinct values to spread load</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A key with a few values — it overloads some shards</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>📦 Shard</h4><span class="pk-tag">the unit of capacity</span><span class="pk-label use">✅ Pick it when</span><ul><li>Each shard has fixed read and write limits</li><li>More shards, more throughput</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting unlimited speed from one shard</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🕰️ Retention</h4><span class="pk-tag">how long records are kept</span><span class="pk-label use">✅ Pick it when</span><ul><li>Default is 24 hours after creation, extendable up to 365 days</li><li>Replay inside the window</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Treating the stream as permanent storage</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🎚️ Capacity modes</h4><span class="pk-tag">on-demand or provisioned</span><span class="pk-label use">✅ Pick it when</span><ul><li>On-demand: Kinesis manages the shard count</li><li>Provisioned: you set and change the shard count, and can split a hot shard yourself</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>On-demand does not isolate a single very hot key — use provisioned for highly uneven keys</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">👥 Many readers, one stream</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Several consumers each read the same stream at their own position; enhanced fan-out gives a registered consumer its own dedicated throughput">
+<defs><marker id="kn2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="kn2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,120 L215,120 L215,58 L300,58" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#kn2A)"/>
+<path d="M130,132 L300,140" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#kn2A)"/>
+<path d="M130,144 L215,144 L215,222 L300,222" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#kn2A)"/>
+<rect class="bx" x="10" y="100" width="120" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="70" y="129.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🌊 Stream</text>
+<text x="70" y="142.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">records kept</text>
+<rect class="bx" x="300" y="30" width="140" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="370" y="55.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Analytics</text>
+<text x="370" y="68.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">reads from here</text>
+<rect class="bx" x="300" y="112" width="140" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="370" y="137.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🚨 Alerting</text>
+<text x="370" y="150.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">reads from here</text>
+<rect class="bx" x="300" y="194" width="140" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="370" y="219.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🗃️ Archive</text>
+<text x="370" y="232.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">reads from here</text>
+<text class="free" x="540" y="120" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Reading does not delete.</text>
+<text class="free" x="540" y="138" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Each consumer keeps</text>
+<text class="free" x="540" y="154" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its own position.</text>
+<g class="arrow-pill"><rect x="193" y="80" width="44" height="18" rx="9"/><text x="215" y="92.5" text-anchor="middle" font-size="9" font-style="italic">reads</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> analytics, alerting and an archive all read the <em>same</em> stream, each at its own position. Standard consumers share the shard's read throughput. With <b>enhanced fan-out</b>, a registered consumer gets its own dedicated throughput; there is a limit on how many consumers can be registered, which depends on the capacity mode.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 Queue or stream?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 346" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: a job for one worker use SQS; many independent readers or replay of ordered events use Kinesis">
+<defs><marker id="kn3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="kn3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#kn3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#kn3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#kn3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#kn3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#kn3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 Queue or stream?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📬 Each item handled once, then gone?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a to-do list for workers</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">SQS</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">a queue</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌊 Many readers, replay, ordered flow?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">clickstreams, logs, telemetry</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Kinesis</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">a stream</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Not sure?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with SQS — it is simpler</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> if each item is handled once and then gone, use <b>SQS</b>. If many readers need the same ordered flow, or you need to replay, use <b>Kinesis</b>. When unsure, start with SQS: it is simpler.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Queue vs stream</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">SQS queue</th><th scope="col">Kinesis stream</th></tr></thead><tbody><tr><th scope="row">Reading</th><td>Message is removed once processed</td><td>Records stay until retention ends</td></tr><tr><th scope="row">Readers</th><td>Consumers share the work</td><td>Each consumer reads everything, at its own position</td></tr><tr><th scope="row">Order</th><td>FIFO queues; standard queues do not guarantee it</td><td>Per shard, by partition key</td></tr><tr><th scope="row">Replay</th><td>No</td><td>Yes, within retention</td></tr><tr><th scope="row">Scaling</th><td>Managed by the service</td><td>By shards, in provisioned or on-demand mode</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🖱️</span><h5>Website clicks, millions a minute</h5><p>Analytics, alerts and an archive all need them.</p><span class="sc-use">→ Kinesis Data Streams</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Every record for one customer must stay in order</h5><p>Same key, same shard.</p><span class="sc-use">→ Use the customer ID as the partition key</span></div>
+      <div class="scenario"><span class="sc-icon">🔁</span><h5>A bug corrupted yesterday's results</h5><p>You need to reprocess.</p><span class="sc-use">→ Replay the stream within retention</span></div>
+      <div class="scenario"><span class="sc-icon">🔥</span><h5>One celebrity account gets most of the traffic</h5><p>A hot key overloads a shard.</p><span class="sc-use">→ Provisioned mode and shard splitting, or a better key</span></div>
+      <div class="scenario"><span class="sc-icon">📬</span><h5>Resize each uploaded image once</h5><p>A to-do item, handled once.</p><span class="sc-use">→ SQS, not Kinesis</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Not sure which to use</h5><p>Start simple.</p><span class="sc-use">→ SQS first</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — limits and modes</summary>
+    <div class="zoom-inner">
+      <p><b>Shard limits.</b> Each shard has fixed limits for writes (a records-per-second and a megabytes-per-second cap) and for reads. Check the current numbers in the developer guide; they differ by mode and change over time.</p>
+      <p><b>Hot shards.</b> Uneven partition keys can still cause throttling. Provisioned mode lets you split a hot shard manually. On-demand mode spreads evenly and does not detect and isolate a hot hash key.</p>
+      <p><b>Retention.</b> The default retention is 24 hours, extendable up to 365 days.</p>
+      <p><b>Consumers.</b> Standard consumers use shared read throughput; enhanced fan-out gives registered consumers dedicated throughput, with a cap on registered consumers that depends on the mode.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>A stream is a replayable ordered log; reading does not delete.</li><li>Partition key → hashed → shard; same key, same shard, ordered per key.</li><li>Retention: 24 hours by default, up to 365 days.</li><li>On-demand vs provisioned capacity; provisioned lets you split a hot shard.</li><li>Queue for one-time jobs; stream for many readers and replay.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"A Kinesis stream is a replayable log. Producers choose a partition key that hashes to a shard, so order is kept per key. Records stay for the retention period, many consumers read at their own position, and enhanced fan-out gives a consumer dedicated throughput. I use SQS for one-time jobs and Kinesis when many readers or replay matter, and I watch for hot shards."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>A bad partition key.</b> Using a key with few values sends most records to a few shards, which throttle while others sit idle.</p>
+      <p>Second trap: <b>forgetting that reading does not delete.</b> Each consumer must track its own position, and records disappear when retention ends.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📬 SQS</h5><p>A to-do list: one consumer takes an item and it is gone.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🌊 Kinesis</h5><p>A log: every consumer can read everything, at its own pace, and replay it.</p></div>
+  </div>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is Kinesis. Back to the Messaging page for the big picture — and on to the next concept: Serverless &amp; Orchestration.</span>
+      <a class="next-link" href="messaging.html">Back to Messaging <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html" target="_blank" rel="noopener">Amazon Kinesis Data Streams developer guide</a> · <a href="https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html" target="_blank" rel="noopener">Kinesis Data Streams terminology and concepts</a> · <a href="https://docs.aws.amazon.com/streams/latest/dev/how-do-i-size-a-stream.html" target="_blank" rel="noopener">Choose the right Kinesis capacity mode</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

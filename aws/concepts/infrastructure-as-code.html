@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure as Code — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Infrastructure as Code</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 13 of 19 · 🛠️ Shipping and operating</div>
+    <h1>Infrastructure as code turns your environment into files you can <span class="grad-text">review, repeat and roll back.</span></h1>
+    <p class="sub">CloudFormation, the CDK and Terraform: why clicking resources together stops working, how a preview protects you, and which tool to pick.</p>
+    <div class="interview-q">❓ "What is infrastructure as code, and would you use CloudFormation, the CDK or Terraform on AWS?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Infrastructure as code flow: a template in Git, a change set preview, a deployment, and AWS resources that match the template">
+<defs><marker id="ia1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,88 L240,88" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<path d="M390,88 L510,88" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia1A)"/>
+<rect class="bx" x="10" y="56" width="120" height="64" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="70" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📄 Template</text>
+<text x="70" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">lives in Git</text>
+<rect class="bx" x="240" y="56" width="150" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="315" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">👀 Change set</text>
+<text x="315" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">what will change?</text>
+<rect class="bx" x="510" y="56" width="120" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">☁️ AWS</text>
+<text x="570" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">matches the file</text>
+<text class="free" x="320" y="168" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Want a change? Edit the template and review it — do not click it into the console.</text>
+<text class="free" x="320" y="188" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Then the same template can build the same environment again, anywhere.</text>
+<g class="arrow-pill"><rect x="157.5" y="79" width="55" height="18" rx="9"/><text x="185" y="91.5" text-anchor="middle" font-size="9" font-style="italic">preview</text></g>
+<g class="arrow-pill"><rect x="425" y="79" width="50" height="18" rx="9"/><text x="450" y="91.5" text-anchor="middle" font-size="9" font-style="italic">deploy</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the environment lives in a <b>template</b>, kept in Git like any other code. Before deploying, a <b>change set</b> shows what would be created, changed or deleted — a preview. Then the deployment makes AWS match the template. To change the environment, you change the template and get it reviewed. The same template can build the same environment again, in a new account or a new Region.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Infrastructure as code means your environment is described in files that you can review, repeat and roll back — instead of being a pile of clicks nobody remembers.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>By now the system is dozens of resources: networks, servers, databases, queues, functions. Someone clicked them together in the console. Ask three questions: <b>Can we build the same thing again?</b> (a second environment, or after a disaster) <b>Who changed what, and why?</b> <b>Does production really match staging?</b> With clicking, the honest answer to all three is "not sure".</p>
+      <p>Infrastructure as code (IaC) answers all three. You describe what you want and a tool makes AWS match. The file is the record, it goes through review like code, and it is the plan for the disaster-recovery day from the Scaling concept.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 Which tool?</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#fbbf24"><h4>📄 AWS CloudFormation</h4><span class="pk-tag">AWS-native templates and stacks</span><span class="pk-label use">✅ Pick it when</span><ul><li>You work on AWS only</li><li>A template describes resources; a stack is the deployed, trackable unit</li><li>Change sets preview changes</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You also manage non-AWS providers in the same code</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>💻 AWS CDK</h4><span class="pk-tag">infrastructure in a programming language</span><span class="pk-label use">✅ Pick it when</span><ul><li>Write infrastructure in familiar languages, with loops and functions</li><li>Constructs package reusable patterns</li><li>It generates CloudFormation templates</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You want a no-code, purely declarative file — and note each account and Region needs a bootstrapped environment</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🌐 Terraform</h4><span class="pk-tag">multi-provider, with a state file</span><span class="pk-label use">✅ Pick it when</span><ul><li>One tool across AWS, other clouds and services</li><li>A plan shows changes before apply</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You want AWS to track state for you — Terraform keeps its own state, which you must store and protect</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">💻 How the CDK fits</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="The CDK turns code in a familiar language into a CloudFormation template, and from there the process is the same as CloudFormation">
+<defs><marker id="ia2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,122 L250,122" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<path d="M390,122 L500,122" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia2A)"/>
+<rect class="bx" x="10" y="90" width="130" height="64" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="75" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">💻 CDK code</text>
+<text x="75" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">TypeScript, Python…</text>
+<rect class="bx" x="250" y="90" width="140" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📄 Template</text>
+<text x="320" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">CloudFormation</text>
+<rect class="bx" x="500" y="90" width="130" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="565" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📦 Stack</text>
+<text x="565" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">real resources</text>
+<text class="free" x="320" y="206" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Constructs are reusable pieces; one construct can stand for several resources.</text>
+<g class="arrow-pill"><rect x="159.5" y="113" width="71" height="18" rx="9"/><text x="195" y="125.5" text-anchor="middle" font-size="9" font-style="italic">synthesize</text></g>
+<g class="arrow-pill"><rect x="420" y="113" width="50" height="18" rx="9"/><text x="445" y="125.5" text-anchor="middle" font-size="9" font-style="italic">deploy</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> with the <b>CDK</b> you write infrastructure in a language like TypeScript or Python. <b>Synthesizing</b> turns it into a CloudFormation template; after that the process is identical to CloudFormation. A <b>construct</b> is a reusable piece that represents one or more CloudFormation resources. So CDK and CloudFormation are not rivals: the CDK is a nicer way to write the template.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 428" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for infrastructure-as-code tools: CloudFormation templates, CDK for real programming languages, Terraform for several providers">
+<defs><marker id="ia3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ia3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ia3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 Which tool?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📄 AWS only, and you like declarative files?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">JSON or YAML templates</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">CloudFormation</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">AWS-native service</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 AWS only, and you prefer real code?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">loops, functions, reuse</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">AWS CDK</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">generates CloudFormation</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌐 Other clouds or providers in the same code?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">one tool and workflow for all</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Terraform</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">keeps a state file</text>
+<rect class="bx" x="10" y="366" width="330" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="388.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🤔 Still unsure?</text>
+<text x="175" y="401.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">start with CloudFormation or CDK</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> if your world is AWS only, <b>CloudFormation</b> or the <b>CDK</b> are the usual starting points: files if you like them declarative, code if you want loops and reuse. If the same code must also manage other clouds or services, <b>Terraform</b> is the common choice. AWS's guide maps the vocabulary for you: a CloudFormation change set is the equivalent of a Terraform plan, and a template is the equivalent of a configuration.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">CloudFormation</th><th scope="col">CDK</th><th scope="col">Terraform</th></tr></thead><tbody><tr><th scope="row">Written as</th><td>JSON or YAML template</td><td>Code in a programming language</td><td>Configuration files</td></tr><tr><th scope="row">Scope</th><td>AWS</td><td>AWS (via CloudFormation)</td><td>Many providers</td></tr><tr><th scope="row">Preview</th><td>Change set</td><td>Change set (after synthesis)</td><td>Plan</td></tr><tr><th scope="row">State</th><td>Tracked by the stack</td><td>Tracked by the stack</td><td>Your state file — store and protect it</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Spin up a test copy of production</h5><p>Same shape, smaller, deleted on Friday.</p><span class="sc-use">→ The same template with parameters</span></div>
+      <div class="scenario"><span class="sc-icon">🆘</span><h5>The primary Region is gone</h5><p>Build the second Region fast, not by memory.</p><span class="sc-use">→ Deploy the same template to the other Region</span></div>
+      <div class="scenario"><span class="sc-icon">👀</span><h5>A teammate wants to change a security group</h5><p>Someone should review it first.</p><span class="sc-use">→ Pull request + change set</span></div>
+      <div class="scenario"><span class="sc-icon">💻</span><h5>The same pattern ten times</h5><p>Do not copy and paste.</p><span class="sc-use">→ A CDK construct</span></div>
+      <div class="scenario"><span class="sc-icon">☁️</span><h5>AWS plus another provider, one team</h5><p>Same workflow for both.</p><span class="sc-use">→ Terraform</span></div>
+      <div class="scenario"><span class="sc-icon">🖱️</span><h5>Someone fixes something in the console</h5><p>Production no longer matches the template.</p><span class="sc-use">→ Drift — detect it and fix the template</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — stacks, drift and state</summary>
+    <div class="zoom-inner">
+      <p><b>Stacks.</b> A stack is infrastructure as code deployed and tracked as a single unit; a template is one CloudFormation file. A change set lets you review a change before it runs.</p>
+      <p><b>Drift</b> is when the real environment stops matching the template, usually because someone changed something in the console. Treat the console as read-only for anything the code owns, and let the pipeline (next concept) deploy.</p>
+      <p><b>CDK bootstrapping.</b> The CDK needs a bootstrapped environment in each account and Region it deploys to.</p>
+      <p><b>Terraform state.</b> Terraform records what it manages in its own state; store it remotely, limit access and back it up. There is also a CDK variant for Terraform that lets you write Terraform configuration in a programming language.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>IaC = the environment described in reviewed, versioned files; repeatable, reviewable, recoverable.</li><li>CloudFormation: templates and stacks, change sets to preview. CDK: code that synthesizes into CloudFormation. Terraform: multi-provider with a state file.</li><li>A CloudFormation change set ≈ a Terraform plan; a template ≈ a configuration.</li><li>The CDK needs a bootstrapped environment per account and Region.</li><li>Drift = reality no longer matches the template; avoid console edits for code-managed resources.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I define environments as code so they are repeatable, reviewable and recoverable. On AWS only I use CloudFormation, often through the CDK so I can use a programming language; if I must manage several providers I use Terraform and protect its state. I preview with change sets or plans, and I keep the console read-only for anything the code owns so there is no drift."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Fixing things in the console "just this once".</b> The template no longer matches reality, and the next deployment may undo your fix — or fail.</p>
+      <p>Second trap: <b>leaving the Terraform state file somewhere unprotected.</b> It is the tool's record of your infrastructure and can contain sensitive data; store it remotely, with access limited and backups on.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📄 CloudFormation</h5><p>You write the template; AWS tracks the stack. Declarative.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>💻 CDK</h5><p>You write code; it produces the CloudFormation template for you.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># a CloudFormation template (YAML) that creates one S3 bucket</span>
+Resources:
+  ReportsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative only — a real template adds encryption, access rules and tags, and names are chosen per environment.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Environments are now code. But code needs a safe, automatic way to <b>build, test and roll out</b> — and to roll back when something goes wrong. Next: CI/CD &amp; Deployment Strategies.</span>
+      <a class="next-link" href="ci-cd-deployment.html">CI/CD &amp; Deployment Strategies <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Tools and versions change often. This page teaches the ideas; for current syntax, versions and features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html" target="_blank" rel="noopener">AWS CloudFormation user guide</a> · <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html" target="_blank" rel="noopener">AWS CDK developer guide</a> · <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/choose-iac-tool/introduction.html" target="_blank" rel="noopener">Choosing an IaC tool (Prescriptive Guidance)</a> · <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/getting-started-terraform/introduction.html" target="_blank" rel="noopener">Getting started with Terraform (Prescriptive Guidance)</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

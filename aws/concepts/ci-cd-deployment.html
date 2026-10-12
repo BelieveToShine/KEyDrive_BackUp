@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD &amp; Deployment Strategies — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">CI/CD &amp; Deployment</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 14 of 19 · 🛠️ Shipping and operating</div>
+    <h1>CI/CD makes every release the same automatic steps — <span class="grad-text">so shipping is routine, and undoing a bad release is one move.</span></h1>
+    <p class="sub">Pipelines, blue/green, canary and linear deployments and passwordless sign-in with OIDC: how to ship to AWS safely and roll back fast.</p>
+    <div class="interview-q">❓ "How would you set up CI/CD to AWS with zero downtime and a safe rollback?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 352" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A deployment pipeline: a commit triggers build and test, deploy to a new version beside the old, then shift traffic, with a way back">
+<defs><marker id="cd1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,62 L320,96" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<path d="M320,148 L320,182" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<path d="M320,234 L320,268" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd1A)"/>
+<rect class="bx" x="20" y="10" width="600" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="33.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 Commit to Git</text>
+<text x="320" y="46.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">the pipeline starts by itself</text>
+<rect class="bx" x="20" y="96" width="600" height="52" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="119.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧪 Build and test</text>
+<text x="320" y="132.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">the same package every time</text>
+<rect class="bx" x="20" y="182" width="600" height="52" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="205.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🚦 Deploy beside the old version</text>
+<text x="320" y="218.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">production is untouched</text>
+<rect class="bx" x="20" y="268" width="600" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="291.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🔁 Shift traffic to the new version</text>
+<text x="320" y="304.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">shift back to roll back</text>
+<g class="arrow-pill"><rect x="390" y="70" width="60" height="18" rx="9"/><text x="420" y="82.5" text-anchor="middle" font-size="9" font-style="italic">triggers</text></g>
+<g class="arrow-pill"><rect x="384.5" y="156" width="71" height="18" rx="9"/><text x="420" y="168.5" text-anchor="middle" font-size="9" font-style="italic">tests pass</text></g>
+<g class="arrow-pill"><rect x="358" y="242" width="124" height="18" rx="9"/><text x="420" y="254.5" text-anchor="middle" font-size="9" font-style="italic">new version is ready</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a change goes through the same steps every time. A <b>commit</b> starts the pipeline. It <b>builds and tests</b> the code and makes one package. That package is <b>deployed beside the old version</b>, where it can be checked. Then <b>traffic shifts</b> to the new version — all at once, or gradually. If something is wrong, shift back.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">CI/CD means every change is built, tested and released by the same automatic steps — so shipping is routine, and undoing a bad release is one move.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>The environment is code now. The app is code too. If a person still copies files onto a server by hand, every release is different, every release is slow, and every release is a little scary — so teams release rarely, in big batches, which makes each one riskier.</p>
+      <p><b>CI</b> (continuous integration) builds and tests every change automatically. <b>CD</b> (continuous delivery or deployment) takes the tested package and ships it by a repeatable path. The second half of the skill is <b>how</b> it goes live: all at once, to a few users first, or in steps, with a quick way back.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔗 AWS CodePipeline</h4><span class="pk-tag">orchestrates the release stages</span><span class="pk-label use">✅ Pick it when</span><ul><li>Source, build, test and deploy stages in order</li><li>Connects the other services</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You already run everything in another CI system — you can still deploy with it</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧪 AWS CodeBuild</h4><span class="pk-tag">builds and tests code</span><span class="pk-label use">✅ Pick it when</span><ul><li>Compile, run tests, produce an artifact</li><li>A managed build service</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Deployment itself — that is CodeDeploy or another tool</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🚀 AWS CodeDeploy</h4><span class="pk-tag">deploys with a chosen strategy</span><span class="pk-label use">✅ Pick it when</span><ul><li>In-place on EC2 or on-premises; blue/green on EC2, Lambda and ECS</li><li>Traffic shifting for Lambda and ECS: all at once, canary or linear</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>In-place for Lambda and ECS — those platforms use blue/green</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🐙 GitHub Actions and others</h4><span class="pk-tag">your own pipeline tool</span><span class="pk-label use">✅ Pick it when</span><ul><li>Your code is already on GitHub</li><li>Sign in to AWS with OIDC and a role instead of a stored key</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Storing an access key as a pipeline secret</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 How a release goes live</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 252" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="All-at-once shifts every user to the new version together; canary sends a small share first; linear increases the share in equal steps">
+<defs><marker id="cd2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="236" rx="14" fill="rgba(52,211,153,.05)" stroke="#34d399" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#6ee7b7">ALL AT ONCE · blue/green</text>
+<rect class="zone" x="325" y="8" width="305" height="236" rx="14" fill="rgba(251,191,36,.05)" stroke="#fbbf24" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#fcd34d">CANARY · a small share first</text>
+<path d="M94,121 L147,121 L147,65 L200,65" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<path d="M250,150 L250,90" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#cd2A)" marker-start="url(#cd2S)"/>
+<path d="M409,111 L462,111 L462,65 L515,65" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<path d="M409,131 L462,131 L462,175 L515,175" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#cd2A)"/>
+<rect class="bx" x="24" y="96" width="70" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="59" y="125" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👥 Users</text>
+<rect class="bx" x="200" y="40" width="100" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="250" y="62.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔵 Old</text>
+<text x="250" y="75.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">current</text>
+<rect class="bx" x="200" y="150" width="100" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="250" y="172.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🟢 New</text>
+<text x="250" y="185.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">ready</text>
+<text class="free" x="162" y="222" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Switch back to undo.</text>
+<rect class="bx" x="339" y="96" width="70" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="374" y="125" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👥 Users</text>
+<rect class="bx" x="515" y="40" width="100" height="50" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="565" y="62.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔵 Old</text>
+<text x="565" y="75.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">most traffic</text>
+<rect class="bx" x="515" y="150" width="100" height="50" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="565" y="172.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🟢 New</text>
+<text x="565" y="185.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">a small share</text>
+<text class="free" x="477" y="222" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Watch it, then send everyone.</text>
+<g class="arrow-pill"><rect x="122" y="84" width="50" height="18" rx="9"/><text x="147" y="96.5" text-anchor="middle" font-size="9" font-style="italic">before</text></g>
+<g class="arrow-pill"><rect x="257" y="111" width="50" height="18" rx="9"/><text x="282" y="123.5" text-anchor="middle" font-size="9" font-style="italic">switch</text></g>
+<g class="arrow-pill"><rect x="442.5" y="79" width="39" height="18" rx="9"/><text x="462" y="91.5" text-anchor="middle" font-size="9" font-style="italic">most</text></g>
+<g class="arrow-pill"><rect x="440" y="144" width="44" height="18" rx="9"/><text x="462" y="156.5" text-anchor="middle" font-size="9" font-style="italic">a few</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Blue/green</b> (left): the new version (green) runs beside the old (blue); when it is ready, traffic switches. Rolling back is switching back. <b>Canary</b> (right): a small share of traffic goes to the new version first; if it looks healthy, the rest follows. <b>Linear</b> is similar, but the share rises in equal steps with equal waits. For Lambda and ECS, CodeDeploy offers all-at-once, canary and linear traffic shifting, with predefined and custom configurations.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔑 Deploy without a stored key</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 214" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A pipeline signs in to AWS with a short-lived token through OIDC federation, so no long-lived access key is stored">
+<defs><marker id="cd3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="cd3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M130,84 L250,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#cd3A)"/>
+<path d="M390,84 L510,84" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#cd3A)"/>
+<rect class="bx" x="10" y="52" width="120" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="70" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🤖 Pipeline</text>
+<text x="70" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">GitHub Actions</text>
+<rect class="bx" x="250" y="52" width="140" height="64" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🪪 IAM role</text>
+<text x="320" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">trusts this repo</text>
+<rect class="bx" x="510" y="52" width="120" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="570" y="81.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">☁️ AWS</text>
+<text x="570" y="94.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">deploy allowed</text>
+<text class="free" x="320" y="166" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">No long-lived access key is stored in the pipeline to leak.</text>
+<text class="free" x="320" y="186" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">The role's trust policy names the exact repository and branch that may use it.</text>
+<g class="arrow-pill"><rect x="146.5" y="75" width="87" height="18" rx="9"/><text x="190" y="87.5" text-anchor="middle" font-size="9" font-style="italic">sends a token</text></g>
+<g class="arrow-pill"><rect x="417" y="75" width="66" height="18" rx="9"/><text x="450" y="87.5" text-anchor="middle" font-size="9" font-style="italic">temp keys</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> old pipelines kept an access key to log in to AWS — a permanent secret that can leak. With <b>OIDC federation</b> the pipeline presents a short-lived token from its identity provider; an <b>IAM role</b> trusts that provider and returns temporary credentials. The role's trust policy should name the exact repository (and branch) allowed to use it — otherwise workflows you do not control could assume it. This is the role idea from concept 3, applied to the pipeline.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Choosing a release style</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Style</th><th scope="col">What happens</th><th scope="col">Rollback</th><th scope="col">Best when</th></tr></thead><tbody><tr><th scope="row">🔁 Blue/green, all at once</th><td>New version warmed up beside the old, then takes all traffic</td><td>Switch back</td><td>You want a clean cut-over</td></tr><tr><th scope="row">🐤 Canary</th><td>A small share first, then the rest</td><td>Send the share back to zero</td><td>You are unsure and want real-user proof</td></tr><tr><th scope="row">📈 Linear</th><td>The share rises in equal steps with waits</td><td>Stop and shift back</td><td>You want a gradual, steady rollout</td></tr><tr><th scope="row">🔧 In-place (EC2)</th><td>Instances are updated where they are, a few at a time</td><td>Redeploy the old version</td><td>Simple apps on servers</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Release the shop on a Friday afternoon</h5><p>No downtime, and a fast way back.</p><span class="sc-use">→ Blue/green</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>A risky pricing change</h5><p>Try it on a few users first.</p><span class="sc-use">→ Canary traffic shifting</span></div>
+      <div class="scenario"><span class="sc-icon">🔑</span><h5>The team stores an access key as a pipeline secret</h5><p>It leaked in a log once.</p><span class="sc-use">→ OIDC and a role</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Every pull request must be tested</h5><p>Nothing merges if tests fail.</p><span class="sc-use">→ CI on each change</span></div>
+      <div class="scenario"><span class="sc-icon">🏗️</span><h5>Release infrastructure and app together</h5><p>The template and the code change as one.</p><span class="sc-use">→ One pipeline: deploy the stack, then the app</span></div>
+      <div class="scenario"><span class="sc-icon">⏪</span><h5>A bad release reaches production</h5><p>Customers see errors right now.</p><span class="sc-use">→ Shift traffic back to the old version</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — details that bite</summary>
+    <div class="zoom-inner">
+      <p><b>Platform differences.</b> In-place deployments are for EC2 and on-premises instances; Lambda and ECS cannot use in-place and use blue/green with traffic shifting.</p>
+      <p><b>Build once, deploy the same package everywhere.</b> If each environment builds its own copy, "it worked in staging" proves little.</p>
+      <p><b>Health decides.</b> CodeDeploy tracks application health with rules you configure; wire in alarms (concept 17) so a bad canary stops by itself.</p>
+      <p><b>OIDC trust.</b> Add the provider to IAM, create a web-identity role with the expected audience, and restrict the trust policy to your repository and branch. AWS recommends matching on immutable identifiers where available, because names can change.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>CI builds and tests every change automatically; CD ships the tested package by a repeatable path.</li><li>CodePipeline orchestrates, CodeBuild builds and tests, CodeDeploy deploys with a strategy.</li><li>Blue/green runs the new version beside the old and switches traffic; canary sends a small share first; linear raises it in equal steps.</li><li>Lambda and ECS deployments use blue/green traffic shifting; in-place is for EC2 and on-premises.</li><li>Prefer OIDC and an IAM role to a stored access key for pipeline sign-in; scope the trust policy to the repo and branch.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I use a pipeline: every change is built and tested, then deployed beside the current version and traffic is shifted — all at once for a clean cut-over, canary or linear when I want proof from real users — and shifting back is my rollback. The pipeline signs in with OIDC to an IAM role scoped to the repository, so no access key is stored."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>A stored access key for the pipeline.</b> It is a long-lived secret that leaks through logs, forks and screenshots. Use short-lived credentials through OIDC.</p>
+      <p>Second trap: <b>an unrestricted OIDC trust policy.</b> If the role trusts the provider without naming your repository and branch, workflows outside your control can assume it.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🔁 Blue/green</h5><p>The new version waits beside the old, then everyone switches together.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🐤 Canary</h5><p>A small share goes to the new version first, so real users test it before everyone does.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># start a CodeDeploy deployment using a canary traffic-shifting configuration (ECS)</span>
+aws deploy create-deployment --application-name shop --deployment-group-name prod \
+    --deployment-config-name CodeDeployDefault.ECSCanary10Percent5Minutes \
+    --revision file://appspec-revision.json</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the names and revision file are placeholders; the predefined configuration here sends 10 percent first, then the rest five minutes later.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You can now ship changes safely. But apps and pipelines need credentials and settings — database passwords, API keys, feature switches — and hard-coding them is the classic leak. Next: Secrets &amp; Configuration.</span>
+      <a class="next-link" href="secrets-configuration.html">Secrets &amp; Configuration <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Tools and features change often. This page teaches the ideas; for current services, actions and limits, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html" target="_blank" rel="noopener">What is AWS CodeDeploy?</a> · <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html" target="_blank" rel="noopener">CodeDeploy deployment configurations</a> · <a href="https://docs.aws.amazon.com/codepipeline/" target="_blank" rel="noopener">AWS CodePipeline documentation</a> · <a href="https://docs.aws.amazon.com/codebuild/" target="_blank" rel="noopener">AWS CodeBuild documentation</a> · <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html" target="_blank" rel="noopener">OIDC federation in IAM</a> · <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html" target="_blank" rel="noopener">Create a role for OpenID Connect federation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

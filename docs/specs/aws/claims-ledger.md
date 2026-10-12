@@ -165,6 +165,67 @@ Batch A: "Only two Regions" (scenario: a law allows two Regions) · "30 minutes"
 
 Batch B illustrative phrases: "at least two zones" is not used here · "three zones" in diagrams is the teaching layout (RG2).
 
+## Messaging & Events and its deep dives (`messaging.html`, `sqs-sns-eventbridge.html`, `kinesis.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| MS1 | SQS is pull-based, persists messages until processed or expired (up to a fixed maximum retention); SNS is push-based, does not persist, supports HTTP/S, email, SMS, mobile push, Lambda and SQS subscribers; EventBridge matches events by rules and delivers to targets | ✅ V | `/decision-guides/latest/sns-or-sqs-or-eventbridge/sns-or-sqs-or-eventbridge.html` |
+| MS2 | FIFO queues and FIFO topics guarantee order; EventBridge does not; EventBridge delivery to targets is at least once (sources differ on wording — the safer reading is used) | ✅ V | same page |
+| MS3 | SNS filters are per subscriber; EventBridge rules are central; SNS for many subscribers, EventBridge for many topics/filters between microservices; EventBridge or SNS into an SQS buffer is a common pattern | ✅ V | same guide, Prescriptive Guidance |
+| MS4 | Dead-letter queue catches repeated failures; visibility timeout hides a message during processing | ✅ V (EventBridge Pipes doc), 🟨 K (general SQS) | `/eventbridge/latest/userguide/eb-pipes-sqs.html` |
+| MS5 | Kinesis: partition key hashed to a shard; per-shard fixed limits (numbers not quoted); default retention 24 hours, extendable up to 365 days; on-demand and provisioned modes; hot shards split manually in provisioned mode; enhanced fan-out for registered consumers with a mode-dependent cap | ✅ V | `/streams/latest/dev/key-concepts.html`, `/how-do-i-size-a-stream.html` |
+| MS6 | On-demand mode does not detect and isolate a hot key | ✅ V | same page |
+| MS7 | `aws sqs send-message`; queue URL/account ID 111122223333, order_id 1001 | 🟨 K / 🟦 I | |
+| MS-I | Scenarios, diagrams | 🟦 I | |
+
+## Serverless & Orchestration (`serverless-orchestration.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SV1 | Step Functions Standard: long-running, durable, auditable, exactly-once; Express: up to five minutes, at-least-once (async), suits idempotent actions; Standard fits non-repeatable actions like payments; Express history via CloudWatch Logs best-effort; the type cannot be changed after creation | ✅ V | `/step-functions/latest/dg/choosing-workflow-type.html`, `/bp-express.html` |
+| SV2 | Lambda fits short, bursty tasks better than long-running services | ✅ V | `/decision-guides/latest/decision-guides/fargate-or-lambda.html` |
+| SV3 | EventBridge: event routing without ordering guarantee | ✅ V | MS2 |
+| SV4 | Lambda cold starts, execution role | 🟨 K | Lambda internals not searched |
+| SV5 | `aws lambda create-function` flags; runtime `python3.12` | 🟨 K | example runtime |
+| SV-I | Scenarios, "Step 1/2/3" | 🟦 I | |
+
+## Infrastructure as Code (`infrastructure-as-code.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| IA1 | CDK is an open-source framework to define AWS resources in programming languages; synthesizing produces a CloudFormation template; a construct represents one or more CloudFormation resources; needs a bootstrapped environment per account | ✅ V | `/prescriptive-guidance/latest/choose-iac-tool/aws-cdk.html`, getting-started-terraform |
+| IA2 | A stack is IaC deployed and tracked as a single unit; a template is one CloudFormation file | ✅ V | `/prescriptive-guidance/latest/getting-started-terraform/introduction.html` |
+| IA3 | Terraform is not tied to one provider; CloudFormation change set ≈ Terraform plan; template ≈ configuration; CDK for Terraform exists | ✅ V | same guide |
+| IA4 | Change sets preview changes; drift detection | 🟨 K | not returned by the search |
+| IA5 | The sample template (`AWS::S3::Bucket`, versioning enabled) | 🟦 I | |
+| IA-I | Scenarios | 🟦 I | |
+
+## CI/CD & Deployment Strategies (`ci-cd-deployment.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CD1 | CodeDeploy: in-place for EC2/on-premises only; blue/green on EC2, Lambda and ECS; Lambda and ECS cannot use in-place | ✅ V | `/codedeploy/latest/userguide/deployment-configurations.html` |
+| CD2 | Traffic shifting for Lambda/ECS: all-at-once, canary, linear; predefined examples `CodeDeployDefault.ECSCanary10Percent5Minutes` (10 percent, then the rest five minutes later) | ✅ V | same page |
+| CD3 | CodeDeploy tracks application health by rules you configure | ✅ V | CodeDeploy docs |
+| CD4 | OIDC: add the provider to IAM, create a web-identity role with audience `sts.amazonaws.com`, restrict the trust policy to the repository/branch; match immutable IDs where possible; workflow needs `id-token: write` | ✅ V | `/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html`, condition-keys page |
+| CD5 | CodePipeline orchestrates stages; CodeBuild builds and tests | 🟨 K | not returned by the search |
+| CD6 | `aws deploy create-deployment` flags; `appspec-revision.json` | 🟨 K / 🟦 I | |
+| CD-I | Pipeline picture, scenarios | 🟦 I | |
+
+## Secrets & Configuration (`secrets-configuration.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| SX1 | Secrets Manager: automatic rotation, random secret generation, cross-account sharing, cross-Region replication; per-secret and per-API-call charges; database rotation expects the database secret JSON structure | ✅ V | `/secretsmanager/latest/userguide/integrating_parameterstore.html`, ECS sensitive-data guide |
+| SX2 | Parameter Store has no automatic rotation; keep secrets in Secrets Manager and reference them from Parameter Store; standard-tier parameters up to a small size have no charge; both use KMS | ✅ V | same pages, `/systems-manager/latest/userguide/systems-manager-parameter-store.html` |
+| SX3 | Environment variables carry a higher risk of leakage for containers; a sidecar reading Secrets Manager into a shared volume is described | ✅ V | `/AmazonECS/latest/developerguide/specifying-sensitive-data.html` |
+| SX4 | AWS recommends ephemeral secrets or a secrets-management service | ✅ V | `/prescriptive-guidance/latest/aws-startup-security-baseline/wkld-03.html` |
+| SX5 | KMS envelope encryption details | 🟨 K | not returned; the page only says both services encrypt with KMS |
+| SX6 | `aws secretsmanager get-secret-value`; secret name `prod/shop/db` | 🟨 K / 🟦 I | |
+| SX-I | Scenarios | 🟦 I | |
+
+Batch C illustrative phrases: "365 days" and "24 hours" are Kinesis retention values (MS5) · "Preview" in CloudFormation text is the "change set preview" meaning, not a lifecycle state.
+
 ---
 
 ## Open verification list

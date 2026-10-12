@@ -1574,5 +1574,187 @@
     "summary": "The classic mistake with Caching & Edge Delivery.",
     "keywords": "aws caching cloudfront elasticache lazy loading write-through ttl invalidation edge cache cdn trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "aws-messaging",
+    "title": "Messaging & Events",
+    "category": "AWS",
+    "page": "aws/concepts/messaging.html",
+    "summary": "SQS, SNS, EventBridge and Kinesis: messages, events and streams.",
+    "keywords": "aws messaging events sqs sns eventbridge kinesis queue topic stream decouple fan-out"
+  },
+  {
+    "id": "aws-messaging-recall",
+    "title": "Messaging & Events — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/messaging.html",
+    "summary": "Quick recall points: Messaging & Events.",
+    "keywords": "aws messaging events sqs sns eventbridge kinesis queue topic stream decouple fan-out interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-messaging-trap",
+    "title": "Messaging & Events — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/messaging.html",
+    "summary": "The classic mistake with Messaging & Events.",
+    "keywords": "aws messaging events sqs sns eventbridge kinesis queue topic stream decouple fan-out trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-sqs-sns-eventbridge",
+    "title": "SQS, SNS and EventBridge",
+    "category": "AWS",
+    "page": "aws/concepts/sqs-sns-eventbridge.html",
+    "summary": "Pull vs push, ordering, fan-out, filtering and dead-letter queues.",
+    "keywords": "aws sqs sns eventbridge queue topic event bus fifo dead letter queue visibility timeout fan-out"
+  },
+  {
+    "id": "aws-sqs-sns-eventbridge-recall",
+    "title": "SQS, SNS and EventBridge — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/sqs-sns-eventbridge.html",
+    "summary": "Quick recall points: SQS, SNS and EventBridge.",
+    "keywords": "aws sqs sns eventbridge queue topic event bus fifo dead letter queue visibility timeout fan-out interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-sqs-sns-eventbridge-trap",
+    "title": "SQS, SNS and EventBridge — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/sqs-sns-eventbridge.html",
+    "summary": "The classic mistake with SQS, SNS and EventBridge.",
+    "keywords": "aws sqs sns eventbridge queue topic event bus fifo dead letter queue visibility timeout fan-out trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-kinesis",
+    "title": "Kinesis Data Streams",
+    "category": "AWS",
+    "page": "aws/concepts/kinesis.html",
+    "summary": "Shards, partition keys, retention, capacity modes and enhanced fan-out.",
+    "keywords": "aws kinesis data streams shard partition key retention on-demand provisioned enhanced fan-out"
+  },
+  {
+    "id": "aws-kinesis-recall",
+    "title": "Kinesis Data Streams — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/kinesis.html",
+    "summary": "Quick recall points: Kinesis Data Streams.",
+    "keywords": "aws kinesis data streams shard partition key retention on-demand provisioned enhanced fan-out interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-kinesis-trap",
+    "title": "Kinesis Data Streams — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/kinesis.html",
+    "summary": "The classic mistake with Kinesis Data Streams.",
+    "keywords": "aws kinesis data streams shard partition key retention on-demand provisioned enhanced fan-out trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-serverless-orchestration",
+    "title": "Serverless & Orchestration",
+    "category": "AWS",
+    "page": "aws/concepts/serverless-orchestration.html",
+    "summary": "Lambda, Step Functions and EventBridge: what each is for and how to choose.",
+    "keywords": "aws serverless lambda step functions eventbridge orchestration standard express workflow"
+  },
+  {
+    "id": "aws-serverless-orchestration-recall",
+    "title": "Serverless & Orchestration — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/serverless-orchestration.html",
+    "summary": "Quick recall points: Serverless & Orchestration.",
+    "keywords": "aws serverless lambda step functions eventbridge orchestration standard express workflow interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-serverless-orchestration-trap",
+    "title": "Serverless & Orchestration — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/serverless-orchestration.html",
+    "summary": "The classic mistake with Serverless & Orchestration.",
+    "keywords": "aws serverless lambda step functions eventbridge orchestration standard express workflow trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-infrastructure-as-code",
+    "title": "Infrastructure as Code",
+    "category": "AWS",
+    "page": "aws/concepts/infrastructure-as-code.html",
+    "summary": "CloudFormation, the CDK and Terraform: templates, change sets and drift.",
+    "keywords": "aws infrastructure as code iac cloudformation cdk terraform change set stack drift template"
+  },
+  {
+    "id": "aws-infrastructure-as-code-recall",
+    "title": "Infrastructure as Code — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/infrastructure-as-code.html",
+    "summary": "Quick recall points: Infrastructure as Code.",
+    "keywords": "aws infrastructure as code iac cloudformation cdk terraform change set stack drift template interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-infrastructure-as-code-trap",
+    "title": "Infrastructure as Code — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/infrastructure-as-code.html",
+    "summary": "The classic mistake with Infrastructure as Code.",
+    "keywords": "aws infrastructure as code iac cloudformation cdk terraform change set stack drift template trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-ci-cd-deployment",
+    "title": "CI/CD & Deployment Strategies",
+    "category": "AWS",
+    "page": "aws/concepts/ci-cd-deployment.html",
+    "summary": "CodePipeline, CodeBuild, CodeDeploy, blue/green, canary, linear and OIDC sign-in.",
+    "keywords": "aws ci cd codepipeline codebuild codedeploy blue green canary linear oidc github actions rollback"
+  },
+  {
+    "id": "aws-ci-cd-deployment-recall",
+    "title": "CI/CD & Deployment Strategies — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/ci-cd-deployment.html",
+    "summary": "Quick recall points: CI/CD & Deployment Strategies.",
+    "keywords": "aws ci cd codepipeline codebuild codedeploy blue green canary linear oidc github actions rollback interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-ci-cd-deployment-trap",
+    "title": "CI/CD & Deployment Strategies — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/ci-cd-deployment.html",
+    "summary": "The classic mistake with CI/CD & Deployment Strategies.",
+    "keywords": "aws ci cd codepipeline codebuild codedeploy blue green canary linear oidc github actions rollback trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "aws-secrets-configuration",
+    "title": "Secrets & Configuration",
+    "category": "AWS",
+    "page": "aws/concepts/secrets-configuration.html",
+    "summary": "IAM roles, Secrets Manager, Parameter Store and KMS.",
+    "keywords": "aws secrets configuration secrets manager parameter store kms rotation iam role encryption"
+  },
+  {
+    "id": "aws-secrets-configuration-recall",
+    "title": "Secrets & Configuration — interview recall",
+    "category": "AWS",
+    "page": "aws/concepts/secrets-configuration.html",
+    "summary": "Quick recall points: Secrets & Configuration.",
+    "keywords": "aws secrets configuration secrets manager parameter store kms rotation iam role encryption interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "aws-secrets-configuration-trap",
+    "title": "Secrets & Configuration — common trap",
+    "category": "AWS",
+    "page": "aws/concepts/secrets-configuration.html",
+    "summary": "The classic mistake with Secrets & Configuration.",
+    "keywords": "aws secrets configuration secrets manager parameter store kms rotation iam role encryption trap mistake",
+    "anchor": "trap"
   }
 ]

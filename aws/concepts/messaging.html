@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messaging &amp; Events — AWS — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🟧 AWS</a><span class="sep">›</span><span class="cur">Messaging &amp; Events</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 11 of 19 · ⚙️ Handling load</div>
+    <h1>When one part of your system waits for another, they fail together — <span class="grad-text">put a queue, topic or stream in between.</span></h1>
+    <p class="sub">SQS, SNS, EventBridge and Kinesis: messages, events and streams, what each is for and how they combine.</p>
+    <div class="interview-q">❓ "When would you use SQS, SNS, EventBridge or Kinesis?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Three shapes of asynchronous communication: a message waits in a queue for one worker, an event is announced to whoever listens, and a stream is a log many readers replay">
+<defs><marker id="ms1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ms1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M110,190 L110,230 L530,230 L530,190" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ms1A)"/>
+<rect class="bx" x="10" y="40" width="200" height="150" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="110" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Message</text>
+<text x="110" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQS · SNS</text>
+<text x="110" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">"do this job"</text>
+<text x="110" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">one consumer handles it</text>
+<text x="110" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">removed once processed</text>
+<rect class="bx" x="220" y="40" width="200" height="150" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📣 Event</text>
+<text x="320" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">EventBridge · SNS</text>
+<text x="320" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">"this happened"</text>
+<text x="320" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">many may react</text>
+<text x="320" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">fire and route</text>
+<rect class="bx" x="430" y="40" width="200" height="150" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="530" y="94" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🌊 Stream</text>
+<text x="530" y="106.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">Kinesis Data Streams</text>
+<text x="530" y="119" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">a long ordered log</text>
+<text x="530" y="131.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">many readers, replay</text>
+<text x="530" y="144" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">kept for a retention period</text>
+<text class="free" x="320" y="278" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Do not make parts of your app wait for each other — put something in between.</text>
+<g class="arrow-pill"><rect x="239.5" y="221" width="161" height="18" rx="9"/><text x="320" y="233.5" text-anchor="middle" font-size="9" font-style="italic">pick by what the data means</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> three shapes of "do not wait for each other". A <b>message</b> says "do this job" and waits in a queue until one worker handles it (SQS, SNS). An <b>event</b> says "this happened" and is announced to whoever cares (EventBridge, SNS). A <b>stream</b> is a long ordered log that many readers can replay (Kinesis). Choosing the right shape is most of the skill.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">When one part of your system calls another and waits, they fail together — put a queue, topic or stream in between so each side can scale and fail on its own.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Caching and scaling help a request finish faster. But some work does not belong in the request at all: sending an email, resizing an image, charging a card, updating stock. If the web request waits for all of that, it is slow — and if one step fails, the whole request fails.</p>
+      <p>The fix is to <b>decouple</b>. The web app drops a message or event into a service in the middle and carries on. Workers pick it up when they can. Under load, work queues up instead of failing; when a worker crashes, the message is still there. AWS offers several services because "send something" means different things.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The four services</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#a78bfa"><h4>📬 Amazon SQS</h4><span class="pk-tag">a queue — pull-based</span><span class="pk-label use">✅ Pick it when</span><ul><li>A job for one worker; messages wait until processed or expired</li><li>A buffer so a slow consumer does not slow the producer</li><li>FIFO queues when strict order matters</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need to notify many subscribers at once → SNS or EventBridge</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📣 Amazon SNS</h4><span class="pk-tag">topics — push to subscribers</span><span class="pk-label use">✅ Pick it when</span><ul><li>Fan-out: one message to many subscribers</li><li>Subscribers include SQS queues, Lambda functions, HTTP endpoints, email, SMS and mobile push</li><li>SNS FIFO topics when order matters</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need messages to wait for slow consumers — SNS does not store them; put an SQS queue behind it</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🧭 Amazon EventBridge</h4><span class="pk-tag">an event bus with rules</span><span class="pk-label use">✅ Pick it when</span><ul><li>Route events by their content to one or more targets</li><li>Many topics and filters between microservices</li><li>AWS and SaaS events</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need ordering guarantees — EventBridge does not provide message ordering</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🌊 Amazon Kinesis Data Streams</h4><span class="pk-tag">a stream — a replayable log</span><span class="pk-label use">✅ Pick it when</span><ul><li>Huge volumes of ordered events: clicks, logs, telemetry</li><li>Many readers, each with their own position; replay within retention</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A simple job queue — SQS is simpler</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 524" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: a job for one worker use SQS, announce to many use SNS or EventBridge, route by content use EventBridge, a huge ordered stream use Kinesis">
+<defs><marker id="ms2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ms2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ms2A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What are you sending?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📬 A job one worker must finish?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">process an order, resize an image</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">SQS queue</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">buffers; consumers pull</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📣 Tell many subscribers at once?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">email, SMS, queues, functions</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">SNS topic</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">push to every subscriber</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧭 Route events by their content?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">rules decide the target</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">EventBridge</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">event bus with rules</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🌊 A flood of ordered events to replay?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">clickstreams, logs, telemetry</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Kinesis</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">shards and retention</text>
+<rect class="bx" x="10" y="460" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="484.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🤝 Often you combine them</text>
+<text x="175" y="497.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">SNS or EventBridge → SQS buffer</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> ask in order. <b>A job for one worker?</b> SQS. <b>Tell many subscribers at once?</b> SNS. <b>Route by event content?</b> EventBridge. <b>A flood of ordered events to replay?</b> Kinesis. The fifth box is the real-world answer: combine them — for example, SNS or EventBridge delivering into an SQS queue as a buffer for each consumer.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🤝 Using them together</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 292" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A common combination: an order event goes to EventBridge, which routes it to separate SQS queues so each consumer works at its own pace">
+<defs><marker id="ms3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ms3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M100,140 L210,140" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ms3A)"/>
+<path d="M350,126 L415,126 L415,58 L480,58" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ms3A)"/>
+<path d="M350,146 L480,146" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ms3A)"/>
+<path d="M350,158 L415,158 L415,234 L480,234" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ms3A)"/>
+<rect class="bx" x="10" y="108" width="90" height="64" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="55" y="137.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🛒 Orders</text>
+<text x="55" y="150.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">service</text>
+<rect class="bx" x="210" y="108" width="140" height="64" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="280" y="137.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🧭 EventBridge</text>
+<text x="280" y="150.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">rules route</text>
+<rect class="bx" x="480" y="30" width="150" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="555" y="55.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Billing queue</text>
+<text x="555" y="68.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQS</text>
+<rect class="bx" x="480" y="118" width="150" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="555" y="143.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Email queue</text>
+<text x="555" y="156.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQS</text>
+<rect class="bx" x="480" y="206" width="150" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="555" y="231.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Stock queue</text>
+<text x="555" y="244.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQS</text>
+<g class="arrow-pill"><rect x="122" y="131" width="66" height="18" rx="9"/><text x="155" y="143.5" text-anchor="middle" font-size="9" font-style="italic">publishes</text></g>
+<g class="arrow-pill"><rect x="395.5" y="83" width="39" height="18" rx="9"/><text x="415" y="95.5" text-anchor="middle" font-size="9" font-style="italic">rule</text></g>
+<g class="arrow-pill"><rect x="395.5" y="137" width="39" height="18" rx="9"/><text x="415" y="149.5" text-anchor="middle" font-size="9" font-style="italic">rule</text></g>
+<g class="arrow-pill"><rect x="395.5" y="187" width="39" height="18" rx="9"/><text x="415" y="199.5" text-anchor="middle" font-size="9" font-style="italic">rule</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> an orders service publishes one event. <b>EventBridge</b> rules route it to a separate <b>SQS queue</b> for billing, email and stock. Each consumer reads its own queue at its own pace, and if one is down its messages simply wait. This is the "event bus in front, queues behind" pattern AWS describes: EventBridge or SNS for routing, SQS as the buffer.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Model</th><th scope="col">Delivery</th><th scope="col">Order</th><th scope="col">Keeps messages?</th></tr></thead><tbody><tr><th scope="row">📬 SQS</th><td>Pull from a queue</td><td>Consumers fetch</td><td>FIFO queues guarantee order</td><td>Yes, until processed or expired</td></tr><tr><th scope="row">📣 SNS</th><td>Push to subscribers</td><td>Pushed in real time</td><td>FIFO topics guarantee order</td><td>No — not persisted</td></tr><tr><th scope="row">🧭 EventBridge</th><td>Rules route events</td><td>To targets</td><td>No ordering guarantee</td><td>Not as a queue; targets can buffer</td></tr><tr><th scope="row">🌊 Kinesis</th><td>Readers pull from shards</td><td>Consumers read the log</td><td>Per shard</td><td>For a retention period</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📧</span><h5>Send a welcome email after sign-up</h5><p>The sign-up page must not wait.</p><span class="sc-use">→ SQS queue + a worker</span></div>
+      <div class="scenario"><span class="sc-icon">📢</span><h5>An order is placed</h5><p>Billing, shipping and analytics all need to know.</p><span class="sc-use">→ SNS or EventBridge to queues</span></div>
+      <div class="scenario"><span class="sc-icon">🧭</span><h5>Only "premium order" events go to the VIP team</h5><p>Route by content.</p><span class="sc-use">→ An EventBridge rule</span></div>
+      <div class="scenario"><span class="sc-icon">🏦</span><h5>Process transactions in strict order per account</h5><p>Order matters.</p><span class="sc-use">→ SQS FIFO</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>Millions of clicks a minute</h5><p>Many analysis jobs read the same flow.</p><span class="sc-use">→ Kinesis Data Streams</span></div>
+      <div class="scenario"><span class="sc-icon">⚠️</span><h5>A message keeps failing</h5><p>It should not block the others.</p><span class="sc-use">→ A dead-letter queue</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="sqs-sns-eventbridge.html"><span class="dc-kicker">Deep dive · Messaging</span><h4>SQS, SNS and EventBridge</h4><p>Queues versus topics versus event buses: pull and push, ordering, fan-out, filtering and the combinations that real systems use.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+      <a class="kd-card deep-card" href="kinesis.html"><span class="dc-kicker">Deep dive · Messaging</span><h4>Kinesis Data Streams</h4><p>Shards, partition keys, retention, capacity modes and enhanced fan-out: when a stream beats a queue.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — habits for async systems</summary>
+    <div class="zoom-inner">
+      <p><b>Expect duplicates.</b> Messaging infrastructure can deliver the same message more than once, and EventBridge targets get events at least once. Make consumers <i>idempotent</i>: doing the work twice has the same result as once.</p>
+      <p><b>Dead-letter queues.</b> When a message fails repeatedly, move it aside so it does not block healthy messages, and look at it later.</p>
+      <p><b>Retention.</b> SQS keeps messages until they are processed or expire (up to a fixed maximum retention); Kinesis keeps data for its retention period; SNS does not persist messages.</p>
+      <p><b>Message, event, stream.</b> A message is a command for one handler. An event is a fact many may use. A stream is a log you read at your own position. The words matter because they decide who is responsible for what happens next.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Message (SQS/SNS) = a job; event (EventBridge) = a fact to route; stream (Kinesis) = a replayable log.</li><li>SQS is pull-based and persists until processed or expired; SNS is push-based and does not persist; EventBridge routes by rules and has no ordering guarantee.</li><li>FIFO queues and FIFO topics give strict ordering.</li><li>Combine: SNS or EventBridge → SQS buffer per consumer. Add dead-letter queues.</li><li>Consumers must be idempotent — duplicates happen.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I decouple with the right shape: SQS for a job one worker handles, SNS for fan-out to many subscribers, EventBridge to route events by content, and Kinesis for a replayable ordered stream. In practice I put EventBridge or SNS in front and an SQS queue behind each consumer as a buffer, add dead-letter queues, and make consumers idempotent because duplicates happen."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Treating SNS like a queue.</b> It pushes to subscribers and does not persist messages; a subscriber that is down can miss them. Put an SQS queue behind it.</p>
+      <p>Second trap: <b>assuming order everywhere.</b> Only FIFO queues, FIFO topics and a single Kinesis shard give ordering. EventBridge does not.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📨 Message</h5><p>A command for one handler. Removed once handled. You care that it was processed.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>📣 Event</h5><p>A fact that something happened. Many may react, or none. The sender does not care who.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt"># send a message to an SQS queue</span>
+aws sqs send-message --queue-url https://sqs.eu-west-1.amazonaws.com/111122223333/orders \
+    --message-body '{"order_id": 1001}'</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — the queue URL, account ID and body are placeholders.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Messages and events now have a home. Next: running small pieces of code only when a message or event arrives — Serverless &amp; Orchestration.</span>
+      <a class="next-link" href="serverless-orchestration.html">Serverless &amp; Orchestration <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official AWS docs. Official docs: <a href="https://docs.aws.amazon.com/decision-guides/latest/sns-or-sqs-or-eventbridge/sns-or-sqs-or-eventbridge.html" target="_blank" rel="noopener">Amazon SQS, Amazon SNS, or Amazon EventBridge? (decision guide)</a> · <a href="https://docs.aws.amazon.com/decision-guides/latest/application-integration-on-aws-how-to-choose/application-integration-on-aws-how-to-choose.html" target="_blank" rel="noopener">Choosing an AWS application integration service</a> · <a href="https://docs.aws.amazon.com/sqs/" target="_blank" rel="noopener">Amazon SQS documentation</a> · <a href="https://docs.aws.amazon.com/sns/" target="_blank" rel="noopener">Amazon SNS documentation</a> · <a href="https://docs.aws.amazon.com/eventbridge/" target="_blank" rel="noopener">Amazon EventBridge documentation</a> · <a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html" target="_blank" rel="noopener">Amazon Kinesis Data Streams developer guide</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AWS · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

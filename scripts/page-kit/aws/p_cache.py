@@ -123,7 +123,7 @@ if item is None:               <span class="cmt"># miss</span>
     cache.set(key, item, ttl=minutes)  <span class="cmt"># save a copy, with an expiry</span>
 return item''',
       'Illustrative pseudo-code only — real client libraries have their own method names and options.'))
-    body += next_box('Your app is now fast and can take heavier load. But some work should not happen while a user waits — it should be handed off and done in the background. Next: Messaging &amp; Events.', None)
+    body += next_box('Your app is now fast and can take heavier load. But some work should not happen while a user waits — it should be handed off and done in the background. Next: Messaging &amp; Events.', 'messaging.html', 'Messaging &amp; Events')
     body += fact_note(FOOT, [DOCS_CF, DOCS_EXP, DOCS_INV, DOCS_EC, DOCS_STR])
     return page('caching-edge', 'Caching & Edge Delivery', 'Concept 10 of 19 · ⚙️ Handling load',
         'A cache keeps a copy of an answer close to whoever asks — <span class="grad-text">so the slow, expensive place is asked far less often.</span>',

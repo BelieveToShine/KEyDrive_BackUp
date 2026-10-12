@@ -17,16 +17,16 @@ per `../../rules/content-structure.md` and `../../rules/navigation.md`.
 | 8 | Load Balancing & Traffic Routing | ✅ Written | `aws/concepts/load-balancing.html` |
 | 9 | Scaling & Resilience | ✅ Written | `aws/concepts/scaling-resilience.html`, `aws/concepts/disaster-recovery.html` (Disaster Recovery) |
 | 10 | Caching & Edge Delivery | ✅ Written | `aws/concepts/caching-edge.html` |
-| 11 | Messaging & Events | 🔒 Planned | — |
-| 12 | Serverless & Orchestration | 🔒 Planned | — |
-| 13 | Infrastructure as Code | 🔒 Planned | — |
-| 14 | CI/CD & Deployment Strategies | 🔒 Planned | — |
-| 15 | Secrets & Configuration | 🔒 Planned | — |
+| 11 | Messaging & Events | ✅ Written | `aws/concepts/messaging.html`, `aws/concepts/sqs-sns-eventbridge.html`, `aws/concepts/kinesis.html` |
+| 12 | Serverless & Orchestration | ✅ Written | `aws/concepts/serverless-orchestration.html` |
+| 13 | Infrastructure as Code | ✅ Written | `aws/concepts/infrastructure-as-code.html` |
+| 14 | CI/CD & Deployment Strategies | ✅ Written | `aws/concepts/ci-cd-deployment.html` |
+| 15 | Secrets & Configuration | ✅ Written | `aws/concepts/secrets-configuration.html` |
 | 16 | Security & Governance | 🔒 Planned | — |
 | 17 | Monitoring & Observability | 🔒 Planned | — |
 | 18 | Cost Management | 🔒 Planned | — |
 | 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
 
-**10 / 19 written (batches A and B, written 2026-10-12 while the user was away).** The hub page (`aws/index.html`) is built with the full locked roadmap;
+**15 / 19 written (batches A–C, written 2026-10-12 while the user was away).** The hub page (`aws/index.html`) is built with the full locked roadmap;
 concept pages come next, in the order fixed in `concept-taxonomy.md`. Slug convention: kebab-case
 of the concept name, e.g. `aws/concepts/regions-availability-zones.html`.
