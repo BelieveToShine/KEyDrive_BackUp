@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Databases — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Databases</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 7 of 19 · 🧱 Building blocks</div>
+    <h1>Pick a database by <span class="grad-text">the shape of your data</span> and the questions you will ask — not by what is popular.</h1>
+    <p class="sub">Tables that relate to each other, flexible JSON items at world scale, and plain files all need different homes. Azure has a family of databases for this. Learn the map, then learn when each one wins.</p>
+    <div class="interview-q">❓ "When would you choose Azure SQL, PostgreSQL/MySQL or Cosmos DB for a new application?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 404" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision map: relational data goes to Azure SQL or PostgreSQL/MySQL, flexible global-scale items to Cosmos DB, plain files to Storage">
+<defs><marker id="db1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="db1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,60 L170,60 L170,130" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M320,42 L320,60 L420,60 L420,130" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M320,42 L320,60 L570,60 L570,130" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M85,200 L85,300" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M255,200 L255,300" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M420,200 L420,300" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#db1A)"/>
+<path d="M570,200 L570,300" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#db1A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What does your data look like?</text>
+<rect class="bx" x="10" y="130" width="320" height="70" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="170" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🔗 Tables that relate to each other</text>
+<text x="170" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">joins · constraints · all-or-nothing transactions</text>
+<rect class="bx" x="350" y="130" width="140" height="70" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="420" y="156.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🧩 Flexible items</text>
+<text x="420" y="169" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">JSON · huge scale</text>
+<text x="420" y="181.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">users worldwide</text>
+<rect class="bx" x="510" y="130" width="120" height="70" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="570" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📄 Just files</text>
+<text x="570" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">photos · backups</text>
+<rect class="bx" x="10" y="300" width="150" height="84" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="85" y="327.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🟦 Azure SQL</text>
+<text x="85" y="339.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQL Database</text>
+<text x="85" y="352.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Managed Instance</text>
+<text x="85" y="364.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">SQL Server on a VM</text>
+<rect class="bx" x="180" y="300" width="150" height="84" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="255" y="327.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🐘 Open source</text>
+<text x="255" y="339.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">PostgreSQL ·</text>
+<text x="255" y="352.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">MySQL</text>
+<text x="255" y="364.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Flexible Server</text>
+<rect class="bx" x="350" y="300" width="140" height="84" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="420" y="333.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🌍 Cosmos DB</text>
+<text x="420" y="346" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">NoSQL API (JSON)</text>
+<text x="420" y="358.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">plus other APIs</text>
+<rect class="bx" x="510" y="300" width="120" height="84" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="570" y="333.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">📦 Storage</text>
+<text x="570" y="346" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">Blob / Files</text>
+<text x="570" y="358.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">not a database</text>
+<g class="arrow-pill"><rect x="126.5" y="87" width="87" height="18" rx="9"/><text x="170" y="99.5" text-anchor="middle" font-size="9" font-style="italic">tables, joins</text></g>
+<g class="arrow-pill"><rect x="368.5" y="87" width="103" height="18" rx="9"/><text x="420" y="99.5" text-anchor="middle" font-size="9" font-style="italic">scale-out + JSON</text></g>
+<g class="arrow-pill"><rect x="521" y="87" width="98" height="18" rx="9"/><text x="570" y="99.5" text-anchor="middle" font-size="9" font-style="italic">files, not rows</text></g>
+<g class="arrow-pill"><rect x="31" y="243" width="108" height="18" rx="9"/><text x="85" y="255.5" text-anchor="middle" font-size="9" font-style="italic">SQL Server skills</text></g>
+<g class="arrow-pill"><rect x="198.5" y="243" width="113" height="18" rx="9"/><text x="255" y="255.5" text-anchor="middle" font-size="9" font-style="italic">open-source engine</text></g>
+<g class="arrow-pill"><rect x="358" y="243" width="124" height="18" rx="9"/><text x="420" y="255.5" text-anchor="middle" font-size="9" font-style="italic">global · low latency</text></g>
+<g class="arrow-pill"><rect x="524" y="243" width="92" height="18" rx="9"/><text x="570" y="255.5" text-anchor="middle" font-size="9" font-style="italic">not a database</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> start with the shape of your data, then follow the arrow. <b>Tables that relate to each other</b> (customers → orders → items) point to a relational engine: the Azure SQL family if you want the SQL Server world, or PostgreSQL/MySQL Flexible Server if you prefer open source. <b>Flexible JSON items at world scale</b> point to Azure Cosmos DB. And if it is really just files, it never needed a database — that is Storage.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Pick a database by the shape of your data and the questions you will ask — not by what is popular. Related tables → Azure SQL (or Postgres/MySQL). Flexible items at world scale → Cosmos DB.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Storage keeps files and simple records safe. But imagine this question: <i>"Show customer 42's orders from last month over $100 — and when they buy, reduce the stock <b>and</b> save the order, or do neither."</i> A storage account cannot search across records, join related data, or promise that two changes happen together.</p>
+      <p>A <b>database</b> adds exactly those three things: fast queries (indexes), relationships between data, and <b>transactions</b> — all-or-nothing changes. Azure offers several databases because data comes in different shapes, and forcing every shape into one engine means paying for it later in speed, cost or complexity.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The Azure database family</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🗄️ Azure SQL Database</h4><span class="pk-tag">the fully managed SQL Server engine, for new cloud apps</span><span class="pk-label use">✅ Pick it when</span><ul><li>A new app with related tables</li><li>You want Microsoft to patch, back up and run it</li><li>Spiky or idle workloads (serverless option can pause when idle)</li><li>Very large databases (Hyperscale tier)</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need instance-level SQL Server features → Managed Instance</li><li>You need the operating system itself → SQL on a VM</li></ul></div>
+      <div class="pick-card" style="--pick:#c4b5fd"><h4>🏢 SQL Managed Instance</h4><span class="pk-tag">nearly all SQL Server features, still managed</span><span class="pk-label use">✅ Pick it when</span><ul><li>Moving an existing SQL Server app with minimal changes</li><li>You rely on SQL Agent, linked servers, cross-database queries or CLR</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A brand-new app that needs none of those → SQL Database is simpler</li></ul></div>
+      <div class="pick-card" style="--pick:#93a0b8"><h4>🖥️ SQL Server on an Azure VM</h4><span class="pk-tag">your own SQL Server, running on a virtual machine</span><span class="pk-label use">✅ Pick it when</span><ul><li>You need access to the operating system or file system</li><li>You must stay on one exact SQL Server version</li><li>You already own licenses you want to reuse</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You do not want to patch and look after a VM → use a managed option</li></ul></div>
+      <div class="pick-card" style="--pick:#8b9eff"><h4>🐘 PostgreSQL / MySQL Flexible Server</h4><span class="pk-tag">managed open-source relational databases</span><span class="pk-label use">✅ Pick it when</span><ul><li>Your app is built for PostgreSQL or MySQL</li><li>You want open-source tools and extensions</li><li>You want a managed service without rewriting the app</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You are an SQL Server shop with T-SQL code → Azure SQL</li><li>You need flexible JSON at world scale → Cosmos DB</li></ul></div>
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🌍 Azure Cosmos DB</h4><span class="pk-tag">a globally distributed NoSQL database</span><span class="pk-label use">✅ Pick it when</span><ul><li>Flexible JSON items and a schema that keeps changing</li><li>Users all over the world who need fast reads and writes</li><li>Huge scale by spreading data over partitions</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Many joins and strict relationships between tables → relational</li><li>You cannot choose a good partition key yet</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🪜 Azure SQL: how much do you want to manage?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 236" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Azure SQL options from most control to most managed: SQL Server on a VM, SQL Managed Instance, SQL Database">
+<defs><marker id="db2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="db2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M105,150 L105,190 L535,190 L535,150" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#db2A)"/>
+<text class="free" x="10" y="30" text-anchor="start" font-size="10" font-weight="600" fill="#93a0b8">more control, more admin work</text>
+<text class="free" x="630" y="30" text-anchor="end" font-size="10" font-weight="600" fill="#93a0b8">less admin work, fewer options</text>
+<rect class="bx" x="10" y="50" width="190" height="100" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="105" y="85.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🖥️ SQL Server on a VM</text>
+<text x="105" y="97.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">you patch the OS and SQL</text>
+<text x="105" y="110.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">full control</text>
+<text x="105" y="122.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">any version you choose</text>
+<rect class="bx" x="225" y="50" width="190" height="100" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="320" y="85.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🏢 SQL Managed Instance</text>
+<text x="320" y="97.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">Microsoft runs the server</text>
+<text x="320" y="110.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">keeps SQL Server features</text>
+<text x="320" y="122.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">(SQL Agent, linked servers)</text>
+<rect class="bx" x="440" y="50" width="190" height="100" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="535" y="85.25" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🗄️ Azure SQL Database</text>
+<text x="535" y="97.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">Microsoft runs everything</text>
+<text x="535" y="110.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">you manage just the data</text>
+<text x="535" y="122.75" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">serverless option available</text>
+<g class="arrow-pill"><rect x="229" y="181" width="182" height="18" rx="9"/><text x="320" y="193.5" text-anchor="middle" font-size="9" font-style="italic">you hand more work to Microsoft</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the three Azure SQL options sit on a ladder. On the left you get <b>full control</b> — your own SQL Server on a virtual machine — but you patch and look after it. In the middle, <b>Managed Instance</b> keeps almost every SQL Server feature while Microsoft runs the server. On the right, <b>SQL Database</b> is the most managed: you look after your data and nothing else. A good rule: start on the right, and move left only if you have a hard reason.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📐 Two ways to grow — see the difference</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 392" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Two ways to scale: Azure SQL has one writable primary with readable copies; Cosmos DB splits data by partition key across partitions and regions">
+<defs><marker id="db3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="db3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="376" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">AZURE SQL · one writer, copies for reading</text>
+<rect class="zone" x="325" y="8" width="305" height="376" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">COSMOS DB · data split by partition key</text>
+<rect class="zone" x="345" y="196" width="272" height="92" rx="14" fill="#171c28" stroke="#2d364a" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="359" y="215" font-size="9.5" font-family="'JetBrains Mono'" fill="#e7ebf3">PARTITIONS (managed for you)</text>
+<path d="M160,80 L160,120" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db3A)"/>
+<path d="M100,182 L100,244" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db3A)"/>
+<path d="M220,182 L220,244" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db3A)"/>
+<path d="M480,80 L480,112" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#db3A)"/>
+<path d="M480,158 L480,196" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#db3A)"/>
+<path d="M480,288 L480,332" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#db3A)"/>
+<rect class="bx" x="100" y="44" width="120" height="36" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="160" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 App</text>
+<rect class="bx" x="90" y="120" width="140" height="62" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="160" y="148.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🟦 Primary database</text>
+<text x="160" y="161.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">reads + writes</text>
+<rect class="bx" x="26" y="244" width="130" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="91" y="263.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">Readable copy</text>
+<text x="91" y="276.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">reads only</text>
+<rect class="bx" x="164" y="244" width="130" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="229" y="263.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">Readable copy</text>
+<text x="229" y="276.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">reads only</text>
+<text class="free" x="162" y="318" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Writes go to one place. Reads can use the copies.</text>
+<text class="free" x="162" y="336" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Mostly scales UP — a bigger machine —</text>
+<text class="free" x="162" y="352" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">and the copies add read capacity.</text>
+<rect class="bx" x="420" y="44" width="120" height="36" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="480" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💻 App</text>
+<rect class="bx" x="360" y="112" width="240" height="46" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="480" y="132.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔑 Partition key</text>
+<text x="480" y="145.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">its hash picks the partition</text>
+<rect class="bx" x="360" y="226" width="50" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="385" y="252" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">P1</text>
+<rect class="bx" x="424" y="226" width="50" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="449" y="252" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">P2</text>
+<rect class="bx" x="488" y="226" width="50" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="513" y="252" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">P3</text>
+<rect class="bx" x="552" y="226" width="50" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="577" y="252" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">P4</text>
+<rect class="bx" x="360" y="332" width="240" height="40" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="480" y="356" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🌍 Same data in other regions</text>
+<g class="arrow-pill"><rect x="199" y="91" width="82" height="18" rx="9"/><text x="240" y="103.5" text-anchor="middle" font-size="9" font-style="italic">all requests</text></g>
+<g class="arrow-pill"><rect x="62" y="204" width="76" height="18" rx="9"/><text x="100" y="216.5" text-anchor="middle" font-size="9" font-style="italic">copies data</text></g>
+<g class="arrow-pill"><rect x="182" y="204" width="76" height="18" rx="9"/><text x="220" y="216.5" text-anchor="middle" font-size="9" font-style="italic">copies data</text></g>
+<g class="arrow-pill"><rect x="520.5" y="87" width="71" height="18" rx="9"/><text x="556" y="99.5" text-anchor="middle" font-size="9" font-style="italic">item + key</text></g>
+<g class="arrow-pill"><rect x="510" y="168" width="92" height="18" rx="9"/><text x="556" y="180.5" text-anchor="middle" font-size="9" font-style="italic">hash picks one</text></g>
+<g class="arrow-pill"><rect x="511.5" y="301" width="71" height="18" rx="9"/><text x="547" y="313.5" text-anchor="middle" font-size="9" font-style="italic">replicated</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Left — Azure SQL:</b> every change goes to one primary database; copies of the data can serve reads. You grow mostly by using a bigger machine. <b>Right — Cosmos DB:</b> every item carries a <b>partition key</b>; its hash decides which partition stores the item, so the data (and the load) is spread across many partitions and can be copied to other regions. That is why Cosmos DB grows by spreading out, and why choosing the partition key well is the most important decision there.</figcaption>
+</figure>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Relational (Azure SQL, PostgreSQL, MySQL)</th><th scope="col">Azure Cosmos DB (NoSQL)</th></tr></thead><tbody><tr><th scope="row">Data shape</th><td>Tables with rows and columns, a fixed schema</td><td>JSON items in containers, flexible schema</td></tr><tr><th scope="row">Relationships</th><td>Foreign keys and joins between tables</td><td>Usually embedded inside one item, or linked by id</td></tr><tr><th scope="row">All-or-nothing changes</th><td>Transactions across many tables</td><td>Transactions inside one partition key</td></tr><tr><th scope="row">Growing</th><td>Mostly bigger machine, plus read copies</td><td>Spread data across partitions and regions</td></tr><tr><th scope="row">Queries</th><td>Powerful ad-hoc SQL: joins, grouping, reports</td><td>Fast when the query includes the partition key</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🛒</span><h5>Online shop orders</h5><p>Customers, orders and stock must stay consistent. Money is involved.</p><span class="sc-use">→ Azure SQL Database</span></div>
+      <div class="scenario"><span class="sc-icon">🏭</span><h5>Old ERP on SQL Server</h5><p>Uses SQL Agent jobs and cross-database queries. Rewriting it is not possible this year.</p><span class="sc-use">→ SQL Managed Instance</span></div>
+      <div class="scenario"><span class="sc-icon">🐘</span><h5>App built on PostgreSQL</h5><p>The team already knows Postgres and uses its extensions.</p><span class="sc-use">→ PostgreSQL Flexible Server</span></div>
+      <div class="scenario"><span class="sc-icon">🎮</span><h5>Game player profiles</h5><p>Millions of players worldwide, profile read on every login, schema changes each season.</p><span class="sc-use">→ Cosmos DB</span></div>
+      <div class="scenario"><span class="sc-icon">🏷️</span><h5>Product catalog</h5><p>Shoes have a size; laptops have RAM. Every product has different attributes.</p><span class="sc-use">→ Cosmos DB (or SQL with JSON)</span></div>
+      <div class="scenario"><span class="sc-icon">🏦</span><h5>Bank ledger</h5><p>Every transfer must be exact, auditable and all-or-nothing across accounts.</p><span class="sc-use">→ Azure SQL Database</span></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="cosmos-db-vs-azure-sql.html"><span class="dc-kicker">Deep dive · Databases</span><h4>Cosmos DB vs Azure SQL</h4><p>The two you will be asked about most: side-by-side strengths and weaknesses, partition keys, request units, consistency levels and when to use both.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds)</summary>
+    <div class="zoom-inner">
+      <p><b>Two ways to buy Azure SQL.</b> The <b>vCore</b> model lets you pick compute and storage separately. The <b>DTU</b> model bundles them into simple packages.
+      The <b>serverless</b> compute tier (vCore only) scales with load and can pause when idle, so you pay for storage only while it is paused.</p>
+      <p><b>Hyperscale</b> is the service tier built for very large databases and fast scaling of storage and read copies.</p>
+      <p><b>PostgreSQL and MySQL:</b> use <b>Flexible Server</b>. The older PostgreSQL "Single Server" has been retired, so new work should never start on it.</p>
+      <p><b>Cosmos DB has several APIs</b> — NoSQL (its native one, recommended for new apps), MongoDB, Cassandra, Gremlin (graph) and Table — so you can often keep the tools you already know.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Choose by data shape and question shape: related tables → relational; flexible items at global scale → Cosmos DB; plain files → Storage.</li><li>Azure SQL family: SQL Database (most managed, new apps) → Managed Instance (SQL Server features, easy migration) → SQL Server on a VM (full OS control).</li><li>PostgreSQL / MySQL → use Flexible Server.</li><li>Relational scales mostly up, with read copies. Cosmos DB scales out by partition key, and can replicate to other regions.</li><li>A database adds queries, relationships and transactions — the things Storage cannot do.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I choose a database by the shape of the data and the queries. For related tables and transactions I start with Azure SQL Database, move to Managed Instance if I need instance-level SQL Server features, and only use SQL on a VM when I need the OS. For open-source apps I use PostgreSQL or MySQL Flexible Server. For flexible JSON data that must be fast worldwide I use Cosmos DB, where the partition key is the key design decision."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>"NoSQL" does not mean "better" or "faster for everything".</b> Cosmos DB is excellent when your queries match your partition key, and painful when they do not. Relational databases are not "old" — for related data and transactions they are still the right default.</p>
+      <p>Also watch the names: <i>Azure SQL Database</i> is one product, <i>Azure SQL</i> is the whole family, and <i>Azure Database for PostgreSQL</i> is a different service again.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🗄️ Azure SQL Database</h5><p>Fully managed. You get a database, not a server. Best for new apps.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🏢 SQL Managed Instance</h5><p>A whole managed SQL Server instance, with features like SQL Agent. Best for moving existing apps with few changes.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative examples</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt">-- Azure SQL: related tables + an all-or-nothing change</span>
+<span class="kw">BEGIN TRANSACTION</span>;
+  <span class="kw">UPDATE</span> Stock <span class="kw">SET</span> Qty = Qty - <span class="num">1</span> <span class="kw">WHERE</span> ProductId = <span class="num">7</span>;
+  <span class="kw">INSERT INTO</span> Orders (CustomerId, ProductId) <span class="kw">VALUES</span> (<span class="num">42</span>, <span class="num">7</span>);
+<span class="kw">COMMIT</span>;   <span class="cmt">-- both happen, or neither does</span>
+
+<span class="cmt">// Cosmos DB (NoSQL API): one order = one JSON item, read fast by id + partition key</span>
+<span class="kw">const</span> { resource } = <span class="kw">await</span> container.item(<span class="str">"order-1001"</span>, <span class="str">"customer-42"</span>).read();</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shapes only — real code adds error handling, retries and connection setup.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box locked">
+      <span>One database plus one app server is one working instance — but one instance is a single point of failure. Next: Load Balancing &amp; Traffic Routing <i>(coming soon)</i>.</span>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/azure-sql/" target="_blank" rel="noopener">Azure SQL documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/" target="_blank" rel="noopener">Azure Cosmos DB documentation</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

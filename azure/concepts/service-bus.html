@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Bus: Queues &amp; Topics — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><a href="messaging.html">Messaging &amp; Events</a><span class="sep">›</span><span class="cur">Service Bus</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Messaging · 📨 Service Bus</div>
+    <h1>Service Bus is <span class="grad-text">a safe post office</span> for business messages — it holds each one until someone confirms it was handled.</h1>
+    <p class="sub">Use it when losing, duplicating or mixing up a message would cost you money or trust: orders, payments, workflows. Learn queues, topics, peek-lock, dead-letter queues and sessions.</p>
+    <div class="interview-q">❓ "What is the difference between a Service Bus queue and a topic, and what happens to a message that keeps failing?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Service Bus queue: each message goes to one competing worker. Topic: every matching subscription gets its own copy">
+<defs><marker id="sb1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sb1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="620" height="170" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">QUEUE · one message, one worker</text>
+<rect class="zone" x="10" y="190" width="620" height="312" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="209" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">TOPIC · every subscription gets its own copy</text>
+<path d="M124,88 L200,88" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M350,88 L436,88 L436,68 L480,68" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M350,88 L436,88 L436,122 L480,122" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M134,254 L230,254" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M320,276 L320,300 L118,300 L118,340" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M320,276 L320,340" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M320,276 L320,300 L522,300 L522,340" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M118,390 L118,442" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M320,390 L320,442" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<path d="M522,390 L522,442" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#sb1A)"/>
+<rect class="bx" x="24" y="60" width="100" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="74" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📤 Producer</text>
+<text x="74" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">sends orders</text>
+<rect class="bx" x="200" y="60" width="150" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="275" y="85.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Queue: orders</text>
+<text x="275" y="98.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">M1 · M2 · M3</text>
+<rect class="bx" x="480" y="46" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚙️ Worker A</text>
+<rect class="bx" x="480" y="100" width="140" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="126" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚙️ Worker B</text>
+<text class="free" x="320" y="164" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Each message is handled by ONE worker — the workers compete for it.</text>
+<rect class="bx" x="24" y="232" width="110" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="79" y="258" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📢 Publisher</text>
+<rect class="bx" x="230" y="232" width="180" height="44" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="258" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📢 Topic: price-updates</text>
+<rect class="bx" x="24" y="340" width="188" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="118" y="362.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔎 Subscription: EU</text>
+<text x="118" y="375.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">filter: region = EU</text>
+<rect class="bx" x="226" y="340" width="188" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="362.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔎 Subscription: All</text>
+<text x="320" y="375.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">no filter — gets everything</text>
+<rect class="bx" x="428" y="340" width="188" height="50" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="522" y="362.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🔎 Subscription: Urgent</text>
+<text x="522" y="375.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">filter: priority = high</text>
+<rect class="bx" x="24" y="442" width="188" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="118" y="468" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚙️ Pricing app (EU)</text>
+<rect class="bx" x="226" y="442" width="188" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="468" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📊 Analytics app</text>
+<rect class="bx" x="428" y="442" width="188" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="522" y="468" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔔 Alerts app</text>
+<g class="arrow-pill"><rect x="140" y="79" width="44" height="18" rx="9"/><text x="162" y="91.5" text-anchor="middle" font-size="9" font-style="italic">sends</text></g>
+<g class="arrow-pill"><rect x="363" y="79" width="60" height="18" rx="9"/><text x="393" y="91.5" text-anchor="middle" font-size="9" font-style="italic">delivers</text></g>
+<g class="arrow-pill"><rect x="160" y="245" width="44" height="18" rx="9"/><text x="182" y="257.5" text-anchor="middle" font-size="9" font-style="italic">sends</text></g>
+<g class="arrow-pill"><rect x="58.5" y="303" width="119" height="18" rx="9"/><text x="118" y="315.5" text-anchor="middle" font-size="9" font-style="italic">copy if region = EU</text></g>
+<g class="arrow-pill"><rect x="255.5" y="303" width="129" height="18" rx="9"/><text x="320" y="315.5" text-anchor="middle" font-size="9" font-style="italic">copy of every message</text></g>
+<g class="arrow-pill"><rect x="452" y="303" width="140" height="18" rx="9"/><text x="522" y="315.5" text-anchor="middle" font-size="9" font-style="italic">copy if priority = high</text></g>
+<g class="arrow-pill"><rect x="88" y="407" width="60" height="18" rx="9"/><text x="118" y="419.5" text-anchor="middle" font-size="9" font-style="italic">delivers</text></g>
+<g class="arrow-pill"><rect x="290" y="407" width="60" height="18" rx="9"/><text x="320" y="419.5" text-anchor="middle" font-size="9" font-style="italic">delivers</text></g>
+<g class="arrow-pill"><rect x="492" y="407" width="60" height="18" rx="9"/><text x="522" y="419.5" text-anchor="middle" font-size="9" font-style="italic">delivers</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Top — a queue:</b> a producer sends messages; workers pull them. Each message goes to <b>one</b> worker, so the workers share (compete for) the work. <b>Bottom — a topic:</b> a publisher sends one message; each <b>subscription</b> checks its filter and, if the message matches, gets <b>its own copy</b>. So a queue shares jobs between workers, and a topic shares news between apps.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">A queue hands each message to one worker. A topic gives every matching subscription its own copy. Both keep the message until someone confirms it was handled.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Some messages are too important to lose: an order, a payment, a stock change. Dropping one costs money; handling one twice costs trust. A plain queue cannot promise much beyond "it is in there".</p>
+      <p><b>Service Bus</b> is the broker for these messages. It holds a message until a worker <b>confirms</b> it was handled, retries if the worker fails, moves messages that keep failing to a side queue, and can keep messages in order. That is the difference between "a list of jobs" and "a reliable post office".</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔁 The life of one message</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 304" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Life of a Service Bus message with peek-lock: waiting, locked, then completed, retried or dead-lettered">
+<defs><marker id="sb2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="sb2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M150,130 L235,130" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sb2A)"/>
+<path d="M405,118 L460,118 L460,48 L520,48" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#sb2A)"/>
+<path d="M320,164 L320,200 L80,200 L80,160" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#sb2A)"/>
+<path d="M390,164 L390,259 L490,259" fill="none" stroke="#fb7185" stroke-width="1.6" marker-end="url(#sb2A)"/>
+<rect class="bx" x="10" y="100" width="140" height="60" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="80" y="127.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Waiting</text>
+<text x="80" y="140.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">in the queue</text>
+<rect class="bx" x="235" y="100" width="170" height="64" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="320" y="123.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🔒 Locked</text>
+<text x="320" y="136" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">a worker is processing</text>
+<text x="320" y="148.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">(peek-lock)</text>
+<rect class="bx" x="520" y="20" width="110" height="56" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="575" y="45.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">✅ Completed</text>
+<text x="575" y="58.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">message removed</text>
+<rect class="bx" x="490" y="228" width="140" height="62" rx="10" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.3"/>
+<text x="560" y="250.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fda4af">🧟 Dead-letter</text>
+<text x="560" y="263" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">a side queue for</text>
+<text x="560" y="275.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fcc3cb">bad messages</text>
+<text class="free" x="200" y="232" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">every retry adds 1 to the delivery count</text>
+<g class="arrow-pill"><rect x="164.5" y="121" width="55" height="18" rx="9"/><text x="192" y="133.5" text-anchor="middle" font-size="9" font-style="italic">receive</text></g>
+<g class="arrow-pill"><rect x="424.5" y="74" width="71" height="18" rx="9"/><text x="460" y="86.5" text-anchor="middle" font-size="9" font-style="italic">Complete()</text></g>
+<g class="arrow-pill"><rect x="125" y="191" width="150" height="18" rx="9"/><text x="200" y="203.5" text-anchor="middle" font-size="9" font-style="italic">lock expires or Abandon()</text></g>
+<g class="arrow-pill"><rect x="396" y="250" width="76" height="18" rx="9"/><text x="434" y="262.5" text-anchor="middle" font-size="9" font-style="italic">max retries</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> a message waits in the queue. A worker <b>receives</b> it with <b>peek-lock</b>: the message is locked, not deleted, so nobody else takes it. If the worker finishes, it calls <b>Complete()</b> and the message is removed. If the worker fails or is too slow, the lock expires (or the worker calls Abandon()), the message goes back to waiting, and its <b>delivery count</b> goes up by one. After too many tries — 10 by default — Service Bus moves it to the <b>dead-letter queue</b>, a side queue where you can look at it and fix the cause.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 Features that make it "enterprise"</div>
+    <div class="taxonomy-strip">
+      <div class="tax-item"><h5>🎟️ Sessions</h5><p>Messages with the same session id are handled in order, one session at a time. Use the customer id so each customer's steps stay in order.</p></div>
+      <div class="tax-item"><h5>🧟 Dead-letter queue</h5><p>Every queue and subscription has one. Bad or expired messages land there instead of blocking everyone.</p></div>
+      <div class="tax-item"><h5>🪞 Duplicate detection</h5><p>Drops a message that is sent twice with the same MessageId within a time window. It protects the <b>sending</b> side only.</p></div>
+      <div class="tax-item"><h5>⏰ Scheduled delivery</h5><p>Send a message now, deliver it later — "remind the customer in 24 hours".</p></div>
+      <div class="tax-item"><h5>🔗 Transactions</h5><p>Group operations so they succeed or fail together.</p></div>
+      <div class="tax-item"><h5>➡️ Auto-forwarding</h5><p>Chain queues and subscriptions so messages flow on to another queue automatically.</p></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🏷️ Which tier?</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Basic</th><th scope="col">Standard</th><th scope="col">Premium</th></tr></thead><tbody><tr><th scope="row">Queues</th><td>✅</td><td>✅</td><td>✅</td></tr><tr><th scope="row">Topics and subscriptions</th><td>❌</td><td>✅</td><td>✅</td></tr><tr><th scope="row">Capacity</th><td>Shared</td><td>Shared, billed per operation</td><td>Dedicated resources, predictable performance</td></tr><tr><th scope="row">Extras</th><td>—</td><td>—</td><td>Isolation, Private Link, geo-replication, much larger messages</td></tr><tr><th scope="row">Pick it for</th><td>Simple queues only</td><td>Most apps that need topics</td><td>Heavy, steady or sensitive workloads</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Order processing</h5><p>Orders go on a queue. Several workers share the load, and failures are retried.</p><span class="sc-use">→ Queue</span></div>
+      <div class="scenario"><span class="sc-icon">📢</span><h5>Price update</h5><p>The website, the app and analytics each need every price change.</p><span class="sc-use">→ Topic + 3 subscriptions</span></div>
+      <div class="scenario"><span class="sc-icon">🧑</span><h5>Steps per customer</h5><p>"Created", "paid", "shipped" must be handled in order for each customer.</p><span class="sc-use">→ Sessions (session id = customer id)</span></div>
+      <div class="scenario"><span class="sc-icon">🧟</span><h5>A poison message</h5><p>One malformed message keeps crashing the worker. It must not block the rest.</p><span class="sc-use">→ Dead-letter queue</span></div>
+      <div class="scenario"><span class="sc-icon">⏰</span><h5>Reminder in 24 hours</h5><p>Send now, deliver tomorrow.</p><span class="sc-use">→ Scheduled message</span></div>
+      <div class="scenario"><span class="sc-icon">🌍</span><h5>Regional filter</h5><p>The EU app only wants EU price changes.</p><span class="sc-use">→ Subscription filter</span></div>
+    </div>
+  </section>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Queue = one message, one worker (competing consumers). Topic = every matching subscription gets its own copy.</li><li>Peek-lock: receive → lock → Complete() removes it; failure or lock expiry returns it and raises the delivery count. Too many tries → dead-letter queue (default limit 10).</li><li>Sessions keep messages with the same session id in order.</li><li>Topics need the Standard or Premium tier; Basic has queues only.</li><li>Delivery is at-least-once — make the handler idempotent. Duplicate detection only stops duplicate sends.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Service Bus is Azure's enterprise message broker. A queue delivers each message to one of several competing workers; a topic copies each message to every subscription whose filter matches. With peek-lock the message is locked while a worker processes it and removed only when completed; repeated failures move it to the dead-letter queue. I use sessions for ordering, and I make handlers idempotent because delivery is at least once."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>At-least-once means duplicates can happen.</b> If a worker finishes the work but crashes before it calls Complete(), the message comes back. <i>Duplicate detection</i> will not help — it only catches the same message being <b>sent</b> twice. Make the handler safe to run twice.</p>
+      <p>Second trap: a message that matches <b>no</b> subscription filter on a topic is not delivered to any subscription — it is effectively dropped. Add a catch-all subscription if you need to see everything.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>🔒 Peek-lock</h5><p>Receive → locked → you complete it. If you fail, it comes back. At-least-once. The safe default for important work.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🗑️ Receive-and-delete</h5><p>The message is removed the moment it is received. If you crash, it is gone. At-most-once — only for work you can afford to lose.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example — receive and complete</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="kw">with</span> client.get_queue_receiver(<span class="str">"orders"</span>) <span class="kw">as</span> receiver:
+    <span class="kw">for</span> msg <span class="kw">in</span> receiver:
+        handle(str(msg))                 <span class="cmt"># your code — must be safe to run twice</span>
+        receiver.complete_message(msg)   <span class="cmt"># tell Service Bus it is done, so it is removed</span></pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real code also handles errors (abandon or dead-letter the message) and renews long locks.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>Service Bus is for messages that need care. For huge streams of simple events, you want a different tool: Event Hubs.</span>
+      <a class="next-link" href="event-hubs.html">Event Hubs <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/service-bus-messaging/" target="_blank" rel="noopener">Service Bus documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/messaging" target="_blank" rel="noopener">Choose an Azure messaging service (Architecture Center)</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

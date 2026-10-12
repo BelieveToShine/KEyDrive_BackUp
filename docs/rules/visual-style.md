@@ -42,6 +42,13 @@ Poppins/Lexend/Fira Code). KeyDrive is dark, gradient-glow, Sora/Inter/JetBrains
 | Back pill / fixed bottom bar (built by `site.js`) | `.crumb-back`, `.fixed-pager` — see `navigation.md` |
 | Journey-map SVG wrapper | `.journey-wrap`, with `.jm-node` (`.done`/`.locked`) and `.jm-link` |
 | Concept-list row on a category hub | `.concept-row` (`.done`/`.soon` modifiers) |
+| Option card with ✅ pick-when / ⛔ look-elsewhere lists (cloud decision pages; set `--pick` colour) | `.pick-grid` > `.pick-card` |
+| Strengths vs watch-outs (two cards) | `.pros-cons` > `.pc-side.pro` / `.pc-side.con`, title `.pc-title` |
+| Comparison table (scrolls on mobile) | `.table-wrap` > `table.cmp-table` |
+| Real-world scenario cards ("situation → verdict") | `.scenario-grid` > `.scenario` (`.sc-icon`, `.sc-use`) |
+| "Go deeper" link cards to sub pages | `.deep-grid` > `a.kd-card.deep-card` |
+| "Check the official docs" note | `.fact-note` |
+| Locked cell in the bottom bar | `.fixed-pager .fp-locked` |
 | Deep-link landing glow (triggered by `assets/site.js`, not authored per-page) | `.kd-pointed` |
 
 ## Adding a new section type

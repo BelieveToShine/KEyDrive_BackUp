@@ -187,8 +187,12 @@
 })();
 
 /* Fixed bottom journey bar — Prev / ↑ category hub / Next on every concept page, built from
-   assets/journeys.json (the ordered concept list per category) + concepts-index.json (titles).
-   Zero per-page markup. See docs/rules/navigation.md. */
+   assets/journeys.json (ordered concept list per category) + concepts-index.json (titles).
+   Zero per-page markup. See docs/rules/navigation.md.
+   - journeys.json "written" (optional): slugs that exist. A neighbour that isn't written yet is
+     shown as a locked "coming soon" cell instead of a dead link. Omit it when all are written.
+   - journeys.json "sub": { subSlug: parentSlug } — deep-dive pages hanging off a concept. They are
+     not part of "order"; their bar goes parent → sub 1 → sub 2 → … → parent's next concept. */
 (function () {
   var m = location.pathname.match(/\/([^\/]+)\/concepts\/([^\/]+)\.html$/);
   if (!m) return;
@@ -201,35 +205,52 @@
   ]).then(function (res) {
     var journey = res[0][cat];
     if (!journey) return;
-    var i = journey.order.indexOf(slug);
-    if (i < 0) return;
-
+    var sub = journey.sub || {};
+    var written = journey.written || journey.order;
     var titles = {};
-    res[1].forEach(function (it) { if (!it.anchor) titles[it.id] = it.title; });
+    res[1].forEach(function (it) { if (!it.anchor && it.page.indexOf(cat + "/") === 0) titles[it.id] = it.title; });
+    Object.keys(journey.titles || {}).forEach(function (k) { titles[k] = journey.titles[k]; });
+    Object.keys(journey.subTitles || {}).forEach(function (k) { titles[k] = journey.subTitles[k]; });
 
-    function side(target, cls, arrowFirst, tag) {
-      if (!target) return '<span class="fp-side ' + cls + ' fp-empty"></span>';
-      var arrow = '<span class="fp-arrow">' + (arrowFirst ? "←" : "→") + "</span>";
-      var text = '<span class="fp-text"><span class="fp-tag">' + tag + '</span><span class="fp-title">' +
-        target.title + "</span></span>";
-      return '<a class="fp-side ' + cls + '" href="' + target.href + '">' +
-        (arrowFirst ? arrow + text : text + arrow) + "</a>";
-    }
-    function pick(slugName) {
-      return slugName ? { title: titles[slugName] || slugName, href: slugName + ".html" } : null;
+    function target(s, tag) {
+      if (!s) return null;
+      return { title: titles[s] || s, href: s + ".html", locked: written.indexOf(s) < 0 && !sub[s], tag: tag };
     }
 
-    var prev = pick(journey.order[i - 1]);
-    var next = pick(journey.order[i + 1]);
-    if (!next) next = { title: "Back to " + journey.title + " hub", href: "../index.html" };
+    var total = journey.order.length, prev, next, i;
+    if (sub[slug]) {
+      var parent = sub[slug];
+      var sibs = Object.keys(sub).filter(function (k) { return sub[k] === parent; });
+      var si = sibs.indexOf(slug);
+      i = journey.order.indexOf(parent);
+      prev = target(si > 0 ? sibs[si - 1] : parent, si > 0 ? "Previous deep dive" : "Main concept");
+      next = si < sibs.length - 1
+        ? target(sibs[si + 1], "Next deep dive")
+        : target(journey.order[i + 1], i + 1 < total ? "Next concept · " + (i + 2) + " of " + total : "");
+    } else {
+      i = journey.order.indexOf(slug);
+      if (i < 0) return;
+      prev = target(journey.order[i - 1], "Previous · " + i + " of " + total);
+      next = target(journey.order[i + 1], "Next · " + (i + 2) + " of " + total);
+    }
+    if (!next) next = { title: "Back to " + journey.title + " hub", href: "../index.html", tag: "Finished" };
+
+    function side(t, cls, arrowFirst) {
+      if (!t) return '<span class="fp-side ' + cls + ' fp-empty"></span>';
+      var arrow = '<span class="fp-arrow">' + (t.locked ? "🔒" : (arrowFirst ? "←" : "→")) + "</span>";
+      var text = '<span class="fp-text"><span class="fp-tag">' + (t.locked ? "Coming soon" : t.tag) + '</span><span class="fp-title">' +
+        t.title + "</span></span>";
+      var inner = arrowFirst ? arrow + text : text + arrow;
+      return t.locked
+        ? '<span class="fp-side fp-locked ' + cls + '" aria-disabled="true">' + inner + "</span>"
+        : '<a class="fp-side ' + cls + '" href="' + t.href + '">' + inner + "</a>";
+    }
 
     var bar = document.createElement("nav");
     bar.className = "fixed-pager";
     bar.setAttribute("aria-label", "Journey navigation");
-    bar.innerHTML =
-      side(prev, "fp-prev", true, "Previous · " + (i) + " of " + journey.order.length) +
-      '<a class="fp-mid" href="../index.html">↑ ' + journey.title + " hub</a>" +
-      side(next, "fp-next", false, i + 1 < journey.order.length ? "Next · " + (i + 2) + " of " + journey.order.length : "Finished");
+    bar.innerHTML = side(prev, "fp-prev", true) +
+      '<a class="fp-mid" href="../index.html">↑ ' + journey.title + " hub</a>" + side(next, "fp-next", false);
     document.body.appendChild(bar);
     document.body.classList.add("has-fixed-pager");
   }).catch(function () {});

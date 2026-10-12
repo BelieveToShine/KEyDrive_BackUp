@@ -11,9 +11,13 @@ file first in any new session; it routes to everything else rather than trying t
   (What is AI? through Production — including Embeddings & Vector Search and Context
   Engineering, added after a production-verification review found them missing from the
   original 17). Journey map, concept list, and search index are all fully wired to match.
-- **Azure** and **AWS** have a hub page + full locked 19-concept roadmap (developer-to-architect
-  journey, same shape for both, only service names differ) and spec folders, added at the user's
-  request — **no concept pages written yet**. Next step when asked: write them in roadmap order.
+- **Azure** has its hub + full 19-concept roadmap and its first batch of pages written (3 / 19
+  concepts + 4 deep dives): **Storage** (+ Blob in depth), **Databases** (+ Cosmos DB vs Azure SQL),
+  **Messaging & Events** (+ Service Bus, Event Hubs). Facts are logged in
+  `docs/specs/azure/claims-ledger.md` (✅ verified via Microsoft Learn searches / 🟨 still to verify).
+- **AWS** has its hub + locked roadmap and spec folder; **no concept pages yet**. A later session writes
+  them by following `docs/rules/page-production-workflow.md` + `docs/rules/cloud-category-playbook.md`
+  (the "AWS page set" is listed there) — no re-briefing needed.
 - Three other categories (Cloud Systems, Data Systems, Web Platforms) exist only as "coming
   soon" placeholder tiles on the platform home — no hub page, no spec folder yet.
 - **Status: the user is verifying the AI category in production and applying corrections as
@@ -33,14 +37,23 @@ Full detail: `docs/keydrive-overview.md`.
 | Adding a page, category, or changing folder/URL layout | `docs/rules/content-structure.md` |
 | Back button, fixed bottom Prev/Next bar, "where this leads" box, `journeys.json` | `docs/rules/navigation.md` — built by `site.js`, zero per-page markup; every new concept/category must be added to `assets/journeys.json` |
 | Adding or editing any page (search-index sync) | `docs/rules/search-index.md` |
-| Stating any technical or historical fact | `docs/rules/accuracy.md` — non-negotiable |
+| Stating any technical or historical fact | `docs/rules/accuracy.md` + `docs/rules/fact-check-and-currency.md` — non-negotiable: official docs only, every claim/number in the category's `claims-ledger.md`, say what you could not verify |
+| **Writing any new concept page (start here for AWS or any category)** | `docs/rules/page-production-workflow.md` — the step-by-step; then `docs/rules/cloud-category-playbook.md` for cloud categories |
+| Checking your work | `docs/rules/verification.md` (scripts + eyes) and `docs/checklists/concept-page-qa.md` |
 
 ## Where a category's own plan lives
 
 Each category has a `docs/specs/<category>/` folder: `concept-taxonomy.md` (fixed order + why
 each concept exists), `roadmap.md` (written/planned status, updated the moment a page ships),
 `overview.md` (status + deferred-features list + category-specific decisions). Currently `docs/specs/ai/`,
-`docs/specs/azure/` and `docs/specs/aws/` exist.
+`docs/specs/azure/` (also holds `claims-ledger.md`) and `docs/specs/aws/` exist.
+
+## Scripts (run before reporting any page done)
+
+`node scripts/check-site.js [category]` (wiring + claims cross-check) ·
+`node scripts/diagram-lint.js <baseUrl> <page…>` (SVG geometry) ·
+`node scripts/shoot-diagrams.js <baseUrl> <page> <prefix>` (2× screenshots to look at) ·
+`scripts/page-kit/` (optional page generator; HTML stays the source of truth). Details: `docs/rules/verification.md`.
 
 ## Explicitly deferred, platform-wide — do not build until asked
 

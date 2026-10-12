@@ -77,3 +77,16 @@ Architect) — removed; don't re-add locked path previews unless asked.
   between borders), Next (right, tag above title, arrow at the far edge).
 - **Static `<footer class="kd-foot">`:** plain text only ("KeyDrive · AI · concept journey"). Never
   put a navigation link in it — the fixed bar is the only footer navigation.
+
+
+## Locked neighbours and deep-dive pages (added with the Azure pages)
+
+`assets/journeys.json` per category: `order` (all concept slugs), `titles` (slug → title, for unwritten ones
+too), optional `written` (slugs that exist; omit = all), optional `sub` + `subTitles` (deep dives).
+
+- **Main page**: Previous / Next come from `order`. A neighbour not in `written` renders as
+  `<span class="fp-side fp-locked">` — 🔒, tag "Coming soon", not clickable.
+- **Sub page**: Previous = the previous deep dive of the same parent, else the parent ("Main concept");
+  Next = the next deep dive, else the parent's next concept in `order` (locked if unwritten). The middle
+  cell is still "↑ <Category> hub".
+- The in-page `#next` box on a sub page links back to the parent (the bar handles forward movement).

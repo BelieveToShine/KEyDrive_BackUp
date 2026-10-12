@@ -494,19 +494,201 @@
     "keywords": "production trap engineering discipline ai skill"
   },
   {
-    "id": "azure-hub",
-    "title": "Azure — roadmap",
-    "category": "Azure",
-    "page": "azure/index.html",
-    "summary": "The 19-concept Azure journey for developers growing into architects: resource hierarchy to well-architected.",
-    "keywords": "azure microsoft cloud architect roadmap entra rbac vnet app service aks functions cosmos key vault bicep well-architected"
-  },
-  {
     "id": "aws-hub",
     "title": "AWS — roadmap",
     "category": "AWS",
     "page": "aws/index.html",
     "summary": "The 19-concept AWS journey for developers growing into architects: accounts to well-architected.",
     "keywords": "aws amazon cloud architect roadmap iam vpc ec2 s3 lambda dynamodb cloudformation well-architected"
+  },
+  {
+    "id": "azure-storage",
+    "title": "Storage",
+    "category": "Azure",
+    "page": "azure/concepts/storage.html",
+    "summary": "The four doors of an Azure storage account — Blob, Files, Queues, Tables — how to choose, and how many copies to keep.",
+    "keywords": "azure storage account blob files queue table lrs zrs grs gzrs redundancy containers file shares"
+  },
+  {
+    "id": "azure-storage-recall",
+    "title": "Storage — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/storage.html",
+    "summary": "Quick recall points: Storage.",
+    "keywords": "azure storage account blob files queue table lrs zrs grs gzrs redundancy containers file shares interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-storage-trap",
+    "title": "Storage — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/storage.html",
+    "summary": "The classic mistake with Storage.",
+    "keywords": "azure storage account blob files queue table lrs zrs grs gzrs redundancy containers file shares trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-blob-storage",
+    "title": "Blob Storage in Depth",
+    "category": "Azure",
+    "page": "azure/concepts/blob-storage.html",
+    "summary": "Blob URLs, block/append/page blobs, SAS uploads, access tiers and lifecycle rules.",
+    "keywords": "azure blob storage sas hot cool cold archive tier lifecycle data lake gen2 upload container"
+  },
+  {
+    "id": "azure-blob-storage-recall",
+    "title": "Blob Storage in Depth — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/blob-storage.html",
+    "summary": "Quick recall points: Blob Storage in Depth.",
+    "keywords": "azure blob storage sas hot cool cold archive tier lifecycle data lake gen2 upload container interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-blob-storage-trap",
+    "title": "Blob Storage in Depth — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/blob-storage.html",
+    "summary": "The classic mistake with Blob Storage in Depth.",
+    "keywords": "azure blob storage sas hot cool cold archive tier lifecycle data lake gen2 upload container trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-databases",
+    "title": "Databases",
+    "category": "Azure",
+    "page": "azure/concepts/databases.html",
+    "summary": "Choosing between Azure SQL, PostgreSQL/MySQL Flexible Server and Cosmos DB by data shape.",
+    "keywords": "azure database sql managed instance postgresql mysql flexible server cosmos db relational nosql"
+  },
+  {
+    "id": "azure-databases-recall",
+    "title": "Databases — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/databases.html",
+    "summary": "Quick recall points: Databases.",
+    "keywords": "azure database sql managed instance postgresql mysql flexible server cosmos db relational nosql interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-databases-trap",
+    "title": "Databases — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/databases.html",
+    "summary": "The classic mistake with Databases.",
+    "keywords": "azure database sql managed instance postgresql mysql flexible server cosmos db relational nosql trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-cosmos-db-vs-azure-sql",
+    "title": "Cosmos DB vs Azure SQL",
+    "category": "Azure",
+    "page": "azure/concepts/cosmos-db-vs-azure-sql.html",
+    "summary": "Strengths, weaknesses, partition keys, request units and consistency — when to use which.",
+    "keywords": "cosmos db azure sql partition key request units ru consistency polyglot nosql relational compare"
+  },
+  {
+    "id": "azure-cosmos-db-vs-azure-sql-recall",
+    "title": "Cosmos DB vs Azure SQL — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/cosmos-db-vs-azure-sql.html",
+    "summary": "Quick recall points: Cosmos DB vs Azure SQL.",
+    "keywords": "cosmos db azure sql partition key request units ru consistency polyglot nosql relational compare interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-cosmos-db-vs-azure-sql-trap",
+    "title": "Cosmos DB vs Azure SQL — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/cosmos-db-vs-azure-sql.html",
+    "summary": "The classic mistake with Cosmos DB vs Azure SQL.",
+    "keywords": "cosmos db azure sql partition key request units ru consistency polyglot nosql relational compare trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-messaging",
+    "title": "Messaging & Events",
+    "category": "Azure",
+    "page": "azure/concepts/messaging.html",
+    "summary": "Service Bus vs Event Hubs vs Event Grid vs Storage Queues — messages, events and streams.",
+    "keywords": "azure messaging service bus event hubs event grid storage queue message event stream decouple"
+  },
+  {
+    "id": "azure-messaging-recall",
+    "title": "Messaging & Events — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/messaging.html",
+    "summary": "Quick recall points: Messaging & Events.",
+    "keywords": "azure messaging service bus event hubs event grid storage queue message event stream decouple interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-messaging-trap",
+    "title": "Messaging & Events — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/messaging.html",
+    "summary": "The classic mistake with Messaging & Events.",
+    "keywords": "azure messaging service bus event hubs event grid storage queue message event stream decouple trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-service-bus",
+    "title": "Service Bus: Queues & Topics",
+    "category": "Azure",
+    "page": "azure/concepts/service-bus.html",
+    "summary": "Queues, topics, subscriptions, peek-lock, dead-letter queues, sessions and tiers.",
+    "keywords": "service bus queue topic subscription peek-lock dead letter sessions duplicate detection tier"
+  },
+  {
+    "id": "azure-service-bus-recall",
+    "title": "Service Bus: Queues & Topics — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/service-bus.html",
+    "summary": "Quick recall points: Service Bus: Queues & Topics.",
+    "keywords": "service bus queue topic subscription peek-lock dead letter sessions duplicate detection tier interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-service-bus-trap",
+    "title": "Service Bus: Queues & Topics — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/service-bus.html",
+    "summary": "The classic mistake with Service Bus: Queues & Topics.",
+    "keywords": "service bus queue topic subscription peek-lock dead letter sessions duplicate detection tier trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-event-hubs",
+    "title": "Event Hubs",
+    "category": "Azure",
+    "page": "azure/concepts/event-hubs.html",
+    "summary": "Partitions, consumer groups, Capture, Kafka endpoint and when Event Hubs beats Service Bus.",
+    "keywords": "event hubs partition consumer group capture kafka stream telemetry replay checkpoint"
+  },
+  {
+    "id": "azure-event-hubs-recall",
+    "title": "Event Hubs — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/event-hubs.html",
+    "summary": "Quick recall points: Event Hubs.",
+    "keywords": "event hubs partition consumer group capture kafka stream telemetry replay checkpoint interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-event-hubs-trap",
+    "title": "Event Hubs — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/event-hubs.html",
+    "summary": "The classic mistake with Event Hubs.",
+    "keywords": "event hubs partition consumer group capture kafka stream telemetry replay checkpoint trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-hub",
+    "title": "Azure — roadmap",
+    "category": "Azure",
+    "page": "azure/index.html",
+    "summary": "The 19-concept Azure journey for developers growing into architects.",
+    "keywords": "azure microsoft cloud architect roadmap entra rbac vnet app service aks functions cosmos key vault bicep well-architected"
   }
 ]

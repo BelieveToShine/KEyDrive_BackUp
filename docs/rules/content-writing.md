@@ -70,3 +70,15 @@ covers where the visual sits in the page and why.
 - Keep `id="why"`, `id="recall"`, `id="trap"`, `id="next"` exactly as named — `assets/site.js`'s
   deep-link handler and `assets/concepts-index.json`'s anchors depend on them.
 - See `accuracy.md` for the factual-claims rule and `diagram-style.md` before drawing anything.
+
+
+## Cloud decision pages and simple English (added with the Azure pages)
+
+Cloud categories (Azure, AWS) add a *decision-first* body between the "why" box and the recall box — see
+`page-production-workflow.md` step 3 and `cloud-category-playbook.md` "Writing when-to-use pages":
+pick-cards → decision-tree diagram → comparison table → real-world scenarios → strengths/watch-outs →
+"Go deeper" cards. Sub (deep-dive) pages follow the same skeleton with eyebrow `Deep dive · …`.
+
+Voice: simple English. Short sentences, one idea each, "you", active voice, every term defined where it
+first appears, analogies that support (never replace) the real model, honest "look elsewhere when…" lists.
+Every number or technical claim must be in the category's `claims-ledger.md`.

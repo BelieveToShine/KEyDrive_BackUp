@@ -2,9 +2,87 @@
   "ai": {
     "title": "AI",
     "order": [
-      "what-is-ai", "machine-learning", "deep-learning", "neural-networks", "transformers", "llms",
-      "embeddings-vector-search", "prompting", "rag", "fine-tuning", "agents", "tools", "memory",
-      "planning", "context-engineering", "ai-application", "evaluation", "observability", "production"
+      "what-is-ai",
+      "machine-learning",
+      "deep-learning",
+      "neural-networks",
+      "transformers",
+      "llms",
+      "embeddings-vector-search",
+      "prompting",
+      "rag",
+      "fine-tuning",
+      "agents",
+      "tools",
+      "memory",
+      "planning",
+      "context-engineering",
+      "ai-application",
+      "evaluation",
+      "observability",
+      "production"
     ]
+  },
+  "azure": {
+    "title": "Azure",
+    "order": [
+      "resource-hierarchy",
+      "regions-availability-zones",
+      "identity-access",
+      "virtual-networks",
+      "compute",
+      "storage",
+      "databases",
+      "load-balancing",
+      "scaling-resilience",
+      "caching-edge",
+      "messaging",
+      "serverless-orchestration",
+      "infrastructure-as-code",
+      "ci-cd-deployment",
+      "secrets-configuration",
+      "security-governance",
+      "monitoring-observability",
+      "cost-management",
+      "well-architected"
+    ],
+    "titles": {
+      "resource-hierarchy": "Tenants, Subscriptions & Resource Groups",
+      "regions-availability-zones": "Regions & Availability Zones",
+      "identity-access": "Identity & Access",
+      "virtual-networks": "Virtual Networks",
+      "compute": "Compute",
+      "storage": "Storage",
+      "databases": "Databases",
+      "load-balancing": "Load Balancing & Traffic Routing",
+      "scaling-resilience": "Scaling & Resilience",
+      "caching-edge": "Caching & Edge Delivery",
+      "messaging": "Messaging & Events",
+      "serverless-orchestration": "Serverless & Orchestration",
+      "infrastructure-as-code": "Infrastructure as Code",
+      "ci-cd-deployment": "CI/CD & Deployment Strategies",
+      "secrets-configuration": "Secrets & Configuration",
+      "security-governance": "Security & Governance",
+      "monitoring-observability": "Monitoring & Observability",
+      "cost-management": "Cost Management",
+      "well-architected": "Well-Architected & Landing Zones"
+    },
+    "written": [
+      "storage",
+      "databases",
+      "messaging"
+    ],
+    "sub": {
+      "blob-storage": "storage",
+      "cosmos-db-vs-azure-sql": "databases",
+      "service-bus": "messaging",
+      "event-hubs": "messaging"
+    },
+    "subTitles": {
+      "blob-storage": "Blob Storage in Depth",
+      "cosmos-db-vs-azure-sql": "Cosmos DB vs Azure SQL",
+      "service-bus": "Service Bus: Queues & Topics",
+      "event-hubs": "Event Hubs"
+    }
   }
 }

@@ -53,3 +53,11 @@ silently — there's no build step or test that catches a stale index.
 
 Adding a concept page means two registries, not one: `concepts-index.json` (search + titles) and
 `journeys.json` (order for the fixed bottom bar). See `navigation.md`.
+
+
+## Cloud categories
+
+Same contract: each concept **and each deep-dive page** gets three entries (top-level, `#recall`, `#trap`);
+`category` is the cloud name ("Azure"); `keywords` should include the service names people actually type
+(`cosmos db`, `service bus`, `sqs`…). The category hub gets one entry (`azure-hub`).
+`scripts/check-site.js` fails if a concept page lacks any of the three.

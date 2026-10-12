@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+/* Screenshot every diagram on a page at 2x so you can LOOK at every junction.
+ *   node scripts/shoot-diagrams.js http://localhost:5900 azure/concepts/storage.html /tmp/out/storage
+ * → /tmp/out/storage-1.png, -2.png …  (one per figure.diagram-card, all <details> opened)
+ * The sticky header and fixed bottom bar can overlap tall figures in element screenshots — that is a
+ * capture artefact, not a page bug. Needs `playwright` (NODE_PATH=$(npm root -g)). See docs/rules/verification.md. */
+const { chromium } = require('playwright');
+(async () => {
+  const [base, page, prefix] = process.argv.slice(2);
+  if (!base || !page || !prefix) { console.error('usage: node scripts/shoot-diagrams.js <baseUrl> <page> <outPrefix>'); process.exit(2); }
+  const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM || '/opt/pw-browsers/chromium' }).catch(() => chromium.launch());
+  const ctx = await browser.newContext({ viewport: { width: 1100, height: 900 }, deviceScaleFactor: 2 });
+  const p = await ctx.newPage();
+  await p.goto(new URL(page, base.endsWith('/') ? base : base + '/').href);
+  await p.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
+  await p.evaluate(() => document.fonts.ready);
+  await p.waitForTimeout(400);
+  const figs = await p.locator('figure.diagram-card').all();
+  for (let i = 0; i < figs.length; i++) await figs[i].screenshot({ path: `${prefix}-${i + 1}.png` });
+  console.log(`${figs.length} diagram(s) → ${prefix}-N.png`);
+  await browser.close();
+})();

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Hubs — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><a href="messaging.html">Messaging &amp; Events</a><span class="sep">›</span><span class="cur">Event Hubs</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Messaging · 🌊 Event Hubs</div>
+    <h1>Event Hubs is <span class="grad-text">a giant, replayable log</span> for huge streams of events — many readers, each at its own position.</h1>
+    <p class="sub">When thousands of devices or users send millions of small events, you need a pipe built for volume and replay — not a mailbox for single jobs. Learn partitions, consumer groups, Capture and when Event Hubs is the right tool.</p>
+    <div class="interview-q">❓ "When would you choose Event Hubs over Service Bus, and what are partitions and consumer groups?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 424" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Event Hubs: producers send events into partitions; each consumer group reads the same events at its own position; Capture saves them to storage">
+<defs><marker id="eh1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="eh1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="100" width="620" height="186" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="119" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">AN EVENT HUB · one stream split into partitions</text>
+<path d="M320,54 L320,100" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh1A)"/>
+<path d="M105,286 L105,344" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh1A)"/>
+<path d="M320,286 L320,344" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh1A)"/>
+<path d="M535,286 L535,344" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh1A)"/>
+<rect class="bx" x="180" y="10" width="280" height="44" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="36" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📱 Devices · 🌐 Apps · 📋 Logs</text>
+<rect class="bx" x="24" y="138" width="330" height="28" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="189" y="154.5" text-anchor="middle" font-size="8.8" font-weight="400" fill="#9fe8f5" font-family="'JetBrains Mono'">Partition 0 ▸ e0 e1 e2 e3 e4 e5 →</text>
+<rect class="bx" x="24" y="172" width="330" height="28" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="189" y="188.5" text-anchor="middle" font-size="8.8" font-weight="400" fill="#9fe8f5" font-family="'JetBrains Mono'">Partition 1 ▸ e0 e1 e2 e3 e4 e5 →</text>
+<rect class="bx" x="24" y="206" width="330" height="28" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="189" y="222.5" text-anchor="middle" font-size="8.8" font-weight="400" fill="#9fe8f5" font-family="'JetBrains Mono'">Partition 2 ▸ e0 e1 e2 e3 e4 e5 →</text>
+<rect class="bx" x="24" y="240" width="330" height="28" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="189" y="256.5" text-anchor="middle" font-size="8.8" font-weight="400" fill="#9fe8f5" font-family="'JetBrains Mono'">Partition 3 ▸ e0 e1 e2 e3 e4 e5 →</text>
+<text class="free" x="372" y="156" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">• Same key → same partition</text>
+<text class="free" x="372" y="190" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">• Order is kept inside a partition</text>
+<text class="free" x="372" y="224" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">• New events join the end</text>
+<text class="free" x="372" y="258" text-anchor="start" font-size="9.5" font-weight="400" fill="#93a0b8">• Events stay for the retention time</text>
+<rect class="bx" x="10" y="344" width="190" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="105" y="369.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📊 Group: analytics</text>
+<text x="105" y="382.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its own position</text>
+<rect class="bx" x="225" y="344" width="190" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="320" y="369.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🚨 Group: alerts</text>
+<text x="320" y="382.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">its own position</text>
+<rect class="bx" x="440" y="344" width="190" height="56" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="535" y="369.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🗃️ Capture</text>
+<text x="535" y="382.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">saves batches to storage</text>
+<g class="arrow-pill"><rect x="362" y="68" width="76" height="18" rx="9"/><text x="400" y="80.5" text-anchor="middle" font-size="9" font-style="italic">send events</text></g>
+<g class="arrow-pill"><rect x="51" y="306" width="108" height="18" rx="9"/><text x="105" y="318.5" text-anchor="middle" font-size="9" font-style="italic">reads at own pace</text></g>
+<g class="arrow-pill"><rect x="266" y="306" width="108" height="18" rx="9"/><text x="320" y="318.5" text-anchor="middle" font-size="9" font-style="italic">reads at own pace</text></g>
+<g class="arrow-pill"><rect x="481" y="306" width="108" height="18" rx="9"/><text x="535" y="318.5" text-anchor="middle" font-size="9" font-style="italic">copies to storage</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> devices, apps and logs <b>send events</b> into an event hub. The hub splits the stream into <b>partitions</b> — ordered logs that new events join at the end. Events with the same key land in the same partition, so their order is kept. Below, several <b>consumer groups</b> read the same events, each from its own position, at its own speed. <b>Capture</b> can also save the stream to Blob Storage or Data Lake automatically.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Event Hubs is a replayable log: events are appended, kept for a while, and every reader group keeps its own place in the stream.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Service Bus treats each message as a precious job and takes care of it one by one. That care costs throughput. Now imagine 10,000 sensors sending a reading every second, or every click on a busy website: millions of tiny events, where losing one is fine but <b>keeping up</b> is not — and several teams want to read the same data.</p>
+      <p><b>Event Hubs</b> is built for that: very high volume in, many independent readers out, and the ability to <b>replay</b> what happened. It is a log, not a mailbox.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📬 vs 📜 Mailbox or log?</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 296" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="A Service Bus queue removes a message once it is completed; an Event Hubs partition keeps events while each reader tracks its own position">
+<defs><marker id="eh2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="eh2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<rect class="zone" x="10" y="8" width="305" height="276" rx="14" fill="rgba(167,139,250,.05)" stroke="#a78bfa" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="24" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#c4b5fd">SERVICE BUS · a post office</text>
+<rect class="zone" x="325" y="8" width="305" height="276" rx="14" fill="rgba(34,211,238,.05)" stroke="#22d3ee" stroke-opacity=".55" stroke-dasharray="5 4"/>
+<text class="zone-title" x="339" y="27" font-size="9.5" font-family="'JetBrains Mono'" fill="#67e8f9">EVENT HUBS · a log you can replay</text>
+<path d="M160,100 L160,150" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#eh2A)"/>
+<path d="M402,100 L402,150" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh2A)"/>
+<path d="M552,100 L552,150" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#eh2A)"/>
+<rect class="bx" x="90" y="44" width="140" height="56" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="160" y="69.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📬 Queue</text>
+<text x="160" y="82.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">M1 · M2 · M3</text>
+<rect class="bx" x="90" y="150" width="140" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="160" y="171.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">⚙️ Worker</text>
+<text x="160" y="184.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">takes M1</text>
+<text class="free" x="162" y="232" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">When the worker completes M1,</text>
+<text class="free" x="162" y="248" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">M1 is removed from the queue.</text>
+<rect class="bx" x="340" y="44" width="275" height="56" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="477.5" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📜 One partition</text>
+<text x="477.5" y="82" text-anchor="middle" font-size="8.8" font-weight="400" fill="#9fe8f5" font-family="'JetBrains Mono'">E1 · E2 · E3 · E4 · E5 →</text>
+<rect class="bx" x="340" y="150" width="125" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="402.5" y="171.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👁️ Reader A</text>
+<text x="402.5" y="184.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">is at E3</text>
+<rect class="bx" x="490" y="150" width="125" height="48" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="552.5" y="171.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">👁️ Reader B</text>
+<text x="552.5" y="184.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">is at E5</text>
+<text class="free" x="477" y="232" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">Events stay in the log for the retention time.</text>
+<text class="free" x="477" y="248" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Each reader keeps its own place.</text>
+<g class="arrow-pill"><rect x="232" y="116" width="60" height="18" rx="9"/><text x="262" y="128.5" text-anchor="middle" font-size="9" font-style="italic">delivers</text></g>
+<g class="arrow-pill"><rect x="428" y="116" width="44" height="18" rx="9"/><text x="450" y="128.5" text-anchor="middle" font-size="9" font-style="italic">reads</text></g>
+<g class="arrow-pill"><rect x="576" y="116" width="44" height="18" rx="9"/><text x="598" y="128.5" text-anchor="middle" font-size="9" font-style="italic">reads</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> <b>Left:</b> in Service Bus the message is taken by a worker and <em>removed</em> once completed — a mailbox. <b>Right:</b> in Event Hubs events <em>stay</em> in the partition for the retention time. Reader A is at E3 and Reader B is at E5 — each reads at its own pace, and either can go back and re-read. That is why Event Hubs suits streams and analytics, and Service Bus suits jobs.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📖 The words you need</div>
+    <div class="taxonomy-strip">
+      <div class="tax-item"><h5>🏢 Namespace</h5><p>The container that holds your event hubs, with one address and shared settings.</p></div>
+      <div class="tax-item"><h5>📜 Event hub</h5><p>One named stream — for example "telemetry". It is split into partitions.</p></div>
+      <div class="tax-item"><h5>🧱 Partition</h5><p>An ordered sequence of events. Order is kept <b>inside</b> a partition, not across them. More partitions = more parallel readers.</p></div>
+      <div class="tax-item"><h5>👥 Consumer group</h5><p>An independent view of the whole stream. Analytics and alerts each use their own group, so they never disturb each other.</p></div>
+      <div class="tax-item"><h5>📍 Checkpoint</h5><p>A reader's saved position, so after a restart it carries on where it stopped.</p></div>
+      <div class="tax-item"><h5>🗃️ Capture</h5><p>Automatically saves the stream in batches to Blob Storage or Data Lake for long-term keeping.</p></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔌 Already using Kafka?</div>
+    <div class="kd-card">Event Hubs speaks the <b>Apache Kafka</b> protocol, so existing Kafka producers and consumers can usually point at an Event Hubs endpoint instead of running their own Kafka cluster. This is available from the <b>Standard</b> tier up.</div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🏷️ Which tier?</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col">Tier</th><th scope="col">What it is for</th><th scope="col">Good to know</th></tr></thead><tbody><tr><th scope="row">Basic</th><td>Low-cost entry for simple streaming</td><td>No Capture, no Kafka</td></tr><tr><th scope="row">Standard</th><td>The general-purpose choice</td><td>Capture, Kafka endpoint and geo-disaster-recovery are available</td></tr><tr><th scope="row">Premium</th><td>Resource isolation and higher performance</td><td>For demanding or sensitive workloads</td></tr><tr><th scope="row">Dedicated</th><td>A single-tenant cluster for the very largest workloads</td><td>Biggest scale</td></tr></tbody></table></div>
+    <div class="kd-card" style="margin-top:14px"><b>Plan your partitions early.</b> You choose the partition count when you create the event hub, and only the Premium and Dedicated tiers let you increase it later. Retention is a limited window that depends on the tier, so use Capture if you must keep data longer.</div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🌡️</span><h5>IoT telemetry</h5><p>Thousands of devices send readings every second to live dashboards.</p><span class="sc-use">→ Event Hubs</span></div>
+      <div class="scenario"><span class="sc-icon">🖱️</span><h5>Website clickstream</h5><p>Every click flows to analytics and to a recommendation engine — two reader groups.</p><span class="sc-use">→ Event Hubs + 2 consumer groups</span></div>
+      <div class="scenario"><span class="sc-icon">📋</span><h5>Logs and metrics</h5><p>Collect logs from hundreds of servers into one pipeline.</p><span class="sc-use">→ Event Hubs</span></div>
+      <div class="scenario"><span class="sc-icon">🕵️</span><h5>Fraud detection</h5><p>Score card transactions as the stream arrives, and keep a copy for audits.</p><span class="sc-use">→ Event Hubs + Capture</span></div>
+      <div class="scenario"><span class="sc-icon">🧳</span><h5>Existing Kafka app</h5><p>The team already writes Kafka code and wants a managed service.</p><span class="sc-use">→ Event Hubs (Kafka endpoint)</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Business orders</h5><p>Each order must be processed once, with retries.</p><span class="sc-use">→ Not Event Hubs — Service Bus</span></div>
+    </div>
+  </section>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Event Hubs = a partitioned, replayable event log for high-volume streams.</li><li>Order is kept inside a partition, not across partitions. Same key → same partition.</li><li>Each consumer group has an independent view and its own checkpoint; many groups can read the same events.</li><li>Events are not deleted when read — they stay for the retention time. Capture saves them to Blob / Data Lake.</li><li>Event Hubs has a Kafka-protocol endpoint (Standard tier and above). Choose the partition count up front.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"Event Hubs is Azure's event-streaming service — a partitioned, append-only log built for very high throughput. Producers append events; each consumer group reads the whole stream independently with its own checkpoint, so events can be replayed or processed by several systems. Order is guaranteed within a partition. I use Capture to archive to Blob or Data Lake, and the Kafka endpoint to migrate Kafka workloads. For per-message reliability like orders and payments I would use Service Bus instead."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Reading does not delete.</b> Unlike a queue, an event is still there after a reader has processed it — which is a feature (replay) but means <i>you</i> must track progress with checkpoints.</p>
+      <p>Second trap: expecting order across the whole event hub. Order is kept only <b>inside a partition</b>, so put events that must stay in order (one device, one customer) on the same partition with the same key.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📨 Service Bus</h5><p>Broker: handles each message with care and removes it when done. Built for reliable jobs.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🌊 Event Hubs</h5><p>Log: appends events, keeps them, lets many readers replay them. Built for volume.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example — send a batch of events</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="kw">from</span> azure.identity <span class="kw">import</span> DefaultAzureCredential
+<span class="kw">from</span> azure.eventhub <span class="kw">import</span> EventHubProducerClient, EventData
+
+producer = EventHubProducerClient(<span class="str">"mynamespace.servicebus.windows.net"</span>,
+                                  eventhub_name=<span class="str">"telemetry"</span>, credential=DefaultAzureCredential())
+<span class="kw">with</span> producer:
+    batch = producer.create_batch()
+    batch.add(EventData(<span class="str">'{"deviceId": "d1", "temp": 21.5}'</span>))
+    producer.send_batch(batch)           <span class="cmt"># many events go in one efficient call</span></pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative shape only — real producers choose a partition key, handle errors, and the identity needs a role such as Azure Event Hubs Data Sender.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is Event Hubs. Back to the Messaging page for the full picture of all four tools — and on to the next concept: Serverless &amp; Orchestration <i>(coming soon)</i>.</span>
+      <a class="next-link" href="messaging.html">Back to Messaging <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Cloud services change often. This page teaches the ideas; for exact limits, prices and new features, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/event-hubs/" target="_blank" rel="noopener">Event Hubs documentation</a> · <a href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/messaging" target="_blank" rel="noopener">Choose an Azure messaging service (Architecture Center)</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

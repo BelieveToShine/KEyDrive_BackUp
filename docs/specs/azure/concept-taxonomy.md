@@ -6,6 +6,8 @@ need appears. The order and the "why it exists" reasoning are provider-neutral o
 Azure and AWS categories share the same 19-step shape (and the same journey-map layout), and only
 the service names differ. Keep them in sync: if one reorders, discuss the other.
 
+**Written order ≠ journey order:** the first batch was written out of order (6, 7, 11); the journey order below is unchanged. Roadmap shows status.
+
 **Do not reorder these without discussion** — the journey map (`azure/index.html`), the concept list on that
 same page, and this file must always agree on order.
 

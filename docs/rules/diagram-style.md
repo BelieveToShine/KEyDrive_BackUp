@@ -287,3 +287,22 @@ Interactive click-to-explore diagrams (click a box/token to reveal internals, pr
 disclosure via layered detail) are part of where this philosophy eventually leads, but building
 that interactivity is a future scope decision — see the "explicitly deferred" list in
 `docs/keydrive-overview.md`. Don't build it until asked.
+
+
+## Automated geometry lint + generator (added with the Azure pages)
+
+Reading coordinates is not enough — and neither is only looking. Run `scripts/diagram-lint.js` on every
+page you touch (it fails on: arrows that do not end on a box/container edge, labels that touch boxes or sit
+within 14 units of an arrowhead, text that overflows its box, anything leaving the viewBox, arrows running
+through boxes or text) **and** view every diagram at 2× with `scripts/shoot-diagrams.js`. Details and the
+acceptance test (`scripts/fixtures/broken-diagram.html` must fail loudly) are in `verification.md`.
+
+Extra conventions learned while building 21 diagrams:
+- **Label long arrows beside the line, not on it**; on-line labels need ≥ 14 units of clear line before the arrowhead.
+- **No circled digits (①②…)** in SVG text — they fall back to a tall font and break label sizing. Write "1 · asks".
+- **A box with no arrow in or out is a bug** unless it is clearly a legend/note (the first SAS-flow diagram had a floating "SAS link" box).
+- **Contrast pairs teach best** (good key vs bad key, message vs event, mailbox vs log): two zones, same layout, one difference.
+- **Decision trees**: ordered questions down the left, answers on the right, "no" arrows between questions, an honest
+  last box ("None of these? Probably a database").
+- Free-text notes inside a zone are fine; keep them ≤ 2 lines and away from arrows.
+- `scripts/page-kit/kit.py` produces boxes/zones/pills/arrows in these conventions (`rect.bx`, `rect.zone`, `g.arrow-pill`).

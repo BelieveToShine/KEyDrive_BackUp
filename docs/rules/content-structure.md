@@ -102,3 +102,18 @@ of finding them one at a time:
 4. Add the new category to `docs/keydrive-overview.md`.
 5. Add it to `assets/journeys.json` (ordered concept slugs) so the fixed bottom bar and Back
    button work on its pages — see `navigation.md`.
+
+
+## Deep-dive (sub) pages and partially written categories
+
+- A concept may have **deep-dive pages** next to it in `<cat>/concepts/` (e.g. `blob-storage.html` under
+  Storage). They are not part of the numbered journey. Register them in `assets/journeys.json`:
+  `"sub": { "blob-storage": "storage" }` and `"subTitles": { "blob-storage": "Blob Storage in Depth" }`.
+  Eyebrow: `Deep dive · <Parent> · <icon> <topic>`; crumbs: `KeyDrive › <Cat> › <Parent> › <page>`; `#next` points
+  back to the parent. The parent links to its deep dives from a "🔬 Go deeper" block, and the hub row lists
+  them in `.cr-subs`.
+- A category may be **partly written**: `journeys.json` → `"written": [slugs]`. Unwritten concepts stay
+  `.locked` on the hub, a neighbour that is not written shows as a 🔒 "Coming soon" cell in the bottom bar,
+  and the previous page's `#next` box is `.next-box.locked`. `scripts/check-site.js` enforces all of this.
+  Omit `written` when every concept exists (the AI category).
+- Per-page claims: add each number and fact to `docs/specs/<cat>/claims-ledger.md` (`fact-check-and-currency.md`).
