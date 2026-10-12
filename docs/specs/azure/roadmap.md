@@ -24,15 +24,15 @@ journey-map node and concept-list row from locked to written** (and adds its slu
 | 14 | CI/CD & Deployment Strategies | ✅ Written | `azure/concepts/ci-cd-deployment.html` |
 | 15 | Secrets & Configuration | ✅ Written | `azure/concepts/secrets-configuration.html` |
 | 16 | Security & Governance | ✅ Written | `azure/concepts/security-governance.html` |
-| 17 | Monitoring & Observability | 🔒 Planned | — |
-| 18 | Cost Management | 🔒 Planned | — |
-| 19 | Well-Architected & Landing Zones | 🔒 Planned | — |
+| 17 | Monitoring & Observability | ✅ Written | `azure/concepts/monitoring-observability.html` |
+| 18 | Cost Management | ✅ Written | `azure/concepts/cost-management.html` |
+| 19 | Well-Architected & Landing Zones | ✅ Written | `azure/concepts/well-architected.html` |
 
-**16 / 19 written, plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
+**19 / 19 written (journey complete), plus 7 deep-dive pages** (2026-10-12). Batch 1 (written first, out of order, at the user's
 request): Storage, Databases, Messaging & Events. Batch 2 (roadmap order): concepts 1–5 — the whole foundation
-(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge. Batch 4 (roadmap order): 12 Serverless, 13 Infrastructure as Code, 14 CI/CD. Batch 5 (roadmap order): 15 Secrets & Configuration, 16 Security & Governance.
+(hierarchy, regions, identity, networking, compute). Batch 3 (roadmap order): 8 Load Balancing, 9 Scaling & Resilience (+ Disaster Recovery), 10 Caching & Edge. Batch 4 (roadmap order): 12 Serverless, 13 Infrastructure as Code, 14 CI/CD. Batch 5 (roadmap order): 15 Secrets & Configuration, 16 Security & Governance. Batch 6 (roadmap order): 17 Monitoring & Observability, 18 Cost Management, 19 Well-Architected & Landing Zones.
 
 Slug convention: kebab-case of the concept name (the slugs for all 19 are fixed in `assets/journeys.json`).
 
-**Next in order when asked:** Monitoring & Observability (17), Cost Management (18), Well-Architected & Landing Zones (19).
+**Next:** none planned. Open items: verify the 🟨 rows in `claims-ledger.md` (see its "Open verification list"), apply user corrections from production review, then the AWS category.
 Verify every fact first (`../../rules/fact-check-and-currency.md`).

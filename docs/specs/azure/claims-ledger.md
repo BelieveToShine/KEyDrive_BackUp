@@ -404,11 +404,53 @@ Doc roots (stable): [Storage](https://learn.microsoft.com/en-us/azure/storage/) 
 | SG11 | `az policy assignment create` flags | 🟨 K | |
 | SG-I | Scenario names, subscription A/B | 🟦 I | |
 
+## Monitoring & Observability (`monitoring-observability.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| MO1 | Azure Monitor combines metrics, logs, traces and events | ✅ V | `/azure/azure-monitor/fundamentals/overview` |
+| MO2 | Log Analytics workspaces hold logs/traces queried with KQL; Azure Monitor workspaces hold Prometheus/OpenTelemetry metrics queried with PromQL | ✅ V | same page |
+| MO3 | Application Insights is the APM feature; instrument with OpenTelemetry (some OpenTelemetry paths are in Preview); distributed tracing; its data lands in a Log Analytics workspace | ✅ V | `/azure/azure-monitor/app/app-insights-overview` |
+| MO4 | Platform metrics collected about every minute by default | ✅ V | `/azure/azure-monitor/metrics/data-platform-metrics` |
+| MO5 | Platform metrics and the activity log are collected automatically; resource logs need a diagnostic setting; resource-specific tables recommended; diagnostic settings cannot filter within a category; built-in Policy can deploy them at scale | ✅ V | `/azure/azure-monitor/platform/diagnostic-settings`, `/diagnostic-settings-policy` |
+| MO6 | Alert types: metric, log, activity-log; action groups can email, SMS, push, run automation runbooks, Functions, ITSM, Logic Apps, webhooks | ✅ V | `/azure/azure-monitor/alerts/alerts-overview` |
+| MO7 | Every alert needs an owner / alert on symptoms | 🟨 K | operational guidance |
+| MO8 | The KQL example (`requests`, `success`, `timestamp`) | 🟨 K | table names depend on setup |
+| MO-I | Scenarios | 🟦 I | |
+
+## Cost Management (`cost-management.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| CO1 | Budgets can be scoped to subscription, resource group or resource sets; use actual or forecast cost; can trigger action groups, including ones that stop VMs | ✅ V | `/azure/cost-management-billing/costs/tutorial-acm-create-budgets`, budget scenario |
+| CO2 | Azure has no built-in hard cap for a whole subscription; alerts are the main defence | ✅ V | `/azure/cost-management-billing/manage/cost-management-budget-scenario` |
+| CO3 | Tags are the way to add your own business context to cost; tag inheritance; allocation rules do not cover reservations or savings plans | ✅ V | `/azure/cost-management-billing/costs/allocate-costs` |
+| CO4 | Reservations are prepaid one- or three-year commitments; the savings plan for compute is the most flexible commitment (discount percentages deliberately left off the page) | ✅ V | `/azure/cost-management-billing/costs/overview-cost-management`, savings docs |
+| CO5 | Advisor flags VMs with little use over a week and suggests shutdown or a cheaper size; orphaned resources appear after a parent is deleted | ✅ V | `/azure/advisor/advisor-cost-recommendations` |
+| CO6 | Spot VMs: spare capacity, can be evicted with a short warning (Scheduled Events), not checkpointed work is lost, choose deallocate or delete | ✅ V | `/azure/virtual-machines/spot-vms` |
+| CO7 | Hybrid Benefit uses existing Windows Server or SQL Server licenses | ✅ V | Cost Management docs |
+| CO8 | Cut waste before committing to discounts | 🟨 K | FinOps guidance |
+| CO9 | `az group update --tags` flags | 🟨 K | |
+| CO-I | Tag example (`cc-1042` is an example value); scenarios | 🟦 I | |
+
+## Well-Architected & Landing Zones (`well-architected.html`)
+
+| # | Claim | Status | Source / note |
+|---|---|---|---|
+| WA1 | Five pillars: Reliability, Security, Cost Optimization, Operational Excellence, Performance Efficiency | ✅ V | `/azure/well-architected/pillars` |
+| WA2 | Design must be balanced across pillars; recommendations may mean trade-offs against others; document trade-offs | ✅ V | `/azure/well-architected/what-is-well-architected-framework`, CAF cloud-native planning |
+| WA3 | Zone-redundant is often the best balance; multi-region raises reliability, cost and complexity | ✅ V | `/azure/well-architected/design-guides/regions-availability-zones` |
+| WA4 | Landing zone = platform landing zone (shared services) + workload landing zones; design areas include identity, network, security, management, governance, automation | ✅ V | `/azure/cloud-adoption-framework/ready/landing-zone/`, `/design-areas` |
+| WA5 | CAF renamed "application landing zones" to "workload landing zones" and dropped separate data landing zones; detailed architecture guidance now mainly in the Architecture Center and WAF | ✅ V | `/azure/cloud-adoption-framework/whats-new` (single search result; re-check) |
+| WA6 | Advisor recommends across cost, performance, reliability, security, operational excellence | ✅ V | `/azure/advisor/advisor-overview` |
+| WA7 | Mapping of pillars to earlier concepts | 🟦 I | teaching model |
+| WA-I | Scenarios | 🟦 I | |
+
 ---
 
 ## Open verification list (do these with direct docs access)
 
 Everything marked 🟨 K above, in priority order: **RH4 / RH10 / RH11** (management-group and ARM wording), **RG8 / RG10** (region price differences), **VN9 / VN10** (peering overlap; VPN vs ExpressRoute wording), **CP10 / CP11** (App Service plan and AKS control-plane wording), **PE8**, **ID10**, **MI7**, **S7** (Table storage wording), **S10** (three copies),
-**SC5 / DR6 / CE9 / LB10 / SC11** (general terms and CLI flags), **SG10 / SX8 / SG11 / SV6 / SV7 / CD8 / IA8** (locks, CLI flags, general guidance), **D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
+**SC5 / DR6 / CE9 / LB10 / SC11** (general terms and CLI flags), **MO7 / MO8 / CO8 / CO9 / WA5** (WA5: re-check the landing-zone rename), **SG10 / SX8 / SG11 / SV6 / SV7 / CD8 / IA8** (locks, CLI flags, general guidance), **D6** (MySQL Flexible Server), **C1** (JOIN inside one item), **B6** (Function trigger for blob events),
 **E2** (same key → same partition), and the SDK method names (**B16, C14, M12, SB-I, E9**).
 After checking a row, change 🟨 K to ✅ V and add the exact page URL.

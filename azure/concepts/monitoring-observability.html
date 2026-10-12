@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoring &amp; Observability — Azure — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🔷 Azure</a><span class="sep">›</span><span class="cur">Monitoring &amp; Observability</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Concept 17 of 19 · 🛠️ Shipping and operating</div>
+    <h1>Monitoring tells you something is wrong; observability helps you find why — <span class="grad-text">but only if you collected the signals before the incident.</span></h1>
+    <p class="sub">Metrics, logs and traces in Azure Monitor, Log Analytics and Application Insights — plus alerts that turn signals into action.</p>
+    <div class="interview-q">❓ "How would you monitor an Azure application and get alerted before users notice?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Metrics, logs and traces flow into Azure Monitor, where you can query them, alert on them and chart them">
+<defs><marker id="mo1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M140,75 L300,75" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M140,165 L300,165" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M140,255 L300,255" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,75 L510,75" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,165 L510,165" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<path d="M420,255 L510,255" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo1A)"/>
+<rect class="bx" x="10" y="44" width="130" height="62" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="75" y="72.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📈 Metrics</text>
+<text x="75" y="85.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">numbers over time</text>
+<rect class="bx" x="10" y="134" width="130" height="62" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="75" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">📜 Logs</text>
+<text x="75" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">events with detail</text>
+<rect class="bx" x="10" y="224" width="130" height="62" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="75" y="252.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🧵 Traces</text>
+<text x="75" y="265.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">one request's path</text>
+<rect class="bx" x="300" y="44" width="120" height="242" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="360" y="149" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📡 Azure</text>
+<text x="360" y="164" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Monitor</text>
+<text x="360" y="176.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">one place for</text>
+<text x="360" y="189" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">every signal</text>
+<rect class="bx" x="510" y="44" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="72.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔍 Query</text>
+<text x="570" y="85.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">KQL, logs</text>
+<rect class="bx" x="510" y="134" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="162.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🚨 Alerts</text>
+<text x="570" y="175.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">notify or fix</text>
+<rect class="bx" x="510" y="224" width="120" height="62" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="570" y="252.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📊 Charts</text>
+<text x="570" y="265.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">see it at a glance</text>
+<g class="arrow-pill"><rect x="187" y="66" width="66" height="18" rx="9"/><text x="220" y="78.5" text-anchor="middle" font-size="9" font-style="italic">automatic</text></g>
+<g class="arrow-pill"><rect x="163.5" y="156" width="113" height="18" rx="9"/><text x="220" y="168.5" text-anchor="middle" font-size="9" font-style="italic">diagnostic setting</text></g>
+<g class="arrow-pill"><rect x="179" y="246" width="82" height="18" rx="9"/><text x="220" y="258.5" text-anchor="middle" font-size="9" font-style="italic">instrumented</text></g>
+<g class="arrow-pill"><rect x="448" y="66" width="34" height="18" rx="9"/><text x="465" y="78.5" text-anchor="middle" font-size="9" font-style="italic">ask</text></g>
+<g class="arrow-pill"><rect x="440" y="156" width="50" height="18" rx="9"/><text x="465" y="168.5" text-anchor="middle" font-size="9" font-style="italic">notify</text></g>
+<g class="arrow-pill"><rect x="445.5" y="246" width="39" height="18" rx="9"/><text x="465" y="258.5" text-anchor="middle" font-size="9" font-style="italic">show</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> three kinds of signal flow into one place, <b>Azure Monitor</b>. <b>Metrics</b> are numbers over time (is CPU high?). <b>Logs</b> are detailed records of what happened. <b>Traces</b> follow one request through the parts of your app. Once they are together you can <b>query</b> them, <b>alert</b> on them and <b>chart</b> them. Note the labels: metrics arrive by themselves, logs need a diagnostic setting turned on, and traces need your app to be instrumented.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Monitoring tells you something is wrong; observability lets you work out why — and both need metrics, logs and traces gathered in one place before the incident.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Guardrails say what <i>should</i> happen. They do not tell you what <i>did</i> happen. The app is fast today and slower next week; a deployment looks fine and customers still see errors; the cost climbs and nobody knows which part grew. Without signals, every problem becomes guessing.</p>
+      <p>The skill is deciding <b>what to collect before you need it</b>. Metrics answer "is something off?". Logs answer "what exactly happened?". Traces answer "where did this one request spend its time?". Then <b>alerts</b> turn the signals into action, so a person (or an automatic fix) hears about trouble before the customers do.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The pieces</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#34d399"><h4>📡 Azure Monitor</h4><span class="pk-tag">the platform for all signals</span><span class="pk-label use">✅ Pick it when</span><ul><li>Metrics, logs, traces and events in one service</li><li>Platform metrics and the activity log are collected automatically</li><li>Alerts, dashboards and workbooks on top</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Nothing — it is the base for the rest</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🔎 Log Analytics</h4><span class="pk-tag">query logs with KQL</span><span class="pk-label use">✅ Pick it when</span><ul><li>Search and join logs from many resources</li><li>Resource logs, after you create a diagnostic setting</li><li>Investigate an incident after the fact</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Resource logs are not collected until you turn them on</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧑‍💻 Application Insights</h4><span class="pk-tag">application performance monitoring</span><span class="pk-label use">✅ Pick it when</span><ul><li>Requests, failures, dependencies and traces inside your app</li><li>Instrument with OpenTelemetry, a vendor-neutral framework</li><li>Distributed tracing across services</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Only watching the VM or the platform — add resource metrics and logs too</li></ul></div>
+      <div class="pick-card" style="--pick:#fb7185"><h4>🚨 Alerts and action groups</h4><span class="pk-tag">turn a signal into action</span><span class="pk-label use">✅ Pick it when</span><ul><li>Metric, log and activity-log alerts</li><li>Action groups: email, SMS, push, automation runbooks, Functions, Logic Apps, ITSM tickets, webhooks</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Alert on everything — people will start ignoring them</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 524" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: which question needs which Azure Monitor tool">
+<defs><marker id="mo3A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo3S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M340,393 L410,393" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<path d="M175,420 L175,460" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#mo3A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What do you need to know?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🧑‍💻 Is the app slow or failing for users?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">requests, errors, dependencies, traces</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">Application Insights</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">app performance</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📜 What did a resource do, in detail?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">needs its resource logs turned on</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Log Analytics</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">query logs with KQL</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📈 Is a number out of range right now?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">CPU, queue length, latency</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Metrics + alert</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">collected automatically</text>
+<rect class="bx" x="10" y="366" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🕵️ Who changed this resource?</text>
+<text x="175" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">create, update, delete operations</text>
+<rect class="bx" x="410" y="366" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="390.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Activity log</text>
+<text x="520" y="403.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">collected automatically</text>
+<rect class="bx" x="10" y="460" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="482.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="495.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">start with metrics, then add logs</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="384" width="34" height="18" rx="9"/><text x="375" y="396.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="429" width="29" height="18" rx="9"/><text x="199" y="441.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> start from the <b>question</b>, not the tool. If users report slowness or errors, look at <b>Application Insights</b>. If you need detail about what a resource did, query its <b>logs</b> in Log Analytics. If you only need to know when a number leaves its normal range, use <b>metrics with an alert</b>. If the question is "who changed this?", the <b>activity log</b> has it. Most real investigations use several of these together.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🔔 From signal to action</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 272" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="An alert rule watches a signal; when its condition is met it fires an action group, which notifies people, runs automation or opens a ticket">
+<defs><marker id="mo2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="mo2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M120,70 L230,70" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M360,70 L480,70" fill="none" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,138 L290,138 L290,176" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,138 L420,138 L420,176" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<path d="M555,100 L555,176" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#mo2A)"/>
+<rect class="bx" x="10" y="40" width="110" height="60" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="65" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">📊 Signal</text>
+<text x="65" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">metric or log</text>
+<rect class="bx" x="230" y="40" width="130" height="60" rx="10" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.3"/>
+<text x="295" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fcd34d">🚨 Alert rule</text>
+<text x="295" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#fde59a">condition + window</text>
+<rect class="bx" x="480" y="40" width="150" height="60" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="555" y="67.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🔔 Action group</text>
+<text x="555" y="80.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">who or what to call</text>
+<rect class="bx" x="230" y="176" width="120" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="290" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">✉️ A person</text>
+<text x="290" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">email, SMS, push</text>
+<rect class="bx" x="360" y="176" width="120" height="52" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="420" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">⚡ Automation</text>
+<text x="420" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">Function, Logic App</text>
+<rect class="bx" x="490" y="176" width="120" height="52" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="550" y="199.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🎫 A ticket</text>
+<text x="550" y="212.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">ITSM incident</text>
+<text class="free" x="320" y="256" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Every alert needs an owner who acts on it — otherwise it becomes noise.</text>
+<g class="arrow-pill"><rect x="139.5" y="61" width="71" height="18" rx="9"/><text x="175" y="73.5" text-anchor="middle" font-size="9" font-style="italic">watched by</text></g>
+<g class="arrow-pill"><rect x="398" y="61" width="44" height="18" rx="9"/><text x="420" y="73.5" text-anchor="middle" font-size="9" font-style="italic">fires</text></g>
+<g class="arrow-pill"><rect x="300" y="129" width="60" height="18" rx="9"/><text x="330" y="141.5" text-anchor="middle" font-size="9" font-style="italic">notifies</text></g>
+<g class="arrow-pill"><rect x="450.5" y="129" width="39" height="18" rx="9"/><text x="470" y="141.5" text-anchor="middle" font-size="9" font-style="italic">runs</text></g>
+<g class="arrow-pill"><rect x="533" y="110" width="44" height="18" rx="9"/><text x="555" y="122.5" text-anchor="middle" font-size="9" font-style="italic">opens</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> an <b>alert rule</b> watches a signal against a condition and a time window. When the condition is met it <b>fires</b> an <b>action group</b>, which can notify people, run automation, or open a ticket in an IT service tool. Splitting the rule (when to fire) from the action group (what to do) lets many alerts share one set of contacts and automation.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Metrics, logs and traces</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Answers</th><th scope="col">Looks like</th><th scope="col">Collected</th></tr></thead><tbody><tr><th scope="row">📈 Metrics</th><td>Is something off, and since when?</td><td>Numbers in a time series; platform metrics arrive about every minute</td><td>Platform metrics automatically</td></tr><tr><th scope="row">📜 Logs</th><td>What exactly happened?</td><td>Records with fields, queried with KQL</td><td>Resource logs need a diagnostic setting</td></tr><tr><th scope="row">🧵 Traces</th><td>Where did this request go and slow down?</td><td>A request followed across services</td><td>Your app, instrumented (Application Insights, OpenTelemetry)</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🐢</span><h5>Checkout feels slow since Tuesday</h5><p>Which call inside the request is taking the time?</p><span class="sc-use">→ Application Insights traces</span></div>
+      <div class="scenario"><span class="sc-icon">📉</span><h5>CPU on the web tier keeps spiking</h5><p>Know about it before users do.</p><span class="sc-use">→ Metric alert + action group</span></div>
+      <div class="scenario"><span class="sc-icon">🔍</span><h5>A firewall rule blocked a partner</h5><p>What exactly was denied, and when?</p><span class="sc-use">→ Resource logs in Log Analytics</span></div>
+      <div class="scenario"><span class="sc-icon">🕵️</span><h5>A setting changed overnight</h5><p>Find out who changed it.</p><span class="sc-use">→ Activity log</span></div>
+      <div class="scenario"><span class="sc-icon">🧯</span><h5>A disk is almost full</h5><p>Fix it before the app stops.</p><span class="sc-use">→ Alert that runs an automation</span></div>
+      <div class="scenario"><span class="sc-icon">🏗️</span><h5>Every new resource must send logs</h5><p>Do not rely on people remembering.</p><span class="sc-use">→ Azure Policy deploys diagnostic settings</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — workspaces, settings and the traps</summary>
+    <div class="zoom-inner">
+      <p><b>Two kinds of workspace.</b> A <i>Log Analytics workspace</i> holds logs and traces, queried with KQL. An <i>Azure Monitor workspace</i> holds Prometheus and OpenTelemetry metrics, queried with PromQL. Application Insights data is stored in a Log Analytics workspace, so you can query it like other logs.</p>
+      <p><b>Diagnostic settings.</b> Platform metrics and the activity log are collected automatically, but <b>resource logs are not</b>. A diagnostic setting sends them to a Log Analytics workspace, an event hub or storage. For new settings, Microsoft recommends the resource-specific table mode. You can roll them out at scale with built-in Azure Policy (concept 16).</p>
+      <p><b>Keep monitoring itself monitored.</b> The guardrails from concept 16 need signals too: send Policy, Defender and Key Vault logs to the same place, and alert when something important turns off.</p>
+      <p><b>Cost.</b> Logs are billed by volume, and a diagnostic setting cannot filter inside a category; collect what you will use. (Cost Management is the next concept.)</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Three signals: metrics (numbers over time), logs (detailed records), traces (a request across services). Azure Monitor gathers them.</li><li>Platform metrics and the activity log are automatic; resource logs need a diagnostic setting; traces need instrumentation (Application Insights, OpenTelemetry).</li><li>Log Analytics workspace = logs/traces queried with KQL. Application Insights = application performance monitoring.</li><li>Alert rule (condition + window) fires an action group (notify, run automation, open ticket).</li><li>Decide what to collect before the incident; alerts without an owner become noise.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I collect the three signals — metrics, logs and traces — in Azure Monitor. Metrics and the activity log are automatic, resource logs need diagnostic settings, and the app is instrumented with Application Insights and OpenTelemetry for traces. I query logs with KQL in Log Analytics, and I turn signals into action with alert rules and action groups. I deploy the diagnostic settings with Azure Policy so nothing is forgotten."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Assuming logs are on by default.</b> Platform metrics and the activity log are, but resource logs are not collected until you create a diagnostic setting — so the one time you need them, they are missing.</p>
+      <p>Second trap: <b>an alert for everything.</b> A flood of alerts trains people to ignore them. Alert on symptoms users feel, give each alert an owner, and use dashboards for the rest.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📈 Metrics</h5><p>Cheap, fast numbers over time. Tell you that something is off.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>📜 Logs and traces</h5><p>Detailed records and request journeys. Tell you why and where.</p></div>
+  </div>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> 💻 Tiny illustrative example</summary>
+    <div class="zoom-inner">
+    <div class="code-block"><pre><span class="cmt">// KQL: failed requests per hour in Application Insights, last day</span>
+requests
+| where timestamp &gt; ago(1d) and success == false
+| summarize failures = count() by bin(timestamp, 1h)
+| order by timestamp asc</pre></div>
+    <p style="color:var(--ink-faint); font-size:13px; margin-top:12px;">Illustrative only — table and column names depend on how the workspace and the app are set up.</p>
+    </div>
+  </details>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>You can now see what your system does. Everything above is also <b>metered</b> — and a good design can still be an unaffordable one. Next: Cost Management.</span>
+      <a class="next-link" href="cost-management.html">Cost Management <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 Monitoring features change often, and some OpenTelemetry paths are still in preview. This page teaches the ideas; for current features and prices, check the official docs. Official docs: <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview" target="_blank" rel="noopener">Azure Monitor overview</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview" target="_blank" rel="noopener">Application Insights overview</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs" target="_blank" rel="noopener">Azure Monitor Logs overview</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings" target="_blank" rel="noopener">Diagnostic settings</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview" target="_blank" rel="noopener">Azure Monitor alerts overview</a> · <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/data-platform-metrics" target="_blank" rel="noopener">Metrics in Azure Monitor</a></p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · Azure · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

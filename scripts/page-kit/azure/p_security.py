@@ -121,7 +121,7 @@ az policy assignment create --name audit-allowed-locations \\
     --policy &lt;built-in-policy-id&gt; --scope /providers/Microsoft.Management/managementGroups/&lt;mg-id&gt; \\
     --params '{ "effect": { "value": "Audit" } }\'''',
       'Illustrative shape only — the policy ID and parameter names depend on the built-in policy you choose, and the flags can change.'))
-    body += next_box('Guardrails say what <b>should</b> happen. You still need to see what <b>actually</b> happens — including for the guardrails themselves. Next: Monitoring &amp; Observability.', None)
+    body += next_box('Guardrails say what <b>should</b> happen. You still need to see what <b>actually</b> happens — including for the guardrails themselves. Next: Monitoring &amp; Observability.', 'monitoring-observability.html', 'Monitoring &amp; Observability')
     body += fact_note(FOOT, [DOCS_POL, DOCS_EFF, DOCS_REM, DOCS_DFC, DOCS_WAF, DOCS_ZT])
     return page('security-governance', 'Security & Governance', 'Concept 16 of 19 · 🛠️ Shipping and operating',
         'Security is layers, not a wall — and governance is <span class="grad-text">guardrails that hold for every resource, even when nobody is watching.</span>',

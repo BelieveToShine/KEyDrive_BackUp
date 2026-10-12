@@ -1106,5 +1106,83 @@
     "summary": "The classic mistake with Security & Governance.",
     "keywords": "azure security governance zero trust defense in depth azure policy defender for cloud waf ddos deny audit modify deployifnotexists remediation trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "azure-monitoring-observability",
+    "title": "Monitoring & Observability",
+    "category": "Azure",
+    "page": "azure/concepts/monitoring-observability.html",
+    "summary": "Metrics, logs and traces in Azure Monitor, Log Analytics and Application Insights, plus alerts and action groups.",
+    "keywords": "azure monitoring observability azure monitor log analytics application insights kql metrics logs traces alerts action group diagnostic settings opentelemetry"
+  },
+  {
+    "id": "azure-monitoring-observability-recall",
+    "title": "Monitoring & Observability — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/monitoring-observability.html",
+    "summary": "Quick recall points: Monitoring & Observability.",
+    "keywords": "azure monitoring observability azure monitor log analytics application insights kql metrics logs traces alerts action group diagnostic settings opentelemetry interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-monitoring-observability-trap",
+    "title": "Monitoring & Observability — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/monitoring-observability.html",
+    "summary": "The classic mistake with Monitoring & Observability.",
+    "keywords": "azure monitoring observability azure monitor log analytics application insights kql metrics logs traces alerts action group diagnostic settings opentelemetry trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-cost-management",
+    "title": "Cost Management",
+    "category": "Azure",
+    "page": "azure/concepts/cost-management.html",
+    "summary": "Cost analysis, budgets, tags, reservations, savings plans, Spot and Hybrid Benefit.",
+    "keywords": "azure cost management budget tags reservation savings plan spot hybrid benefit rightsizing orphaned resources advisor"
+  },
+  {
+    "id": "azure-cost-management-recall",
+    "title": "Cost Management — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/cost-management.html",
+    "summary": "Quick recall points: Cost Management.",
+    "keywords": "azure cost management budget tags reservation savings plan spot hybrid benefit rightsizing orphaned resources advisor interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-cost-management-trap",
+    "title": "Cost Management — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/cost-management.html",
+    "summary": "The classic mistake with Cost Management.",
+    "keywords": "azure cost management budget tags reservation savings plan spot hybrid benefit rightsizing orphaned resources advisor trap mistake",
+    "anchor": "trap"
+  },
+  {
+    "id": "azure-well-architected",
+    "title": "Well-Architected & Landing Zones",
+    "category": "Azure",
+    "page": "azure/concepts/well-architected.html",
+    "summary": "The five Well-Architected pillars, trade-offs, the Cloud Adoption Framework and landing zones.",
+    "keywords": "azure well architected framework pillars reliability security cost optimization operational excellence performance efficiency landing zone cloud adoption framework trade-offs"
+  },
+  {
+    "id": "azure-well-architected-recall",
+    "title": "Well-Architected & Landing Zones — interview recall",
+    "category": "Azure",
+    "page": "azure/concepts/well-architected.html",
+    "summary": "Quick recall points: Well-Architected & Landing Zones.",
+    "keywords": "azure well architected framework pillars reliability security cost optimization operational excellence performance efficiency landing zone cloud adoption framework trade-offs interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "azure-well-architected-trap",
+    "title": "Well-Architected & Landing Zones — common trap",
+    "category": "Azure",
+    "page": "azure/concepts/well-architected.html",
+    "summary": "The classic mistake with Well-Architected & Landing Zones.",
+    "keywords": "azure well architected framework pillars reliability security cost optimization operational excellence performance efficiency landing zone cloud adoption framework trade-offs trap mistake",
+    "anchor": "trap"
   }
 ]

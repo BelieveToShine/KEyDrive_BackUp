@@ -11,11 +11,11 @@ file first in any new session; it routes to everything else rather than trying t
   (What is AI? through Production — including Embeddings & Vector Search and Context
   Engineering, added after a production-verification review found them missing from the
   original 17). Journey map, concept list, and search index are all fully wired to match.
-- **Azure** has its hub + full 19-concept roadmap and **16 / 19 concepts written + 7 deep dives**: the whole foundation
+- **Azure** has its hub + full 19-concept roadmap and **19 / 19 concepts written (complete) + 7 deep dives**: the whole foundation
   (**Tenants/Subscriptions/Resource Groups**, **Regions & Availability Zones**, **Identity & Access** + Managed Identities,
   **Virtual Networks** + Private Endpoints, **Compute**) plus **Storage** (+ Blob in depth), **Databases** (+ Cosmos DB vs Azure SQL) and
   **Load Balancing & Traffic Routing**, **Scaling & Resilience** (+ Disaster Recovery), **Caching & Edge Delivery**, **Messaging & Events** (+ Service Bus, Event Hubs),
-  **Serverless & Orchestration**, **Infrastructure as Code** and **CI/CD & Deployment Strategies**. **Secrets & Configuration** and **Security & Governance**. Next in roadmap order: 17 Monitoring & Observability, 18 Cost Management, 19 Well-Architected.
+  **Serverless & Orchestration**, **Infrastructure as Code** and **CI/CD & Deployment Strategies**. **Secrets & Configuration**, **Security & Governance**, **Monitoring & Observability**, **Cost Management** and **Well-Architected & Landing Zones**. The Azure journey is complete; remaining work is user-driven corrections and the 🟨 K ledger rows.
   Facts are logged in `docs/specs/azure/claims-ledger.md` (✅ verified via Microsoft Learn searches / 🟨 still to verify).
 - **AWS** has its hub + locked roadmap and spec folder; **no concept pages yet**. A later session writes
   them by following `docs/rules/page-production-workflow.md` + `docs/rules/cloud-category-playbook.md`

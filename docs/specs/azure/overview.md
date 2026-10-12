@@ -2,22 +2,23 @@
 
 ## Status
 
-Hub page, full roadmap and **five batches of pages** are done: 16 / 19 concepts + 7 deep dives.
+Hub page, full roadmap and **six batches of pages** are done: **19 / 19 concepts + 7 deep dives — the Azure journey is complete**.
 Batch 1: Storage, Databases, Messaging & Events (+ Blob Storage in depth, Cosmos DB vs Azure SQL, Service Bus, Event Hubs).
 Batch 2 (roadmap order): Tenants/Subscriptions/Resource Groups, Regions & Availability Zones, Identity & Access (+ Managed Identities),
 Virtual Networks (+ Private Endpoints), Compute.
 Batch 3 (roadmap order): Load Balancing & Traffic Routing, Scaling & Resilience (+ Disaster Recovery), Caching & Edge Delivery.
 Batch 4 (roadmap order): Serverless & Orchestration, Infrastructure as Code, CI/CD & Deployment Strategies.
-Batch 5 (roadmap order): Secrets & Configuration, Security & Governance. Added at the user's
+Batch 5 (roadmap order): Secrets & Configuration, Security & Governance.
+Batch 6 (roadmap order): Monitoring & Observability, Cost Management, Well-Architected & Landing Zones. Added at the user's
 explicit request (2026-10-12), which lifts the platform-wide "don't start a new category without
 being asked" rule for this category only.
 
 ## What's built
 
-- `azure/concepts/*.html` — 23 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 68 diagrams in total. Facts are logged in `claims-ledger.md`.
-- `azure/index.html` — category hub: hero, the 19-node journey-map diagram (written nodes are links, the rest locked) (every connector
+- `azure/concepts/*.html` — 26 pages (see `roadmap.md`), each with decision-first content: pick-cards, decision tree, comparison table, scenarios, strengths/watch-outs, 77 diagrams in total. Facts are logged in `claims-ledger.md`.
+- `azure/index.html` — category hub: hero, the 19-node journey-map diagram (every node is a link now that all 19 are written) (every connector
   labeled with the limit that made the next concept necessary, two grouping containers, legend)
-  and the full concept list with 🔒 planned badges. Nodes and rows are not links yet.
+  and the full concept list, every row marked ✅ written and linking to its page and deep dives.
 - A "Roadmap" tile on the platform home (`index.html`), directly after the Cloud Systems placeholder.
 - This spec folder.
 

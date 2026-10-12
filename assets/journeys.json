@@ -83,7 +83,10 @@
       "infrastructure-as-code",
       "ci-cd-deployment",
       "secrets-configuration",
-      "security-governance"
+      "security-governance",
+      "monitoring-observability",
+      "cost-management",
+      "well-architected"
     ],
     "sub": {
       "blob-storage": "storage",
