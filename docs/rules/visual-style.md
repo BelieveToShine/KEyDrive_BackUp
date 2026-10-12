@@ -38,7 +38,8 @@ Poppins/Lexend/Fira Code). KeyDrive is dark, gradient-glow, Sora/Inter/JetBrains
 | Gradient-text 5-second takeaway pill | `.one-sentence` |
 | Inline gradient text (headings, pills) | `.grad-text` |
 | Category tile on the platform home | `.cat-tile` (`.soon` modifier for not-yet-built categories) |
-| Path-picker card on a category hub | `.path-card` (`.locked` modifier) |
+| Hub start button | `.kd-cta` |
+| Back pill / fixed bottom bar (built by `site.js`) | `.crumb-back`, `.fixed-pager` — see `navigation.md` |
 | Journey-map SVG wrapper | `.journey-wrap`, with `.jm-node` (`.done`/`.locked`) and `.jm-link` |
 | Concept-list row on a category hub | `.concept-row` (`.done`/`.soon` modifiers) |
 | Deep-link landing glow (triggered by `assets/site.js`, not authored per-page) | `.kd-pointed` |

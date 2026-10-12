@@ -9,7 +9,7 @@ hover/press feedback below).
 
 ## The bug this fixes
 
-Several whole-card links (`a.kd-card` — category tiles, the real path-card, journey-map nodes)
+Several whole-card links (`a.kd-card` — category tiles, journey-map nodes)
 are HTML/SVG anchors wrapping a title and description. The site's base rule is `a:hover {
 text-decoration: underline }`, and because `text-decoration` set on an ancestor draws through
 descendant inline content, hovering the *whole card* underlined every line of text inside it —

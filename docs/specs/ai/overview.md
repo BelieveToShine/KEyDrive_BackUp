@@ -7,8 +7,8 @@ original 17; both are fixed now — see "Current status" below.
 
 ## What's built
 
-- `ai/index.html` — the category hub: hero, a 4-card "choose your path" picker (only "Learn AI"
-  is a real link — Interview/Build/Architect are locked visual previews), the full 19-node
+- `ai/index.html` — the category hub: hero, a "Start with What is AI?" button (the old
+  4-card path picker was removed), the full 19-node
   journey-map diagram (every node written and linked, every connector labeled with the limit
   that made the next concept necessary, two grouping containers around the branch clusters, and
   an on-canvas legend), and the full concept list with status badges.

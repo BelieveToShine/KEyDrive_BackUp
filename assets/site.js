@@ -114,3 +114,123 @@
     setTimeout(function () { target.classList.remove("kd-pointed"); }, 2600);
   }, 60);
 })();
+
+/* One-level "Back" button in the crumb bar — see docs/rules/navigation.md. A plain left-click on
+   any internal link tags its href with where it came from (bfrom = this page's clean URL +
+   scroll position, bt = label); the destination reads the tag once, shows ← Back, then strips it
+   from the URL. So Back is exactly one hop, a page reached BY Back never shows its own Back, and
+   a fresh visit / reload / search-box jump never shows one. Returning restores scroll position. */
+(function () {
+  var P = ["bfrom", "bt", "bs"];
+
+  function cleanUrl(url) {
+    var hi = url.indexOf("#");
+    var hash = hi > -1 ? url.slice(hi) : "";
+    var rest = hi > -1 ? url.slice(0, hi) : url;
+    var qi = rest.indexOf("?");
+    var base = qi > -1 ? rest.slice(0, qi) : rest;
+    var params = new URLSearchParams(qi > -1 ? rest.slice(qi + 1) : "");
+    P.forEach(function (k) { params.delete(k); });
+    var qs = params.toString();
+    return base + (qs ? "?" + qs : "") + hash;
+  }
+
+  // add a query param BEFORE any #hash (a param after the hash never reaches the page)
+  function addParam(url, key, val) {
+    var hi = url.indexOf("#");
+    var base = hi > -1 ? url.slice(0, hi) : url;
+    var hash = hi > -1 ? url.slice(hi) : "";
+    return base + (base.indexOf("?") > -1 ? "&" : "?") + key + "=" + encodeURIComponent(val) + hash;
+  }
+
+  var incoming = new URLSearchParams(location.search);
+  var backHref = incoming.get("bfrom");
+  var backLabel = incoming.get("bt");
+  var scrollTo = parseInt(incoming.get("bs"), 10);
+  var crumbs = document.querySelector("nav.kd-crumbs");
+
+  if (crumbs && backHref) {
+    var btn = document.createElement("a");
+    btn.className = "crumb-back";
+    btn.href = backHref;
+    var label = backLabel ? "Back to " + backLabel : "Back";
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+    btn.innerHTML = '<span class="cb-arrow">←</span><span class="cb-text">Back</span>';
+    crumbs.appendChild(btn);
+  }
+
+  // this page is a Back target: put the reader exactly where they left it
+  if (!isNaN(scrollTo) && scrollTo > 0) {
+    setTimeout(function () { window.scrollTo(0, scrollTo); }, 120);
+  }
+
+  if (backHref !== null || incoming.has("bs")) {
+    history.replaceState(null, "", cleanUrl(location.pathname + location.search + location.hash));
+  }
+
+  document.addEventListener("click", function (e) {
+    if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.classList.contains("crumb-back") || a.closest(".kdsearch-results")) return;
+    var href = a.getAttribute("href");
+    if (!href || href.charAt(0) === "#" || /^[a-z][a-z0-9+.-]*:/i.test(href) || a.target === "_blank") return;
+
+    var from = cleanUrl(location.pathname + location.search + location.hash);
+    var y = Math.round(window.scrollY || 0);
+    if (y > 0) from = addParam(from, "bs", y);
+    var label = (document.title || "").split(" — ")[0].trim();
+    var tagged = addParam(addParam(href, "bfrom", from), "bt", label);
+    a.setAttribute("href", tagged);
+    setTimeout(function () { a.setAttribute("href", href); }, 0);
+  }, true);
+})();
+
+/* Fixed bottom journey bar — Prev / ↑ category hub / Next on every concept page, built from
+   assets/journeys.json (the ordered concept list per category) + concepts-index.json (titles).
+   Zero per-page markup. See docs/rules/navigation.md. */
+(function () {
+  var m = location.pathname.match(/\/([^\/]+)\/concepts\/([^\/]+)\.html$/);
+  if (!m) return;
+  var cat = m[1], slug = m[2];
+  var root = document.body.getAttribute("data-root") || "";
+
+  Promise.all([
+    fetch(root + "assets/journeys.json").then(function (r) { return r.json(); }),
+    fetch(root + "assets/concepts-index.json").then(function (r) { return r.json(); })
+  ]).then(function (res) {
+    var journey = res[0][cat];
+    if (!journey) return;
+    var i = journey.order.indexOf(slug);
+    if (i < 0) return;
+
+    var titles = {};
+    res[1].forEach(function (it) { if (!it.anchor) titles[it.id] = it.title; });
+
+    function side(target, cls, arrowFirst, tag) {
+      if (!target) return '<span class="fp-side ' + cls + ' fp-empty"></span>';
+      var arrow = '<span class="fp-arrow">' + (arrowFirst ? "←" : "→") + "</span>";
+      var text = '<span class="fp-text"><span class="fp-tag">' + tag + '</span><span class="fp-title">' +
+        target.title + "</span></span>";
+      return '<a class="fp-side ' + cls + '" href="' + target.href + '">' +
+        (arrowFirst ? arrow + text : text + arrow) + "</a>";
+    }
+    function pick(slugName) {
+      return slugName ? { title: titles[slugName] || slugName, href: slugName + ".html" } : null;
+    }
+
+    var prev = pick(journey.order[i - 1]);
+    var next = pick(journey.order[i + 1]);
+    if (!next) next = { title: "Back to " + journey.title + " hub", href: "../index.html" };
+
+    var bar = document.createElement("nav");
+    bar.className = "fixed-pager";
+    bar.setAttribute("aria-label", "Journey navigation");
+    bar.innerHTML =
+      side(prev, "fp-prev", true, "Previous · " + (i) + " of " + journey.order.length) +
+      '<a class="fp-mid" href="../index.html">↑ ' + journey.title + " hub</a>" +
+      side(next, "fp-next", false, i + 1 < journey.order.length ? "Next · " + (i + 2) + " of " + journey.order.length : "Finished");
+    document.body.appendChild(bar);
+    document.body.classList.add("has-fixed-pager");
+  }).catch(function () {});
+})();

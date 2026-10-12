@@ -6,7 +6,7 @@
 index.html                              — platform home (category tile grid)
 <category>/index.html                   — category hub
 <category>/concepts/<slug>.html         — one concept page
-assets/style.css, site.js, concepts-index.json — shared, referenced with relative paths
+assets/style.css, site.js, concepts-index.json, journeys.json — shared, referenced with relative paths
                                            (../assets/... from a category hub,
                                             ../../assets/... from a concept page)
 ```
@@ -22,8 +22,8 @@ navigation targets correctly regardless of page depth.
 1. Breadcrumb back to the platform home.
 2. Hero — what this category's single connected journey is, in one sentence, plus a line making
    explicit that it's one journey and not a topic list.
-3. A "choose your path" picker (`.path-card` grid) — real link for the learn-in-order path,
-   locked previews for any other planned paths (Interview/Build/Architect, on the AI hub).
+3. One start button (`a.kd-cta`) in the hero linking to the first concept. No path-picker and
+   no locked Interview/Build/Architect previews (removed — see `navigation.md`).
 4. **The journey-map** — one big vertical SVG (`.journey-wrap`) showing every planned concept in
    the category, in its fixed order, as `.jm-node` boxes connected by `.jm-link` arrows.
    Written concepts get the `.done` modifier (solid border, clickable `<a class="jm-hit">`
@@ -100,3 +100,5 @@ of finding them one at a time:
 3. Create `docs/specs/<category>/` with `concept-taxonomy.md`, `roadmap.md`, `overview.md`
    mirroring the `docs/specs/ai/` folder.
 4. Add the new category to `docs/keydrive-overview.md`.
+5. Add it to `assets/journeys.json` (ordered concept slugs) so the fixed bottom bar and Back
+   button work on its pages — see `navigation.md`.

@@ -48,3 +48,8 @@ one for any other named box that's genuinely useful as a direct search target.
 **Update this file in the same commit as any page it describes.** Adding a concept page,
 renaming a section id, or removing a page without updating its entries here breaks search
 silently — there's no build step or test that catches a stale index.
+
+## Also register the page in `assets/journeys.json`
+
+Adding a concept page means two registries, not one: `concepts-index.json` (search + titles) and
+`journeys.json` (order for the fixed bottom bar). See `navigation.md`.

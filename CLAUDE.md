@@ -28,6 +28,7 @@ Full detail: `docs/keydrive-overview.md`.
 | Adding/reusing a CSS class or color | `docs/rules/visual-style.md` |
 | Any clickable card/tile/node, or adding animation anywhere | `docs/rules/interaction-style.md` — hover/press must feel like a button, never underlined text; animate wherever it's meaningful, not just inside diagrams |
 | Adding a page, category, or changing folder/URL layout | `docs/rules/content-structure.md` |
+| Back button, fixed bottom Prev/Next bar, "where this leads" box, `journeys.json` | `docs/rules/navigation.md` — built by `site.js`, zero per-page markup; every new concept/category must be added to `assets/journeys.json` |
 | Adding or editing any page (search-index sync) | `docs/rules/search-index.md` |
 | Stating any technical or historical fact | `docs/rules/accuracy.md` — non-negotiable |
 
@@ -42,5 +43,5 @@ each concept exists), `roadmap.md` (written/planned status, updated the moment a
 
 Interactive click-to-explore diagrams, a persistent fictional-company narrative, the full
 "interviewer follows the thread" ladder, architecture-review pages, decision-tree pages,
-historical timelines, real content for locked path previews (Interview/Build/Architect). See
+historical timelines, any Interview/Build/Architect path picker (removed — don't re-add). See
 each category's `overview.md` for anything category-specific on top of this list.

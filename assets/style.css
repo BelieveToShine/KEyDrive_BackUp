@@ -130,7 +130,7 @@ main{ padding:20px 0 100px; }
   transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
 .kd-card:hover{ border-color:rgba(255,255,255,.16); }
-/* a .kd-card that is itself a link (cat-tile, the real path-card) must feel like a button, not
+/* a .kd-card that is itself a link (cat-tile, journey-map nodes) must feel like a button, not
    a text link — kill the browser's default underline-on-hover and add a lift + glow + press
    state instead. Plain .kd-card divs (locked previews, boxes) are untouched by this block. */
 a.kd-card:hover{
@@ -153,14 +153,6 @@ a.kd-card:active{ transform:translateY(-1px) scale(.98); box-shadow:0 6px 16px r
   position:absolute; inset:-40% -40% auto auto; width:140px; height:140px; border-radius:50%;
   background:var(--grad); opacity:.14; filter:blur(30px); pointer-events:none;
 }
-
-/* ---------- path picker ---------- */
-.path-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:14px; margin:28px 0; }
-.path-card{ text-align:center; padding:24px 16px; }
-.path-card .pc-icon{ font-size:26px; margin-bottom:10px; display:block; }
-.path-card h4{ font-size:15px; margin-bottom:5px; }
-.path-card p{ color:var(--ink-faint); font-size:12.5px; margin:0; }
-.path-card.locked{ opacity:.5; }
 
 /* ---------- journey map (SVG diagram) ---------- */
 .journey-wrap{ margin:36px 0; padding:28px; overflow-x:auto; }
@@ -354,6 +346,65 @@ footer.kd-foot a{ color:var(--ink-soft); }
   70%{ box-shadow:0 0 0 3px rgba(34,211,238,.55); }
   100%{ box-shadow:0 0 0 0 rgba(34,211,238,0); }
 }
+
+/* ---------- fixed bottom journey bar + one-level Back (built by assets/site.js; zero page markup) ----------
+   See docs/rules/navigation.md. */
+.kd-cta{
+  display:inline-flex; align-items:center; gap:8px; margin-top:20px; padding:11px 22px; border-radius:12px;
+  background:var(--emerald-bg); border:1px solid rgba(52,211,153,.3); color:var(--emerald-ink);
+  font-family:'Sora'; font-weight:700; font-size:15px; text-decoration:none;
+  transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.kd-cta:hover{ text-decoration:none; transform:translateY(-2px); border-color:rgba(52,211,153,.6); box-shadow:0 10px 24px rgba(0,0,0,.4); }
+.kd-cta:active{ transform:scale(.97); }
+.kd-cta .arrow{ transition:transform .15s ease; }
+.kd-cta:hover .arrow{ transform:translateX(4px); }
+
+.kd-crumbs .crumb-back{
+  display:inline-flex; align-items:center; gap:6px; margin-left:auto; flex:0 0 auto; white-space:nowrap;
+  font-family:'Sora'; font-weight:700; font-size:12.5px; color:var(--ink-soft);
+  background:var(--surface); border:1px solid var(--border-soft); border-radius:20px; padding:5px 14px 5px 11px;
+  transition:border-color .15s ease, color .15s ease, transform .15s ease, background .15s ease;
+}
+.kd-crumbs .crumb-back:hover{ color:var(--cyan-ink); border-color:rgba(34,211,238,.45); background:var(--cyan-bg); text-decoration:none; transform:translateX(-2px); }
+.kd-crumbs .crumb-back:active{ transform:scale(.96); }
+.kd-crumbs .crumb-back::after{ content:none; }
+
+body.has-fixed-pager{ padding-bottom:68px; }
+.fixed-pager{
+  position:fixed; left:0; right:0; bottom:0; z-index:35; display:flex; align-items:stretch;
+  background:rgba(10,13,20,.92); backdrop-filter:blur(14px); border-top:1px solid var(--border-soft);
+  box-shadow:0 -8px 24px rgba(0,0,0,.35);
+}
+.fixed-pager .fp-side, .fixed-pager .fp-mid{
+  display:flex; align-items:center; gap:10px; min-width:0; padding:10px 22px; color:var(--ink);
+  text-decoration:none; transition:background .15s ease, transform .15s ease;
+}
+.fixed-pager .fp-side{ flex:1 1 0; }
+.fixed-pager .fp-prev{ justify-content:flex-start; }
+.fixed-pager .fp-next{ justify-content:flex-end; text-align:right; }
+.fixed-pager .fp-empty{ visibility:hidden; pointer-events:none; }
+.fixed-pager a:hover{ background:var(--surface-2); text-decoration:none; }
+.fixed-pager a:active{ transform:scale(.98); }
+.fixed-pager .fp-arrow{ font-size:18px; color:var(--cyan); flex:0 0 auto; transition:transform .15s ease; }
+.fixed-pager .fp-prev:hover .fp-arrow{ transform:translateX(-4px); }
+.fixed-pager .fp-next:hover .fp-arrow{ transform:translateX(4px); }
+.fixed-pager .fp-next .fp-arrow{ color:var(--emerald-ink); }
+.fixed-pager .fp-text{ display:flex; flex-direction:column; min-width:0; }
+.fixed-pager .fp-tag{ font-family:'JetBrains Mono'; font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); }
+.fixed-pager .fp-title{ font-family:'Sora'; font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.fixed-pager .fp-mid{
+  flex:0 0 auto; color:var(--ink-soft); font-size:12.5px; font-weight:700;
+  border-left:1px solid var(--border-soft); border-right:1px solid var(--border-soft); white-space:nowrap;
+}
+@media (max-width:640px){
+  .fixed-pager .fp-tag{ display:none; }
+  .fixed-pager .fp-side{ padding:10px 12px; }
+  .fixed-pager .fp-title{ font-size:12.5px; }
+  .fixed-pager .fp-mid{ padding:10px 12px; font-size:0; }
+  .fixed-pager .fp-mid::before{ content:"↑"; font-size:16px; }
+}
+@media (prefers-reduced-motion:reduce){ .fixed-pager *, .kd-cta, .crumb-back{ transition:none !important; } }
 
 @media (max-width:720px){
   .kd-hero h1{ font-size:30px; }

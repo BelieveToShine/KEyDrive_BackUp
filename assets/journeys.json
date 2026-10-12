@@ -1,0 +1,10 @@
+{
+  "ai": {
+    "title": "AI",
+    "order": [
+      "what-is-ai", "machine-learning", "deep-learning", "neural-networks", "transformers", "llms",
+      "embeddings-vector-search", "prompting", "rag", "fine-tuning", "agents", "tools", "memory",
+      "planning", "context-engineering", "ai-application", "evaluation", "observability", "production"
+    ]
+  }
+}
