@@ -168,3 +168,4 @@ Don't start a new category or build any of the explicitly deferred items above w
 asked.
 
 - **Round 8 (2026-10-13, same style as Azure/AWS)**: re-read all 19 pages for accuracy (no factual errors found; existing hedged wording kept). Added a "🎬 Real-world scenarios" block (4 each, ending in a verdict) before the recall box on every page; added the deep dive **Prompting, RAG or Fine-tuning?** (decision tree, effort line, table, 6 scenarios) under Fine-tuning; added aria-labels to 24 older diagrams. Round 8b: every page also got a "🧰 pick-cards" block and a "📊 Side by side" table (injected before the scenarios). Note: the diagram linter reports false positives on the older hand-written SVGs (they lack the `bx` classes) — look at them by eye.
+- **Round 8c**: a "🧭 When to pick what" decision-tree diagram (3 questions + fallback) added to all 19 concept pages, before the Side-by-side table.

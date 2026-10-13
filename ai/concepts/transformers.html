@@ -144,6 +144,53 @@
   </section>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧭 When to pick what</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 428" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree for transformers">
+<defs><marker id="ttransfA" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ttransfS" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<path d="M175,326 L175,366" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ttransfA)"/>
+<rect class="bx" x="160" y="8" width="320" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What must the model do?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">✍️ Generate text token by token?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">no peeking at the future</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">Causal attention</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">masked</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔎 Understand a whole input?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">every word sees every word</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Encoder-style</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">no mask</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🔗 Link far-apart words?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">distance should not matter</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Attention</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">direct, weighted</text>
+<rect class="bx" x="10" y="366" width="330" height="50" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="388.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤔 Still unsure?</text>
+<text x="175" y="401.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">attention + stacked layers</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> read from the top; the first "yes" is usually your answer. The same attention idea is masked for generation and unmasked for understanding.</figcaption>
+</figure>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">📊 Side by side</div>
     <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Processing</th><th scope="col">Long-range links</th><th scope="col">Parallel?</th></tr></thead><tbody><tr><th scope="row">🚶 Sequential</th><td>One step at a time</td><td>Weaken with distance</td><td>No</td></tr><tr><th scope="row">🔭 Attention</th><td>Direct, weighted</td><td>Not weakened by distance alone</td><td>Yes</td></tr></tbody></table></div>
   </section>
