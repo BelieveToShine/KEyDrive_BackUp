@@ -135,6 +135,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Two ways to read a sequence</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🚶 Step by step</h4><span class="pk-tag">pass memory along one word at a time</span><span class="pk-label use">✅ Pick it when</span><ul><li>Short sequences</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Long-range links fade</li><li>Cannot run in parallel</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🔭 Attention (transformers)</h4><span class="pk-tag">each position weighs the others directly</span><span class="pk-label use">✅ Pick it when</span><ul><li>Long-range relationships</li><li>Parallel computation at scale</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting equal attention to every word</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🎭 Causal vs encoder style</h4><span class="pk-tag">what a position may see</span><span class="pk-label use">✅ Pick it when</span><ul><li>Causal: generate text left to right</li><li>Encoder: understand a whole input at once</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Mixing up which one you need</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Processing</th><th scope="col">Long-range links</th><th scope="col">Parallel?</th></tr></thead><tbody><tr><th scope="row">🚶 Sequential</th><td>One step at a time</td><td>Weaken with distance</td><td>No</td></tr><tr><th scope="row">🔭 Attention</th><td>Direct, weighted</td><td>Not weakened by distance alone</td><td>Yes</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">📖</span><h5>Link "it" to the right noun far earlier in a sentence</h5><p>Distance should not weaken the signal.</p><span class="sc-use">→ Attention</span></div>

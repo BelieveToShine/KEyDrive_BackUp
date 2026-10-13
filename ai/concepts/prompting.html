@@ -120,6 +120,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Ways to steer with a prompt</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>📝 Clear instruction</h4><span class="pk-tag">say exactly what you want</span><span class="pk-label use">✅ Pick it when</span><ul><li>Tone, format, length, steps</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Expecting it to know facts it never saw</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🧩 Examples in the prompt</h4><span class="pk-tag">show the pattern</span><span class="pk-label use">✅ Pick it when</span><ul><li>The format keeps varying</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Examples so long they crowd out the question</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>📄 Pasted context</h4><span class="pk-tag">supply facts by hand</span><span class="pk-label use">✅ Pick it when</span><ul><li>A small, known document</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Large or changing knowledge — that is RAG's job</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Gives the model</th><th scope="col">Lasts</th><th scope="col">Limit</th></tr></thead><tbody><tr><th scope="row">📝 Instruction</th><td>Direction</td><td>This request</td><td>Cannot add missing facts</td></tr><tr><th scope="row">🧩 Examples</th><td>A pattern</td><td>This request</td><td>Uses context space</td></tr><tr><th scope="row">📄 Pasted context</th><td>Facts</td><td>This request</td><td>Manual and size-limited</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">📝</span><h5>Summaries are too long</h5><p>The model can do it; the instruction is loose.</p><span class="sc-use">→ Tighten the prompt</span></div>

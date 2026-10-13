@@ -115,6 +115,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Three ways to search</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔤 Keyword search</h4><span class="pk-tag">match the words</span><span class="pk-label use">✅ Pick it when</span><ul><li>Exact terms, codes, names</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Same meaning in different words</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧭 Vector search</h4><span class="pk-tag">match the meaning</span><span class="pk-label use">✅ Pick it when</span><ul><li>Related content with no shared words</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Needing exactness — close is not always correct</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🔀 Hybrid</h4><span class="pk-tag">keyword + vector, often reranked</span><span class="pk-label use">✅ Pick it when</span><ul><li>Production search that needs both</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>A tiny collection where simple search is enough</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Matches by</th><th scope="col">Strong at</th><th scope="col">Weak at</th></tr></thead><tbody><tr><th scope="row">🔤 Keyword</th><td>Words</td><td>Exact terms</td><td>Synonyms</td></tr><tr><th scope="row">🧭 Vector</th><td>Meaning</td><td>Paraphrases</td><td>Exact identifiers</td></tr><tr><th scope="row">🔀 Hybrid</th><td>Both</td><td>Most real queries</td><td>More moving parts</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🏖️</span><h5>"Vacation policy" vs "time off rules"</h5><p>No shared words, same meaning.</p><span class="sc-use">→ Embeddings</span></div>

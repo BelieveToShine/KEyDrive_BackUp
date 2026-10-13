@@ -122,6 +122,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Ways to retrieve</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔤 Keyword</h4><span class="pk-tag">exact term matching</span><span class="pk-label use">✅ Pick it when</span><ul><li>Codes, names, exact phrases</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Paraphrased questions</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧭 Vector</h4><span class="pk-tag">matching by meaning</span><span class="pk-label use">✅ Pick it when</span><ul><li>Natural-language questions</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Exact identifiers</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🔀 Hybrid + rerank</h4><span class="pk-tag">both, then reorder</span><span class="pk-label use">✅ Pick it when</span><ul><li>Best quality for real knowledge bases</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Simple, tiny collections</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Finds</th><th scope="col">Typical weakness</th></tr></thead><tbody><tr><th scope="row">🔤 Keyword</th><td>Exact words</td><td>Misses synonyms</td></tr><tr><th scope="row">🧭 Vector</th><td>Related meaning</td><td>Can return related-but-wrong text</td></tr><tr><th scope="row">🔀 Hybrid</th><td>Both</td><td>More to tune</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🏢</span><h5>Answer from this week's HR policy</h5><p>The model never saw it.</p><span class="sc-use">→ RAG</span></div>

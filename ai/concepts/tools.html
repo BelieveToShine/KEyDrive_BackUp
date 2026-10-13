@@ -105,6 +105,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Kinds of tools</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔎 Read-only tools</h4><span class="pk-tag">look things up</span><span class="pk-label use">✅ Pick it when</span><ul><li>Search, weather, database reads</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Anything that must change state</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>✍️ Write tools</h4><span class="pk-tag">change something</span><span class="pk-label use">✅ Pick it when</span><ul><li>Create, update, send, book</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Without permissions limits and confirmation</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🧮 Compute tools</h4><span class="pk-tag">exact calculation</span><span class="pk-label use">✅ Pick it when</span><ul><li>Maths, code execution</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Trusting the model to compute exactly</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Effect</th><th scope="col">Risk</th><th scope="col">Safeguard</th></tr></thead><tbody><tr><th scope="row">🔎 Read-only</th><td>None</td><td>Low</td><td>Limit what data it can see</td></tr><tr><th scope="row">✍️ Write</th><td>Changes state</td><td>Higher</td><td>Least privilege, confirm risky actions</td></tr><tr><th scope="row">🧮 Compute</th><td>None</td><td>Low</td><td>Sandbox code execution</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🌦️</span><h5>"What is the weather in Pune?"</h5><p>The model has no live data.</p><span class="sc-use">→ Call a weather tool</span></div>

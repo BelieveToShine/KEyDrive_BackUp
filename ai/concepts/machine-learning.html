@@ -183,6 +183,21 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Four ways a model can learn</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🏷️ Supervised</h4><span class="pk-tag">labeled (input, answer) pairs</span><span class="pk-label use">✅ Pick it when</span><ul><li>You have known-correct answers</li><li>Predicting a number or a category</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>No labels available</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🔍 Unsupervised</h4><span class="pk-tag">finds structure in unlabeled data</span><span class="pk-label use">✅ Pick it when</span><ul><li>Grouping similar items</li><li>Exploring data you do not understand yet</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You need a specific, known answer</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🪞 Self-supervised</h4><span class="pk-tag">the data supplies its own signal</span><span class="pk-label use">✅ Pick it when</span><ul><li>Huge amounts of raw text or images</li><li>Pretraining large models</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Small, narrow problems</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🎮 Reinforcement</h4><span class="pk-tag">learns from a reward</span><span class="pk-label use">✅ Pick it when</span><ul><li>Sequences of actions with a score at the end</li><li>Games, control, tuning behaviour</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>No safe way to try actions and score them</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Learns from</th><th scope="col">Typical use</th></tr></thead><tbody><tr><th scope="row">🏷️ Supervised</th><td>Labeled examples</td><td>Price prediction, spam detection</td></tr><tr><th scope="row">🔍 Unsupervised</th><td>Unlabeled data</td><td>Customer grouping</td></tr><tr><th scope="row">🪞 Self-supervised</th><td>Signals made from the data itself</td><td>Pretraining language models</td></tr><tr><th scope="row">🎮 Reinforcement</th><td>A reward signal</td><td>Games, control</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🏠</span><h5>Predict a house price from its size</h5><p>Labeled (size, price) examples exist.</p><span class="sc-use">→ Supervised learning</span></div>

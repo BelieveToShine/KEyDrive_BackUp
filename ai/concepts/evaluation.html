@@ -120,6 +120,21 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Ways to grade</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>✅ Exact match</h4><span class="pk-tag">output equals the known answer</span><span class="pk-label use">✅ Pick it when</span><ul><li>Short, deterministic outputs</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Open-ended text</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>⚖️ Rubric or LLM judge</h4><span class="pk-tag">graded against criteria</span><span class="pk-label use">✅ Pick it when</span><ul><li>Open-ended answers</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Using it unchecked — judges can be biased</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>🧑 Human review</h4><span class="pk-tag">a person reads it</span><span class="pk-label use">✅ Pick it when</span><ul><li>Subtle quality, final checks</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Large volumes — slow and costly</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🎯 Task success</h4><span class="pk-tag">did the job get done?</span><span class="pk-label use">✅ Pick it when</span><ul><li>Agents and workflows</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Judging wording quality</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Needs a reference answer?</th><th scope="col">Scales?</th><th scope="col">Best for</th></tr></thead><tbody><tr><th scope="row">✅ Exact match</th><td>Yes</td><td>Yes</td><td>Short outputs</td></tr><tr><th scope="row">⚖️ Rubric / judge</th><td>No</td><td>Yes</td><td>Open-ended text</td></tr><tr><th scope="row">🧑 Human</th><td>No</td><td>No</td><td>Subtle quality</td></tr><tr><th scope="row">🎯 Task success</th><td>No</td><td>Yes</td><td>Outcomes</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🧪</span><h5>Did the new prompt help?</h5><p>A feeling is not evidence.</p><span class="sc-use">→ Run a test set and compare scores</span></div>

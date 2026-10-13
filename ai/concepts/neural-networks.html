@@ -117,6 +117,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 The building blocks</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🔢 Weights and bias</h4><span class="pk-tag">what training adjusts</span><span class="pk-label use">✅ Pick it when</span><ul><li>They hold what the network has learned</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Setting them by hand</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>⚡ Activation function</h4><span class="pk-tag">the bend at each neuron</span><span class="pk-label use">✅ Pick it when</span><ul><li>Lets layers represent curved relationships</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Leaving it out — layers would collapse into one weighted sum</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>📚 Layers</h4><span class="pk-tag">neurons side by side, stacked</span><span class="pk-label use">✅ Pick it when</span><ul><li>Each layer builds on the last</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Assuming more layers always means better</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">What it is</th><th scope="col">Role</th></tr></thead><tbody><tr><th scope="row">Neuron</th><td>Weighted sum + bias, then activation</td><td>The basic computation</td></tr><tr><th scope="row">Layer</th><td>Many neurons in parallel</td><td>One stage of transformation</td></tr><tr><th scope="row">Network</th><td>Layers in sequence</td><td>The whole learned function</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🧮</span><h5>One neuron, three inputs</h5><p>Multiply by weights, add bias.</p><span class="sc-use">→ Weighted sum + activation</span></div>

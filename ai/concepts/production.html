@@ -173,6 +173,21 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 The four pillars</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>🛟 Reliability</h4><span class="pk-tag">keeps working</span><span class="pk-label use">✅ Pick it when</span><ul><li>Retries, fallbacks, version tracking</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Assuming the model API never fails</li></ul></div>
+      <div class="pick-card" style="--pick:#fb7185"><h4>🔐 Security</h4><span class="pk-tag">safe against misuse</span><span class="pk-label use">✅ Pick it when</span><ul><li>Prompt-injection defences, authorisation, privacy</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Trusting user or document text as instructions</li></ul></div>
+      <div class="pick-card" style="--pick:#fbbf24"><h4>💰 Cost</h4><span class="pk-tag">affordable at scale</span><span class="pk-label use">✅ Pick it when</span><ul><li>Rate limits, caching, cheaper models for easy requests</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Unbounded usage</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>📟 Operability</h4><span class="pk-tag">seeing all of it</span><span class="pk-label use">✅ Pick it when</span><ul><li>Evaluation and observability in place</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Shipping with no alerts</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Fails when</th><th scope="col">First safeguard</th></tr></thead><tbody><tr><th scope="row">🛟 Reliability</th><td>The provider or a step breaks</td><td>Retries and fallbacks</td></tr><tr><th scope="row">🔐 Security</th><td>Input is hostile</td><td>Treat input as untrusted</td></tr><tr><th scope="row">💰 Cost</th><td>Usage is unbounded</td><td>Limits and budgets</td></tr><tr><th scope="row">📟 Operability</th><td>You cannot see problems</td><td>Monitoring and alerts</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">🔁</span><h5>The model provider has an outage</h5><p>Users still need answers.</p><span class="sc-use">→ Fallbacks and retries</span></div>

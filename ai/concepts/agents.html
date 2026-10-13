@@ -119,6 +119,20 @@
   </details>
 
   <section class="kd-section ">
+    <div class="sec-label see">🧰 Single call vs agent</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>1️⃣ A single prompt-response</h4><span class="pk-tag">one shot</span><span class="pk-label use">✅ Pick it when</span><ul><li>One question, one answer</li><li>Predictable and cheap</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Goals that need actions and feedback</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>🔁 A plan-act-observe agent</h4><span class="pk-tag">loop until the goal is met</span><span class="pk-label use">✅ Pick it when</span><ul><li>Multi-step goals</li><li>Results that change what to do next</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Simple tasks — a loop adds cost and risk</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🧑‍🤝‍🧑 Multi-agent hand-offs</h4><span class="pk-tag">specialists share the work</span><span class="pk-label use">✅ Pick it when</span><ul><li>Distinct skills per step</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>Problems one agent handles fine</li></ul></div>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Steps</th><th scope="col">Sees results?</th><th scope="col">Risk</th></tr></thead><tbody><tr><th scope="row">1️⃣ Single call</th><td>One</td><td>No</td><td>Low</td></tr><tr><th scope="row">🔁 Agent loop</th><td>Many</td><td>Yes</td><td>Can loop, drift or act wrongly</td></tr><tr><th scope="row">🧑‍🤝‍🧑 Multi-agent</th><td>Many, split up</td><td>Yes</td><td>More coordination</td></tr></tbody></table></div>
+  </section>
+
+  <section class="kd-section ">
     <div class="sec-label see">🎬 Real-world scenarios</div>
     <div class="scenario-grid">
       <div class="scenario"><span class="sc-icon">✈️</span><h5>Book the cheapest flight before noon</h5><p>Search, compare, book, check.</p><span class="sc-use">→ An agent loop</span></div>
