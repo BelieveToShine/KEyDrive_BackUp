@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompting, RAG or Fine-tuning? — AI — KeyDrive</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../">
+
+<header class="topbar">
+  <div class="bar wrap">
+    <a class="brand" href="../../index.html">
+      <svg class="mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="kdMark" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/>
+        </linearGradient></defs>
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="url(#kdMark)" stroke-width="2.4"/>
+        <circle cx="12" cy="16" r="2.6" fill="url(#kdMark)"/><circle cx="20" cy="16" r="2.6" fill="url(#kdMark)"/>
+        <path d="M14.6 16h4.8" stroke="url(#kdMark)" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Key<span class="kd-dot">Drive</span>
+    </a>
+    <div class="kdsearch">
+      <span class="kicon">🔎</span>
+      <input type="text" placeholder="Search any concept… (AI, ML, RAG…)" autocomplete="off" aria-label="Search concepts">
+      <span class="kkey">/</span>
+      <div class="kdsearch-results" role="listbox"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="kd-crumbs wrap">
+  <a href="../../index.html">KeyDrive</a><span class="sep">›</span><a href="../index.html">🧠 AI</a><span class="sep">›</span><a href="fine-tuning.html">Fine-tuning</a><span class="sep">›</span><span class="cur">Prompting, RAG or Fine-tuning?</span>
+</nav>
+
+<main class="wrap">
+  <section class="kd-hero left">
+    <div class="eyebrow">Deep dive · Fine-tuning · ⚖️ Choosing</div>
+    <h1>Prompting changes the instruction, RAG changes the facts, fine-tuning changes the model — <span class="grad-text">pick the lightest one that fixes the real problem.</span></h1>
+    <p class="sub">A decision tree, a side-by-side table and six real scenarios for the choice every AI builder faces.</p>
+    <div class="interview-q">❓ "When would you use prompting, RAG or fine-tuning?"</div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">👁 See it first</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Decision tree: change the instruction use prompting, supply missing or private facts use RAG, change behaviour that must stick use fine-tuning">
+<defs><marker id="ch1A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ch1S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M320,42 L320,63 L175,63 L175,84" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M340,111 L410,111" fill="none" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M175,138 L175,178" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M340,205 L410,205" fill="none" stroke="#34d399" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M175,232 L175,272" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M340,299 L410,299" fill="none" stroke="#a78bfa" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<path d="M175,326 L175,372" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ch1A)"/>
+<rect class="bx" x="190" y="8" width="260" height="34" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="320" y="29" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">🤔 What is going wrong?</text>
+<rect class="bx" x="10" y="84" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">💬 The answer is fine, the instruction is vague?</text>
+<text x="175" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">wrong tone, format or steps</text>
+<rect class="bx" x="410" y="84" width="220" height="54" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="520" y="108.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">Prompting</text>
+<text x="520" y="121.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">rewrite the instruction</text>
+<rect class="bx" x="10" y="178" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">📚 The model lacks the facts?</text>
+<text x="175" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">private, new or fast-changing data</text>
+<rect class="bx" x="410" y="178" width="220" height="54" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="520" y="202.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">RAG</text>
+<text x="520" y="215.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">retrieve, then answer</text>
+<rect class="bx" x="10" y="272" width="330" height="54" rx="10" fill="#171c28" stroke="#2d364a" stroke-width="1.3"/>
+<text x="175" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#e7ebf3">🎯 The behaviour must hold every time?</text>
+<text x="175" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#93a0b8">a style or skill prompts cannot hold</text>
+<rect class="bx" x="410" y="272" width="220" height="54" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="520" y="296.75" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">Fine-tuning</text>
+<text x="520" y="309.25" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">train it into the weights</text>
+<rect class="bx" x="10" y="372" width="330" height="80" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="175" y="403.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">🤝 Often you combine them</text>
+<text x="175" y="416" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">prompt for the task, RAG for the facts,</text>
+<text x="175" y="428.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">fine-tune only what still will not hold</text>
+<g class="arrow-pill"><rect x="201" y="54" width="92" height="18" rx="9"/><text x="247" y="66.5" text-anchor="middle" font-size="9" font-style="italic">check in order</text></g>
+<g class="arrow-pill"><rect x="358" y="102" width="34" height="18" rx="9"/><text x="375" y="114.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="147" width="29" height="18" rx="9"/><text x="199" y="159.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="196" width="34" height="18" rx="9"/><text x="375" y="208.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="241" width="29" height="18" rx="9"/><text x="199" y="253.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+<g class="arrow-pill"><rect x="358" y="290" width="34" height="18" rx="9"/><text x="375" y="302.5" text-anchor="middle" font-size="9" font-style="italic">yes</text></g>
+<g class="arrow-pill"><rect x="184.5" y="335" width="29" height="18" rx="9"/><text x="199" y="347.5" text-anchor="middle" font-size="9" font-style="italic">no</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> ask <b>what is actually going wrong</b>. If the model has the knowledge but the instruction is vague, fix the <b>prompt</b>. If it lacks the facts — private, new, changing — add <b>RAG</b>. If a behaviour must hold every time and prompts cannot keep it there, consider <b>fine-tuning</b>. Most real systems end up combining them.</figcaption>
+</figure>
+  </section>
+  <div class="one-sentence">🎯 <span class="grad-text">Prompting changes the instruction, RAG changes the facts the model sees, fine-tuning changes the model itself — pick the lightest one that fixes the real problem.</span></div>
+  <section class="kd-section " id="why">
+    <div class="sec-label why">📖 Why did this need to exist?</div>
+    <div class="kd-card why-box">
+      <p>Three pages in a row gave you three tools. The mistake teams make is reaching for the heaviest one first: fine-tuning a model to teach it facts that RAG would supply, or building retrieval to fix what a clearer prompt would have solved.</p>
+      <p>The decision comes down to <b>what is missing</b>: clarity (prompt), knowledge (RAG) or built-in behaviour (fine-tune). Name the gap first, then pick the tool.</p>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🧰 The three tools</div>
+    <div class="pick-grid">
+      <div class="pick-card" style="--pick:#22d3ee"><h4>💬 Prompting</h4><span class="pk-tag">change the instruction</span><span class="pk-label use">✅ Pick it when</span><ul><li>Wrong tone, format or steps</li><li>You can describe what you want in words</li><li>You want to try ideas in minutes</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>The model simply does not have the facts</li><li>The behaviour must persist without being re-asked</li></ul></div>
+      <div class="pick-card" style="--pick:#34d399"><h4>📚 RAG</h4><span class="pk-tag">supply the facts at question time</span><span class="pk-label use">✅ Pick it when</span><ul><li>Private, new or fast-changing information</li><li>Answers should point to source documents</li><li>The knowledge base is too big to paste in</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>The knowledge base does not contain the answer — RAG cannot invent it</li><li>The problem is style, not facts</li></ul></div>
+      <div class="pick-card" style="--pick:#a78bfa"><h4>🎯 Fine-tuning</h4><span class="pk-tag">change the weights</span><span class="pk-label use">✅ Pick it when</span><ul><li>A consistent tone or format that prompts cannot hold</li><li>A narrow skill shown best by many examples</li><li>You have good examples of the exact behaviour</li></ul><span class="pk-label skip">⛔ Look elsewhere when</span><ul><li>You mainly need current facts — use RAG</li><li>You have few or poor examples</li></ul></div>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📏 Effort and permanence</div>
+<figure class="diagram-card">
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" class="concept-diagram" role="img" aria-label="Effort and permanence rise from prompting to RAG to fine-tuning">
+<defs><marker id="ch2A" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker><marker id="ch2S" markerWidth="7" markerHeight="7" refX="0" refY="2" orient="auto-start-reverse"><path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/></marker></defs>
+<path d="M105,140 L105,184 L535,184 L535,140" fill="none" stroke="#5b6577" stroke-width="1.6" marker-end="url(#ch2A)"/>
+<rect class="bx" x="10" y="50" width="190" height="90" rx="10" fill="rgba(34,211,238,.13)" stroke="#22d3ee" stroke-width="1.3"/>
+<text x="105" y="86.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#67e8f9">💬 Prompting</text>
+<text x="105" y="99" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">minutes to try</text>
+<text x="105" y="111.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#9fe8f5">lasts one request</text>
+<rect class="bx" x="225" y="50" width="190" height="90" rx="10" fill="rgba(52,211,153,.13)" stroke="#34d399" stroke-width="1.3"/>
+<text x="320" y="86.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6ee7b7">📚 RAG</text>
+<text x="320" y="99" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">needs a knowledge base</text>
+<text x="320" y="111.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#a7f0d0">facts stay current</text>
+<rect class="bx" x="440" y="50" width="190" height="90" rx="10" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="1.3"/>
+<text x="535" y="86.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="#c4b5fd">🎯 Fine-tuning</text>
+<text x="535" y="99" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">needs examples + training</text>
+<text x="535" y="111.5" text-anchor="middle" font-size="9.5" font-weight="400" fill="#cdbffc">built into the weights</text>
+<text class="free" x="320" y="230" text-anchor="middle" font-size="9.5" font-weight="700" fill="#93a0b8">Start on the left; move right only when the left cannot do the job.</text>
+<g class="arrow-pill"><rect x="239.5" y="175" width="161" height="18" rx="9"/><text x="320" y="187.5" text-anchor="middle" font-size="9" font-style="italic">more effort, more permanent</text></g>
+</svg>
+<figcaption><strong>What you're seeing:</strong> the three sit on a line. <b>Prompting</b> is quick but lasts one request. <b>RAG</b> needs a knowledge base and keeps facts current without touching the model. <b>Fine-tuning</b> needs examples and a training run, and the result is built into the weights. Move right only when the left cannot do the job.</figcaption>
+</figure>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">📊 Side by side</div>
+    <div class="table-wrap"><table class="cmp-table"><thead><tr><th scope="col"></th><th scope="col">Fixes</th><th scope="col">Changes the model?</th><th scope="col">Facts stay current?</th><th scope="col">Typical first signal</th></tr></thead><tbody><tr><th scope="row">💬 Prompting</th><td>Unclear instructions</td><td>No</td><td>Only what you paste in</td><td>Outputs are close but off in tone or format</td></tr><tr><th scope="row">📚 RAG</th><td>Missing or private knowledge</td><td>No</td><td>Yes, update the knowledge base</td><td>Answers are confidently wrong about your data</td></tr><tr><th scope="row">🎯 Fine-tuning</th><td>Behaviour that must be built in</td><td>Yes, the weights</td><td>No — facts are frozen at training</td><td>Prompts keep drifting on style or format</td></tr></tbody></table></div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📝</span><h5>Summaries come out too long</h5><p>The model knows enough; the instruction is loose.</p><span class="sc-use">→ Prompting</span></div>
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>A bot must answer from this week's HR policy</h5><p>The model never saw it, and it changes.</p><span class="sc-use">→ RAG</span></div>
+      <div class="scenario"><span class="sc-icon">🗣️</span><h5>Every reply must follow a strict brand voice</h5><p>Long prompts still drift.</p><span class="sc-use">→ Fine-tuning (after trying prompting)</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Support answers need policy facts and a fixed format</h5><p>Two different gaps.</p><span class="sc-use">→ RAG for facts + prompt for format</span></div>
+      <div class="scenario"><span class="sc-icon">⚖️</span><h5>Answers must cite the source document</h5><p>You need traceability.</p><span class="sc-use">→ RAG</span></div>
+      <div class="scenario"><span class="sc-icon">🧪</span><h5>Not sure which one you need</h5><p>Cheap tests first.</p><span class="sc-use">→ Start with prompting and measure</span></div>
+    </div>
+  </section>
+  <details class="zoom">
+    <summary><span class="chev">▾</span> Go one level deeper (60 seconds) — how to decide with evidence</summary>
+    <div class="zoom-inner">
+      <p><b>Measure first.</b> Build a small test set (see Evaluation, concept 17) before you change anything. Without it you cannot tell whether a prompt change, a retrieval change or a fine-tune actually helped.</p>
+      <p><b>Look at the failures.</b> If the failing answers contain wrong facts, think RAG. If they contain the right facts in the wrong shape, think prompt or fine-tune. If retrieval returns the wrong documents, fix retrieval before blaming the model.</p>
+      <p><b>Fine-tuning is not for facts.</b> It shapes behaviour from examples; it is a poor and costly way to keep knowledge current.</p>
+    </div>
+  </details>
+  <section class="kd-section " id="recall">
+    <div class="sec-label recall">🔥 Interview recall</div>
+    <div class="kd-card recall-box">
+      <ul><li>Prompting = change the instruction. RAG = supply facts at question time. Fine-tuning = change the weights.</li><li>Name the gap first: clarity, knowledge or built-in behaviour.</li><li>Start light (prompting), move right only when needed, and measure each step.</li><li>RAG cannot invent facts the knowledge base lacks; fine-tuning is not a good way to teach changing facts.</li><li>Real systems combine them.</li></ul>
+    </div>
+  </section>
+  <section class="kd-section ">
+    <div class="sec-label saythis">🎤 Say this in an interview</div>
+    <div class="kd-card saythis-box">"I decide by what is missing. If the instruction is unclear I improve the prompt; if the model lacks private or current facts I add RAG; if a behaviour must hold every time and prompts cannot keep it there, I consider fine-tuning. I start with the lightest option, measure with a test set, and combine them when the problem has more than one gap."</div>
+  </section>
+  <section class="kd-section " id="trap">
+    <div class="sec-label trap">⚠️ Common trap</div>
+    <div class="kd-card trap-box">
+      <p><b>Fine-tuning to add facts.</b> It is slow to update and the facts go stale. If the problem is knowledge, retrieval fits better.</p>
+      <p>Second trap: <b>skipping measurement.</b> Without a test set you will "fix" things that were fine and miss things that broke.</p>
+    </div>
+  </section>
+  <div class="confuse-pair">
+    <div class="cp-side"><h5>📚 RAG</h5><p>Adds knowledge at question time. The model stays the same.</p></div>
+    <div class="cp-vs">vs.</div>
+    <div class="cp-side"><h5>🎯 Fine-tuning</h5><p>Changes behaviour permanently. Facts freeze at training time.</p></div>
+  </div>
+  <section class="kd-section next" id="next">
+    <div class="sec-label next">➡️ Where this leads</div>
+    <div class="kd-card next-box">
+      <span>That is the choice between the three tools. Back to Fine-tuning for the full picture — and on to the next concept: Agents.</span>
+      <a class="next-link" href="fine-tuning.html">Back to Fine-tuning <span class="arrow">→</span></a>
+    </div>
+  </section>  <p class="fact-note">📌 AI tooling changes fast. This page teaches the decision, not product features; check the current docs of the model provider you use.</p>
+
+
+</main>
+
+<footer class="kd-foot">
+  <div class="wrap">KeyDrive · AI · concept journey</div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

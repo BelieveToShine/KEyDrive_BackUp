@@ -47,7 +47,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="a question doesn't go to the model alone. It first retrieves the most relevant chunks from a knowledge base — company docs, a wiki, anything the model" viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="ragArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -120,6 +120,16 @@
       it can only surface what's actually there.</p>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🏢</span><h5>Answer from this week's HR policy</h5><p>The model never saw it.</p><span class="sc-use">→ RAG</span></div>
+      <div class="scenario"><span class="sc-icon">🔒</span><h5>Questions about private customer data</h5><p>Cannot be in training.</p><span class="sc-use">→ RAG with access control</span></div>
+      <div class="scenario"><span class="sc-icon">❓</span><h5>The knowledge base lacks the answer</h5><p>Retrieval finds nothing useful.</p><span class="sc-use">→ RAG cannot invent it — fix the data</span></div>
+      <div class="scenario"><span class="sc-icon">🧭</span><h5>Exact product codes plus fuzzy questions</h5><p>Keyword and meaning both matter.</p><span class="sc-use">→ Hybrid retrieval</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

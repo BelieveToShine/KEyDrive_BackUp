@@ -47,7 +47,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="two ways to get a model to consistently follow a specific style or skill. Without fine-tuning, you have to re-explain the desired behavior in every pr" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="ftArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -123,6 +123,23 @@
       of an already-capable model instead of starting blank.</p>
     </div>
   </details>
+
+  <section class="kd-section">
+    <div class="sec-label next">🔬 Go deeper</div>
+    <div class="deep-grid">
+      <a class="kd-card deep-card" href="prompt-rag-or-fine-tune.html"><span class="dc-kicker">Deep dive · Fine-tuning</span><h4>Prompting, RAG or Fine-tuning?</h4><p>A decision tree, a side-by-side table and six scenarios for the choice every AI builder faces.</p><span class="dc-go">Open the deep dive <span class="arrow">→</span></span></a>
+    </div>
+  </section>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🗣️</span><h5>A strict brand voice on every reply</h5><p>Long prompts still drift.</p><span class="sc-use">→ Fine-tuning</span></div>
+      <div class="scenario"><span class="sc-icon">🧾</span><h5>Always return a fixed JSON shape</h5><p>Needs to be reliable.</p><span class="sc-use">→ Fine-tuning (after trying prompting)</span></div>
+      <div class="scenario"><span class="sc-icon">📰</span><h5>Keep answers current with daily news</h5><p>Facts change daily.</p><span class="sc-use">→ RAG, not fine-tuning</span></div>
+      <div class="scenario"><span class="sc-icon">📉</span><h5>Only 20 messy examples</h5><p>Too few to teach a skill.</p><span class="sc-use">→ Improve prompts or collect data first</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

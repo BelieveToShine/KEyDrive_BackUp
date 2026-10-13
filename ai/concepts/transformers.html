@@ -47,7 +47,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="the same 4-word sequence, handled two ways. Sequential processing passes a hidden state one word at a time, so word 4 can only reach back to word 1 th" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="trArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -133,6 +133,16 @@
       any other neural network, is what almost every modern large language model is built from.</p>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📖</span><h5>Link "it" to the right noun far earlier in a sentence</h5><p>Distance should not weaken the signal.</p><span class="sc-use">→ Attention</span></div>
+      <div class="scenario"><span class="sc-icon">⚡</span><h5>Process a whole sequence on modern hardware</h5><p>Step-by-step blocks parallelism.</p><span class="sc-use">→ Transformer layers run in parallel</span></div>
+      <div class="scenario"><span class="sc-icon">✍️</span><h5>Generate text one token at a time</h5><p>No peeking at future words.</p><span class="sc-use">→ Causal mask</span></div>
+      <div class="scenario"><span class="sc-icon">🔎</span><h5>Understand a whole sentence at once</h5><p>Every word may see every other.</p><span class="sc-use">→ Encoder-style, no mask</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

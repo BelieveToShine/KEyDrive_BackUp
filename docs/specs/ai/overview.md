@@ -166,3 +166,5 @@ capture it as a rule (see `docs/rules/accuracy.md`'s new verification-before-pub
 and `docs/rules/content-structure.md`'s new insert-a-concept checklist, both added this round).
 Don't start a new category or build any of the explicitly deferred items above without being
 asked.
+
+- **Round 8 (2026-10-13, same style as Azure/AWS)**: re-read all 19 pages for accuracy (no factual errors found; existing hedged wording kept). Added a "🎬 Real-world scenarios" block (4 each, ending in a verdict) before the recall box on every page; added the deep dive **Prompting, RAG or Fine-tuning?** (decision tree, effort line, table, 6 scenarios) under Fine-tuning; added aria-labels to 24 older diagrams. Not done: the AI pages are still hand-written HTML without pick-card/comparison blocks on every concept, and the diagram linter reports false positives on the older hand-written SVGs (they lack the `bx` classes) — look at them by eye.

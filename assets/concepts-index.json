@@ -1860,5 +1860,31 @@
     "summary": "The classic mistake with Well-Architected & Landing Zones.",
     "keywords": "aws well architected framework pillars sustainability landing zone control tower trade-offs trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "ai-prompt-rag-or-fine-tune",
+    "title": "Prompting, RAG or Fine-tuning?",
+    "category": "AI",
+    "page": "ai/concepts/prompt-rag-or-fine-tune.html",
+    "summary": "Decision tree for choosing between prompting, RAG and fine-tuning.",
+    "keywords": "prompting rag fine-tuning choose decision when to use which compare"
+  },
+  {
+    "id": "ai-prompt-rag-or-fine-tune-recall",
+    "title": "Prompting, RAG or Fine-tuning? — interview recall",
+    "category": "AI",
+    "page": "ai/concepts/prompt-rag-or-fine-tune.html",
+    "summary": "Quick recall points.",
+    "keywords": "prompting rag fine-tuning choose decision when to use which compare interview recall",
+    "anchor": "recall"
+  },
+  {
+    "id": "ai-prompt-rag-or-fine-tune-trap",
+    "title": "Prompting, RAG or Fine-tuning? — common trap",
+    "category": "AI",
+    "page": "ai/concepts/prompt-rag-or-fine-tune.html",
+    "summary": "The classic mistake.",
+    "keywords": "prompting rag fine-tuning choose decision when to use which compare trap mistake",
+    "anchor": "trap"
   }
 ]

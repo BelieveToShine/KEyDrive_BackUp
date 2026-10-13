@@ -7,7 +7,7 @@ file first in any new session; it routes to everything else rather than trying t
 
 ## Current state
 
-- **AI** category is complete: hub page + all 19 planned concept pages written, start to finish
+- **AI** category is complete (19 pages + 1 deep dive, scenarios added 2026-10-13): hub page + all 19 planned concept pages written, start to finish
   (What is AI? through Production — including Embeddings & Vector Search and Context
   Engineering, added after a production-verification review found them missing from the
   original 17). Journey map, concept list, and search index are all fully wired to match.

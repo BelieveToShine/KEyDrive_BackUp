@@ -46,7 +46,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="the same bad answer, investigated two ways. Without observability, you know something went wrong but not which step — was it retrieval, a tool call, t" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="obArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -116,7 +116,7 @@
       the system good overall" versus "what exactly happened in this one case."</p>
 
       <figure class="diagram-card" style="margin-top:18px;">
-        <svg viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+        <svg role="img" aria-label="a real request's actual path, logged step by step rather than reconstructed after the fact. A useful trace captures latency, cost, and token counts at" viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
           <defs>
             <marker id="obArrow2" markerWidth="6" markerHeight="6" refX="4" refY="1.5" orient="auto">
               <path d="M0,0 L4,1.5 L0,3 Z" fill="#5b6577"/>
@@ -173,6 +173,16 @@
       </figure>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🐢</span><h5>Users say it is slow</h5><p>Where is the time going?</p><span class="sc-use">→ Trace the request</span></div>
+      <div class="scenario"><span class="sc-icon">💸</span><h5>The bill jumped</h5><p>Which calls cost most?</p><span class="sc-use">→ Log tokens and cost per request</span></div>
+      <div class="scenario"><span class="sc-icon">🕵️</span><h5>One bad answer reported</h5><p>What did the model see?</p><span class="sc-use">→ Keep the prompt and retrieved context</span></div>
+      <div class="scenario"><span class="sc-icon">📈</span><h5>Quality drifts over weeks</h5><p>Nobody noticed.</p><span class="sc-use">→ Monitor scores over time</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

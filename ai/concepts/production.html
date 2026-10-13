@@ -48,7 +48,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="production readiness as four pillars, not three narrow checkboxes. Reliability, security, and cost are independent requirements that all have to hold " viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="prArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -129,7 +129,7 @@
       that page only holds up in practice once all four of these are actually in place.</p>
 
       <figure class="diagram-card" style="margin-top:18px;">
-        <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+        <svg role="img" aria-label="the same AI application, before and after. A prototype usually assumes one user, unlimited cost, and no checks; production means handling real concurr" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
           <defs>
             <marker id="prArrow2" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
               <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -171,6 +171,16 @@
       </figure>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🔁</span><h5>The model provider has an outage</h5><p>Users still need answers.</p><span class="sc-use">→ Fallbacks and retries</span></div>
+      <div class="scenario"><span class="sc-icon">💉</span><h5>A user hides instructions in a document</h5><p>Prompt injection.</p><span class="sc-use">→ Treat input as untrusted; limit what tools can do</span></div>
+      <div class="scenario"><span class="sc-icon">💰</span><h5>One heavy user burns the budget</h5><p>Cost is variable.</p><span class="sc-use">→ Rate limits and budgets</span></div>
+      <div class="scenario"><span class="sc-icon">📟</span><h5>Something degrades at 3 AM</h5><p>Someone must notice.</p><span class="sc-use">→ Alerts on quality, latency and cost</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

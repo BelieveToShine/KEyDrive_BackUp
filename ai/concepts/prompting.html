@@ -47,7 +47,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="the exact same trained model, weights completely unchanged, given two different instructions. The instruction in the prompt itself steers what it does" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="pArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -118,6 +118,16 @@
       fine-tuning's job — both next in this journey.</p>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">📝</span><h5>Summaries are too long</h5><p>The model can do it; the instruction is loose.</p><span class="sc-use">→ Tighten the prompt</span></div>
+      <div class="scenario"><span class="sc-icon">🧩</span><h5>The output format keeps changing</h5><p>Show the format.</p><span class="sc-use">→ Add an example to the prompt</span></div>
+      <div class="scenario"><span class="sc-icon">📄</span><h5>Ask about a document the model never saw</h5><p>Paste it in.</p><span class="sc-use">→ Works — but only for this request</span></div>
+      <div class="scenario"><span class="sc-icon">🔁</span><h5>Same instruction every day</h5><p>Re-supplying is tedious at scale.</p><span class="sc-use">→ Consider RAG or fine-tuning</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

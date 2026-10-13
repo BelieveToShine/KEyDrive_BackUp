@@ -46,7 +46,7 @@
   <section class="kd-section">
     <div class="sec-label see">👁 See it first</div>
     <figure class="diagram-card">
-      <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
+      <svg role="img" aria-label="one neuron's actual computation. Each input gets multiplied by its own weight, the three results get summed together with a bias, and that sum passes " viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" class="concept-diagram">
         <defs>
           <marker id="nnArrow" markerWidth="7" markerHeight="7" refX="4.5" refY="2" orient="auto">
             <path d="M0,0 L4.5,2 L0,4 Z" fill="#5b6577"/>
@@ -115,6 +115,16 @@
       arithmetic (multiply, add, bend). Don't over-read the biology into it.</p>
     </div>
   </details>
+
+  <section class="kd-section ">
+    <div class="sec-label see">🎬 Real-world scenarios</div>
+    <div class="scenario-grid">
+      <div class="scenario"><span class="sc-icon">🧮</span><h5>One neuron, three inputs</h5><p>Multiply by weights, add bias.</p><span class="sc-use">→ Weighted sum + activation</span></div>
+      <div class="scenario"><span class="sc-icon">🔧</span><h5>Training the network</h5><p>Outputs are not yet right.</p><span class="sc-use">→ Nudge every weight</span></div>
+      <div class="scenario"><span class="sc-icon">➗</span><h5>Layers with no activation</h5><p>They collapse into one weighted sum.</p><span class="sc-use">→ Add an activation function</span></div>
+      <div class="scenario"><span class="sc-icon">🧠</span><h5>"It works like a brain"</h5><p>A tempting but loose metaphor.</p><span class="sc-use">→ Treat "neuron" as a small calculation</span></div>
+    </div>
+  </section>
 
   <section class="kd-section" id="recall">
     <div class="sec-label recall">🔥 Interview recall</div>

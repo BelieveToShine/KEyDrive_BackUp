@@ -21,7 +21,13 @@
       "evaluation",
       "observability",
       "production"
-    ]
+    ],
+    "sub": {
+      "prompt-rag-or-fine-tune": "fine-tuning"
+    },
+    "subTitles": {
+      "prompt-rag-or-fine-tune": "Prompting, RAG or Fine-tuning?"
+    }
   },
   "azure": {
     "title": "Azure",
