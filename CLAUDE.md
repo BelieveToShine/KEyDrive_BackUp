@@ -11,6 +11,7 @@ file first in any new session; it routes to everything else rather than trying t
   (What is AI? through Production — including Embeddings & Vector Search and Context
   Engineering, added after a production-verification review found them missing from the
   original 17). Journey map, concept list, and search index are all fully wired to match.
+- **Cloud Systems** (`cloud/index.html`) is the hub above Azure and AWS (side-by-side service map; crumbs go KeyDrive › Cloud Systems › Azure/AWS).
 - **Azure** has its hub + full 19-concept roadmap and **19 / 19 concepts written (complete) + 7 deep dives**: the whole foundation
   (**Tenants/Subscriptions/Resource Groups**, **Regions & Availability Zones**, **Identity & Access** + Managed Identities,
   **Virtual Networks** + Private Endpoints, **Compute**) plus **Storage** (+ Blob in depth), **Databases** (+ Cosmos DB vs Azure SQL) and
@@ -30,6 +31,8 @@ file first in any new session; it routes to everything else rather than trying t
 Full detail: `docs/keydrive-overview.md`.
 
 ## Before you touch anything, read the relevant rule file
+
+**Always first: `docs/rules/lessons-learned.md`** — the user's standing feedback and the pre-delivery checklist (phone-width check, `layout-check.js`, cache-busting). Add to it whenever the user reports a problem.
 
 | Task | Read first |
 |---|---|
@@ -56,6 +59,7 @@ each concept exists), `roadmap.md` (written/planned status, updated the moment a
 `node scripts/check-site.js [category]` (wiring + claims cross-check) ·
 `node scripts/diagram-lint.js <baseUrl> <page…>` (SVG geometry) ·
 `node scripts/shoot-diagrams.js <baseUrl> <page> <prefix>` (2× screenshots to look at) ·
+`NODE_PATH=$(npm root -g) node scripts/layout-check.js <baseUrl> [page…]` (320/390/768/1200 px layout: overflow, missing CSS, ragged cards, glued text) ·
 `scripts/page-kit/` (optional page generator; HTML stays the source of truth). Details: `docs/rules/verification.md`.
 
 ## Explicitly deferred, platform-wide — do not build until asked

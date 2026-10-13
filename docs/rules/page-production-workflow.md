@@ -118,6 +118,7 @@ eyes catch "this arrow means something different from what the label says". Fix 
 4. Page read top to bottom at desktop width and at 390 px; bottom bar and Back pill tested
    (`navigation.md` verification list).
 5. `docs/checklists/concept-page-qa.md` ticked item by item.
+6. `scripts/layout-check.js` → "layout OK" and a phone-width look (see `lessons-learned.md`).
 
 ## Step 9 — Commit and push
 

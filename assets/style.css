@@ -511,3 +511,30 @@ a.deep-card:hover .dc-go .arrow{ transform:translateX(4px); }
 .cloud-card .dc-go{ display:inline-block; margin-top:14px; color:var(--cyan-ink); font-weight:600; font-size:14px; }
 .map-table td a, .map-table th a{ color:var(--ink); text-decoration:none; border-bottom:1px dashed var(--border); }
 .map-table td a:hover, .map-table th a:hover{ color:var(--cyan-ink); border-bottom-color:var(--cyan-ink); }
+
+/* card footer pinned to the bottom so every card in a row lines up */
+.tile-grid .cat-tile, .cloud-cards .cat-tile{ display:flex; flex-direction:column; }
+.ct-foot{ margin-top:auto; padding-top:18px; }
+.ct-stats{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding-top:14px; border-top:1px dashed var(--border-soft); }
+.ct-done{ font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; color:#6ee7b7; background:rgba(52,211,153,.12); border:1px solid rgba(52,211,153,.3); border-radius:999px; padding:3px 10px; white-space:nowrap; }
+.ct-dives{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-faint); white-space:nowrap; }
+.ct-foot .progress{ margin-top:10px; }
+.stat b, .stat span{ white-space:nowrap; }
+
+/* ---- small screens: hubs readable on a phone ---- */
+@media (max-width:720px){
+  .journey-wrap{ padding:14px; }
+  .journey-wrap svg{ min-width:560px; }
+  .concept-row{ flex-wrap:wrap; gap:6px 12px; align-items:flex-start; }
+  .concept-row .cr-main{ flex:1 1 calc(100% - 90px); }
+  .concept-row .cr-tail{ display:block; margin-left:0; margin-top:2px; flex:1 1 100%; }
+  .concept-row .cr-status{ margin-left:auto; }
+  .stat{ min-width:0; flex:1 1 40%; }
+  .cloud-card{ padding:20px; }
+}
+/* keyboard focus must be visible everywhere */
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; border-radius:6px; }
+.cat-tile:hover .ct-done{ background:rgba(52,211,153,.2); }
+.how-step{ transition:transform .15s ease, border-color .15s ease; }
+.how-step:hover{ transform:translateY(-2px); border-color:var(--border); }
+.next-box .next-link{ min-height:36px; display:inline-flex; align-items:center; }

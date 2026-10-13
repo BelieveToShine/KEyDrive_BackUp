@@ -76,3 +76,7 @@ linter had nothing to flag, the eyes did.
 Truth of the facts (ledger + official docs), clarity of the prose, whether the page's story fits the
 journey, accessibility of colour contrast beyond the project palette, and mobile feel. The QA
 checklist (`docs/checklists/concept-page-qa.md`) covers these.
+
+
+## Layout check (added 2026-10-13)
+`NODE_PATH=$(npm root -g) node scripts/layout-check.js http://localhost:5900 [page …]` — run before reporting any UI change. It loads pages at 320/390/768/1200 px and fails on horizontal overflow, CSS classes with no rule, ragged card rows, glued inline text and tiny tap targets. It does not replace looking at a phone-width screenshot. See `lessons-learned.md`.

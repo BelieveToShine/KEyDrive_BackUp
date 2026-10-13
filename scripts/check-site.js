@@ -117,7 +117,7 @@ for (const f of conceptFiles) {
   const idset = ids(html);
   for (const need of ['why', 'recall', 'trap', 'next']) if (!idset.has(need)) E(r, `missing id="${need}"`);
   if (!html.includes('data-root="../../"')) E(r, 'body data-root must be "../../"');
-  if (!html.includes('src="../../assets/site.js"')) E(r, 'missing ../../assets/site.js');
+  if (!/src="\.\.\/\.\.\/assets\/site\.js(\?v=\d+)?"/.test(html)) E(r, 'missing ../../assets/site.js');
   if (!/<title>[^<]+— KeyDrive<\/title>/.test(html)) E(r, '<title> must end with "— KeyDrive"');
   if (!/class="fact-note"/.test(html)) W(r, 'no official-docs fact note (.fact-note)');
   // eyebrow numbering + next wiring
