@@ -33,3 +33,10 @@ The goal: the same mistake never reaches the user twice, in any category or any 
 
 ## Patterns that already exist — reuse, don't reinvent
 `.pick-grid/.pick-card`, `.scenario-grid`, `.table-wrap/.cmp-table`, `.pros-cons`, `.deep-grid`, `.how-strip`, `.stat-row`, `.ct-foot/.ct-stats/.ct-done/.ct-dives/.progress`, `.cloud-cards`, `.map-table`.
+
+## L8 — Long unbreakable strings and big pictures break phones (2026-10-13)
+- A long URL inside a recall `<li>` widened a whole page (513px at 320px). Rule: `.kd-card/.kd-section li,p` use `overflow-wrap:anywhere`. Found only by running `layout-check.js` on EVERY concept page, not a sample — always run the full set (`for c in ai azure aws`, in parallel, output to files).
+- Nowrap links (`.next-link`) overflow on narrow screens; allow wrapping.
+- A 640px-wide SVG map shrunk or scrolled sideways is not "mobile-ready". `site.js` now builds a vertical stepper (`.jm-steps`) from the hub SVG itself (nodes, pills, group boxes) and CSS swaps it in at ≤720px. Any new hub map gets this free as long as it uses `.jm-node` / `a.jm-hit` / `.arrow-pill` / dashed group rects.
+- Search results: category tag must be `display:block` under the title, or it glues to the last word.
+- Bump `?v=` on every page whenever style.css/site.js change (now 20261016).

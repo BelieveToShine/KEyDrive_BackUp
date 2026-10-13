@@ -255,3 +255,45 @@
     document.body.classList.add("has-fixed-pager");
   }).catch(function () {});
 })();
+
+/* Phone view of the hub journey map: the SVG is a 640px-wide picture, so on narrow screens we also
+   build a vertical stepper from the same SVG (nodes, "why the next step" pills, group boxes). */
+(function () {
+  var wrap = document.querySelector(".journey-wrap");
+  var svg = wrap && wrap.querySelector("svg");
+  if (!svg) return;
+  var num = function (el, a) { return parseFloat(el.getAttribute(a)) || 0; };
+  var groups = [].slice.call(svg.querySelectorAll("rect[stroke-dasharray]")).map(function (r) {
+    var t = r.nextElementSibling;
+    return { y: num(r, "y"), h: num(r, "height"), label: t ? t.textContent.trim() : "" };
+  });
+  var pills = [].slice.call(svg.querySelectorAll(".arrow-pill")).map(function (g) {
+    return { y: num(g.querySelector("rect"), "y"), text: g.querySelector("text").textContent.trim() };
+  });
+  var rows = {};
+  [].slice.call(svg.querySelectorAll(".jm-node")).forEach(function (n) {
+    var y = num(n.querySelector("rect"), "y"), a = n.parentNode;
+    (rows[y] = rows[y] || []).push({
+      text: n.querySelector("text").textContent.trim(),
+      href: a.tagName.toLowerCase() === "a" ? (a.getAttribute("href") || a.getAttribute("xlink:href")) : null
+    });
+  });
+  var ys = Object.keys(rows).map(Number).sort(function (a, b) { return a - b; });
+  var out = '<ol class="jm-steps" aria-label="Journey steps in order">', prevY = -1, lastGroup = null;
+  ys.forEach(function (y, i) {
+    var why = pills.filter(function (p) { return p.y < y && p.y > prevY; }).pop();
+    if (i && why) out += '<li class="jm-why">↓ ' + why.text + "</li>";
+    var g = groups.filter(function (g) { return y >= g.y && y <= g.y + g.h; })[0];
+    if (g && g !== lastGroup) out += '<li class="jm-group">' + g.label + "</li>";
+    lastGroup = g || null;
+    out += '<li class="jm-row' + (g ? " in-group" : "") + '">' + rows[y].map(function (n) {
+      return n.href ? '<a class="jm-step" href="' + n.href + '">' + n.text + "</a>"
+                    : '<span class="jm-step locked">' + n.text + " · soon</span>";
+    }).join("") + "</li>";
+    prevY = y;
+  });
+  var box = document.createElement("div");
+  box.className = "jm-steps-wrap";
+  box.innerHTML = out + "</ol>";
+  wrap.insertBefore(box, svg.nextSibling);
+})();

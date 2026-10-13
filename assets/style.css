@@ -79,6 +79,8 @@ code, .mono{ font-family:'JetBrains Mono', monospace; }
 .kd-item{ display:flex; align-items:center; gap:10px; padding:10px 11px; border-radius:10px; cursor:pointer; }
 .kd-item:hover, .kd-item.active{ background:rgba(255,255,255,.05); }
 .kd-item .ki-icon{ font-size:17px; flex:0 0 auto; }
+.kd-item .ki-text{ min-width:0; }
+.kd-item .ki-title, .kd-item .ki-path{ display:block; }
 .kd-item .ki-title{ font-weight:600; font-size:13.5px; color:var(--ink); }
 .kd-item .ki-title mark{ background:none; color:var(--cyan); }
 .kd-item .ki-path{ font-family:'JetBrains Mono'; font-size:10.5px; color:var(--ink-faint); margin-top:1px; }
@@ -246,7 +248,7 @@ a.jm-hit:active .jm-node{ transform:translateY(-1px) scale(.97); }
   background:var(--emerald-bg); border:1px solid rgba(52,211,153,.24); border-radius:16px; padding:20px 22px;
   display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
 }
-.next-box a.next-link{ color:var(--emerald-ink); font-weight:700; font-family:'Sora'; font-size:16px; text-decoration:none; margin-left:auto; flex:0 0 auto; white-space:nowrap; }
+.next-box a.next-link{ color:var(--emerald-ink); font-weight:700; font-family:'Sora'; font-size:16px; text-decoration:none; margin-left:auto; flex:0 1 auto; max-width:100%; white-space:normal; }
 .next-box a.next-link:hover{ text-decoration:none; }
 .next-box a.next-link .arrow{ margin-left:6px; display:inline-block; transition:transform .15s ease; }
 .next-box a.next-link:hover .arrow{ transform:translateX(4px); }
@@ -538,3 +540,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .how-step{ transition:transform .15s ease, border-color .15s ease; }
 .how-step:hover{ transform:translateY(-2px); border-color:var(--border); }
 .next-box .next-link{ min-height:36px; display:inline-flex; align-items:center; }
+
+/* long URLs / identifiers inside cards must wrap, never widen the page (lessons L8) */
+.kd-card li, .kd-card p, .kd-section li, .kd-section p{ overflow-wrap:anywhere; }
+
+/* hub journey map: phones get a vertical stepper instead of a shrunken picture */
+.jm-steps-wrap{ display:none; }
+.jm-steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; align-items:stretch; gap:0; }
+.jm-steps .jm-row{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.jm-steps .jm-why{ text-align:center; font-family:'JetBrains Mono'; font-size:11px; font-style:italic; color:var(--ink-soft); padding:7px 0; }
+.jm-steps .jm-group{ text-align:center; font-family:'JetBrains Mono'; font-size:10.5px; color:var(--violet-ink); padding:4px 0 8px; letter-spacing:.04em; }
+.jm-steps .jm-step{ flex:1 1 140px; display:flex; align-items:center; justify-content:center; text-align:center; min-height:46px; padding:8px 12px;
+  background:var(--surface-2); border:2px solid var(--cyan); border-radius:12px; color:#fff; font-weight:700; font-size:14px; text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease; }
+.jm-steps a.jm-step:hover{ transform:translateY(-2px); box-shadow:0 0 14px rgba(34,211,238,.35); }
+.jm-steps a.jm-step:active{ transform:scale(.97); }
+.jm-steps .jm-step.locked{ border:1.5px dashed var(--border); color:var(--ink-faint); font-weight:600; }
+@media (max-width:720px){
+  .journey-wrap > svg{ display:none; }
+  .jm-steps-wrap{ display:block; }
+}
+.jm-steps .jm-row + .jm-row, .jm-steps .jm-row + .jm-group{ margin-top:8px; }
+.jm-steps .jm-row.in-group{ padding:8px; background:rgba(167,139,250,.06); border:1px dashed rgba(167,139,250,.25); border-radius:14px; }
