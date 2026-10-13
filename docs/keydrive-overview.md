@@ -43,3 +43,7 @@ The AI category's full 19-concept journey is written. The user is verifying it i
 applying corrections as they come in. No other category's hub page should be built without
 being asked. See `specs/ai/overview.md` for the AI category's specific status and revision
 history.
+
+## Front page and Cloud Systems hub (2026-10-13)
+
+`index.html` was redesigned (stats row, "start here" CTA, journey tiles with progress bars, a "how every page teaches" strip). **Azure and AWS now live under Cloud Systems**: `cloud/index.html` is a real hub with the two cloud cards and a side-by-side service map for all 19 concepts (rows link to both pages). Breadcrumbs on every Azure/AWS page are `KeyDrive › ☁️ Cloud Systems › 🔷 Azure/🟧 AWS › …`; URLs (`azure/…`, `aws/…`) did not change. The kit CR lists were updated to match. If a concept's pages or service names change, update the map table in `cloud/index.html` too.

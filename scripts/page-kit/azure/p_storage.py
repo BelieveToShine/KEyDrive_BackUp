@@ -70,7 +70,7 @@ def d_redundancy():
     d.text(320, 512, '●  = one copy of your data', size=9, mono=True)
     return d
 
-CR = ['<a href="../../index.html">KeyDrive</a>', '<a href="../index.html">🔷 Azure</a>']
+CR = ['<a href="../../index.html">KeyDrive</a>', '<a href="../../cloud/index.html">☁️ Cloud Systems</a>', '<a href="../index.html">🔷 Azure</a>']
 DOCS_ST = ('Azure Storage documentation', 'https://learn.microsoft.com/en-us/azure/storage/')
 
 def build_storage():

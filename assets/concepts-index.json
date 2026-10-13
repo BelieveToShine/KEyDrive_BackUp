@@ -1886,5 +1886,13 @@
     "summary": "The classic mistake.",
     "keywords": "prompting rag fine-tuning choose decision when to use which compare trap mistake",
     "anchor": "trap"
+  },
+  {
+    "id": "cloud-hub",
+    "title": "Cloud Systems — Azure and AWS side by side",
+    "category": "Cloud",
+    "page": "cloud/index.html",
+    "summary": "One 19-step architect journey told in Azure and AWS, with a side-by-side service map.",
+    "keywords": "cloud azure aws compare side by side map services equivalent"
   }
 ]
